@@ -1,11 +1,14 @@
 require 'sinclair'
 
 module Azeroth::Resourceable
-  class Builder < Sinclair
-    delegate :resource, to: :options_object
+  class Builder
+    attr_reader :clazz, :resource
+
+    delegate :build, :add_method, to: :builder
 
     def initialize(clazz, resource, **options)
-      super(clazz, resource: resource.to_s, **options)
+      @clazz = clazz
+      @resource = resource.to_s
 
       add_params
       add_resource
@@ -14,6 +17,10 @@ module Azeroth::Resourceable
     end
 
     private
+
+    def builder
+      @builder ||= Sinclair.new(clazz)
+    end
 
     def add_params
       add_method("#{resource}_id",     "params.require(:id)")
@@ -35,14 +42,7 @@ module Azeroth::Resourceable
     end
 
     def add_routes
-      %i(index show new edit create update).each do |route|
-        add_method(route, 'render_basic')
-      end
-      add_method(:destroy, %{
-        #{resource}.destroy
-        head :no_content
-      })
-
+      RoutesBuilder.new(resource, builder).append
     end
 
     def resource_class
