@@ -28,8 +28,7 @@ module Azeroth::Resourceable
     end
 
     def add_resource
-      add_method(resource_plural,  "@#{resource_plural} ||= #{resource_class}.all")
-      add_method(resource,         "@#{resource} ||= #{resource_plural}.find(#{resource}_id)")
+      ResourceBuilder.new(resource, builder).append
     end
 
     def add_resource_for_routes
@@ -40,16 +39,12 @@ module Azeroth::Resourceable
       RoutesBuilder.new(resource, builder).append
     end
 
-    def resource_class
-      @resource_class ||= resource.camelize.constantize
-    end
-
     def permitted_attributes
       @permitted_attributes ||= resource_class.attribute_names - ['id']
     end
 
-    def resource_plural
-      resource.pluralize
+    def resource_class
+      @resource_class ||= resource.camelize.constantize
     end
   end
 end
