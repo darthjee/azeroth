@@ -33,12 +33,7 @@ module Azeroth::Resourceable
     end
 
     def add_resource_for_routes
-      add_method(:new_resource,    "@new_resource ||= #{resource_class}.new")
-      add_method(:create_resource, "@create_resource ||= #{resource_class}.create(#{resource}_params)")
-      add_method(:update_resource, "@update_resource ||= #{resource}.tap { |v| v.update(#{resource}_params) }")
-      add_method(:index_resource,  resource_plural)
-      add_method(:edit_resource,   resource)
-      add_method(:show_resource,   resource)
+      ResourceRouteBuilder.new(resource, builder).append
     end
 
     def add_routes
