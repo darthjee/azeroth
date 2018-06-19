@@ -1,0 +1,18 @@
+version: '2'
+services:
+  base: &base
+    image: ruby:2.4.0
+    working_dir: /home/app/azeroth
+    volumes:
+      - .:/home/app/azeroth
+      - azeroth_gems_2_4_0:/usr/local/bundle
+
+  #################### CONTAINERS ####################
+
+  azeroth:
+    <<: *base
+    container_name: azeroth
+    command: /bin/bash -c 'bundle install && bundle exec rspec'
+
+volumes:
+  azeroth_gems_2_4_0:
