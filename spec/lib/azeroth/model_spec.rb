@@ -20,7 +20,6 @@ shared_examples 'a model wrapper' do
   end
 end
 
-
 describe Azeroth::Model do
   subject { described_class.new(input) }
 
