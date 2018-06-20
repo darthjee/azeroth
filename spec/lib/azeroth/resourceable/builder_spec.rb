@@ -21,7 +21,7 @@ describe Azeroth::Resourceable::Builder do
   subject { described_class.new(clazz, :document) }
 
   let(:name) { 'The Doc' }
-  let(:document_params) { { name: name} }
+  let(:document_params) { { name: name } }
 
   let(:clazz) do
     Class.new(Controller) do
