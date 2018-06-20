@@ -27,9 +27,9 @@ Gem::Specification.new do |gem|
   gem.add_development_dependency 'sqlite3', '>= 1.3.13'
 
   gem.add_development_dependency 'bundler', '~> 1.6'
+  gem.add_development_dependency 'pry-nav'
   gem.add_development_dependency 'rake', '>= 12.3'
   gem.add_development_dependency 'rspec', '>= 3.7'
-  gem.add_development_dependency 'pry-nav'
-  gem.add_development_dependency 'simplecov', '~> 0.16.1'
   gem.add_development_dependency 'rubocop'
+  gem.add_development_dependency 'simplecov', '~> 0.16.1'
 end
