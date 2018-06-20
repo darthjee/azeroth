@@ -2,13 +2,13 @@ require 'sinclair'
 
 module Azeroth::Resourceable
   class Builder
-    attr_reader :clazz, :resource
+    attr_reader :clazz, :model
 
     delegate :build, :add_method, to: :builder
 
-    def initialize(clazz, resource, **options)
+    def initialize(clazz, model_name, **options)
       @clazz = clazz
-      @resource = resource.to_s
+      @model = Azeroth::Model.new(model_name)
 
       add_params
       add_resource
@@ -23,28 +23,24 @@ module Azeroth::Resourceable
     end
 
     def add_params
-      add_method("#{resource}_id",     "params.require(:id)")
-      add_method("#{resource}_params", "params.require(:#{resource}).permit(:#{permitted_attributes.join(', :')})")
+      add_method("#{model.name}_id",     "params.require(:id)")
+      add_method("#{model.name}_params", "params.require(:#{model.name}).permit(:#{permitted_attributes.join(', :')})")
     end
 
     def add_resource
-      ResourceBuilder.new(resource, builder).append
+      ResourceBuilder.new(model, builder).append
     end
 
     def add_resource_for_routes
-      ResourceRouteBuilder.new(resource, builder).append
+      ResourceRouteBuilder.new(model, builder).append
     end
 
     def add_routes
-      RoutesBuilder.new(resource, builder).append
+      RoutesBuilder.new(model, builder).append
     end
 
     def permitted_attributes
-      @permitted_attributes ||= resource_class.attribute_names - ['id']
-    end
-
-    def resource_class
-      @resource_class ||= resource.camelize.constantize
+      @permitted_attributes ||= model.klass.attribute_names - ['id']
     end
   end
 end

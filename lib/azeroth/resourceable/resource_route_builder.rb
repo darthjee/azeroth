@@ -1,31 +1,21 @@
 module Azeroth::Resourceable
   class ResourceRouteBuilder
-    attr_reader :resource, :builder
+    attr_reader :model, :builder
 
     delegate :add_method, to: :builder
 
-    def initialize(resource, builder)
-      @resource = resource
+    def initialize(model, builder)
+      @model = model
       @builder = builder
     end
 
     def append
-      add_method(:new_resource,    "@new_resource ||= #{resource_class}.new")
-      add_method(:create_resource, "@create_resource ||= #{resource_class}.create(#{resource}_params)")
-      add_method(:update_resource, "@update_resource ||= #{resource}.tap { |v| v.update(#{resource}_params) }")
-      add_method(:index_resource,  resource_plural)
-      add_method(:edit_resource,   resource)
-      add_method(:show_resource,   resource)
-    end
-
-    private
-
-    def resource_class
-      @resource_class ||= resource.camelize.constantize
-    end
-
-    def resource_plural
-      resource.pluralize
+      add_method(:new_resource,    "@new_resource ||= #{model.klass}.new")
+      add_method(:create_resource, "@create_resource ||= #{model.klass}.create(#{model.name}_params)")
+      add_method(:update_resource, "@update_resource ||= #{model.name}.tap { |v| v.update(#{model.name}_params) }")
+      add_method(:index_resource,  model.plural)
+      add_method(:edit_resource,   model.name)
+      add_method(:show_resource,   model.name)
     end
   end
 end
