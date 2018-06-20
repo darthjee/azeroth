@@ -33,12 +33,6 @@ Style/Documentation:
     - 'lib/azeroth/resourceable/resource_route_builder.rb'
     - 'lib/azeroth/resourceable/routes_builder.rb'
 
-# Offense count: 1
-# Cop supports --auto-correct.
-Style/MutableConstant:
-  Exclude:
-    - 'lib/azeroth/version.rb'
-
 # Offense count: 6
 # Configuration parameters: AllowHeredoc, AllowURI, URISchemes, IgnoreCopDirectives, IgnoredPatterns.
 # URISchemes: http, https
