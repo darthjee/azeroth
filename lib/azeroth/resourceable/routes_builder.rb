@@ -1,11 +1,11 @@
 module Azeroth::Resourceable
   class RoutesBuilder
-    attr_reader :resource, :builder
+    attr_reader :model, :builder
 
     delegate :add_method, to: :builder
 
-    def initialize(resource, builder)
-      @resource = resource
+    def initialize(model, builder)
+      @model = model
       @builder = builder
     end
 
@@ -26,7 +26,7 @@ module Azeroth::Resourceable
         create: :render_basic,
         update: :render_basic,
         destroy: <<-RUBY
-                   #{resource}.destroy
+                   #{model.name}.destroy
                    head :no_content
                  RUBY
       }
