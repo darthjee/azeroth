@@ -1,5 +1,5 @@
 require 'spec_helper'
 
-describe Azeroth::Resourceable::ResourceBuilder do
+describe Azeroth::ResourceBuilder do
   xit 'Need to write it'
 end
