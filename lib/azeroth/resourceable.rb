@@ -5,7 +5,6 @@ module Azeroth
     extend ActiveSupport::Concern
 
     autoload :Builder,              'azeroth/resourceable/builder'
-    autoload :RoutesBuilder,        'azeroth/resourceable/routes_builder'
     autoload :ResourceBuilder,      'azeroth/resourceable/resource_builder'
     autoload :ResourceRouteBuilder, 'azeroth/resourceable/resource_route_builder'
 
