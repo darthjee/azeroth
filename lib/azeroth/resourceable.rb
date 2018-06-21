@@ -6,7 +6,6 @@ module Azeroth
 
     autoload :Builder,              'azeroth/resourceable/builder'
     autoload :ResourceBuilder,      'azeroth/resourceable/resource_builder'
-    autoload :ResourceRouteBuilder, 'azeroth/resourceable/resource_route_builder'
 
     class_methods do
       def resource_for(name, **options)
