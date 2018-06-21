@@ -4,7 +4,7 @@ module Azeroth
   module Resourceable
     extend ActiveSupport::Concern
 
-    autoload :Builder,              'azeroth/resourceable/builder'
+    autoload :Builder, 'azeroth/resourceable/builder'
 
     class_methods do
       def resource_for(name, **options)
