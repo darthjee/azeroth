@@ -1,5 +1,34 @@
 require 'spec_helper'
 
 describe Azeroth::RoutesBuilder do
-  xit 'Needs to write it'
+  subject { described_class.new(model, builder) }
+
+  let(:model)    { Azeroth::Model.new(:document) }
+  let(:builder)  { Sinclair.new(klass) }
+  let(:klass)    { Class.new(RoutesBuilderController) }
+  let(:instance) { klass.new(params) }
+  let(:params)   { {} }
+
+  before do
+    subject.append
+    10.times { Document.create }
+  end
+
+  describe '#append' do
+    before { subject.append }
+
+    it 'adds index route' do
+      expect do
+        builder.build
+      end.to change { klass.new.respond_to?(:index) }
+    end
+
+    describe 'when calling index' do
+      before { builder.build }
+
+      it 'returns the index object' do
+        expect(instance.perform(:index)).to eq({ json: 'index_json' })
+      end
+    end
+  end
 end
