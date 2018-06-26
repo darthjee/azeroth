@@ -10,7 +10,7 @@ describe Azeroth::Resourceable::Builder do
 
   describe '#build' do
     it_behaves_like 'a route resource build' do
-      let(:builder)  { subject }
+      let(:builder) { subject }
     end
   end
 end

@@ -20,14 +20,14 @@ describe Azeroth::RoutesBuilder do
     it 'adds index route' do
       expect do
         builder.build
-      end.to change { klass.new.respond_to?(:index) }
+      end.to RSpec::CustomMatchers::AddMethod.new(:index).to(klass.new)
     end
 
     describe 'when calling index' do
       before { builder.build }
 
       it 'returns the index object' do
-        expect(instance.perform(:index)).to eq({ json: 'index_json' })
+        expect(instance.perform(:index)).to eq(json: 'index_json')
       end
     end
   end
