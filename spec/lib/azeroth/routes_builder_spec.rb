@@ -20,7 +20,7 @@ describe Azeroth::RoutesBuilder do
     it 'adds index route' do
       expect do
         builder.build
-      end.to RSpec::CustomMatchers::AddMethod.new(:index).to(klass.new)
+      end.to add_method(:index).to(klass.new)
     end
 
     describe 'when calling index' do

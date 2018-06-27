@@ -70,3 +70,11 @@ module RSpec
     end
   end
 end
+
+module RSpec
+  module Matchers
+    def add_method(method)
+      CustomMatchers::AddMethod.new(:index)
+    end
+  end
+end
