@@ -4,9 +4,10 @@ module Azeroth
 
     delegate :add_method, to: :builder
 
-    def initialize(model, builder)
+    def initialize(model, builder, options)
       @model = model
       @builder = builder
+      @options = options
     end
 
     def append

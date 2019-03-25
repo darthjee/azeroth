@@ -8,7 +8,9 @@ module Azeroth
 
     class_methods do
       def resource_for(name, **options)
-        Builder.new(self, name, **options).build
+        Builder.new(
+          self, name, Azeroth::Options.new(options)
+        ).build
       end
     end
   end

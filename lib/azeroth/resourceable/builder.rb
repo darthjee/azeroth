@@ -3,13 +3,14 @@ require 'sinclair'
 module Azeroth
   module Resourceable
     class Builder
-      attr_reader :clazz, :model
+      attr_reader :clazz, :model, :options
 
       delegate :build, :add_method, to: :builder
 
-      def initialize(clazz, model_name, **_options)
+      def initialize(clazz, model_name, options)
         @clazz = clazz
         @model = Azeroth::Model.new(model_name)
+        @options = options
 
         add_params
         add_resource
@@ -37,7 +38,7 @@ module Azeroth
       end
 
       def add_routes
-        RoutesBuilder.new(model, builder).append
+        RoutesBuilder.new(model, builder, options).append
       end
 
       def permitted_attributes

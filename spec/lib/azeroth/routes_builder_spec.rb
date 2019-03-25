@@ -1,13 +1,15 @@
 require 'spec_helper'
 
 describe Azeroth::RoutesBuilder do
-  subject { described_class.new(model, builder) }
+  subject { described_class.new(model, builder, options) }
 
-  let(:model)    { Azeroth::Model.new(:document) }
-  let(:builder)  { Sinclair.new(klass) }
-  let(:klass)    { Class.new(RoutesBuilderController) }
-  let(:instance) { klass.new(params) }
-  let(:params)   { {} }
+  let(:model)        { Azeroth::Model.new(:document) }
+  let(:builder)      { Sinclair.new(klass) }
+  let(:klass)        { Class.new(RoutesBuilderController) }
+  let(:instance)     { klass.new(params) }
+  let(:params)       { {} }
+  let(:options)      { Azeroth::Options.new(options_hash) }
+  let(:options_hash) { {} }
 
   before do
     subject.append
