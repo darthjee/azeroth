@@ -29,9 +29,9 @@ Style/Documentation:
     - 'lib/azeroth/model.rb'
     - 'lib/azeroth/resourceable.rb'
     - 'lib/azeroth/resourceable/builder.rb'
-    - 'lib/azeroth/resourceable/resource_builder.rb'
-    - 'lib/azeroth/resourceable/resource_route_builder.rb'
-    - 'lib/azeroth/resourceable/routes_builder.rb'
+    - 'lib/azeroth/resource_builder.rb'
+    - 'lib/azeroth/resource_route_builder.rb'
+    - 'lib/azeroth/routes_builder.rb'
 
 # Offense count: 6
 # Configuration parameters: AllowHeredoc, AllowURI, URISchemes, IgnoreCopDirectives, IgnoredPatterns.
