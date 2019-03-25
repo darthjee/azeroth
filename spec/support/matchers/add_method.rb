@@ -73,7 +73,7 @@ end
 
 module RSpec
   module Matchers
-    def add_method(method)
+    def add_method(_method)
       CustomMatchers::AddMethod.new(:index)
     end
   end
