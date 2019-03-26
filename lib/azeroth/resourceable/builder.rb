@@ -25,8 +25,14 @@ module Azeroth
       end
 
       def add_params
-        add_method("#{model.name}_id",     'params.require(:id)')
-        add_method("#{model.name}_params", "params.require(:#{model.name}).permit(:#{permitted_attributes.join(', :')})")
+        add_method("#{model.name}_id", 'params.require(:id)')
+        add_method(
+          "#{model.name}_params",
+          <<-CODE
+            params.require(:#{model.name})
+              .permit(:#{permitted_attributes.join(', :')})
+          CODE
+        )
       end
 
       def add_resource

@@ -35,8 +35,3 @@ Style/Documentation:
     - 'lib/azeroth/resourceable/builder.rb'
     - 'lib/azeroth/routes_builder.rb'
 
-# Offense count: 6
-# Configuration parameters: AllowHeredoc, AllowURI, URISchemes, IgnoreCopDirectives, IgnoredPatterns.
-# URISchemes: http, https
-Metrics/LineLength:
-  Max: 121

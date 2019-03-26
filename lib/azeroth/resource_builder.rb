@@ -11,7 +11,10 @@ module Azeroth
 
     def append
       add_method(model.plural, "@#{model.plural} ||= #{model.klass}.all")
-      add_method(model.name,   "@#{model.name} ||= #{model.plural}.find(#{model.name}_id)")
+      add_method(
+        model.name,
+        "@#{model.name} ||= #{model.plural}.find(#{model.name}_id)"
+      )
     end
   end
 end
