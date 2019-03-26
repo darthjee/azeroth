@@ -9,3 +9,6 @@ Metrics/BlockLength:
 
 RSpec/NestedGroups:
   Max: 4
+
+RSpec/AlignLeftLetBrace:
+  Enabled: true
