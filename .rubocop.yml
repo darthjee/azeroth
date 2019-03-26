@@ -6,3 +6,6 @@ Metrics/BlockLength:
     - 'spec/**/*_spec.rb'
     - 'spec/support/shared_*/**/*.rb'
     - 'azeroth.gemspec'
+
+RSpec/NestedGroups:
+  Max: 4
