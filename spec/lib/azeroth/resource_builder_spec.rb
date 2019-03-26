@@ -25,7 +25,7 @@ describe Azeroth::ResourceBuilder do
         .to(true)
     end
 
-    context 'after the build' do
+    describe 'after the build' do
       let(:controller) { klass.new(document_id: document.id) }
       let(:document)   { Document.create }
 

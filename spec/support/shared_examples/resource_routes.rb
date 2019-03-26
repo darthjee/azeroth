@@ -68,7 +68,7 @@ shared_examples 'a route resource build' do
       let(:expected) { Document.find(document.id) }
       let(:params) { { id: document.id, document: document_params } }
 
-      context 'after the methods has been built' do
+      describe 'after the methods has been built' do
         before { builder.build }
 
         it 'updates the resource the resource' do
