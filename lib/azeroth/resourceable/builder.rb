@@ -6,6 +6,7 @@ module Azeroth
       attr_reader :clazz, :model, :options
 
       delegate :build, :add_method, to: :builder
+      delegate :name, :klass, to: :model
 
       def initialize(clazz, model_name, options)
         @clazz = clazz
@@ -25,11 +26,11 @@ module Azeroth
       end
 
       def add_params
-        add_method("#{model.name}_id", 'params.require(:id)')
+        add_method("#{name}_id", 'params.require(:id)')
         add_method(
-          "#{model.name}_params",
+          "#{name}_params",
           <<-CODE
-            params.require(:#{model.name})
+            params.require(:#{name})
               .permit(:#{permitted_attributes.join(', :')})
           CODE
         )
@@ -48,7 +49,7 @@ module Azeroth
       end
 
       def permitted_attributes
-        @permitted_attributes ||= model.klass.attribute_names - ['id']
+        @permitted_attributes ||= klass.attribute_names - ['id']
       end
     end
   end
