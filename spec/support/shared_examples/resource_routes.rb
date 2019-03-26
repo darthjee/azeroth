@@ -57,7 +57,7 @@ shared_examples 'a route resource build' do
 
     it_behaves_like 'a builder that adds a resource for route', :show do
       let(:expected) { document }
-      let(:params) { { id: document.id } }
+      let(:params)   { { id: document.id } }
     end
   end
 
@@ -66,9 +66,9 @@ shared_examples 'a route resource build' do
 
     it_behaves_like 'a builder that adds a resource for route', :update do
       let(:expected) { Document.find(document.id) }
-      let(:params) { { id: document.id, document: document_params } }
+      let(:params)   { { id: document.id, document: document_params } }
 
-      context 'after the methods has been built' do
+      describe 'after the methods has been built' do
         before { builder.build }
 
         it 'updates the resource the resource' do

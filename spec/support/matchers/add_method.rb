@@ -64,8 +64,9 @@ module RSpec
       end
 
       def raise_block_syntax_error
-        raise SyntaxError, 'Block not received by the `add_method_to` matcher. ' \
-          'Perhaps you want to use `{ ... }` instead of do/end?'
+        raise SyntaxError, 'Block not received by the' \
+        '`add_method_to` matcher. ' \
+        'Perhaps you want to use `{ ... }` instead of do/end?'
       end
     end
   end

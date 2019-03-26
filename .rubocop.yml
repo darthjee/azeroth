@@ -1,1 +1,14 @@
+require: rubocop-rspec
 inherit_from: .rubocop_todo.yml
+
+Metrics/BlockLength:
+  Exclude:
+    - 'spec/**/*_spec.rb'
+    - 'spec/support/shared_*/**/*.rb'
+    - 'azeroth.gemspec'
+
+RSpec/NestedGroups:
+  Max: 4
+
+RSpec/AlignLeftLetBrace:
+  Enabled: true

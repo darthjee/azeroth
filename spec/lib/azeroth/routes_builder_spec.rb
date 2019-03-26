@@ -1,7 +1,9 @@
 require 'spec_helper'
 
 describe Azeroth::RoutesBuilder do
-  subject { described_class.new(model, builder, options) }
+  subject(:routes_builder) do
+    described_class.new(model, builder, options)
+  end
 
   let(:model)        { Azeroth::Model.new(:document) }
   let(:builder)      { Sinclair.new(klass) }
@@ -12,12 +14,12 @@ describe Azeroth::RoutesBuilder do
   let(:options_hash) { {} }
 
   before do
-    subject.append
+    routes_builder.append
     10.times { Document.create }
   end
 
   describe '#append' do
-    before { subject.append }
+    before { routes_builder.append }
 
     it 'adds index route' do
       expect do

@@ -1,14 +1,14 @@
 require 'spec_helper'
 
 describe Azeroth::ResourceBuilder do
-  subject { described_class.new(model, builder) }
+  subject(:resource_builder) { described_class.new(model, builder) }
 
   let(:model)   { Azeroth::Model.new(:document) }
   let(:builder) { Sinclair.new(klass) }
   let(:klass)   { Class.new(ResourceBuilderController) }
 
   before do
-    subject.append
+    resource_builder.append
     10.times { Document.create }
   end
 
@@ -25,7 +25,7 @@ describe Azeroth::ResourceBuilder do
         .to(true)
     end
 
-    context 'after the build' do
+    describe 'after the build' do
       let(:controller) { klass.new(document_id: document.id) }
       let(:document)   { Document.create }
 
