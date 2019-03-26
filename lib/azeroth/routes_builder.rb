@@ -11,26 +11,20 @@ module Azeroth
     end
 
     def append
-      %i[index show new edit create update destroy].each do |route|
-        add_method(route, route_code[route].to_s)
+      %i[index show new edit create update].each do |route|
+        add_method(route, 'render_basic')
       end
+
+      add_method(:destroy, destroy)
     end
 
     private
 
-    def route_code
-      {
-        index: :render_basic,
-        show: :render_basic,
-        new: :render_basic,
-        edit: :render_basic,
-        create: :render_basic,
-        update: :render_basic,
-        destroy: <<-RUBY
-          #{model.name}.destroy
-          head :no_content
-        RUBY
-      }
+    def destroy
+      <<-RUBY
+        #{model.name}.destroy
+        head :no_content
+      RUBY
     end
   end
 end
