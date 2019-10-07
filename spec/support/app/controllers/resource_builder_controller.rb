@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ResourceBuilderController
   def initialize(document_id: nil)
     @document_id = document_id

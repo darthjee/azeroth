@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Azeroth
   class Model
     attr_reader :name

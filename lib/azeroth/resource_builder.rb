@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Azeroth
   class ResourceBuilder
     attr_reader :model, :builder

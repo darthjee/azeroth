@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Serializer
   def self.serialize(object)
     case object

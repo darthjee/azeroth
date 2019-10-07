@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module RSpec
   module CustomMatchers
     class AddMethod < Matchers::BuiltIn::BaseMatcher
@@ -33,6 +35,7 @@ module RSpec
       def matches?(event_proc)
         @event_proc = event_proc
         return false unless event_proc.is_a?(Proc)
+
         raise_block_syntax_error if block_given?
         perform_change(event_proc)
         changed?
