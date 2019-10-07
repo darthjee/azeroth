@@ -21,7 +21,8 @@ rules:
     exclude: []
   Summary::Presence:
     enabled: true
-    exclude: []
+    exclude:
+      - Azeroth::Model#initialize
   Summary::Length:
     enabled: true
     exclude: []
