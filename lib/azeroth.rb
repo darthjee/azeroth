@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Azeroth
   autoload :Model,                'azeroth/model'
   autoload :Resourceable,         'azeroth/resourceable'

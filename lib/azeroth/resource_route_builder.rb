@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Azeroth
   class ResourceRouteBuilder
     attr_reader :model, :builder

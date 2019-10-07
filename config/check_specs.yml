@@ -1,0 +1,5 @@
+ignore:
+  - lib/azeroth/resourceable.rb
+  - lib/azeroth/version.rb
+  - lib/azeroth/options.rb
+  - lib/azeroth.rb

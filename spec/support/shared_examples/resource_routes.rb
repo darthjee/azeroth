@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 shared_examples 'a builder that adds a resource for route' do |route|
   let(:params)   { {} }
   let(:instance) { klass.new(params) }

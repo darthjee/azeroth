@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ResourceRouteBuilderController
   def initialize(id: nil, document: nil)
     @id = id
