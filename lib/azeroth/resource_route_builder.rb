@@ -1,6 +1,16 @@
 # frozen_string_literal: true
 
 module Azeroth
+  # @api private
+  # @author Darthjee
+  #
+  # Builder for resources for each route
+  #
+  # For each route method in the controller, there
+  # should be a resource, index should have  listing
+  # of all entries, update should update and return
+  # updated resource, new should return an empty object,
+  # etc..
   class ResourceRouteBuilder
     attr_reader :model, :builder
 
