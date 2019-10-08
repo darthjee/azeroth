@@ -1,5 +1,9 @@
-coverage/
-pkg/
+coverages
+pkg
 Gemfile.lock
-measurement
+coverage
+doc
+.yardoc/
+measurement/
 **/*.swp
+rubycritic/
