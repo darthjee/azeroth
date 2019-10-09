@@ -7,8 +7,8 @@ module Azeroth
   # Model responsible for making the conection to the resource model class
   class Model
     attr_reader :name
-    # @api private
     # @method name
+    # @api private
     #
     # Returns the name of the resource represented by the model
     #

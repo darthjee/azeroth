@@ -17,6 +17,7 @@ module Azeroth
     delegate :add_method, to: :builder
     delegate :name, :klass, to: :model
 
+    # @param (see ResourceBuilder#initialize)
     def initialize(model, builder)
       @model = model
       @builder = builder

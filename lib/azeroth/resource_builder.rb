@@ -10,9 +10,6 @@ module Azeroth
   # entries of a resource, and one for fetching an specific
   # entry
   class ResourceBuilder
-    delegate :add_method, to: :builder
-    delegate :name, :plural, to: :model
-
     # @param model [Model] Resource model interface
     # @param builder [Sinclair] method builder
     def initialize(model, builder)
@@ -32,6 +29,29 @@ module Azeroth
     end
 
     private
+
+    delegate :add_method, to: :builder
+    # @api private
+    # @method add_method
+    #
+    # Add a method to be build on the controller
+    #
+    # @return [Array<Sinclair::MethodDefinition>]
+
+    delegate :name, :plural, to: :model
+    # @method name
+    # @api private
+    #
+    # Returns the name of the resource represented by the model
+    #
+    # @return [String]
+
+    # @method plural
+    # @api private
+    #
+    # Return the pluralized version of resource name
+    #
+    # @return [String]
 
     attr_reader :model, :builder
     # @method model
