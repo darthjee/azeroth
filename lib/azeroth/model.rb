@@ -19,7 +19,7 @@ module Azeroth
       @name = name.to_s
     end
 
-    # resource class (real model class)
+    # Resource class (real model class)
     #
     # @return [Class]
     def klass

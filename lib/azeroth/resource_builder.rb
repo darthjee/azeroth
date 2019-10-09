@@ -17,7 +17,7 @@ module Azeroth
       @builder = builder
     end
 
-    # Add methods to be built
+    # Append methods to be built to the builder
     #
     # Methods are the listing of all entities and fetching
     # of an specific entity
@@ -29,6 +29,25 @@ module Azeroth
     end
 
     private
+
+    attr_reader :model, :builder
+    # @method model
+    # @api private
+    # @private
+    #
+    # Returns the model class of the resource
+    #
+    # @return [Model]
+
+    # @method builder
+    # @api private
+    # @private
+    #
+    # Returns a method builder
+    #
+    # @return [Sinclair]
+    #
+    # @see https://www.rubydoc.info/gems/sinclair Sinclair
 
     delegate :add_method, to: :builder
     # @api private
@@ -52,24 +71,5 @@ module Azeroth
     # Return the pluralized version of resource name
     #
     # @return [String]
-
-    attr_reader :model, :builder
-    # @method model
-    # @api private
-    # @private
-    #
-    # Returns the model class of the resource
-    #
-    # @return [Model]
-
-    # @method builder
-    # @api private
-    # @private
-    #
-    # Returns a method builder
-    #
-    # @return [Sinclair]
-    #
-    # @see https://www.rubydoc.info/gems/sinclair Sinclair
   end
 end
