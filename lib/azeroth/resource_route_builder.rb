@@ -18,8 +18,8 @@ module Azeroth
       @builder = builder
     end
 
-    # Append methods to be build to the builder 
-    # 
+    # Append methods to be build to the builder
+    #
     # The methods to be added are resources related
     # to the routes:
     # - new
@@ -76,7 +76,7 @@ module Azeroth
     # Returns the name of the resource represented by the model
     #
     # @return [String]
-    
+
     # @method klass
     # @api private
     #
