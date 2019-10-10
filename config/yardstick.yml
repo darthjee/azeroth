@@ -1,4 +1,4 @@
-threshold: 51.9
+threshold: 98.5
 require_exact_threshold: false
 rules:
   ApiTag::Presence:
@@ -21,7 +21,12 @@ rules:
     exclude: []
   Summary::Presence:
     enabled: true
-    exclude: []
+    exclude:
+      - Azeroth::Model#initialize
+      - Azeroth::ResourceBuilder#initialize
+      - Azeroth::ResourceRouteBuilder#initialize
+      - Azeroth::Resourceable::Builder#initialize
+      - Azeroth::RoutesBuilder#initialize
   Summary::Length:
     enabled: true
     exclude: []
