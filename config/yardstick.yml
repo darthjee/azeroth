@@ -25,6 +25,7 @@ rules:
       - Azeroth::Model#initialize
       - Azeroth::ResourceBuilder#initialize
       - Azeroth::ResourceRouteBuilder#initialize
+      - Azeroth::Resourceable::Builder#initialize
   Summary::Length:
     enabled: true
     exclude: []
