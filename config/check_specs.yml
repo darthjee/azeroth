@@ -1,4 +1,5 @@
 ignore:
+  - lib/azeroth/resourceable/class_methods.rb
   - lib/azeroth/resourceable.rb
   - lib/azeroth/version.rb
   - lib/azeroth/options.rb
