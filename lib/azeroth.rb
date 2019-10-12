@@ -1,5 +1,10 @@
 # frozen_string_literal: true
 
+# @api public
+#
+# Lib for easily developing controllers
+#
+# @see Resourceable
 module Azeroth
   autoload :Model,                'azeroth/model'
   autoload :Resourceable,         'azeroth/resourceable'
