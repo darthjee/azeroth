@@ -13,6 +13,11 @@ ActiveRecord::Base.establish_connection(
   adapter: 'sqlite3', database: ':memory:'
 )
 
+require File.expand_path('spec/dummy/config/environment')
+require File.expand_path('spec/dummy/db/schema.rb')
+require 'rspec/rails'
+require 'active_support/railtie'
+
 support_files = File.expand_path('spec/support/**/*.rb')
 Dir[support_files].each { |file| require file }
 
