@@ -29,6 +29,8 @@ RSpec.configure do |config|
 
   config.order = 'random'
 
-  config.before do
+  config.around do |example|
+    Document.delete_all
+    example.run
   end
 end
