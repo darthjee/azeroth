@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 
 describe DocumentsController do
@@ -14,7 +16,6 @@ describe DocumentsController do
     end
 
     before do
-
       get :index
     end
 
@@ -22,7 +23,7 @@ describe DocumentsController do
 
     it { expect(parsed_response).to eq([]) }
 
-    context "when there is a document" do
+    context 'when there is a document' do
       let(:documents_count) { 1 }
 
       it { expect(response).to be_successful }
