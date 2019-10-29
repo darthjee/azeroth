@@ -16,7 +16,7 @@ describe DocumentsController do
     end
 
     before do
-      get :index
+      get :index, params: { format: :json }
     end
 
     it { expect(response).to be_successful }
