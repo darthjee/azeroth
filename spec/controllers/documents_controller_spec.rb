@@ -22,7 +22,9 @@ describe DocumentsController do
 
       it { expect(response).to be_successful }
 
-      it { expect(parsed_response).to eq([]) }
+      it 'returns empty array' do
+        expect(parsed_response).to eq([])
+      end
 
       context 'when there is a document' do
         let(:documents_count) { 1 }
@@ -56,7 +58,9 @@ describe DocumentsController do
 
       it { expect(response).to be_successful }
 
-      it { expect(parsed_response).to eq(document.as_json) }
+      it 'returns document json' do
+        expect(parsed_response).to eq(document.as_json)
+      end
     end
 
     context 'when calling on format html' do
@@ -67,6 +71,34 @@ describe DocumentsController do
       it { expect(response).to be_successful }
 
       it { expect(response).to render_template('documents/show') }
+    end
+  end
+
+  describe 'POST create' do
+    context 'when calling on format json' do
+      let(:parameters) do
+        {
+          format: :json,
+          document: {
+            name: 'My document'
+          }
+        }
+      end
+
+      it do
+        post :create, params: parameters
+        expect(response).to be_successful
+      end
+
+      it 'returns created document json' do
+        post :create, params: parameters
+        expect(parsed_response).to eq(Document.last.as_json)
+      end
+
+      it do
+        expect { post :create, params: parameters }
+          .to change(Document, :count).by(1)
+      end
     end
   end
 end
