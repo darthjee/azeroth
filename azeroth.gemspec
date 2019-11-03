@@ -28,6 +28,7 @@ Gem::Specification.new do |gem|
   gem.add_development_dependency 'pry',                      '0.12.2'
   gem.add_development_dependency 'pry-nav',                  '0.3.0'
   gem.add_development_dependency 'rails',                    '>= 5.2.0'
+  gem.add_development_dependency 'rails-controller-testing', '1.0.4'
   gem.add_development_dependency 'rake',                     '12.3.3'
   gem.add_development_dependency 'reek',                     '5.4.0'
   gem.add_development_dependency 'rspec',                    '3.8.0'
@@ -43,5 +44,4 @@ Gem::Specification.new do |gem|
   gem.add_development_dependency 'sqlite3',                  '>= 1.3.13'
   gem.add_development_dependency 'yard',                     '0.9.20'
   gem.add_development_dependency 'yardstick',                '0.9.9'
-  gem.add_development_dependency 'rails-controller-testing', '1.0.4'
 end

@@ -29,7 +29,7 @@ describe DocumentsController do
 
         it { expect(response).to be_successful }
 
-        it "renders documents json" do
+        it 'renders documents json' do
           expect(parsed_response).to eq(documents.as_json)
         end
       end
@@ -42,7 +42,7 @@ describe DocumentsController do
 
       it { expect(response).to be_successful }
 
-      it { expect(response).to render_template("documents/index") }
+      it { expect(response).to render_template('documents/index') }
     end
   end
 end
