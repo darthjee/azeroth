@@ -49,11 +49,12 @@ describe DocumentsController do
   end
 
   describe 'GET show' do
-    let(:document) { Document.create }
+    let(:document)    { Document.create }
+    let(:document_id) { document.id }
 
     context 'when calling on format json' do
       before do
-        get :show, params: { id: document.id, format: :json }
+        get :show, params: { id: document_id, format: :json }
       end
 
       it { expect(response).to be_successful }
@@ -63,9 +64,23 @@ describe DocumentsController do
       end
     end
 
+    context 'when calling on an inexistent id' do
+      let(:document_id) { :wrong_id }
+
+      before do
+        get :show, params: { id: document_id, format: :json }
+      end
+
+      it { expect(response).not_to be_successful }
+
+      it 'returns empty body' do
+        expect(response.body).to eq('')
+      end
+    end
+
     context 'when calling on format html' do
       before do
-        get :show, params: { id: document.id, format: :html }
+        get :show, params: { id: :id, format: :html }
       end
 
       it { expect(response).to be_successful }
