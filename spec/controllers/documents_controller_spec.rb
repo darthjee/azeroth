@@ -211,4 +211,46 @@ describe DocumentsController do
       it { expect(response).to render_template('documents/edit') }
     end
   end
+
+  describe 'DELETE destroy' do
+    let!(:document)   { Document.create }
+    let(:document_id) { document.id }
+
+    let(:parameters) do
+      {
+        id: document_id,
+      }
+    end
+
+    it do
+      delete :destroy, params: parameters
+      expect(response).to be_successful
+    end
+
+    it do
+      delete :destroy, params: parameters
+      expect(response.body).to eq('')
+    end
+
+    it do
+      expect { delete :destroy, params: parameters }
+        .to change(Document, :count)
+        .by(-1)
+    end
+
+    context 'when calling on an inexistent id' do
+      let(:document_id) { :wrong_id }
+
+      before do
+        delete :destroy, params: parameters
+      end
+
+      it { expect(response).not_to be_successful }
+      it { expect(response.status).to eq(404) }
+
+      it 'returns empty body' do
+        expect(response.body).to eq('')
+      end
+    end
+  end
 end
