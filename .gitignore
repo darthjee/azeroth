@@ -7,3 +7,6 @@ doc
 measurement/
 **/*.swp
 rubycritic/
+spec/dummy/log/*
+spec/dummy/tmp/*
+spec/dummy/db/*.sqlite3

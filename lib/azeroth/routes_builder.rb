@@ -19,10 +19,13 @@ module Azeroth
     #
     # @return [Array<Sinclair::MethodDefinition>]
     def append
-      %i[index show new edit create update].each do |route|
+      %i[index show edit].each do |route|
         add_method(route, 'render_basic')
       end
 
+      add_method(:new, '')
+      add_method(:update,  update_code)
+      add_method(:create,  create_code)
       add_method(:destroy, destroy_code)
     end
 
@@ -53,6 +56,18 @@ module Azeroth
     # Appends a method
     #
     # @return [Array<Sinclair::MethodDefinition>]
+
+    def update_code
+      <<-RUBY
+        render json: update_resource
+      RUBY
+    end
+
+    def create_code
+      <<-RUBY
+        render json: create_resource
+      RUBY
+    end
 
     # @private
     #
