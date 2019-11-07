@@ -113,4 +113,48 @@ describe DocumentsController do
         .to change(Document, :count).by(1)
     end
   end
+
+  describe 'PATCH update' do
+    let(:document)    { Document.create }
+    let(:document_id) { document.id }
+
+    let(:parameters) do
+      {
+        id: document_id,
+        document: {
+          name: 'My document'
+        }
+      }
+    end
+
+    it do
+      patch :update, params: parameters
+      expect(response).to be_successful
+    end
+
+    it 'returns created document json' do
+      patch :update, params: parameters
+      expect(parsed_response).to eq(Document.last.as_json)
+    end
+
+    it do
+      expect { patch :update, params: parameters }
+        .to change { document.reload.name }
+        .from(nil).to('My document')
+    end
+
+    context 'when calling on an inexistent id' do
+      let(:document_id) { :wrong_id }
+
+      before do
+        patch :update, params: parameters
+      end
+
+      it { expect(response).not_to be_successful }
+
+      it 'returns empty body' do
+        expect(response.body).to eq('')
+      end
+    end
+  end
 end
