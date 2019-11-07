@@ -23,7 +23,7 @@ module Azeroth
         add_method(route, 'render_basic')
       end
 
-      add_method(:new,  "")
+      add_method(:new, '')
       add_method(:update,  update_code)
       add_method(:create,  create_code)
       add_method(:destroy, destroy_code)

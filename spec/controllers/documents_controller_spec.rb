@@ -169,4 +169,46 @@ describe DocumentsController do
 
     it { expect(response).to render_template('documents/new') }
   end
+
+  describe 'GET edit' do
+    let(:document)    { Document.create }
+    let(:document_id) { document.id }
+
+    context 'when calling on format json' do
+      before do
+        get :edit, params: { id: document_id, format: :json }
+      end
+
+      it { expect(response).to be_successful }
+
+      it 'returns document json' do
+        expect(parsed_response).to eq(document.as_json)
+      end
+    end
+
+    context 'when calling on an inexistent id' do
+      let(:document_id) { :wrong_id }
+
+      before do
+        get :edit, params: { id: document_id, format: :json }
+      end
+
+      it { expect(response).not_to be_successful }
+      it { expect(response.status).to eq(404) }
+
+      it 'returns empty body' do
+        expect(response.body).to eq('')
+      end
+    end
+
+    context 'when calling on format html' do
+      before do
+        get :edit, params: { id: :id, format: :html }
+      end
+
+      it { expect(response).to be_successful }
+
+      it { expect(response).to render_template('documents/edit') }
+    end
+  end
 end
