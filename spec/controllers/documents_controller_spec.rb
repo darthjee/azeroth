@@ -133,7 +133,7 @@ describe DocumentsController do
       expect(response).to be_successful
     end
 
-    it 'returns created document json' do
+    it 'returns updated document json' do
       patch :update, params: parameters
       expect(parsed_response).to eq(Document.last.as_json)
     end
@@ -158,5 +158,15 @@ describe DocumentsController do
         expect(response.body).to eq('')
       end
     end
+  end
+
+  describe 'GET new' do
+    before { get :new }
+
+    it do
+      expect(response).to be_successful
+    end
+
+    it { expect(response).to render_template('documents/new') }
   end
 end
