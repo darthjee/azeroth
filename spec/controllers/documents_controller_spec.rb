@@ -218,7 +218,7 @@ describe DocumentsController do
 
     let(:parameters) do
       {
-        id: document_id,
+        id: document_id
       }
     end
 
