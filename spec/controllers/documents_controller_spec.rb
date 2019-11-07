@@ -72,6 +72,7 @@ describe DocumentsController do
       end
 
       it { expect(response).not_to be_successful }
+      it { expect(response.status).to eq(404) }
 
       it 'returns empty body' do
         expect(response.body).to eq('')
@@ -151,6 +152,7 @@ describe DocumentsController do
       end
 
       it { expect(response).not_to be_successful }
+      it { expect(response.status).to eq(404) }
 
       it 'returns empty body' do
         expect(response.body).to eq('')
