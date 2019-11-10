@@ -34,7 +34,13 @@ module Azeroth
     end
 
     def decorate(object)
-      klass::Decorator.new(object).as_json
+      decorator.new(object).as_json
+    end
+
+    private
+
+    def decorator
+      @decorator ||= klass::Decorator
     end
   end
 end
