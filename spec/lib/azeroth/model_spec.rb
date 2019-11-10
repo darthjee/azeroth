@@ -20,8 +20,26 @@ shared_examples 'a model wrapper' do
       expect(model.klass).to eq(Document)
     end
   end
+end
+
+describe Azeroth::Model do
+  subject(:model) { described_class.new(input) }
+
+  context 'when initializing with symbol' do
+    let(:input) { :document }
+
+    it_behaves_like 'a model wrapper'
+  end
+
+  context 'when initializing with string' do
+    let(:input) { 'document' }
+
+    it_behaves_like 'a model wrapper'
+  end
 
   describe '#decorate' do
+    let(:input) { :document }
+
     context 'when object is just a model' do
       let(:reference) { SecureRandom.uuid }
       let!(:object)   { create(:document, reference: reference) }
@@ -55,21 +73,5 @@ shared_examples 'a model wrapper' do
         end
       end
     end
-  end
-end
-
-describe Azeroth::Model do
-  subject(:model) { described_class.new(input) }
-
-  context 'when initializing with symbol' do
-    let(:input) { :document }
-
-    it_behaves_like 'a model wrapper'
-  end
-
-  context 'when initializing with string' do
-    let(:input) { 'document' }
-
-    it_behaves_like 'a model wrapper'
   end
 end
