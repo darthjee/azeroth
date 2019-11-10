@@ -66,4 +66,10 @@ describe Azeroth::Model do
 
     it_behaves_like 'a model wrapper'
   end
+
+  context 'when initializing with string' do
+    let(:input) { 'document' }
+
+    it_behaves_like 'a model wrapper'
+  end
 end
