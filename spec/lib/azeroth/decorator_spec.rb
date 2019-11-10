@@ -24,7 +24,12 @@ describe Azeroth::Decorator do
         let(:object) { [model, other_model] }
 
         let(:other_model) do
-          build(:dummy_model, first_name: 'dum', age: 65, favorite_pokemon: :bulbasaur)
+          build(
+            :dummy_model,
+            first_name: 'dum',
+            age: 65,
+            favorite_pokemon: :bulbasaur
+          )
         end
 
         let(:expected_json) do

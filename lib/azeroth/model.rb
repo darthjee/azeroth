@@ -32,5 +32,9 @@ module Azeroth
     def plural
       name.pluralize
     end
+
+    def decorate(object)
+      klass::Decorator.new(object).as_json
+    end
   end
 end

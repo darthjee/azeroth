@@ -20,6 +20,42 @@ shared_examples 'a model wrapper' do
       expect(model.klass).to eq(Document)
     end
   end
+
+  describe '#decorate' do
+    context 'when object is just a model' do
+      let(:reference) { SecureRandom.uuid }
+      let!(:object)   { create(:document, reference: reference) }
+
+      let(:expected_json) do
+        {
+          name: object.name
+        }.stringify_keys
+      end
+
+      it 'returns meta data defined json' do
+        expect(model.decorate(object)).to eq(expected_json)
+      end
+
+      context 'when object is an active record relation' do
+        let(:relation)      { Document.where(reference: reference) }
+        let!(:other_object) { create(:document, reference: reference) }
+
+        let(:expected_json) do
+          [
+            {
+              name: object.name
+            }, {
+              name: other_object.name
+            }
+          ].map(&:stringify_keys)
+        end
+
+        it 'returns meta data defined json' do
+          expect(model.decorate(relation)).to eq(expected_json)
+        end
+      end
+    end
+  end
 end
 
 describe Azeroth::Model do
