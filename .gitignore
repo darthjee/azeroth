@@ -6,6 +6,7 @@ doc
 .yardoc/
 measurement/
 **/*.swp
+**/*.swo
 rubycritic/
 spec/dummy/log/*
 spec/dummy/tmp/*
