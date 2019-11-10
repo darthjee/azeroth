@@ -37,6 +37,12 @@ describe Azeroth::Model do
     it_behaves_like 'a model wrapper'
   end
 
+  context 'when initializing with model' do
+    let(:input) { Document }
+
+    it_behaves_like 'a model wrapper'
+  end
+
   describe '#decorate' do
     context 'when model has a decorator' do
       let(:input) { :document }

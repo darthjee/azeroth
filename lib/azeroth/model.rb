@@ -6,17 +6,20 @@ module Azeroth
   #
   # Model responsible for making the conection to the resource model class
   class Model
-    attr_reader :name
-    # @method name
-    # @api private
-    #
+    # @param name [String,Symbol] name of the resource
+    def initialize(name)
+      if name.is_a?(Class)
+        @klass = name
+      else
+        @name = name.to_s
+      end
+    end
+
     # Returns the name of the resource represented by the model
     #
     # @return [String]
-
-    # @param name [String,Symbol] name of the resource
-    def initialize(name)
-      @name = name.to_s
+    def name
+      @name ||= klass.name.gsub(/.*::/, '').underscore
     end
 
     # Resource class (real model class)
