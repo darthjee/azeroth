@@ -11,7 +11,7 @@ describe Azeroth::Decorator do
       let(:expected_json) do
         {
           name: "#{model.first_name} #{model.last_name}",
-          age:  model.age,
+          age: model.age,
           pokemon: model.favorite_pokemon
         }.stringify_keys
       end
@@ -31,11 +31,11 @@ describe Azeroth::Decorator do
           [
             {
               name: "#{model.first_name} #{model.last_name}",
-              age:  model.age,
+              age: model.age,
               pokemon: model.favorite_pokemon
             }, {
               name: "#{other_model.first_name} #{other_model.last_name}",
-              age:  other_model.age,
+              age: other_model.age,
               pokemon: other_model.favorite_pokemon
             }
           ].map(&:stringify_keys)
