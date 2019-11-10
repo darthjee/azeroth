@@ -41,6 +41,18 @@ module Azeroth
 
     def decorator
       @decorator ||= klass::Decorator
+    rescue NameError
+      @decorator = build_decorator
+    end
+
+    def build_decorator
+      clazz = klass
+
+      Class.new(Azeroth::Decorator) do
+        clazz.new.attributes.keys.each do |attribute|
+          expose attribute
+        end
+      end
     end
   end
 end

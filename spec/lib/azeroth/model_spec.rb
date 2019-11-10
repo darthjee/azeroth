@@ -91,16 +91,6 @@ describe Azeroth::Model do
           let(:relation)      { User.where(reference: reference) }
           let!(:other_object) { create(:user, reference: reference) }
 
-          let(:expected_json) do
-            [
-              {
-                name: object.name
-              }, {
-                name: other_object.name
-              }
-            ].map(&:stringify_keys)
-          end
-
           it 'returns regular as_json' do
             expect(model.decorate(relation)).to eq(relation.as_json)
           end
