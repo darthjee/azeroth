@@ -83,10 +83,16 @@ describe Azeroth::Model do
       end
     end
 
-    context 'when model does not have a decorator' do
-      let(:input)     { :user }
+    context 'when model is an active record that does not have a decorator' do
+      let(:input)     { Class.new(User) }
       let(:reference) { SecureRandom.uuid }
       let!(:object)   { create(:user, reference: reference) }
+
+      it 'creates a decorator class' do
+        expect { model.decorate(object) }
+          .to change { model.klass.const_defined?(:Decorator) }
+          .from(false).to(true)
+      end
 
       context 'when object is just a model' do
         it 'returns regular as_json' do

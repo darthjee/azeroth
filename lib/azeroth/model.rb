@@ -51,11 +51,13 @@ module Azeroth
     def build_decorator
       clazz = klass
 
-      Class.new(Azeroth::Decorator) do
+      decorator = Class.new(Azeroth::Decorator) do
         clazz.new.attributes.keys.each do |attribute|
           expose attribute
         end
       end
+
+      klass.const_set(:Decorator, decorator)
     end
   end
 end
