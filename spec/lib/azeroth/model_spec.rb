@@ -45,11 +45,12 @@ describe Azeroth::Model do
 
   describe '#decorate' do
     context 'when model has a decorator' do
-      let(:input) { :document }
+      let(:input)     { :document }
+      let(:reference) { SecureRandom.uuid }
+      let!(:object)   { create(:document, reference: reference) }
 
-      context 'when object is just a model' do
-        let(:reference) { SecureRandom.uuid }
-        let!(:object)   { create(:document, reference: reference) }
+      context 'when object is just a model and has decorator' do
+        let!(:object) { create(:document, reference: reference) }
 
         let(:expected_json) do
           {
@@ -60,46 +61,46 @@ describe Azeroth::Model do
         it 'returns meta data defined json' do
           expect(model.decorate(object)).to eq(expected_json)
         end
+      end
 
-        context 'when object is an active record relation' do
-          let(:relation)      { Document.where(reference: reference) }
-          let!(:other_object) { create(:document, reference: reference) }
+      context 'when object is an active record relation' do
+        let(:relation)      { Document.where(reference: reference) }
+        let!(:other_object) { create(:document, reference: reference) }
 
-          let(:expected_json) do
-            [
-              {
-                name: object.name
-              }, {
-                name: other_object.name
-              }
-            ].map(&:stringify_keys)
-          end
+        let(:expected_json) do
+          [
+            {
+              name: object.name
+            }, {
+              name: other_object.name
+            }
+          ].map(&:stringify_keys)
+        end
 
-          it 'returns meta data defined json' do
-            expect(model.decorate(relation)).to eq(expected_json)
-          end
+        it 'returns meta data defined json' do
+          expect(model.decorate(relation)).to eq(expected_json)
         end
       end
     end
 
     context 'when model does not have a decorator' do
-      let(:input) { :user }
+      let(:input)     { :user }
+      let(:reference) { SecureRandom.uuid }
+      let!(:object)   { create(:user, reference: reference) }
 
       context 'when object is just a model' do
-        let(:reference) { SecureRandom.uuid }
-        let!(:object)   { create(:user, reference: reference) }
-
         it 'returns regular as_json' do
           expect(model.decorate(object)).to eq(object.as_json)
         end
+      end
 
-        context 'when object is an active record relation' do
-          let(:relation)      { User.where(reference: reference) }
-          let!(:other_object) { create(:user, reference: reference) }
+      context 'when object is an active record relation' do
+        let(:relation) { User.where(reference: reference) }
 
-          it 'returns regular as_json' do
-            expect(model.decorate(relation)).to eq(relation.as_json)
-          end
+        before { create(:user, reference: reference) }
+
+        it 'returns regular as_json' do
+          expect(model.decorate(relation)).to eq(relation.as_json)
         end
       end
     end
