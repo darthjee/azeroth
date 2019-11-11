@@ -88,12 +88,6 @@ describe Azeroth::Model do
       let(:reference) { SecureRandom.uuid }
       let!(:object)   { create(:user, reference: reference) }
 
-      it 'creates a decorator class' do
-        expect { model.decorate(object) }
-          .to change { input.const_defined?(:Decorator) }
-          .from(false).to(true)
-      end
-
       context 'when object is just a model' do
         it 'returns regular as_json' do
           expect(model.decorate(object)).to eq(object.as_json)
@@ -120,12 +114,6 @@ describe Azeroth::Model do
       end
 
       let(:object) { input.new(id: 1, name: 'my name') }
-
-      it 'creates a decorator class' do
-        expect { model.decorate(object) }
-          .to change { input.const_defined?(:Decorator) }
-          .from(false).to(true)
-      end
 
       it 'returns regular as_json' do
         expect(model.decorate(object)).to eq(object.as_json)

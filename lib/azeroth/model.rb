@@ -38,26 +38,14 @@ module Azeroth
 
     def decorate(object)
       decorator.new(object).as_json
+    rescue NameError
+      object.as_json
     end
 
     private
 
     def decorator
       @decorator ||= klass::Decorator
-    rescue NameError
-      @decorator = build_decorator
-    end
-
-    def build_decorator
-      attributes = klass.new.try(:attributes) || []
-
-      decorator = Class.new(Azeroth::Decorator) do
-        attributes.each do |attribute|
-          expose attribute
-        end
-      end
-
-      klass.const_set(:Decorator, decorator)
     end
   end
 end
