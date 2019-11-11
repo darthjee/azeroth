@@ -49,10 +49,10 @@ module Azeroth
     end
 
     def build_decorator
-      clazz = klass
+      attributes = klass.new.try(:attributes) || []
 
       decorator = Class.new(Azeroth::Decorator) do
-        clazz.new.attributes.keys.each do |attribute|
+        attributes.each do |attribute|
           expose attribute
         end
       end

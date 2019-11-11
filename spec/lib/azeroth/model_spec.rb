@@ -90,7 +90,7 @@ describe Azeroth::Model do
 
       it 'creates a decorator class' do
         expect { model.decorate(object) }
-          .to change { model.klass.const_defined?(:Decorator) }
+          .to change { input.const_defined?(:Decorator) }
           .from(false).to(true)
       end
 
@@ -108,6 +108,27 @@ describe Azeroth::Model do
         it 'returns regular as_json' do
           expect(model.decorate(relation)).to eq(relation.as_json)
         end
+      end
+    end
+
+    context 'when model is an active model that does not have a decorator' do
+      let(:input) do
+        Class.new do
+          include ActiveModel::Model
+          attr_accessor :id, :name
+        end
+      end
+
+      let(:object) { input.new(id: 1, name: 'my name') }
+
+      it 'creates a decorator class' do
+        expect { model.decorate(object) }
+          .to change { input.const_defined?(:Decorator) }
+          .from(false).to(true)
+      end
+
+      it 'returns regular as_json' do
+        expect(model.decorate(object)).to eq(object.as_json)
       end
     end
   end
