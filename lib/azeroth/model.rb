@@ -36,15 +36,28 @@ module Azeroth
       name.pluralize
     end
 
+    # Decorates object to return a hash
+    #
+    # Decorate uses klass::Decorator to decorate.
+    #
+    # When no decorator has been defined, object will
+    # receive an +#as_json+ call instead
+    #
+    # @return [Hash]
     def decorate(object)
-      decorator.new(object).as_json
+      decorator_class.new(object).as_json
     rescue NameError
       object.as_json
     end
 
     private
 
-    def decorator
+    # @private
+    #
+    # Returns decorator class for the object
+    #
+    # @return [Class] subclass of {Decorator}
+    def decorator_class
       @decorator ||= klass::Decorator
     end
   end
