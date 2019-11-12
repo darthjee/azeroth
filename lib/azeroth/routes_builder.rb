@@ -57,12 +57,22 @@ module Azeroth
     #
     # @return [Array<Sinclair::MethodDefinition>]
 
+    # @private
+    #
+    # Method code to update route
+    #
+    # @return [String]
     def update_code
       <<-RUBY
         render json: update_resource
       RUBY
     end
 
+    # @private
+    #
+    # Method code to create route
+    #
+    # @return [String]
     def create_code
       <<-RUBY
         render json: create_resource
@@ -71,7 +81,7 @@ module Azeroth
 
     # @private
     #
-    # Method code to destrou route
+    # Method code to destroy route
     #
     # @return [String]
     def destroy_code

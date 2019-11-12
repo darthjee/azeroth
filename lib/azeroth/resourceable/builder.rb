@@ -135,6 +135,9 @@ module Azeroth
         RoutesBuilder.new(model, builder, options).append
       end
 
+      # Returns all updatable attributes
+      #
+      # @return [Array<String>]
       def permitted_attributes
         @permitted_attributes ||= klass.attribute_names - ['id']
       end
