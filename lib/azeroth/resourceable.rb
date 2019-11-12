@@ -19,6 +19,12 @@ module Azeroth
 
     private
 
+    # @api private
+    # @private
+    #
+    # Perform rendering of an action based on the requested format
+    #
+    # @return [String]
     def render_basic
       action = params[:action]
       respond_to do |format|
@@ -27,6 +33,12 @@ module Azeroth
       end
     end
 
+    # @api private
+    # @private
+    #
+    # returns 404 as HTTP status
+    #
+    # @return [TrueClass]
     def not_found
       head :not_found
     end
