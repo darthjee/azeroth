@@ -58,7 +58,7 @@ module Azeroth
     #
     # @return [Class] subclass of {Decorator}
     def decorator_class
-      @decorator ||= klass::Decorator
+      @decorator_class ||= klass::Decorator
     end
   end
 end
