@@ -5,5 +5,12 @@ ActiveRecord::Schema.define do
 
   create_table :documents, force: true do |t|
     t.string :name
+    t.string :reference
+  end
+
+  create_table :users, force: true do |t|
+    t.string :name
+    t.string :email
+    t.string :reference
   end
 end

@@ -6,6 +6,7 @@
 #
 # @see Resourceable
 module Azeroth
+  autoload :Decorator,            'azeroth/decorator'
   autoload :Model,                'azeroth/model'
   autoload :Resourceable,         'azeroth/resourceable'
   autoload :ResourceBuilder,      'azeroth/resource_builder'

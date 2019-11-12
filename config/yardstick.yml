@@ -22,6 +22,7 @@ rules:
   Summary::Presence:
     enabled: true
     exclude:
+      - Azeroth::Decorator#initialize
       - Azeroth::Model#initialize
       - Azeroth::ResourceBuilder#initialize
       - Azeroth::ResourceRouteBuilder#initialize

@@ -6,17 +6,20 @@ module Azeroth
   #
   # Model responsible for making the conection to the resource model class
   class Model
-    attr_reader :name
-    # @method name
-    # @api private
-    #
+    # @param name [String,Symbol] name of the resource
+    def initialize(name)
+      if name.is_a?(Class)
+        @klass = name
+      else
+        @name = name.to_s
+      end
+    end
+
     # Returns the name of the resource represented by the model
     #
     # @return [String]
-
-    # @param name [String,Symbol] name of the resource
-    def initialize(name)
-      @name = name.to_s
+    def name
+      @name ||= klass.name.gsub(/.*::/, '').underscore
     end
 
     # Resource class (real model class)
@@ -31,6 +34,31 @@ module Azeroth
     # @return [String]
     def plural
       name.pluralize
+    end
+
+    # Decorates object to return a hash
+    #
+    # Decorate uses klass::Decorator to decorate.
+    #
+    # When no decorator has been defined, object will
+    # receive an +#as_json+ call instead
+    #
+    # @return [Hash]
+    def decorate(object)
+      decorator_class.new(object).as_json
+    rescue NameError
+      object.as_json
+    end
+
+    private
+
+    # @private
+    #
+    # Returns decorator class for the object
+    #
+    # @return [Class] subclass of {Decorator}
+    def decorator_class
+      @decorator_class ||= klass::Decorator
     end
   end
 end
