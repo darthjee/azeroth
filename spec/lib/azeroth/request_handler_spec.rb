@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 
 describe Azeroth::RequestHandler do
@@ -5,14 +7,15 @@ describe Azeroth::RequestHandler do
     subject(:handler) { described_class.new(controller, model) }
 
     let(:controller) { instance_double(ActionController::Base, params: params) }
-    let(:params)     { ActionController::Parameters.new }
+    let(:params)     { ActionController::Parameters.new(parameters) }
     let(:model)      { Azeroth::Model.new(:document) }
 
     let(:expected_json)   {}
     let(:documents_count) { 0 }
+    let(:extra_params)    { {} }
 
     let(:parameters) do
-      { format: format, action: action }
+      { format: format, action: action }.merge(extra_params)
     end
 
     before do
@@ -31,6 +34,21 @@ describe Azeroth::RequestHandler do
         let(:format) { 'json' }
 
         it 'returns all documents json' do
+          expect(handler.process).to eq(expected_json)
+        end
+      end
+    end
+
+    context 'when action is show' do
+      let(:extra_params)    { { 'id' => document.id } }
+      let(:action)          { 'show' }
+      let(:expected_json)   { document.to_json }
+      let!(:document)       { create(:document) }
+
+      context 'with format json' do
+        let(:format) { 'json' }
+
+        it 'returns document json' do
           expect(handler.process).to eq(expected_json)
         end
       end
