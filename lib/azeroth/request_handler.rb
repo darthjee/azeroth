@@ -44,11 +44,11 @@ module Azeroth
     end
 
     def index
-      model.klass.all.to_json
+      controller.send(model.plural).to_json
     end
 
     def show
-      model.klass.all.find(id).to_json
+      controller.send(model.name).to_json
     end
   end
 end

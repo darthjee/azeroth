@@ -6,7 +6,7 @@ describe Azeroth::RequestHandler do
   describe '#process' do
     subject(:handler) { described_class.new(controller, model) }
 
-    let(:controller) { instance_double(ActionController::Base, params: params) }
+    let(:controller) { controller_class.new }
     let(:params)     { ActionController::Parameters.new(parameters) }
     let(:model)      { Azeroth::Model.new(:document) }
 
@@ -14,12 +14,24 @@ describe Azeroth::RequestHandler do
     let(:documents_count) { 0 }
     let(:extra_params)    { {} }
 
+    let(:controller_class) do
+      Class.new(ActionController::Base) do
+        include Azeroth::Resourceable
+
+        resource_for :document
+      end
+    end
+
     let(:parameters) do
       { format: format, action: action }.merge(extra_params)
     end
 
     before do
       documents_count.times { create(:document) }
+
+      allow(controller).to receive(:params)
+        .and_return(params)
+
       allow(controller).to receive(:render)
         .with(json: expected_json)
         .and_return(expected_json)
