@@ -36,6 +36,12 @@ describe Azeroth::RequestHandler do
         it 'returns all documents json' do
           expect(handler.process).to eq(expected_json)
         end
+
+        it 'renders the json' do
+          handler.process
+
+          expect(controller).to have_received(:render)
+        end
       end
     end
 
@@ -50,6 +56,12 @@ describe Azeroth::RequestHandler do
 
         it 'returns document json' do
           expect(handler.process).to eq(expected_json)
+        end
+
+        it 'renders the json' do
+          handler.process
+
+          expect(controller).to have_received(:render)
         end
       end
     end

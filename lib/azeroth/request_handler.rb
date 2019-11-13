@@ -8,11 +8,15 @@ module Azeroth
     end
 
     def process
-      case action
+      json = case action
       when :index
         index
       when :show
         show
+      end
+
+      controller.instance_eval do
+        render(json: json)
       end
     end
 
