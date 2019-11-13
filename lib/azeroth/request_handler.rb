@@ -1,7 +1,19 @@
 # frozen_string_literal: true
 
+require 'arstotzka'
+
+module Arstotzka
+  module TypeCast
+    def to_symbol(value)
+      value.to_sym if value
+    end
+  end
+end
+
 module Azeroth
   class RequestHandler
+    include Arstotzka
+
     def initialize(controller, model)
       @controller = controller
       @model = model
@@ -26,24 +38,15 @@ module Azeroth
 
     delegate :params, to: :controller
 
+    expose :format, :action, type: :symbol, json: :params
+    expose :id, json: :params
+
     def index
       model.klass.all.to_json
     end
 
     def show
       model.klass.all.find(id).to_json
-    end
-
-    def format
-      params[:format].to_sym
-    end
-
-    def action
-      params[:action].to_sym
-    end
-
-    def id
-      params[:id]
     end
   end
 end
