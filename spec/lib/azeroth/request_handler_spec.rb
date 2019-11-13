@@ -99,6 +99,45 @@ describe Azeroth::RequestHandler do
       end
     end
 
+    context 'when action is update' do
+      let(:action)            { 'update' }
+      let(:expected_resource) { document }
+      let!(:document)         { create(:document) }
+
+      let(:extra_params) do
+        {
+          id: document.id,
+          document: {
+            name: 'New Name'
+          }
+        }
+      end
+
+      context 'with format json' do
+        let(:format) { 'json' }
+
+        it 'returns document json' do
+          expect(handler.process).to eq(expected_json)
+        end
+
+        it 'renders the json' do
+          handler.process
+
+          expect(controller).to have_received(:render)
+        end
+      end
+
+      context 'with format html' do
+        let(:format) { 'html' }
+
+        it do
+          handler.process
+
+          expect(controller).not_to have_received(:render)
+        end
+      end
+    end
+
     context 'when action is not allowed' do
       let(:action)        { 'invalid' }
       let(:expected_json) { '' }

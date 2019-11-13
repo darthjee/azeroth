@@ -24,14 +24,13 @@ module Azeroth
 
     private
 
-    ALLOWED_ACTIONS = %i[index show].freeze
+    ALLOWED_ACTIONS = %i[index show update].freeze
 
     attr_reader :controller, :model
 
     delegate :params, to: :controller
 
     expose :format, :action, type: :symbol, json: :params
-    expose :id, json: :params
 
     def json?
       format == :json
@@ -42,6 +41,10 @@ module Azeroth
     end
 
     def show
+      model.decorate(controller.send(model.name))
+    end
+
+    def update
       model.decorate(controller.send(model.name))
     end
 
