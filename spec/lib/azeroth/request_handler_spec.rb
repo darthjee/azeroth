@@ -98,5 +98,28 @@ describe Azeroth::RequestHandler do
         end
       end
     end
+
+    context 'when action is not allowed' do
+      let(:action)        { 'invalid' }
+      let(:expected_json) { '' }
+
+      context 'with format json' do
+        let(:format) { 'json' }
+
+        it do
+          expect { handler.process }
+            .to raise_error(Azeroth::Exception::NotAllowedAction)
+        end
+      end
+
+      context 'with format html' do
+        let(:format) { 'html' }
+
+        it do
+          expect { handler.process }
+            .to raise_error(Azeroth::Exception::NotAllowedAction)
+        end
+      end
+    end
   end
 end

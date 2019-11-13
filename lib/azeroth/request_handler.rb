@@ -12,6 +12,7 @@ module Azeroth
     end
 
     def process
+      fail Azeroth::Exception::NotAllowedAction unless action_allowed?
       return unless json?
 
       json = resource_json
@@ -22,6 +23,7 @@ module Azeroth
     end
 
     private
+    ALLOWED_ACTIONS=%i[index show]
 
     attr_reader :controller, :model
 
@@ -49,6 +51,10 @@ module Azeroth
 
     def show
       model.decorate(controller.send(model.name))
+    end
+
+    def action_allowed?
+      ALLOWED_ACTIONS.include?(action)
     end
   end
 end
