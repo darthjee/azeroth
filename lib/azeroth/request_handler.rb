@@ -14,12 +14,7 @@ module Azeroth
     def process
       return unless json?
 
-      json = case action
-             when :index
-               index
-             when :show
-               show
-      end
+      json = resource_json
 
       controller.instance_eval do
         render(json: json)
@@ -34,6 +29,15 @@ module Azeroth
 
     expose :format, :action, type: :symbol, json: :params
     expose :id, json: :params
+
+    def resource_json
+      case action
+      when :index
+        index
+      when :show
+        show
+      end
+    end
 
     def json?
       format == :json
