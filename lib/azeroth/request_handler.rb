@@ -2,14 +2,6 @@
 
 require 'arstotzka'
 
-module Arstotzka
-  module TypeCast
-    def to_symbol(value)
-      value.to_sym if value
-    end
-  end
-end
-
 module Azeroth
   class RequestHandler
     include Arstotzka
