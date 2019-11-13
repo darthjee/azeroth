@@ -104,6 +104,10 @@ describe Azeroth::RequestHandler do
       let(:expected_resource) { document }
       let!(:document)         { create(:document) }
 
+      let(:expected_json) do
+        decorator.as_json.merge('name' => 'New Name')
+      end
+
       let(:extra_params) do
         {
           id: document.id,
@@ -125,6 +129,13 @@ describe Azeroth::RequestHandler do
 
           expect(controller).to have_received(:render)
         end
+
+        it 'updates the values' do
+          expect { handler.process }
+            .to change { document.reload.name }
+            .from(document.name)
+            .to('New Name')
+        end
       end
 
       context 'with format html' do
@@ -134,6 +145,11 @@ describe Azeroth::RequestHandler do
           handler.process
 
           expect(controller).not_to have_received(:render)
+        end
+
+        it 'does not update the values' do
+          expect { handler.process }
+            .not_to change { document.reload.name }
         end
       end
     end
