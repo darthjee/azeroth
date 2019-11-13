@@ -44,11 +44,11 @@ module Azeroth
     end
 
     def index
-      controller.send(model.plural).to_json
+      model.decorate(controller.send(model.plural))
     end
 
     def show
-      controller.send(model.name).to_json
+      model.decorate(controller.send(model.name))
     end
   end
 end

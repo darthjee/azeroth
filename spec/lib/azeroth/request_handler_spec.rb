@@ -10,7 +10,8 @@ describe Azeroth::RequestHandler do
     let(:params)     { ActionController::Parameters.new(parameters) }
     let(:model)      { Azeroth::Model.new(:document) }
 
-    let(:expected_json)   {}
+    let(:decorator)       { Document::Decorator.new(expected_resource) }
+    let(:expected_json)   { decorator.as_json }
     let(:documents_count) { 0 }
     let(:extra_params)    { {} }
 
@@ -38,9 +39,9 @@ describe Azeroth::RequestHandler do
     end
 
     context 'when action is index' do
-      let(:action)          { 'index' }
-      let(:expected_json)   { Document.all.to_json }
-      let(:documents_count) { 3 }
+      let(:action)            { 'index' }
+      let(:expected_resource) { Document.all }
+      let(:documents_count)   { 3 }
 
       context 'with format json' do
         let(:format) { 'json' }
@@ -68,10 +69,10 @@ describe Azeroth::RequestHandler do
     end
 
     context 'when action is show' do
-      let(:extra_params)  { { 'id' => document.id } }
-      let(:action)        { 'show' }
-      let(:expected_json) { document.to_json }
-      let!(:document)     { create(:document) }
+      let(:extra_params)      { { 'id' => document.id } }
+      let(:action)            { 'show' }
+      let(:expected_resource) { document }
+      let!(:document)         { create(:document) }
 
       context 'with format json' do
         let(:format) { 'json' }
