@@ -13,10 +13,10 @@ module Azeroth
 
     def process
       json = case action
-      when :index
-        index
-      when :show
-        show
+             when :index
+               index
+             when :show
+               show
       end
 
       controller.instance_eval do

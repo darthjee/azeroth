@@ -19,9 +19,9 @@ Gem::Specification.new do |gem|
   gem.require_paths = ['lib']
 
   gem.add_runtime_dependency 'activesupport',       '~> 5.2.0'
+  gem.add_runtime_dependency 'arstotzka',           '>= 1.4.3'
   gem.add_runtime_dependency 'darthjee-active_ext', '>= 1.3.2'
   gem.add_runtime_dependency 'sinclair',            '>= 1.5.2'
-  gem.add_runtime_dependency 'arstotzka',           '>= 1.4.3'
 
   gem.add_development_dependency 'actionpack',               '~> 5.x'
   gem.add_development_dependency 'activerecord',             '~> 5.x'
