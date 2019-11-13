@@ -2,6 +2,6 @@
 
 module Azeroth
   class Exception < StandardError
-    class NotAllowedAction < Exception; end
+    class NotAllowedAction < RuntimeError; end
   end
 end

@@ -12,7 +12,7 @@ module Azeroth
     end
 
     def process
-      fail Azeroth::Exception::NotAllowedAction unless action_allowed?
+      raise Azeroth::Exception::NotAllowedAction unless action_allowed?
       return unless json?
 
       json = send(action)
@@ -23,7 +23,8 @@ module Azeroth
     end
 
     private
-    ALLOWED_ACTIONS=%i[index show]
+
+    ALLOWED_ACTIONS = %i[index show].freeze
 
     attr_reader :controller, :model
 
