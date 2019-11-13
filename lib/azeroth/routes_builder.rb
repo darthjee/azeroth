@@ -24,7 +24,7 @@ module Azeroth
       end
 
       add_method(:new, '')
-      add_method(:update,  update_code)
+      add_method(:update,  &update_code)
       add_method(:create,  create_code)
       add_method(:destroy, destroy_code)
     end
@@ -63,9 +63,13 @@ module Azeroth
     #
     # @return [String]
     def update_code
-      <<-RUBY
-        render json: update_resource
-      RUBY
+      model_interface = model
+
+      Proc.new do
+        Azeroth::RequestHandler.new(
+          self, model_interface
+        ).process
+      end
     end
 
     # @private

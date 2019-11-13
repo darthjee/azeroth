@@ -119,9 +119,14 @@ describe DocumentsController do
     let(:document)    { Document.create }
     let(:document_id) { document.id }
 
+    let(:expected_json) do
+      Document::Decorator.new(Document.last).as_json
+    end
+
     let(:parameters) do
       {
         id: document_id,
+        format: :json,
         document: {
           name: 'My document'
         }
@@ -135,7 +140,7 @@ describe DocumentsController do
 
     it 'returns updated document json' do
       patch :update, params: parameters
-      expect(parsed_response).to eq(Document.last.as_json)
+      expect(parsed_response).to eq(expected_json)
     end
 
     it do
