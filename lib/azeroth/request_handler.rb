@@ -5,6 +5,10 @@ module Azeroth
       @model = model
     end
 
+    def process
+      model.klass.all.to_json
+    end
+
     private
 
     attr_reader :controller, :model
