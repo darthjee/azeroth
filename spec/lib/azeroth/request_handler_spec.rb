@@ -43,13 +43,23 @@ describe Azeroth::RequestHandler do
           expect(controller).to have_received(:render)
         end
       end
+
+      context 'with format html' do
+        let(:format) { 'html' }
+
+        it do
+          handler.process
+
+          expect(controller).not_to have_received(:render)
+        end
+      end
     end
 
     context 'when action is show' do
-      let(:extra_params)    { { 'id' => document.id } }
-      let(:action)          { 'show' }
-      let(:expected_json)   { document.to_json }
-      let!(:document)       { create(:document) }
+      let(:extra_params)  { { 'id' => document.id } }
+      let(:action)        { 'show' }
+      let(:expected_json) { document.to_json }
+      let!(:document)     { create(:document) }
 
       context 'with format json' do
         let(:format) { 'json' }
@@ -62,6 +72,16 @@ describe Azeroth::RequestHandler do
           handler.process
 
           expect(controller).to have_received(:render)
+        end
+      end
+
+      context 'with format html' do
+        let(:format) { 'html' }
+
+        it do
+          handler.process
+
+          expect(controller).not_to have_received(:render)
         end
       end
     end

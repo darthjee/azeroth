@@ -12,6 +12,8 @@ module Azeroth
     end
 
     def process
+      return unless json?
+
       json = case action
              when :index
                index
@@ -32,6 +34,10 @@ module Azeroth
 
     expose :format, :action, type: :symbol, json: :params
     expose :id, json: :params
+
+    def json?
+      format == :json
+    end
 
     def index
       model.klass.all.to_json
