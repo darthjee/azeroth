@@ -46,7 +46,10 @@ module Azeroth
     end
 
     def update
-      controller.send(model.name)
+      attributes = controller.send("#{model.name}_params")
+      resource = controller.send(model.name)
+      resource.update(attributes)
+      resource
     end
 
     def action_allowed?
