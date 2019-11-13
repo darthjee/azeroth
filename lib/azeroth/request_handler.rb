@@ -15,7 +15,8 @@ module Azeroth
       raise Azeroth::Exception::NotAllowedAction unless action_allowed?
       return unless json?
 
-      json = send(action)
+      resource = send(action)
+      json = model.decorate(resource)
 
       controller.instance_eval do
         render(json: json)
@@ -37,15 +38,15 @@ module Azeroth
     end
 
     def index
-      model.decorate(controller.send(model.plural))
+      controller.send(model.plural)
     end
 
     def show
-      model.decorate(controller.send(model.name))
+      controller.send(model.name)
     end
 
     def update
-      model.decorate(controller.send(model.name))
+      controller.send(model.name)
     end
 
     def action_allowed?
