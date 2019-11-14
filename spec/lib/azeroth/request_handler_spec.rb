@@ -15,13 +15,7 @@ describe Azeroth::RequestHandler do
     let(:documents_count) { 0 }
     let(:extra_params)    { {} }
 
-    let(:controller_class) do
-      Class.new(ActionController::Base) do
-        include Azeroth::Resourceable
-
-        resource_for :document
-      end
-    end
+    let(:controller_class) { RequestHandlerController }
 
     let(:parameters) do
       { format: format, action: action }.merge(extra_params)

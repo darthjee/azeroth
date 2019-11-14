@@ -28,7 +28,7 @@ module Azeroth
       add_method(:destroy, destroy_code)
 
       %i[index show update].each do |route|
-        add_method(route,  &route_code)
+        add_method(route, &route_code)
       end
     end
 
@@ -63,7 +63,7 @@ module Azeroth
     def route_code
       model_interface = model
 
-      Proc.new do
+      proc do
         Azeroth::RequestHandler.new(
           self, model_interface
         ).process
