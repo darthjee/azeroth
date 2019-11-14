@@ -24,9 +24,12 @@ module Azeroth
       end
 
       add_method(:new, '')
-      add_method(:update,  &update_code)
       add_method(:create,  create_code)
       add_method(:destroy, destroy_code)
+
+      %i[update].each do |route|
+        add_method(route,  &route_code)
+      end
     end
 
     private
@@ -57,12 +60,7 @@ module Azeroth
     #
     # @return [Array<Sinclair::MethodDefinition>]
 
-    # @private
-    #
-    # Method code to update route
-    #
-    # @return [String]
-    def update_code
+    def route_code
       model_interface = model
 
       Proc.new do
