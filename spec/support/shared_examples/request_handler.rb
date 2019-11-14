@@ -3,9 +3,10 @@
 shared_examples 'a request handler' do |action|
   subject(:handler) { described_class.new(controller, model) }
 
-  let(:controller) { controller_class.new }
-  let(:params)     { ActionController::Parameters.new(parameters) }
-  let(:model)      { Azeroth::Model.new(:document) }
+  let(:controller)      { controller_class.new }
+  let(:params)          { ActionController::Parameters.new(parameters) }
+  let(:model)           { Azeroth::Model.new(:document) }
+  let(:extra_params)    { {} }
 
   let(:decorator)       { Document::Decorator.new(expected_resource) }
   let(:expected_json)   { decorator.as_json }
@@ -16,7 +17,7 @@ shared_examples 'a request handler' do |action|
   let(:format) { 'json' }
 
   let(:parameters) do
-    { format: format, action: action }
+    { format: format, action: action }.merge(extra_params)
   end
 
   before do
