@@ -5,6 +5,9 @@
 # Lib for easily developing controllers
 #
 # @see Resourceable
+
+require 'sinclair'
+
 module Azeroth
   autoload :Decorator,            'azeroth/decorator'
   autoload :Exception,            'azeroth/exception'

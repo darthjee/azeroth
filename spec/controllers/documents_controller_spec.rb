@@ -15,6 +15,10 @@ describe DocumentsController do
       end
     end
 
+    let(:expected_json) do
+      Document::Decorator.new(documents).as_json
+    end
+
     context 'when calling on format json' do
       before do
         get :index, params: { format: :json }
@@ -23,7 +27,7 @@ describe DocumentsController do
       it { expect(response).to be_successful }
 
       it 'returns empty array' do
-        expect(parsed_response).to eq([])
+        expect(parsed_response).to eq(expected_json)
       end
 
       context 'when there is a document' do
@@ -32,7 +36,7 @@ describe DocumentsController do
         it { expect(response).to be_successful }
 
         it 'renders documents json' do
-          expect(parsed_response).to eq(documents.as_json)
+          expect(parsed_response).to eq(expected_json)
         end
       end
     end
