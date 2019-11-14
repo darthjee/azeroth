@@ -28,7 +28,7 @@ module Azeroth
       add_method(:destroy, destroy_code)
 
       %i[index show update].each do |route|
-        add_method(route, &route_code)
+        add_method(route, &route_code(route))
       end
     end
 
@@ -60,8 +60,11 @@ module Azeroth
     #
     # @return [Array<Sinclair::MethodDefinition>]
 
-    def route_code
+    def route_code(route)
       model_interface = model
+      handler_class = Azeroth::RequestHandler.const_get(
+        route.to_s.capitalize
+      )
 
       proc do
         Azeroth::RequestHandler.new(
