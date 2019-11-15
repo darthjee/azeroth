@@ -1,11 +1,7 @@
 # frozen_string_literal: true
 
-require 'arstotzka'
-
 module Azeroth
   class RequestHandler
-    include Arstotzka
-
     autoload :Create,  'azeroth/request_handler/create'
     autoload :Destroy, 'azeroth/request_handler/destroy'
     autoload :Edit,    'azeroth/request_handler/edit'
@@ -35,10 +31,12 @@ module Azeroth
 
     delegate :params, to: :controller
 
-    expose :format, type: :symbol, json: :params
-
     def json?
       format == :json
+    end
+
+    def format
+      params[:format]&.to_sym
     end
   end
 end
