@@ -7,7 +7,7 @@ module Azeroth
     class Show < RequestHandler
       private
 
-      def show
+      def resource
         controller.send(model.name)
       end
     end

@@ -7,7 +7,7 @@ module Azeroth
     class Index < RequestHandler
       private
 
-      def index
+      def resource
         controller.send(model.plural)
       end
     end

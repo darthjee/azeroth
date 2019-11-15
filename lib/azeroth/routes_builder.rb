@@ -67,7 +67,7 @@ module Azeroth
       )
 
       proc do
-        Azeroth::RequestHandler.new(
+        handler_class.new(
           self, model_interface
         ).process
       end

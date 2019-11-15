@@ -7,7 +7,7 @@ module Azeroth
     class Update < RequestHandler
       private
 
-      def update
+      def resource
         attributes = controller.send("#{model.name}_params")
         resource = controller.send(model.name)
         resource.update(attributes)
