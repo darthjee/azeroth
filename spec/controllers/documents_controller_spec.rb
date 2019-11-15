@@ -258,9 +258,14 @@ describe DocumentsController do
     let!(:document)   { Document.create }
     let(:document_id) { document.id }
 
+    let(:expected_json) do
+      Document::Decorator.new(document).as_json
+    end
+
     let(:parameters) do
       {
-        id: document_id
+        id: document_id,
+        format: :json
       }
     end
 
@@ -271,7 +276,7 @@ describe DocumentsController do
 
     it do
       delete :destroy, params: parameters
-      expect(response.body).to eq('')
+      expect(parsed_response).to eq(expected_json)
     end
 
     it do
