@@ -6,6 +6,7 @@ module Azeroth
   class RequestHandler
     include Arstotzka
 
+    autoload :Edit,   'azeroth/request_handler/edit'
     autoload :Index,  'azeroth/request_handler/index'
     autoload :New,    'azeroth/request_handler/new'
     autoload :Show,   'azeroth/request_handler/show'
