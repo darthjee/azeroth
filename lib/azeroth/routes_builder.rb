@@ -19,10 +19,9 @@ module Azeroth
     #
     # @return [Array<Sinclair::MethodDefinition>]
     def append
-      add_method(:create,  create_code)
       add_method(:destroy, destroy_code)
 
-      %i[edit index new show update].each do |route|
+      %i[create edit index new show update].each do |route|
         add_method(route, &route_code(route))
       end
     end
@@ -66,17 +65,6 @@ module Azeroth
           self, model_interface
         ).process
       end
-    end
-
-    # @private
-    #
-    # Method code to create route
-    #
-    # @return [String]
-    def create_code
-      <<-RUBY
-        render json: create_resource
-      RUBY
     end
 
     # @private

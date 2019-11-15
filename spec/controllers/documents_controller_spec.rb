@@ -101,25 +101,34 @@ describe DocumentsController do
   describe 'POST create' do
     let(:parameters) do
       {
+        format: format,
         document: {
           name: 'My document'
         }
       }
     end
 
-    it do
-      post :create, params: parameters
-      expect(response).to be_successful
-    end
+    context 'when requesting format json' do
+      let(:format) { :json }
 
-    it 'returns created document json' do
-      post :create, params: parameters
-      expect(parsed_response).to eq(Document.last.as_json)
-    end
+      let(:expected_json) do
+        Document::Decorator.new(Document.last).as_json
+      end
 
-    it do
-      expect { post :create, params: parameters }
-        .to change(Document, :count).by(1)
+      it do
+        post :create, params: parameters
+        expect(response).to be_successful
+      end
+
+      it 'returns created document json' do
+        post :create, params: parameters
+        expect(parsed_response).to eq(expected_json)
+      end
+
+      it do
+        expect { post :create, params: parameters }
+          .to change(Document, :count).by(1)
+      end
     end
   end
 
