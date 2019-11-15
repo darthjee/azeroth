@@ -7,6 +7,7 @@ module Azeroth
     include Arstotzka
 
     autoload :Index,  'azeroth/request_handler/index'
+    autoload :New,    'azeroth/request_handler/new'
     autoload :Show,   'azeroth/request_handler/show'
     autoload :Update, 'azeroth/request_handler/update'
 
