@@ -23,11 +23,10 @@ module Azeroth
         add_method(route, 'render_basic')
       end
 
-      add_method(:new, '')
       add_method(:create,  create_code)
       add_method(:destroy, destroy_code)
 
-      %i[index show update].each do |route|
+      %i[new index show update].each do |route|
         add_method(route, &route_code(route))
       end
     end

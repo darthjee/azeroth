@@ -174,13 +174,29 @@ describe DocumentsController do
   end
 
   describe 'GET new' do
-    before { get :new }
+    context 'when calling with format json' do
+      before { get :new, params: { format: :json } }
 
-    it do
-      expect(response).to be_successful
+      let(:expected_json) do
+        Document::Decorator.new(Document.new).as_json
+      end
+
+      it do
+        expect(response).to be_successful
+      end
+
+      it { expect(parsed_response).to eq(expected_json) }
     end
 
-    it { expect(response).to render_template('documents/new') }
+    context 'when calling with format html' do
+      before { get :new }
+
+      it do
+        expect(response).to be_successful
+      end
+
+      it { expect(response).to render_template('documents/new') }
+    end
   end
 
   describe 'GET edit' do
