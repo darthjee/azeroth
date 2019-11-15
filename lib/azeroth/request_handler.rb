@@ -6,12 +6,13 @@ module Azeroth
   class RequestHandler
     include Arstotzka
 
-    autoload :Create, 'azeroth/request_handler/create'
-    autoload :Edit,   'azeroth/request_handler/edit'
-    autoload :Index,  'azeroth/request_handler/index'
-    autoload :New,    'azeroth/request_handler/new'
-    autoload :Show,   'azeroth/request_handler/show'
-    autoload :Update, 'azeroth/request_handler/update'
+    autoload :Create,  'azeroth/request_handler/create'
+    autoload :Destroy, 'azeroth/request_handler/destroy'
+    autoload :Edit,    'azeroth/request_handler/edit'
+    autoload :Index,   'azeroth/request_handler/index'
+    autoload :New,     'azeroth/request_handler/new'
+    autoload :Show,    'azeroth/request_handler/show'
+    autoload :Update,  'azeroth/request_handler/update'
 
     def initialize(controller, model)
       @controller = controller
