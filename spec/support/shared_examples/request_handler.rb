@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-shared_examples 'a request handler' do |action|
+shared_examples 'a request handler' do
   subject(:handler) { described_class.new(controller, model) }
 
   let(:controller)      { controller_class.new }
@@ -17,7 +17,7 @@ shared_examples 'a request handler' do |action|
   let(:format) { 'json' }
 
   let(:parameters) do
-    { format: format, action: action }.merge(extra_params)
+    { format: format }.merge(extra_params)
   end
 
   before do

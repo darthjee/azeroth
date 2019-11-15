@@ -4,7 +4,7 @@ require 'spec_helper'
 
 describe Azeroth::RequestHandler::Update do
   describe '#process' do
-    it_behaves_like 'a request handler', :update do
+    it_behaves_like 'a request handler' do
       let(:expected_resource) { document }
       let!(:document)         { create(:document) }
 
