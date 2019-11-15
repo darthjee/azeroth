@@ -10,7 +10,7 @@ shared_examples 'a request handler' do |action|
 
   let(:decorator)       { Document::Decorator.new(expected_resource) }
   let(:expected_json)   { decorator.as_json }
-  let(:documents_count) { 3 }
+  let(:documents_count) { 0 }
 
   let(:controller_class) { RequestHandlerController }
 
