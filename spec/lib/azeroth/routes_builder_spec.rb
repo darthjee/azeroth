@@ -11,7 +11,6 @@ describe Azeroth::RoutesBuilder do
   let(:params)     { ActionController::Parameters.new(parameters) }
   let(:model)      { Azeroth::Model.new(:document) }
   let(:builder)    { Sinclair.new(controller_class) }
-  let(:params)     { ActionController::Parameters.new(parameters) }
   let(:parameters) { { action: :index, format: :json } }
 
   let(:options)      { Azeroth::Options.new(options_hash) }
