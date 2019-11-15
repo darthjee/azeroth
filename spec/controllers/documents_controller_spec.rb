@@ -204,6 +204,10 @@ describe DocumentsController do
     let(:document_id) { document.id }
 
     context 'when calling on format json' do
+      let(:expected_json) do
+        Document::Decorator.new(document).as_json
+      end
+
       before do
         get :edit, params: { id: document_id, format: :json }
       end
@@ -211,7 +215,7 @@ describe DocumentsController do
       it { expect(response).to be_successful }
 
       it 'returns document json' do
-        expect(parsed_response).to eq(document.as_json)
+        expect(parsed_response).to eq(expected_json)
       end
     end
 
