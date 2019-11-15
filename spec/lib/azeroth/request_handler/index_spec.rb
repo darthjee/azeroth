@@ -2,7 +2,7 @@
 
 require 'spec_helper'
 
-describe Azeroth::RequestHandler do
+describe Azeroth::RequestHandler::Index do
   describe '#process' do
     it_behaves_like 'a request handler', :index do
       let(:expected_resource) { Document.all }
