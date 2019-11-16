@@ -4,7 +4,7 @@ module Azeroth
   class RequestHandler
     # @api private
     #
-    # hadle requests to create resources
+    # hadler for requests to create resources
     class Create < RequestHandler
       private
 
@@ -12,7 +12,7 @@ module Azeroth
       #
       # Creates and return an instance of the model
       #
-      # creation uses the method #{model.name"_params to
+      # creation uses the method #{model.name}_params" to
       # fetch all allowed attributes for creation
       #
       # @return [Object]
