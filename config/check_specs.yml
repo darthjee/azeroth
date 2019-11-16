@@ -4,4 +4,3 @@ ignore:
   - lib/azeroth/version.rb
   - lib/azeroth/options.rb
   - lib/azeroth.rb
-  - lib/azeroth/exception.rb

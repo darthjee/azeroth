@@ -10,7 +10,6 @@ require 'sinclair'
 
 module Azeroth
   autoload :Decorator,            'azeroth/decorator'
-  autoload :Exception,            'azeroth/exception'
   autoload :Model,                'azeroth/model'
   autoload :RequestHandler,       'azeroth/request_handler'
   autoload :Resourceable,         'azeroth/resourceable'
