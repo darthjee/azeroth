@@ -24,6 +24,7 @@ rules:
     exclude:
       - Azeroth::Decorator#initialize
       - Azeroth::Model#initialize
+      - Azeroth::RequestHandler#initialize
       - Azeroth::ResourceBuilder#initialize
       - Azeroth::ResourceRouteBuilder#initialize
       - Azeroth::Resourceable::Builder#initialize
