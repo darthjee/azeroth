@@ -69,9 +69,25 @@ module Azeroth
     #
     # @return [ActionController::Parameters]
 
+    # @private
+    #
     # Checks if request format is json
+    #
+    # @return [TrueClass,FalseClass]
     def json?
       params[:format]&.to_s == 'json'
+    end
+
+    # @private
+    #
+    # Resource to be serialized and returned
+    #
+    # Must be implemented in subclass
+    #
+    # @return [Object]
+    # @raise Not implmented
+    def resource
+      raise 'must be implemented in subclass'
     end
   end
 end
