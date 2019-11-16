@@ -22,20 +22,6 @@ module Azeroth
     # @api private
     # @private
     #
-    # Perform rendering of an action based on the requested format
-    #
-    # @return [String]
-    def render_basic
-      action = params[:action]
-      respond_to do |format|
-        format.json { render json: send("#{action}_resource") }
-        format.html { action }
-      end
-    end
-
-    # @api private
-    # @private
-    #
     # returns 404 as HTTP status
     #
     # @return [TrueClass]

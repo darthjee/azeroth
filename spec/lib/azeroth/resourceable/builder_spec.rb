@@ -14,8 +14,6 @@ describe Azeroth::Resourceable::Builder do
   end
 
   describe '#build' do
-    it_behaves_like 'a route resource build' do
-      let(:builder) { subject }
-    end
+    it 'adds spec'
   end
 end

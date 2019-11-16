@@ -19,14 +19,11 @@ module Azeroth
     #
     # @return [Array<Sinclair::MethodDefinition>]
     def append
-      %i[index show edit].each do |route|
-        add_method(route, 'render_basic')
-      end
+      actions = %i[create destroy edit index new show update]
 
-      add_method(:new, '')
-      add_method(:update,  update_code)
-      add_method(:create,  create_code)
-      add_method(:destroy, destroy_code)
+      actions.each do |route|
+        add_method(route, &route_code(route))
+      end
     end
 
     private
@@ -57,38 +54,17 @@ module Azeroth
     #
     # @return [Array<Sinclair::MethodDefinition>]
 
-    # @private
-    #
-    # Method code to update route
-    #
-    # @return [String]
-    def update_code
-      <<-RUBY
-        render json: update_resource
-      RUBY
-    end
+    def route_code(route)
+      model_interface = model
+      handler_class = Azeroth::RequestHandler.const_get(
+        route.to_s.capitalize
+      )
 
-    # @private
-    #
-    # Method code to create route
-    #
-    # @return [String]
-    def create_code
-      <<-RUBY
-        render json: create_resource
-      RUBY
-    end
-
-    # @private
-    #
-    # Method code to destroy route
-    #
-    # @return [String]
-    def destroy_code
-      <<-RUBY
-        #{model.name}.destroy
-        head :no_content
-      RUBY
+      proc do
+        handler_class.new(
+          self, model_interface
+        ).process
+      end
     end
   end
 end

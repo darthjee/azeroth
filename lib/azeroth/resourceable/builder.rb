@@ -24,7 +24,6 @@ module Azeroth
 
         add_params
         add_resource
-        add_resource_for_routes
         add_routes
       end
 
@@ -119,13 +118,6 @@ module Azeroth
       # @return [Array<Sinclair::MethodDefinition>]
       def add_resource
         ResourceBuilder.new(model, builder).append
-      end
-
-      # Add the routes resource methods
-      #
-      # @return [Array<Sinclair::MethodDefinition>]
-      def add_resource_for_routes
-        ResourceRouteBuilder.new(model, builder).append
       end
 
       # Add metohods for each route
