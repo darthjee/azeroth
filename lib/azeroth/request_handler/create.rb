@@ -12,7 +12,7 @@ module Azeroth
       #
       # Creates and return an instance of the model
       #
-      # creation uses the method #{model.name}_params" to
+      # creation uses the method +"#{model.name}_params"+ to
       # fetch all allowed attributes for creation
       #
       # @return [Object]
