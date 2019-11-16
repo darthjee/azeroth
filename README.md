@@ -9,4 +9,4 @@ Azeroth
 
 Yard Documentation
 -------------------
-https://www.rubydoc.info/gems/azeroth/0.0.7
+https://www.rubydoc.info/gems/azeroth/0.1.0
