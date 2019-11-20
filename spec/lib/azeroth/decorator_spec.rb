@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'spec_helper'
+
 describe Azeroth::Decorator do
   subject(:decorator) { DummyModel::Decorator.new(object) }
 
