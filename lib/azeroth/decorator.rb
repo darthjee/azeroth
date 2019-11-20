@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'sinclair'
+
 module Azeroth
   # @api public
   #
@@ -38,8 +40,6 @@ module Azeroth
   #                     #   'pokemon' => 'Arcanine'
   #                     # }
   class Decorator
-    autoload :Builder, 'azeroth/decorator/builder'
-
     class << self
       # @api private
       #
@@ -82,9 +82,9 @@ module Azeroth
       #       end
       #     end
       #   end
-      def expose(attribute, as: attribute, **options)
-        builder = Builder.new(self)
-        builder.add(attribute, as, **options)
+      def expose(attribute, as: attribute, **_options)
+        builder = Sinclair.new(self)
+        builder.add_method(as, "@object.#{attribute}")
         builder.build
 
         attributes << as.to_sym
