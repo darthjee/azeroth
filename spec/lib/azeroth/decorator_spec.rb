@@ -19,6 +19,25 @@ describe Azeroth::Decorator do
       it 'returns meta data defined json' do
         expect(decorator.as_json).to eq(expected_json)
       end
+
+      context 'when conditional attibute is exposed' do
+        let(:model) { build(:dummy_model, first_name: nil) }
+
+        let(:expected_json) do
+          {
+            name: model.last_name,
+            age: model.age,
+            pokemon: model.favorite_pokemon,
+            errors: {
+              first_name: ["can't be blank"]
+            }
+          }.stringify_keys
+        end
+
+        it 'include the conditional attributes' do
+          expect(decorator.as_json).to eq(expected_json)
+        end
+      end
     end
 
     context 'when object is an array' do

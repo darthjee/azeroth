@@ -5,9 +5,15 @@ class DummyModel
     expose :name
     expose :age
     expose :favorite_pokemon, as: :pokemon
+    expose :errors, if: :invalid?
 
     def name
-      [object.first_name, object.last_name].join(' ')
+      [object.first_name, object.last_name].compact.join(' ')
+    end
+
+    def errors
+      object.valid?
+      object.errors.messages
     end
   end
 end

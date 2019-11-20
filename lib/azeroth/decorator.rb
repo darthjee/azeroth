@@ -82,7 +82,7 @@ module Azeroth
       #       end
       #     end
       #   end
-      def expose(attribute, as: attribute)
+      def expose(attribute, as: attribute, **_options)
         builder = Sinclair.new(self)
         builder.add_method(as, "@object.#{attribute}")
         builder.build
