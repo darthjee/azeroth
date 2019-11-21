@@ -118,6 +118,8 @@ module Azeroth
       {}.tap do |hash|
         self.class.attributes_map.each do |method, options|
           key = options[:as] || method
+          conditional = options[:if]
+          next if conditional
           hash[key.to_s] = public_send(method)
         end
       end
