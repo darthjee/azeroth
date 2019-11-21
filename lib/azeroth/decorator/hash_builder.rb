@@ -51,8 +51,7 @@ module Azeroth
         conditional = options[:if]
         return true unless conditional.present?
 
-        # TODO: delegate method missing to object
-        decorator.send(:object).public_send(conditional)
+        decorator.public_send(conditional)
       end
 
       def attributes_map
