@@ -40,6 +40,8 @@ module Azeroth
   #                     #   'pokemon' => 'Arcanine'
   #                     # }
   class Decorator
+    autoload :HashBuilder, 'azeroth/decorator/hash_builder'
+
     class << self
       # @api private
       #
@@ -51,8 +53,6 @@ module Azeroth
       end
 
       private
-
-      # rubocop:disable Naming/UncommunicativeMethodParamName
 
       # @visibility public
       # @api public
@@ -115,14 +115,7 @@ module Azeroth
     def as_json(*args)
       return array_as_json(*args) if enum?
 
-      {}.tap do |hash|
-        self.class.attributes_map.each do |method, options|
-          key = options[:as] || method
-          conditional = options[:if]
-          next if conditional
-          hash[key.to_s] = public_send(method)
-        end
-      end
+      HashBuilder.new(self).as_json
     end
 
     private
