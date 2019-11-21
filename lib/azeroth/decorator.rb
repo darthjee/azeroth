@@ -46,8 +46,8 @@ module Azeroth
       # All attributes exposed
       #
       # @return [Array<Symbol>]
-      def attributes
-        @attributes ||= []
+      def attributes_map
+        @attributes_map ||= {}
       end
 
       private
@@ -82,12 +82,12 @@ module Azeroth
       #       end
       #     end
       #   end
-      def expose(attribute, as: attribute, **_options)
+      def expose(attribute, **options)
         builder = Sinclair.new(self)
-        builder.add_method(as, "@object.#{attribute}")
+        builder.add_method(attribute, "@object.#{attribute}")
         builder.build
 
-        attributes << as.to_sym
+        attributes_map[attribute] = options
       end
       # rubocop:enable Naming/UncommunicativeMethodParamName
     end
@@ -116,8 +116,9 @@ module Azeroth
       return array_as_json(*args) if enum?
 
       {}.tap do |hash|
-        self.class.attributes.each do |method|
-          hash[method.to_s] = public_send(method)
+        self.class.attributes_map.each do |method, options|
+          key = options[:as] || method
+          hash[key.to_s] = public_send(method)
         end
       end
     end
