@@ -61,7 +61,12 @@ module Azeroth
       # Expose attributes on json decorated
       #
       # @param attribute [Symbol,String] attribute to be exposed
-      # @param as [Symbol,String] name of the attribute on the json
+      # @param options [Hash] exposing options
+      # @option options as [Symbol,String] custom key
+      #   to expose
+      # @option options if [Symbol] method to be called
+      #   checking if an attribute should or should not
+      #   be exposed
       #
       # @return [Array<Symbol>]
       #
