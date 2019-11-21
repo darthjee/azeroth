@@ -149,6 +149,16 @@ module Azeroth
       end
     end
 
+    # Method called when method is missing
+    #
+    # This delegates method calls to the given object
+    #
+    # @param method_name [Symbol] name of the method
+    #   called
+    # @param *args [Array<Object>] arguments of the
+    #   method called
+    #
+    # @return [Object]
     def method_missing(method_name, *args)
       if object.respond_to?(method_name)
         object.public_send(method_name, *args)
@@ -157,6 +167,15 @@ module Azeroth
       end
     end
 
+    # Checks if it would respond to a method
+    #
+    # The decision is delegated to the object
+    #
+    # @param method_name [Symbol] name of the method checked
+    # @param include_private [TrueClass,FalseClass] flag
+    #   indicating if private methods should be included
+    #
+    # @return [TrueClass,FalseClass]
     def respond_to_missing?(method_name, include_private)
       object.respond_to?(method_name, include_private)
     end
