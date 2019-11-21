@@ -113,4 +113,59 @@ describe Azeroth::Decorator do
       end
     end
   end
+
+  describe '#method_missing' do
+    subject(:decorator) { decorator_class.new(object) }
+
+    let(:decorator_class) { Class.new(described_class) }
+    let(:model) { build(:dummy_model) }
+
+    it 'delegates methods to object' do
+      expect(decorator.first_name).not_to be_nil
+    end
+
+    context 'when object does not respond to method' do
+      it do
+        expect { decorator.bad_method }
+          .to raise_error(NoMethodError)
+      end
+    end
+  end
+
+  describe '#respond_to_missing?' do
+    subject(:decorator) { decorator_class.new(object) }
+
+    let(:decorator_class) { Class.new(described_class) }
+    let(:model) { build(:dummy_model) }
+
+    context 'when object responds to it' do
+      it do
+        expect(decorator)
+          .to respond_to(:first_name)
+      end
+    end
+
+    context 'when method is private' do
+      it do
+        expect(decorator)
+          .not_to respond_to(:private_name)
+      end
+    end
+
+    context 'when method is private and passing include_private' do
+      # rubocop:disable RSpec/PredicateMatcher
+      it do
+        expect(decorator.respond_to?(:private_name, true))
+          .to be_truthy
+      end
+      # rubocop:enable RSpec/PredicateMatcher
+    end
+
+    context 'when object does not respond to it' do
+      it do
+        expect(decorator)
+          .not_to respond_to(:no_name)
+      end
+    end
+  end
 end

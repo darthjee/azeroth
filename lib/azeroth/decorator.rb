@@ -89,7 +89,6 @@ module Azeroth
 
         attributes_map[attribute] = options
       end
-      # rubocop:enable Naming/UncommunicativeMethodParamName
     end
 
     # @api private
@@ -148,6 +147,18 @@ module Azeroth
       object.map do |item|
         self.class.new(item).as_json(*args)
       end
+    end
+
+    def method_missing(method_name, *args)
+      if object.respond_to?(method_name)
+        object.public_send(method_name, *args)
+      else
+        super
+      end
+    end
+
+    def respond_to_missing?(method_name, include_private)
+      object.respond_to?(method_name, include_private)
     end
   end
 end

@@ -7,4 +7,10 @@ class DummyModel
                 :favorite_pokemon
 
   validates_presence_of :first_name
+
+  private
+
+  def private_name
+    "Secret #{last_name}"
+  end
 end

@@ -15,6 +15,7 @@ module Azeroth
         {}.tap do |hash|
           attributes_map.each do |method, options|
             next unless add_attribute?(options)
+
             key = options[:as] || method
 
             hash[key.to_s] = decorator.public_send(method)
@@ -27,7 +28,8 @@ module Azeroth
       def add_attribute?(options)
         conditional = options[:if]
         return true unless conditional.present?
-        #TODO: delegate method missing to object
+
+        # TODO: delegate method missing to object
         decorator.send(:object).public_send(conditional)
       end
 
