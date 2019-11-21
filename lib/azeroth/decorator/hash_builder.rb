@@ -4,13 +4,25 @@ require 'sinclair'
 
 module Azeroth
   class Decorator
+    # @api private
+    #
+    # Class responsible for building the hash on
+    # Decorator#as_json calls
     class HashBuilder
-      attr_reader :decorator
-
+      # @param decorator [Decorator] decorator that
+      #   will receive all method calls
       def initialize(decorator)
         @decorator = decorator
       end
 
+      # Build hash as defined by decorator
+      #
+      # The built of the hash keys is defined
+      # by decorator attributes and method calls
+      # to the same decorator that will then delgate,
+      # when needed, to its object
+      #
+      # @return [Hash]
       def as_json
         {}.tap do |hash|
           attributes_map.each do |method, options|
@@ -25,6 +37,16 @@ module Azeroth
 
       private
 
+      attr_reader :decorator
+      # @method decorator
+      # @api private
+      # @private
+      #
+      # decorator with object to be decorated
+      #
+      # @return [Decorator]
+
+      # Check if an attribute should be added to the hash
       def add_attribute?(options)
         conditional = options[:if]
         return true unless conditional.present?
