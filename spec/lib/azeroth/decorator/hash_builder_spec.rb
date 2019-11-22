@@ -60,7 +60,7 @@ describe Azeroth::Decorator::HashBuilder do
 
         let(:expected_json) do
           {
-            name:      model.name,
+            name: model.name,
             reference: 'X-MAGIC-01'
           }.stringify_keys
         end

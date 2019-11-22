@@ -3,7 +3,7 @@
 class Document
   class Decorator < Azeroth::Decorator
     expose :name
-    expose :reference, if: :magic?
+    expose :reference, if: proc(&:magic?)
 
     def magic?
       reference&.match(/^X-MAGIC/)

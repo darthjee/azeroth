@@ -73,7 +73,9 @@ module Azeroth
         conditional = options[:if]
         return true unless conditional.present?
 
-        decorator.public_send(conditional)
+        block = proc(&conditional)
+
+        block.call(decorator)
       end
 
       # attributes to be built to hash
