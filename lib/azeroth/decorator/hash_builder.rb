@@ -48,7 +48,7 @@ module Azeroth
       # @param options [Hash] exposing options
       # @option options as [Symbol,String] custom key
       #   to expose
-      # @option options if [Symbol] method to be called
+      # @option options if [Symbol,Proc] method/block to be called
       #   checking if an attribute should or should not
       #   be exposed
       #
@@ -64,7 +64,7 @@ module Azeroth
       # Check if an attribute should be added to the hash
       #
       # @param options [Hash] exposing options
-      # @option options if [Symbol] method to be called
+      # @option options if [Symbol,Proc] method/block to be called
       #   checking if an attribute should or should not
       #   be exposed
       #
