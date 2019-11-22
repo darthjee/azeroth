@@ -113,7 +113,7 @@ module Azeroth
     # When object is an iterator, decoration is applied to each
     # and an array is returned
     #
-    # @param *args [Hash] options (to be implemented)
+    # @param args [Hash] options (to be implemented)
     #
     # @return [Hash]
     def as_json(*args)
@@ -154,6 +154,8 @@ module Azeroth
       end
     end
 
+    # @api private
+    # @private
     # Method called when method is missing
     #
     # This delegates method calls to the given object
@@ -172,6 +174,8 @@ module Azeroth
       end
     end
 
+    # @api private
+    # @private
     # Checks if it would respond to a method
     #
     # The decision is delegated to the object
