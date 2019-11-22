@@ -40,19 +40,19 @@ module Azeroth
   #                     #   'pokemon' => 'Arcanine'
   #                     # }
   class Decorator
+    autoload :HashBuilder, 'azeroth/decorator/hash_builder'
+
     class << self
       # @api private
       #
       # All attributes exposed
       #
       # @return [Array<Symbol>]
-      def attributes
-        @attributes ||= []
+      def attributes_map
+        @attributes_map ||= {}
       end
 
       private
-
-      # rubocop:disable Naming/UncommunicativeMethodParamName
 
       # @visibility public
       # @api public
@@ -61,7 +61,12 @@ module Azeroth
       # Expose attributes on json decorated
       #
       # @param attribute [Symbol,String] attribute to be exposed
-      # @param as [Symbol,String] name of the attribute on the json
+      # @param options [Hash] exposing options
+      # @option options as [Symbol,String] custom key
+      #   to expose
+      # @option options if [Symbol,Proc] method/block to be called
+      #   checking if an attribute should or should not
+      #   be exposed
       #
       # @return [Array<Symbol>]
       #
@@ -82,14 +87,13 @@ module Azeroth
       #       end
       #     end
       #   end
-      def expose(attribute, as: attribute)
+      def expose(attribute, **options)
         builder = Sinclair.new(self)
-        builder.add_method(as, "@object.#{attribute}")
+        builder.add_method(attribute, "@object.#{attribute}")
         builder.build
 
-        attributes << as.to_sym
+        attributes_map[attribute] = options
       end
-      # rubocop:enable Naming/UncommunicativeMethodParamName
     end
 
     # @api private
@@ -109,17 +113,13 @@ module Azeroth
     # When object is an iterator, decoration is applied to each
     # and an array is returned
     #
-    # @param *args [Hash] options (to be implemented)
+    # @param args [Hash] options (to be implemented)
     #
     # @return [Hash]
     def as_json(*args)
       return array_as_json(*args) if enum?
 
-      {}.tap do |hash|
-        self.class.attributes.each do |method|
-          hash[method.to_s] = public_send(method)
-        end
-      end
+      HashBuilder.new(self).as_json
     end
 
     private
@@ -152,6 +152,41 @@ module Azeroth
       object.map do |item|
         self.class.new(item).as_json(*args)
       end
+    end
+
+    # @api private
+    # @private
+    # Method called when method is missing
+    #
+    # This delegates method calls to the given object
+    #
+    # @param method_name [Symbol] name of the method
+    #   called
+    # @param args [Array<Object>] arguments of the
+    #   method called
+    #
+    # @return [Object]
+    def method_missing(method_name, *args)
+      if object.respond_to?(method_name)
+        object.public_send(method_name, *args)
+      else
+        super
+      end
+    end
+
+    # @api private
+    # @private
+    # Checks if it would respond to a method
+    #
+    # The decision is delegated to the object
+    #
+    # @param method_name [Symbol] name of the method checked
+    # @param include_private [TrueClass,FalseClass] flag
+    #   indicating if private methods should be included
+    #
+    # @return [TrueClass,FalseClass]
+    def respond_to_missing?(method_name, include_private)
+      object.respond_to?(method_name, include_private)
     end
   end
 end

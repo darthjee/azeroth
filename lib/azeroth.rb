@@ -1,13 +1,14 @@
 # frozen_string_literal: true
 
+require 'sinclair'
+
 # @api public
 #
 # Lib for easily developing controllers
 #
+# @example (see Resourceable)
+#
 # @see Resourceable
-
-require 'sinclair'
-
 module Azeroth
   autoload :Decorator,            'azeroth/decorator'
   autoload :Model,                'azeroth/model'

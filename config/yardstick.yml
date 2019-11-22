@@ -23,6 +23,7 @@ rules:
     enabled: true
     exclude:
       - Azeroth::Decorator#initialize
+      - Azeroth::Decorator::HashBuilder#initialize
       - Azeroth::Model#initialize
       - Azeroth::RequestHandler#initialize
       - Azeroth::ResourceBuilder#initialize
