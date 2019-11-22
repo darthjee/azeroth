@@ -162,7 +162,7 @@ module Azeroth
     #
     # @param method_name [Symbol] name of the method
     #   called
-    # @param *args [Array<Object>] arguments of the
+    # @param args [Array<Object>] arguments of the
     #   method called
     #
     # @return [Object]
