@@ -132,7 +132,7 @@ describe DocumentsController do
       end
     end
 
-    xcontext 'when there is validation error' do
+    context 'when there is validation error' do
       let(:format)  { :json }
       let(:payload) { { reference: 'x01' } }
 

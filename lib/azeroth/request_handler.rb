@@ -44,10 +44,6 @@ module Azeroth
 
     private
 
-    def status
-      :ok
-    end
-
     attr_reader :controller, :model
     # @method controller
     # @api private
@@ -93,6 +89,10 @@ module Azeroth
     # @raise Not implmented
     def resource
       raise 'must be implemented in subclass'
+    end
+
+    def status
+      :ok
     end
   end
 end

@@ -27,7 +27,7 @@ describe Azeroth::RequestHandler::Create do
 
   context 'when payload is invalid' do
     it_behaves_like 'a request handler',
-      status: :unprocessable_entity do
+                    status: :unprocessable_entity do
       let(:extra_params) do
         {
           document: {

@@ -11,7 +11,7 @@ describe Azeroth::ResourceBuilder do
 
   before do
     resource_builder.append
-    10.times { create(:document) }
+    create_list(:document, 10)
   end
 
   describe '#append' do
