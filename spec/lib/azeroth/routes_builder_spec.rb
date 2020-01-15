@@ -31,7 +31,7 @@ describe Azeroth::RoutesBuilder do
   end
 
   before do
-    10.times { Document.create }
+    10.times { create(:document) }
 
     allow(controller).to receive(:params)
       .and_return(params)
