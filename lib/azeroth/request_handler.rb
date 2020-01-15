@@ -34,14 +34,19 @@ module Azeroth
     def process
       return unless json?
 
-      json = model.decorate(resource)
+      json            = model.decorate(resource)
+      response_status = status
 
       controller.instance_eval do
-        render(json: json)
+        render(json: json, status: response_status)
       end
     end
 
     private
+
+    def status
+      :ok
+    end
 
     attr_reader :controller, :model
     # @method controller

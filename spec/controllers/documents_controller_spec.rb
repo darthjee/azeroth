@@ -131,6 +131,30 @@ describe DocumentsController do
           .to change(Document, :count).by(1)
       end
     end
+
+    xcontext 'when there is validation error' do
+      let(:format)  { :json }
+      let(:payload) { { reference: 'x01' } }
+
+      let(:expected_json) do
+        Document::Decorator.new(Document.new(payload)).as_json
+      end
+
+      it do
+        post :create, params: parameters
+        expect(response).not_to be_successful
+      end
+
+      it 'returns created document json' do
+        post :create, params: parameters
+        expect(parsed_response).to eq(expected_json)
+      end
+
+      it do
+        expect { post :create, params: parameters }
+          .not_to change(Document, :count)
+      end
+    end
   end
 
   describe 'PATCH update' do
