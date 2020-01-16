@@ -91,6 +91,16 @@ module Azeroth
       raise 'must be implemented in subclass'
     end
 
+    # @private
+    #
+    # Response status
+    #
+    # For most requests, status is 200 (+:ok+)
+    #
+    # Must be implemented in subclasses that will handle
+    # status differently
+    #
+    # @return [Symbol]
     def status
       :ok
     end

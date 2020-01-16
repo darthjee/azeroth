@@ -26,6 +26,14 @@ module Azeroth
         collection.create(attributes)
       end
 
+      # @private
+      #
+      # Response status
+      #
+      # For success, returns +:created+, for
+      # validation errors, it returns +:unprocessable_entity+
+      #
+      # @return [Symbol]
       def status
         resource.valid? ? :created : :unprocessable_entity
       end
