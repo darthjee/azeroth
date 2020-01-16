@@ -8,7 +8,7 @@ Gem::Specification.new do |gem|
   gem.name          = 'azeroth'
   gem.version       = Azeroth::VERSION
   gem.authors       = ['Darthjee']
-  gem.email         = ['dev@gmail.com']
+  gem.email         = ['darthjee@gmail.com']
   gem.summary       = 'Azeroth'
   gem.description   = gem.description
   gem.homepage      = 'https://github.com/darthjee/azeroth'
