@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-shared_examples 'a request handler' do
+shared_examples 'a request handler' do |status: :ok|
   subject(:handler) { described_class.new(controller, model) }
 
   let(:controller)      { controller_class.new }
@@ -27,7 +27,7 @@ shared_examples 'a request handler' do
       .and_return(params)
 
     allow(controller).to receive(:render)
-      .with(json: expected_json)
+      .with(json: expected_json, status: status)
       .and_return(expected_json)
   end
 

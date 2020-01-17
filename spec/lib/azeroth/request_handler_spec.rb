@@ -37,7 +37,7 @@ describe Azeroth::RequestHandler do
         .and_return(params)
 
       allow(controller).to receive(:render)
-        .with(json: expected_json)
+        .with(json: expected_json, status: :ok)
         .and_return(expected_json)
     end
 

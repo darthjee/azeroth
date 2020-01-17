@@ -31,13 +31,13 @@ describe Azeroth::RoutesBuilder do
   end
 
   before do
-    10.times { Document.create }
+    create_list(:document, 10)
 
     allow(controller).to receive(:params)
       .and_return(params)
 
     allow(controller).to receive(:render)
-      .with(json: expected_json)
+      .with(json: expected_json, status: :ok)
       .and_return(expected_json)
   end
 
@@ -61,7 +61,7 @@ describe Azeroth::RoutesBuilder do
         controller.index
 
         expect(controller).to have_received(:render)
-          .with(json: expected_json)
+          .with(json: expected_json, status: :ok)
       end
     end
   end

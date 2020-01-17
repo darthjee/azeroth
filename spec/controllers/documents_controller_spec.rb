@@ -10,9 +10,7 @@ describe DocumentsController do
   describe 'GET index' do
     let(:documents_count) { 0 }
     let!(:documents) do
-      documents_count.times.map do
-        Document.create
-      end
+      documents_count.times.map { create(:document) }
     end
 
     let(:expected_json) do
@@ -53,7 +51,7 @@ describe DocumentsController do
   end
 
   describe 'GET show' do
-    let(:document)    { Document.create }
+    let(:document)    { create(:document) }
     let(:document_id) { document.id }
 
     let(:expected_json) do
@@ -99,12 +97,15 @@ describe DocumentsController do
   end
 
   describe 'POST create' do
+    let(:payload) do
+      {
+        name: 'My document'
+      }
+    end
     let(:parameters) do
       {
         format: format,
-        document: {
-          name: 'My document'
-        }
+        document: payload
       }
     end
 
@@ -130,23 +131,51 @@ describe DocumentsController do
           .to change(Document, :count).by(1)
       end
     end
+
+    context 'when there is validation error' do
+      let(:format)  { :json }
+      let(:payload) { { reference: 'x01' } }
+
+      let(:expected_json) do
+        Document::Decorator.new(Document.new(payload)).as_json
+      end
+
+      it do
+        post :create, params: parameters
+        expect(response).not_to be_successful
+      end
+
+      it 'returns created document json' do
+        post :create, params: parameters
+        expect(parsed_response).to eq(expected_json)
+      end
+
+      it do
+        expect { post :create, params: parameters }
+          .not_to change(Document, :count)
+      end
+    end
   end
 
   describe 'PATCH update' do
-    let(:document)    { Document.create }
+    let(:document)    { create(:document) }
     let(:document_id) { document.id }
 
     let(:expected_json) do
       Document::Decorator.new(Document.last).as_json
     end
 
+    let(:payload) do
+      {
+        name: 'My document'
+      }
+    end
+
     let(:parameters) do
       {
         id: document_id,
         format: :json,
-        document: {
-          name: 'My document'
-        }
+        document: payload
       }
     end
 
@@ -163,7 +192,7 @@ describe DocumentsController do
     it do
       expect { patch :update, params: parameters }
         .to change { document.reload.name }
-        .from(nil).to('My document')
+        .to('My document')
     end
 
     context 'when calling on an inexistent id' do
@@ -178,6 +207,30 @@ describe DocumentsController do
 
       it 'returns empty body' do
         expect(response.body).to eq('')
+      end
+    end
+
+    context 'when there is validation error' do
+      let(:format)  { :json }
+      let(:payload) { { name: nil } }
+
+      let(:expected_json) do
+        { 'name' => '' }
+      end
+
+      it do
+        post :create, params: parameters
+        expect(response).not_to be_successful
+      end
+
+      it 'returns created document json' do
+        post :create, params: parameters
+        expect(parsed_response).to eq(expected_json)
+      end
+
+      it 'does not update entry' do
+        expect { post :create, params: parameters }
+          .not_to(change { document.reload.name })
       end
     end
   end
@@ -209,7 +262,7 @@ describe DocumentsController do
   end
 
   describe 'GET edit' do
-    let(:document)    { Document.create }
+    let(:document)    { create(:document) }
     let(:document_id) { document.id }
 
     context 'when calling on format json' do
@@ -255,7 +308,7 @@ describe DocumentsController do
   end
 
   describe 'DELETE destroy' do
-    let!(:document)   { Document.create }
+    let!(:document)   { create(:document) }
     let(:document_id) { document.id }
 
     let(:expected_json) do

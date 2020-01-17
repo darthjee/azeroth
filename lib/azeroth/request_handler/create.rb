@@ -17,9 +17,25 @@ module Azeroth
       #
       # @return [Object]
       def resource
+        @resource ||= build_resource
+      end
+
+      def build_resource
         attributes = controller.send("#{model.name}_params")
         collection = controller.send(model.plural)
         collection.create(attributes)
+      end
+
+      # @private
+      #
+      # Response status
+      #
+      # For success, returns +:created+, for
+      # validation errors, it returns +:unprocessable_entity+
+      #
+      # @return [Symbol]
+      def status
+        resource.valid? ? :created : :unprocessable_entity
       end
     end
   end

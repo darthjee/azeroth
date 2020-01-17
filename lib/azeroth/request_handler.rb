@@ -34,10 +34,11 @@ module Azeroth
     def process
       return unless json?
 
-      json = model.decorate(resource)
+      json            = model.decorate(resource)
+      response_status = status
 
       controller.instance_eval do
-        render(json: json)
+        render(json: json, status: response_status)
       end
     end
 
@@ -88,6 +89,20 @@ module Azeroth
     # @raise Not implmented
     def resource
       raise 'must be implemented in subclass'
+    end
+
+    # @private
+    #
+    # Response status
+    #
+    # For most requests, status is 200 (+:ok+)
+    #
+    # Must be implemented in subclasses that will handle
+    # status differently
+    #
+    # @return [Symbol]
+    def status
+      :ok
     end
   end
 end

@@ -11,7 +11,7 @@ describe Azeroth::ResourceBuilder do
 
   before do
     resource_builder.append
-    10.times { Document.create }
+    create_list(:document, 10)
   end
 
   describe '#append' do
@@ -29,7 +29,7 @@ describe Azeroth::ResourceBuilder do
 
     describe 'after the build' do
       let(:controller) { klass.new(document_id: document.id) }
-      let(:document)   { Document.create }
+      let(:document)   { create(:document) }
 
       before { builder.build }
 
