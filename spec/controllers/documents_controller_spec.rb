@@ -165,13 +165,17 @@ describe DocumentsController do
       Document::Decorator.new(Document.last).as_json
     end
 
+    let(:payload) do
+      {
+        name: 'My document'
+      }
+    end
+
     let(:parameters) do
       {
         id: document_id,
         format: :json,
-        document: {
-          name: 'My document'
-        }
+        document: payload
       }
     end
 
@@ -203,6 +207,30 @@ describe DocumentsController do
 
       it 'returns empty body' do
         expect(response.body).to eq('')
+      end
+    end
+
+    context 'when there is validation error' do
+      let(:format)  { :json }
+      let(:payload) { { name: nil } }
+
+      let(:expected_json) do
+        { 'name' => '' }
+      end
+
+      it do
+        post :create, params: parameters
+        expect(response).not_to be_successful
+      end
+
+      it 'returns created document json' do
+        post :create, params: parameters
+        expect(parsed_response).to eq(expected_json)
+      end
+
+      it 'does not update entry' do
+        expect { post :create, params: parameters }
+          .not_to change { document.reload.name }
       end
     end
   end
