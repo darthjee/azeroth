@@ -112,6 +112,43 @@ describe Azeroth::Decorator do
         expect(decorator.as_json).to eq(expected_json)
       end
     end
+
+    context 'decotator for model with validation' do
+      subject(:decorator) do
+        Document::DecoratorWithError.new(object)
+      end
+
+      context 'with valid model' do
+        let(:object) { build(:document) }
+
+        let(:expected_json) do
+          {
+            name: object.name
+          }.stringify_keys
+        end
+
+        it 'returns meta data defined json' do
+          expect(decorator.as_json).to eq(expected_json)
+        end
+      end
+
+      context 'with invalid model' do
+        let(:object) { build(:document, name: nil) }
+
+        let(:expected_json) do
+          {
+            name: nil,
+            errors: {
+              name: ["can't be blank"]
+            }
+          }.stringify_keys
+        end
+
+        it 'returns meta data defined json' do
+          expect(decorator.as_json).to eq(expected_json)
+        end
+      end
+    end
   end
 
   describe '#method_missing' do
