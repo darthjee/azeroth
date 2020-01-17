@@ -230,7 +230,7 @@ describe DocumentsController do
 
       it 'does not update entry' do
         expect { post :create, params: parameters }
-          .not_to change { document.reload.name }
+          .not_to(change { document.reload.name })
       end
     end
   end

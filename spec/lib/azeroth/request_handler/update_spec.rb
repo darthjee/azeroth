@@ -32,7 +32,7 @@ describe Azeroth::RequestHandler::Update do
 
     context 'when payload is invalid' do
       it_behaves_like 'a request handler',
-        status: :unprocessable_entity do
+                      status: :unprocessable_entity do
         let(:expected_resource) { document }
         let(:extra_params) do
           {
@@ -49,7 +49,7 @@ describe Azeroth::RequestHandler::Update do
 
         it 'does not update entry' do
           expect { handler.process }
-            .not_to change { document.reload.name }
+            .not_to(change { document.reload.name })
         end
       end
     end
