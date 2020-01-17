@@ -17,10 +17,27 @@ module Azeroth
       #
       # @return [Object]
       def resource
+        @resource ||= update_resource
+      end
+
+      def update_resource
         attributes = controller.send("#{model.name}_params")
-        resource = controller.send(model.name)
-        resource.update(attributes)
-        resource
+
+        controller.send(model.name).tap do |entry|
+          entry.update(attributes)
+        end
+      end
+
+      # @private
+      #
+      # Response status
+      #
+      # For success, returns +:ok+, for
+      # validation errors, it returns +:unprocessable_entity+
+      #
+      # @return [Symbol]
+      def status
+        resource.valid? ? :ok : :unprocessable_entity
       end
     end
   end
