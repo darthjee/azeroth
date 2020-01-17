@@ -113,7 +113,7 @@ describe Azeroth::Decorator do
       end
     end
 
-    context 'decotator for model with validation' do
+    context 'with decotator for model with validation' do
       subject(:decorator) do
         Document::DecoratorWithError.new(object)
       end
