@@ -26,7 +26,7 @@ Gem::Specification.new do |gem|
   gem.add_development_dependency 'activerecord',             '~> 5.x'
   gem.add_development_dependency 'bundler',                  '~> 1.16.1'
   gem.add_development_dependency 'factory_bot',              '~> 5.1.1'
-  gem.add_development_dependency 'nokogiri',                 '1.10.8'
+  gem.add_development_dependency 'nokogiri',                 '1.10.9'
   gem.add_development_dependency 'pry',                      '0.12.2'
   gem.add_development_dependency 'pry-nav',                  '0.3.0'
   gem.add_development_dependency 'rails',                    '>= 5.2.0'
