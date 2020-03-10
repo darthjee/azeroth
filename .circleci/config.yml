@@ -2,7 +2,7 @@ version: 2
 jobs:
   build:
     docker:
-      - image: darthjee/circleci_rails_gems:0.3.0
+      - image: darthjee/circleci_rails_gems:0.4.0
         environment:
           PROJECT: azeroth
     steps:
