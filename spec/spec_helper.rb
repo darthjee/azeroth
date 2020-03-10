@@ -19,7 +19,7 @@ require 'rspec/rails'
 require 'active_support/railtie'
 
 support_files = File.expand_path('spec/support/**/*.rb')
-Dir[support_files].each { |file| require file }
+Dir[support_files].sort.each { |file| require file }
 
 RSpec.configure do |config|
   config.infer_spec_type_from_file_location!
