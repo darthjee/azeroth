@@ -5,7 +5,17 @@ require 'spec_helper'
 describe Azeroth::Options do
   subject(:options) { described_class.new }
 
-  describe "#actions" do
+  describe 'validation' do
+    context 'when initializing with invalid options' do
+
+      it do
+        expect { described_class.new(invalid_option: 1) }
+          .to raise_error(Azeroth::Exception::InvalidOptions)
+      end
+    end
+  end
+
+  describe '#actions' do
     it 'returns default actions' do
       expect(options.actions)
         .to eq(%i[create destroy edit index new show update])

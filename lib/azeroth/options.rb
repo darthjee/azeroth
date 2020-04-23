@@ -17,6 +17,8 @@ module Azeroth
     # @option options except [Array<Symbol,String>] List of
     #   actions to not to be built
     def initialize(options = {})
+      check_options(options)
+
       super(DEFAULT_OPTIONS.merge(options))
     end
 
@@ -25,6 +27,16 @@ module Azeroth
     # @return [Array<Symbol>]
     def actions
       [only].flatten.map(&:to_sym) - [except].flatten.map(&:to_sym)
+    end
+
+    private
+
+    def check_options(options)
+      invalid_keys = options.keys - DEFAULT_OPTIONS.keys
+
+      return if invalid_keys.empty?
+
+      fail Azeroth::Exception::InvalidOptions, invalid_keys
     end
   end
 end
