@@ -12,7 +12,7 @@ module Azeroth
     end
 
     def actions
-      only.map(&:to_sym) - except.map(&:to_sym)
+      [only].flatten.map(&:to_sym) - [except].flatten.map(&:to_sym)
     end
   end
 end
