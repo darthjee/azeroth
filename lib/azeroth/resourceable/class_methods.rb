@@ -18,6 +18,8 @@ module Azeroth
       #
       # @return [Array<MethodDefinition>] list of methods created
       #
+      # @see Options
+      #
       # @example Controller without delete
       #   class DocumentsController < ApplicationController
       #     include Azeroth::Resourceable

@@ -6,6 +6,7 @@ module Azeroth
   #
   # Resource buiilding options
   class Options < ::OpenStruct
+    # Default options
     DEFAULT_OPTIONS = {
       only: %i[create destroy edit index new show update],
       except: []
