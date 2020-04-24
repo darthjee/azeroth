@@ -104,7 +104,7 @@ describe DocumentsWithErrorController do
     let(:document_id) { document.id }
 
     let(:expected_body) do
-      Document::DecoratorWithError.new(Document.last).to_json
+      Document.last.to_json
     end
 
     let(:payload) do
@@ -157,21 +157,25 @@ describe DocumentsWithErrorController do
       let(:payload) { { name: nil } }
 
       let(:expected_json) do
-        { 'name' => '', "errors" => {"name"=>["can't be blank"]} }
+        {
+          'id' => document.id,
+          'name' => '',
+          'reference' => nil
+        }
       end
 
       it do
-        post :create, params: parameters
+        post :update, params: parameters
         expect(response).not_to be_successful
       end
 
       it 'returns created document json' do
-        post :create, params: parameters
+        post :update, params: parameters
         expect(parsed_response).to eq(expected_json)
       end
 
       it 'does not update entry' do
-        expect { post :create, params: parameters }
+        expect { post :update, params: parameters }
           .not_to(change { document.reload.name })
       end
     end
