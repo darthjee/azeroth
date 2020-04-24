@@ -3,5 +3,5 @@
 class IndexDocumentsController < ApplicationController
   include Azeroth::Resourceable
 
-  resource_for :document, only: :index
+  resource_for :document, only: 'index'
 end
