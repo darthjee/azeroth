@@ -3,7 +3,7 @@
 require 'spec_helper'
 
 describe Azeroth::DummyDecorator do
-  subject(:decorator) { Azeroth::DummyDecorator.new(object) }
+  subject(:decorator) { described_class.new(object) }
 
   let(:model)  { build(:dummy_model) }
   let(:object) { model }
@@ -12,12 +12,12 @@ describe Azeroth::DummyDecorator do
     context 'when object is just a model' do
       let(:expected_json) do
         {
-          favorite_game:    "pokemon",
-          favorite_pokemon: "squirtle",
-          first_name:       "dummy",
-          id:               model.id,
-          last_name:        "bot",
-          age:              21
+          favorite_game: 'pokemon',
+          favorite_pokemon: 'squirtle',
+          first_name: 'dummy',
+          id: model.id,
+          last_name: 'bot',
+          age: 21
         }.stringify_keys
       end
 
@@ -41,19 +41,19 @@ describe Azeroth::DummyDecorator do
       let(:expected_json) do
         [
           {
-            favorite_game:    "pokemon",
-            favorite_pokemon: "squirtle",
-            first_name:       "dummy",
-            id:               model.id,
-            last_name:        "bot",
-            age:              21
+            favorite_game: 'pokemon',
+            favorite_pokemon: 'squirtle',
+            first_name: 'dummy',
+            id: model.id,
+            last_name: 'bot',
+            age: 21
           }, {
-            favorite_game:    "pokemon",
-            favorite_pokemon: "bulbasaur",
-            first_name:       "dum",
-            id:               other_model.id,
-            last_name:        "bot",
-            age:              65
+            favorite_game: 'pokemon',
+            favorite_pokemon: 'bulbasaur',
+            first_name: 'dum',
+            id: other_model.id,
+            last_name: 'bot',
+            age: 65
           }
         ].map(&:stringify_keys)
       end
