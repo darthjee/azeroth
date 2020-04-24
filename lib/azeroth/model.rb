@@ -7,12 +7,15 @@ module Azeroth
   # Model responsible for making the conection to the resource model class
   class Model
     # @param name [String,Symbol] name of the resource
-    def initialize(name)
+    # @param options [Azeroth::Options] resource options
+    def initialize(name, options)
       if name.is_a?(Class)
         @klass = name
       else
         @name = name.to_s
       end
+
+      @options = options
     end
 
     # Returns the name of the resource represented by the model

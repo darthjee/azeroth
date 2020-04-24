@@ -9,7 +9,7 @@ describe Azeroth::RoutesBuilder do
 
   let(:controller) { controller_class.new }
   let(:params)     { ActionController::Parameters.new(parameters) }
-  let(:model)      { Azeroth::Model.new(:document) }
+  let(:model)      { Azeroth::Model.new(:document, options) }
   let(:builder)    { Sinclair.new(controller_class) }
   let(:parameters) { { action: :index, format: :json } }
 

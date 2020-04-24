@@ -23,7 +23,9 @@ shared_examples 'a model wrapper' do
 end
 
 describe Azeroth::Model do
-  subject(:model) { described_class.new(input) }
+  subject(:model) { described_class.new(input, options) }
+
+  let(:options) { Azeroth::Options.new }
 
   context 'when initializing with symbol' do
     let(:input) { :document }
