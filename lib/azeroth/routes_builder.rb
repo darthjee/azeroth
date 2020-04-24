@@ -19,16 +19,14 @@ module Azeroth
     #
     # @return [Array<Sinclair::MethodDefinition>]
     def append
-      actions = %i[create destroy edit index new show update]
-
-      actions.each do |route|
+      options.actions.each do |route|
         add_method(route, &route_code(route))
       end
     end
 
     private
 
-    attr_reader :model, :builder
+    attr_reader :model, :builder, :options
     # @method model
     # @api private
     # @private
@@ -44,6 +42,14 @@ module Azeroth
     # Methods builder
     #
     # @return [Sinclair]
+
+    # @method options
+    # @api private
+    # @private
+    #
+    # Buiding options
+    #
+    # @return [Options]
 
     delegate :add_method, to: :builder
     # @method add_method

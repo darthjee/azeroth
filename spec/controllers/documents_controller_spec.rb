@@ -9,12 +9,9 @@ describe DocumentsController do
 
   describe 'GET index' do
     let(:documents_count) { 0 }
-    let!(:documents) do
-      documents_count.times.map { create(:document) }
-    end
 
-    let(:expected_json) do
-      Document::Decorator.new(documents).as_json
+    before do
+      documents_count.times.map { create(:document) }
     end
 
     context 'when calling on format json' do
@@ -24,8 +21,8 @@ describe DocumentsController do
 
       it { expect(response).to be_successful }
 
-      it 'returns empty array' do
-        expect(parsed_response).to eq(expected_json)
+      it 'returns empty text' do
+        expect(response.body).to eq('')
       end
 
       context 'when there is a document' do
@@ -33,8 +30,8 @@ describe DocumentsController do
 
         it { expect(response).to be_successful }
 
-        it 'renders documents json' do
-          expect(parsed_response).to eq(expected_json)
+        it 'returns empty text' do
+          expect(response.body).to eq('')
         end
       end
     end
@@ -53,7 +50,6 @@ describe DocumentsController do
   describe 'GET show' do
     let(:document)    { create(:document) }
     let(:document_id) { document.id }
-
     let(:expected_json) do
       Document::Decorator.new(document).as_json
     end
