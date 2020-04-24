@@ -48,12 +48,22 @@ module Azeroth
     #
     # @return [Hash]
     def decorate(object)
+      return object.as_json unless options.decorator
       decorator_class.new(object).as_json
     rescue NameError
       object.as_json
     end
 
     private
+
+    attr_reader :options
+    # @method options
+    # @api private
+    # @private
+    #
+    # Returns options
+    #
+    # @return [Azeroth::Options]
 
     # @private
     #
