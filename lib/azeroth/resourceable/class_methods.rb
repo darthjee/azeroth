@@ -10,11 +10,8 @@ module Azeroth
       # Adds resource methods for resource
       #
       # @param name [String, Symbol] Name of the resource
-      # @param options [Hash] Resource options
-      # @option options only [Array<Symbol,String>] List of
-      #   actions to be built
-      # @option options except [Array<Symbol,String>] List of
-      #   actions to not to be built
+      # @param (see Options#initialize)
+      # @option (see Options#initialize)
       #
       # @return [Array<MethodDefinition>] list of methods created
       #
