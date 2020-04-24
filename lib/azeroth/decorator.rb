@@ -49,10 +49,14 @@ module Azeroth
       #
       # @return [Array<Symbol>]
       def attributes_map
-        @attributes_map ||= {}
+        @attributes_map ||= build_attributes_map
       end
 
       private
+
+      def build_attributes_map
+        superclass.try(:attributes_map).dup || {}
+      end
 
       # @visibility public
       # @api public
