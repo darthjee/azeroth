@@ -5,7 +5,8 @@ shared_examples 'a request handler' do |status: :ok|
 
   let(:controller)      { controller_class.new }
   let(:params)          { ActionController::Parameters.new(parameters) }
-  let(:model)           { Azeroth::Model.new(:document) }
+  let(:model)           { Azeroth::Model.new(:document, options) }
+  let(:options)         { Azeroth::Options.new }
   let(:extra_params)    { {} }
 
   let(:decorator)       { Document::Decorator.new(expected_resource) }

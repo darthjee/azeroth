@@ -47,12 +47,26 @@ module Azeroth
       #
       # All attributes exposed
       #
-      # @return [Array<Symbol>]
+      # @return [Hash<Symbol,Hash>]
       def attributes_map
-        @attributes_map ||= {}
+        @attributes_map ||= build_attributes_map
       end
 
       private
+
+      # @api private
+      # @private
+      #
+      # Initialize attributes to be exposed map
+      #
+      # When the class inherity from another
+      # decorator, the new class should expose the
+      # same attributes.
+      #
+      # @return [Hash<Symbol,Hash>]
+      def build_attributes_map
+        superclass.try(:attributes_map).dup || {}
+      end
 
       # @visibility public
       # @api public

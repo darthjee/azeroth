@@ -1,8 +1,7 @@
 # frozen_string_literal: true
 
 class Document
-  class DecoratorWithError < Azeroth::Decorator
-    expose :name
+  class DecoratorWithError < Document::Decorator
     expose :errors, if: :invalid?
 
     def errors

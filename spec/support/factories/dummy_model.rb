@@ -7,5 +7,6 @@ FactoryBot.define do
     last_name        { 'bot' }
     age              { 21 }
     favorite_pokemon { 'squirtle' }
+    favorite_game    { 'pokemon' }
   end
 end

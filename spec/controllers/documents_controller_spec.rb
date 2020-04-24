@@ -215,12 +215,12 @@ describe DocumentsController do
       end
 
       it do
-        post :create, params: parameters
+        post :update, params: parameters
         expect(response).not_to be_successful
       end
 
       it 'returns created document json' do
-        post :create, params: parameters
+        post :update, params: parameters
         expect(parsed_response).to eq(expected_json)
       end
 

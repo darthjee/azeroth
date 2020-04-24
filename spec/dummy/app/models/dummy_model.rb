@@ -4,7 +4,7 @@ class DummyModel
   include ActiveModel::Model
 
   attr_accessor :id, :first_name, :last_name, :age,
-                :favorite_pokemon
+                :favorite_pokemon, :favorite_game
 
   validates_presence_of :first_name
 

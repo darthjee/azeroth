@@ -19,8 +19,8 @@ module Azeroth
       # @param options [Options]
       def initialize(clazz, model_name, options)
         @clazz = clazz
-        @model = Azeroth::Model.new(model_name)
         @options = options
+        @model = Azeroth::Model.new(model_name, options)
 
         add_params
         add_resource

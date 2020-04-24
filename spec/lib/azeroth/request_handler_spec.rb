@@ -8,7 +8,8 @@ describe Azeroth::RequestHandler do
 
     let(:controller) { controller_class.new }
     let(:params)     { ActionController::Parameters.new(parameters) }
-    let(:model)      { Azeroth::Model.new(:document) }
+    let(:model)      { Azeroth::Model.new(:document, options) }
+    let(:options)    { Azeroth::Options.new }
 
     let(:decorator)       { Document::Decorator.new(Document.all) }
     let(:expected_json)   { decorator.as_json }

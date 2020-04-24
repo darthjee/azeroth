@@ -7,12 +7,15 @@ module Azeroth
   # Model responsible for making the conection to the resource model class
   class Model
     # @param name [String,Symbol] name of the resource
-    def initialize(name)
+    # @param options [Azeroth::Options] resource options
+    def initialize(name, options)
       if name.is_a?(Class)
         @klass = name
       else
         @name = name.to_s
       end
+
+      @options = options
     end
 
     # Returns the name of the resource represented by the model
@@ -46,11 +49,18 @@ module Azeroth
     # @return [Hash]
     def decorate(object)
       decorator_class.new(object).as_json
-    rescue NameError
-      object.as_json
     end
 
     private
+
+    attr_reader :options
+    # @method options
+    # @api private
+    # @private
+    #
+    # Returns options
+    #
+    # @return [Azeroth::Options]
 
     # @private
     #
@@ -58,7 +68,28 @@ module Azeroth
     #
     # @return [Class] subclass of {Decorator}
     def decorator_class
-      @decorator_class ||= klass::Decorator
+      @decorator_class ||= calculate_decorator_class
+    end
+
+    # @private
+    #
+    # Calculates decorator class
+    #
+    # When options.decorator is false return DummyDecorator
+    #
+    # when options.decorator is a class, returns it
+    #
+    # When finding the decorator from the model fails,
+    # returns DummyDecorator
+    #
+    # @return [Azeroth::Decorator,DummyDecorator]
+    def calculate_decorator_class
+      return DummyDecorator unless options.decorator
+      return options.decorator if options.decorator.is_a?(Class)
+
+      klass::Decorator
+    rescue NameError
+      DummyDecorator
     end
   end
 end
