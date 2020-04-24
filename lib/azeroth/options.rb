@@ -31,6 +31,13 @@ module Azeroth
 
     private
 
+    # @private
+    #
+    # check if given options are allowed
+    #
+    # @raise Azeroth::Exception::InvalidOptions
+    #
+    # @return [NilClass]
     def check_options(options)
       invalid_keys = options.keys - DEFAULT_OPTIONS.keys
 

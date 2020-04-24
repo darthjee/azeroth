@@ -20,6 +20,9 @@ module Azeroth
         @resource ||= build_resource
       end
 
+      # build resource for create
+      #
+      # @return [Object]
       def build_resource
         attributes = controller.send("#{model.name}_params")
         collection = controller.send(model.plural)

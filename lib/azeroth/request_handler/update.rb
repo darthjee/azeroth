@@ -20,6 +20,9 @@ module Azeroth
         @resource ||= update_resource
       end
 
+      # build resource for update
+      #
+      # @return [Object]
       def update_resource
         attributes = controller.send("#{model.name}_params")
 

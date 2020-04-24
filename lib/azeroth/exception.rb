@@ -1,15 +1,20 @@
 # frozen_string_literal: true
 
 module Azeroth
-  # @api public
+  # @api private
   # @author Darthjee
   #
   # Excaptions raised by azeroth
   class Exception < ::StandardError
-    # @api public
+    # @api private
     # @author Darthjee
     #
     # Exception raised when invalid options are given
+    #
+    # @example Usage
+    #   exception = Azeroth::Exception::InvalidOptions.new(%i[invalid options])
+    #   exception.message # returns
+    #                     # 'Invalid keys on options initialization (invalid options)'
     class InvalidOptions < Azeroth::Exception
       # @param invalid_keys [Array<Symbol>] list of invalid keys
       def initialize(invalid_keys = [])
@@ -19,6 +24,8 @@ module Azeroth
       # Exception string showing invalid keys
       #
       # @return [String]
+      #
+      # @example (see InvalidOptions)
       def message
         keys = invalid_keys.join(' ')
         "Invalid keys on options initialization (#{keys})"
