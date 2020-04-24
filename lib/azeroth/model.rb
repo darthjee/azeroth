@@ -48,10 +48,7 @@ module Azeroth
     #
     # @return [Hash]
     def decorate(object)
-      return object.as_json unless options.decorator
       decorator_class.new(object).as_json
-    rescue NameError
-      object.as_json
     end
 
     private
@@ -71,7 +68,25 @@ module Azeroth
     #
     # @return [Class] subclass of {Decorator}
     def decorator_class
-      @decorator_class ||= klass::Decorator
+      @decorator_class ||= calculate_decorator_class
+    end
+
+    # @private
+    #
+    # Calculates decorator class
+    #
+    # When options.decorator is false return DummyDecorator
+    #
+    # When finding the decorator from the model fails,
+    # returns DummyDecorator
+    #
+    # @return [Azeroth::Decorator,DummyDecorator]
+    def calculate_decorator_class
+      return DummyDecorator unless options.decorator
+
+      klass::Decorator
+    rescue NameError
+      DummyDecorator
     end
   end
 end
