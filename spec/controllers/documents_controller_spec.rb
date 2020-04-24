@@ -9,7 +9,8 @@ describe DocumentsController do
 
   describe 'GET index' do
     let(:documents_count) { 0 }
-    let!(:documents) do
+
+    before do
       documents_count.times.map { create(:document) }
     end
 

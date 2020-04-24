@@ -36,7 +36,7 @@ module Azeroth
 
       return if invalid_keys.empty?
 
-      fail Azeroth::Exception::InvalidOptions, invalid_keys
+      raise Azeroth::Exception::InvalidOptions, invalid_keys
     end
   end
 end

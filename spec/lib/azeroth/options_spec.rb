@@ -7,7 +7,6 @@ describe Azeroth::Options do
 
   describe 'validation' do
     context 'when initializing with invalid options' do
-
       it do
         expect { described_class.new(invalid_option: 1) }
           .to raise_error(Azeroth::Exception::InvalidOptions)
@@ -41,7 +40,7 @@ describe Azeroth::Options do
 
     context 'when passing except options' do
       subject(:options) do
-        described_class.new(except: [:index, :create])
+        described_class.new(except: %i[index create])
       end
 
       it 'returns not excluded actions' do

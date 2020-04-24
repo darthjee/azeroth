@@ -43,26 +43,28 @@ describe IndexDocumentsController do
   describe 'GET show' do
     let(:document)    { create(:document) }
     let(:document_id) { document.id }
-    let(:parameters)  { { id: document_id, format: :json } }
-
 
     context 'when calling on format json' do
+      let(:parameters) { { id: document_id, format: :json } }
+
       it do
         expect { get :show, params: parameters }
           .to raise_error(AbstractController::ActionNotFound)
       end
-    end
 
-    context 'when calling on an inexistent id' do
-      let(:document_id) { :wrong_id }
+      context 'when calling on an inexistent id' do
+        let(:document_id) { :wrong_id }
 
-      it do
-        expect { get :show, params: parameters }
-          .to raise_error(AbstractController::ActionNotFound)
+        it do
+          expect { get :show, params: parameters }
+            .to raise_error(AbstractController::ActionNotFound)
+        end
       end
     end
 
     context 'when calling on format html' do
+      let(:parameters) { { id: document_id, format: :html } }
+
       it do
         expect { get :show, params: parameters }
           .to raise_error(AbstractController::ActionNotFound)
@@ -127,7 +129,7 @@ describe IndexDocumentsController do
 
     context 'when calling with format html' do
       it do
-        expect { get :new, params: { format: :json } }
+        expect { get :new, params: { format: :html } }
           .to raise_error(AbstractController::ActionNotFound)
       end
     end

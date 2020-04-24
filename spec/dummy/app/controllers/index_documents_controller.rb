@@ -5,4 +5,3 @@ class IndexDocumentsController < ApplicationController
 
   resource_for :document, only: :index
 end
-
