@@ -13,8 +13,8 @@ module Azeroth
     #
     # @example Usage
     #   exception = Azeroth::Exception::InvalidOptions.new(%i[invalid options])
-    #   exception.message # returns
-    #                     # 'Invalid keys on options initialization (invalid options)'
+    #   exception.message
+    #   # return 'Invalid keys on options initialization (invalid options)'
     class InvalidOptions < Azeroth::Exception
       # @param invalid_keys [Array<Symbol>] list of invalid keys
       def initialize(invalid_keys = [])
