@@ -3,16 +3,14 @@
 require 'spec_helper'
 
 describe Azeroth::Exception::InvalidOptions do
-  let(:exception) { described_class.new(%i[invalid option]) }
-
-  describe 'messagee' do
+  describe '#message' do
+    let(:exception) { described_class.new(%i[invalid options]) }
     let(:expected_message) do
-      'Invalid keys on options initialization (invalid option)'
+      'Invalid keys on options initialization (invalid options)'
     end
 
-    it 'returns message with invalid keys' do
-      expect(exception.message)
-        .to eq(expected_message)
+    it 'shows invalid keys' do
+      expect(exception.message).to eq(expected_message)
     end
   end
 end
