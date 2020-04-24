@@ -77,12 +77,15 @@ module Azeroth
     #
     # When options.decorator is false return DummyDecorator
     #
+    # when options.decorator is a class, returns it
+    #
     # When finding the decorator from the model fails,
     # returns DummyDecorator
     #
     # @return [Azeroth::Decorator,DummyDecorator]
     def calculate_decorator_class
       return DummyDecorator unless options.decorator
+      return options.decorator if options.decorator.is_a?(Class)
 
       klass::Decorator
     rescue NameError

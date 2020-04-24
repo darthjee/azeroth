@@ -141,5 +141,29 @@ describe Azeroth::Model do
         end
       end
     end
+
+    context 'when model has a decorator and option decorator is a decorator' do
+      let(:input)        { :document }
+      let(:reference)    { SecureRandom.uuid }
+      let(:object)       { create(:document, reference: reference) }
+      let(:options_hash) { { decorator: Document::DecoratorWithError } }
+
+      context 'when object is just a model and has decorator' do
+        let!(:object) { Document.new }
+
+        let(:expected_json) do
+          {
+            name: nil,
+            errors: {
+              name: ["can't be blank"]
+            }
+          }.stringify_keys
+        end
+
+        it 'object.as_json' do
+          expect(model.decorate(object)).to eq(expected_json)
+        end
+      end
+    end
   end
 end
