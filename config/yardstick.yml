@@ -15,7 +15,8 @@ rules:
     exclude: []
   ExampleTag:
     enabled: true
-    exclude: []
+    exclude:
+      - Azeroth::DummyDecorator#as_json
   ReturnTag:
     enabled: true
     exclude: []
@@ -24,6 +25,7 @@ rules:
     exclude:
       - Azeroth::Decorator#initialize
       - Azeroth::Decorator::HashBuilder#initialize
+      - Azeroth::DummyDecorator#initialize
       - Azeroth::Exception::InvalidOptions#initialize
       - Azeroth::Model#initialize
       - Azeroth::Options#initialize
