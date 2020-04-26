@@ -8,6 +8,44 @@ describe Azeroth::Decorator do
   let(:model)  { build(:dummy_model) }
   let(:object) { model }
 
+  describe '.expose' do
+    subject(:decorator) { Class.new(described_class) }
+
+    let(:expected_options) do
+      Azeroth::Decorator::Options.new
+    end
+
+    it do
+      expect { decorator.send(:expose, :name) }
+        .to change(decorator, :attributes_map)
+        .from({})
+        .to({ name: expected_options })
+    end
+
+    it do
+      expect { decorator.send(:expose, :name) }
+        .to add_method(:name).to(decorator)
+    end
+
+    context 'when passing options' do
+      let(:expected_options) do
+        Azeroth::Decorator::Options.new(if: :valid?)
+      end
+
+      it do
+        expect { decorator.send(:expose, :name, if: :valid?) }
+          .to change(decorator, :attributes_map)
+          .from({})
+          .to({ name: expected_options })
+      end
+
+      it do
+        expect { decorator.send(:expose, :name) }
+          .to add_method(:name).to(decorator)
+      end
+    end
+  end
+
   describe '#as_json' do
     context 'when object is just a model' do
       let(:expected_json) do
