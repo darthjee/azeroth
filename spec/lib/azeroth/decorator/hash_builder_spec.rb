@@ -33,7 +33,7 @@ describe Azeroth::Decorator::HashBuilder do
           errors: {
             first_name: ["can't be blank"]
           }
-        }.stringify_keys
+        }.deep_stringify_keys
       end
 
       it 'include the conditional attributes' do
