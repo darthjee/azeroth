@@ -44,6 +44,20 @@ describe Azeroth::Decorator do
           .to add_method(:name).to(decorator)
       end
     end
+
+    context 'when passing invalid options' do
+      it do
+        expect { decorator.send(:expose, :name, invalid_option: :valid?) }
+          .to not_change(decorator, :attributes_map)
+          .and raise_error(Azeroth::Exception::InvalidOptions)
+      end
+
+      it do
+        expect { decorator.send(:expose, :name) }
+          .to not_add_method(:name).to(decorator)
+          .and raise_error(Azeroth::Exception::InvalidOptions)
+      end
+    end
   end
 
   describe '#as_json' do
