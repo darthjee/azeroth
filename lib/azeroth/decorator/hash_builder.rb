@@ -56,7 +56,7 @@ module Azeroth
       def add_attribute(method, options)
         return unless add_attribute?(options)
 
-        key = options[:as] || method
+        key = options.as || method
 
         hash[key.to_s] = json_for(method)
       end
@@ -84,7 +84,7 @@ module Azeroth
       #
       # @return [Object] result of method call from decorator
       def add_attribute?(options)
-        conditional = options[:if]
+        conditional = options.if
         return true unless conditional.present?
 
         block = proc(&conditional)
