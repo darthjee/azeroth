@@ -58,7 +58,19 @@ module Azeroth
 
         key = options[:as] || method
 
-        hash[key.to_s] = decorator.public_send(method).as_json
+        hash[key.to_s] = json_for(method)
+      end
+
+      def json_for(method)
+        value = decorator.public_send(method)
+
+        decorator_class_for(value).new(value).as_json
+      end
+
+      def decorator_class_for(value)
+        value.class::Decorator
+      rescue NameError
+        Azeroth::DummyDecorator
       end
 
       # Check if an attribute should be added to the hash
