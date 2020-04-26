@@ -68,7 +68,9 @@ module Azeroth
       end
 
       def decorator_class_for(value)
-        value.class::Decorator
+        return value.class::Decorator unless value.is_a?(Enumerable)
+
+        decorator_class_for(value.first)
       rescue NameError
         Azeroth::DummyDecorator
       end

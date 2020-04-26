@@ -4,5 +4,6 @@ class Factory
   class DecoratorWithProduct < Azeroth::Decorator
     expose :name
     expose :main_product
+    expose :products
   end
 end

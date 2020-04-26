@@ -179,12 +179,21 @@ describe Azeroth::Decorator do
         let(:main_product) { create(:product) }
         let(:factory)      { main_product.factory }
 
+        let!(:other_product) do
+          create(:product, factory: factory)
+        end
+
         let(:expected_json) do
           {
             name: factory.name,
             main_product: {
               name: main_product.name
-            }
+            },
+            products: [{
+              name: main_product.name
+            }, {
+              name: other_product.name
+            }]
           }.deep_stringify_keys
         end
 
