@@ -149,6 +149,50 @@ describe Azeroth::Decorator do
         end
       end
     end
+
+    context 'when decorator decorates relation' do
+      context 'when relation object has no decorator' do
+        subject(:decorator) do
+          Product::DecoratorWithFactory.new(product)
+        end
+
+        let(:product) { create(:product) }
+        let(:factory) { product.factory }
+
+        let(:expected_json) do
+          {
+            name: product.name,
+            factory: factory.as_json
+          }.stringify_keys
+        end
+
+        it 'exposes relation' do
+          expect(decorator.as_json).to eq(expected_json)
+        end
+      end
+
+      context 'when relation object has decorator' do
+        subject(:decorator) do
+          Factory::DecoratorWithProduct.new(factory)
+        end
+
+        let(:main_product) { create(:product) }
+        let(:factory)      { main_product.factory }
+
+        let(:expected_json) do
+          {
+            name: factory.name,
+            main_product: {
+              name: main_product.name
+            }
+          }.stringify_keys
+        end
+
+        it 'exposes relation' do
+          expect(decorator.as_json).to eq(expected_json)
+        end
+      end
+    end
   end
 
   describe '#method_missing' do
