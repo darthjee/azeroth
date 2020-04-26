@@ -40,7 +40,7 @@ describe Azeroth::Decorator do
       end
 
       it do
-        expect { decorator.send(:expose, :name) }
+        expect { decorator.send(:expose, :name, if: :valid?) }
           .to add_method(:name).to(decorator)
       end
     end
@@ -53,8 +53,9 @@ describe Azeroth::Decorator do
       end
 
       it do
-        expect { decorator.send(:expose, :name) }
-          .to not_add_method(:name).to(decorator)
+        expect { decorator.send(:expose, :name, invalid_option: :valid?) }
+          .to not_add_method(:name)
+          .to(decorator)
           .and raise_error(Azeroth::Exception::InvalidOptions)
       end
     end

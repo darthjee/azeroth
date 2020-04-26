@@ -102,12 +102,14 @@ module Azeroth
       #       end
       #     end
       #   end
-      def expose(attribute, **options)
+      def expose(attribute, **options_hash)
+        options = Decorator::Options.new(options_hash)
+
         builder = Sinclair.new(self)
         builder.add_method(attribute, "@object.#{attribute}")
         builder.build
 
-        attributes_map[attribute] = Decorator::Options.new(options)
+        attributes_map[attribute] = options
       end
     end
 
