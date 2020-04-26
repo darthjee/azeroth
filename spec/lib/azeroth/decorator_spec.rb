@@ -33,7 +33,7 @@ describe Azeroth::Decorator do
             errors: {
               first_name: ["can't be blank"]
             }
-          }.stringify_keys
+          }.deep_stringify_keys
         end
 
         it 'include the conditional attributes' do
@@ -59,11 +59,11 @@ describe Azeroth::Decorator do
           {
             name: "#{model.first_name} #{model.last_name}",
             age: model.age,
-            pokemon: model.favorite_pokemon
+            pokemon: model.favorite_pokemon.to_s
           }, {
             name: "#{other_model.first_name} #{other_model.last_name}",
             age: other_model.age,
-            pokemon: other_model.favorite_pokemon
+            pokemon: other_model.favorite_pokemon.to_s
           }
         ].map(&:stringify_keys)
       end
@@ -141,7 +141,7 @@ describe Azeroth::Decorator do
             errors: {
               name: ["can't be blank"]
             }
-          }.stringify_keys
+          }.deep_stringify_keys
         end
 
         it 'returns meta data defined json' do
@@ -185,7 +185,7 @@ describe Azeroth::Decorator do
             main_product: {
               name: main_product.name
             }
-          }.stringify_keys
+          }.deep_stringify_keys
         end
 
         it 'exposes relation' do

@@ -58,7 +58,7 @@ module Azeroth
 
         key = options[:as] || method
 
-        hash[key.to_s] = decorator.public_send(method)
+        hash[key.to_s] = decorator.public_send(method).as_json
       end
 
       # Check if an attribute should be added to the hash
