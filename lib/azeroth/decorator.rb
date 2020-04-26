@@ -41,6 +41,7 @@ module Azeroth
   #                     # }
   class Decorator
     autoload :HashBuilder, 'azeroth/decorator/hash_builder'
+    autoload :Options,     'azeroth/decorator/options'
 
     class << self
       # @api private
@@ -106,7 +107,7 @@ module Azeroth
         builder.add_method(attribute, "@object.#{attribute}")
         builder.build
 
-        attributes_map[attribute] = options
+        attributes_map[attribute] = Decorator::Options.new(options)
       end
     end
 
