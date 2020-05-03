@@ -5,6 +5,8 @@ module Azeroth
   # @author Darthjee
   #
   # Resource buiilding options
+  #
+  # @see https://www.rubydoc.info/gems/sinclair/1.6.4/Sinclair/Options Sinclair::Options
   class Options < Sinclair::Options
     # Default options
     DEFAULT_OPTIONS = {
@@ -21,5 +23,34 @@ module Azeroth
     def actions
       [only].flatten.map(&:to_sym) - [except].flatten.map(&:to_sym)
     end
+
+    # @method only
+    # @api private
+    # @public
+    #
+    # filter of only actions to be built
+    #
+    # @return [Array<String,Symbol>]
+
+    # @method except
+    # @api private
+    # @public
+    #
+    # actions to be ignored
+    #
+    # @return [Array<String,Symbol>]
+
+    # @method decorator
+    # @api private
+    # @public
+    #
+    # decorator class to be used
+    #
+    # when set as true/false, it either infer
+    # the class (model_class::Decorator) or
+    # do not use a decorator at all calling
+    # model.as_json
+    #
+    # @return [Decorator,TrueClass,FalseClass]
   end
 end
