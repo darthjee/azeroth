@@ -6,7 +6,8 @@ module Azeroth
   #
   # Resource buiilding options
   #
-  # @see https://www.rubydoc.info/gems/sinclair/1.6.4/Sinclair/Options Sinclair::Options
+  # @see https://www.rubydoc.info/gems/sinclair/1.6.4/Sinclair/Options
+  #   Sinclair::Options
   class Options < Sinclair::Options
     # Default options
     DEFAULT_OPTIONS = {

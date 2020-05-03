@@ -7,7 +7,8 @@ module Azeroth
     #
     # Resource buiilding options for decorator
     #
-    # @see https://www.rubydoc.info/gems/sinclair/1.6.4/Sinclair/Options Sinclair::Options
+    # @see https://www.rubydoc.info/gems/sinclair/1.6.4/Sinclair/Options
+    #   Sinclair::Options
     class Options < Sinclair::Options
       DEFAULT_OPTIONS = {
         as: nil,
