@@ -56,9 +56,23 @@ module Azeroth
       def add_attribute(method, options)
         return unless add_attribute?(options)
 
-        key = options[:as] || method
+        key = options.as || method
 
-        hash[key.to_s] = decorator.public_send(method)
+        hash[key.to_s] = json_for(method)
+      end
+
+      def json_for(method)
+        value = decorator.public_send(method)
+
+        decorator_class_for(value).new(value).as_json
+      end
+
+      def decorator_class_for(value)
+        return value.class::Decorator unless value.is_a?(Enumerable)
+
+        decorator_class_for(value.first)
+      rescue NameError
+        Azeroth::DummyDecorator
       end
 
       # Check if an attribute should be added to the hash
@@ -70,7 +84,7 @@ module Azeroth
       #
       # @return [Object] result of method call from decorator
       def add_attribute?(options)
-        conditional = options[:if]
+        conditional = options.if
         return true unless conditional.present?
 
         block = proc(&conditional)

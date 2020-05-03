@@ -8,6 +8,59 @@ describe Azeroth::Decorator do
   let(:model)  { build(:dummy_model) }
   let(:object) { model }
 
+  describe '.expose' do
+    subject(:decorator) { Class.new(described_class) }
+
+    let(:expected_options) do
+      Azeroth::Decorator::Options.new
+    end
+
+    it do
+      expect { decorator.send(:expose, :name) }
+        .to change(decorator, :attributes_map)
+        .from({})
+        .to({ name: expected_options })
+    end
+
+    it do
+      expect { decorator.send(:expose, :name) }
+        .to add_method(:name).to(decorator)
+    end
+
+    context 'when passing options' do
+      let(:expected_options) do
+        Azeroth::Decorator::Options.new(if: :valid?)
+      end
+
+      it do
+        expect { decorator.send(:expose, :name, if: :valid?) }
+          .to change(decorator, :attributes_map)
+          .from({})
+          .to({ name: expected_options })
+      end
+
+      it do
+        expect { decorator.send(:expose, :name, if: :valid?) }
+          .to add_method(:name).to(decorator)
+      end
+    end
+
+    context 'when passing invalid options' do
+      it do
+        expect { decorator.send(:expose, :name, invalid_option: :valid?) }
+          .to not_change(decorator, :attributes_map)
+          .and raise_error(Sinclair::Exception::InvalidOptions)
+      end
+
+      it do
+        expect { decorator.send(:expose, :name, invalid_option: :valid?) }
+          .to not_add_method(:name)
+          .to(decorator)
+          .and raise_error(Sinclair::Exception::InvalidOptions)
+      end
+    end
+  end
+
   describe '#as_json' do
     context 'when object is just a model' do
       let(:expected_json) do
@@ -33,7 +86,7 @@ describe Azeroth::Decorator do
             errors: {
               first_name: ["can't be blank"]
             }
-          }.stringify_keys
+          }.deep_stringify_keys
         end
 
         it 'include the conditional attributes' do
@@ -59,11 +112,11 @@ describe Azeroth::Decorator do
           {
             name: "#{model.first_name} #{model.last_name}",
             age: model.age,
-            pokemon: model.favorite_pokemon
+            pokemon: model.favorite_pokemon.to_s
           }, {
             name: "#{other_model.first_name} #{other_model.last_name}",
             age: other_model.age,
-            pokemon: other_model.favorite_pokemon
+            pokemon: other_model.favorite_pokemon.to_s
           }
         ].map(&:stringify_keys)
       end
@@ -141,10 +194,63 @@ describe Azeroth::Decorator do
             errors: {
               name: ["can't be blank"]
             }
-          }.stringify_keys
+          }.deep_stringify_keys
         end
 
         it 'returns meta data defined json' do
+          expect(decorator.as_json).to eq(expected_json)
+        end
+      end
+    end
+
+    context 'when decorator decorates relation' do
+      context 'when relation object has no decorator' do
+        subject(:decorator) do
+          Product::DecoratorWithFactory.new(product)
+        end
+
+        let(:product) { create(:product) }
+        let(:factory) { product.factory }
+
+        let(:expected_json) do
+          {
+            name: product.name,
+            factory: factory.as_json
+          }.stringify_keys
+        end
+
+        it 'exposes relation' do
+          expect(decorator.as_json).to eq(expected_json)
+        end
+      end
+
+      context 'when relation object has decorator' do
+        subject(:decorator) do
+          Factory::DecoratorWithProduct.new(factory)
+        end
+
+        let(:main_product) { create(:product) }
+        let(:factory)      { main_product.factory }
+
+        let!(:other_product) do
+          create(:product, factory: factory)
+        end
+
+        let(:expected_json) do
+          {
+            name: factory.name,
+            main_product: {
+              name: main_product.name
+            },
+            products: [{
+              name: main_product.name
+            }, {
+              name: other_product.name
+            }]
+          }.deep_stringify_keys
+        end
+
+        it 'exposes relation' do
           expect(decorator.as_json).to eq(expected_json)
         end
       end

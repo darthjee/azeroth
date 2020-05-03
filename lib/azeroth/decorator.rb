@@ -41,6 +41,7 @@ module Azeroth
   #                     # }
   class Decorator
     autoload :HashBuilder, 'azeroth/decorator/hash_builder'
+    autoload :Options,     'azeroth/decorator/options'
 
     class << self
       # @api private
@@ -101,7 +102,9 @@ module Azeroth
       #       end
       #     end
       #   end
-      def expose(attribute, **options)
+      def expose(attribute, **options_hash)
+        options = Decorator::Options.new(options_hash)
+
         builder = Sinclair.new(self)
         builder.add_method(attribute, "@object.#{attribute}")
         builder.build

@@ -5,7 +5,10 @@ module Azeroth
   # @author Darthjee
   #
   # Resource buiilding options
-  class Options < ::OpenStruct
+  #
+  # @see https://www.rubydoc.info/gems/sinclair/1.6.4/Sinclair/Options
+  #   Sinclair::Options
+  class Options < Sinclair::Options
     # Default options
     DEFAULT_OPTIONS = {
       only: %i[create destroy edit index new show update],
@@ -13,18 +16,7 @@ module Azeroth
       decorator: true
     }.freeze
 
-    # @param options [Hash] hash with options (see {Options::DEFAULT_OPTIONS})
-    # @option options only [Array<Symbol,String>] List of
-    #   actions to be built
-    # @option options except [Array<Symbol,String>] List of
-    #   actions to not to be built
-    # @option options decorator [Azeroth::Decorator,TrueClass,FalseClass]
-    #   Decorator class or flag allowing/disallowing decorators
-    def initialize(options = {})
-      check_options(options)
-
-      super(DEFAULT_OPTIONS.merge(options))
-    end
+    with_options DEFAULT_OPTIONS
 
     # Actions to be built
     #
@@ -33,21 +25,33 @@ module Azeroth
       [only].flatten.map(&:to_sym) - [except].flatten.map(&:to_sym)
     end
 
-    private
-
-    # @private
+    # @method only
+    # @api private
+    # @public
     #
-    # check if given options are allowed
+    # filter of only actions to be built
     #
-    # @raise Azeroth::Exception::InvalidOptions
+    # @return [Array<String,Symbol>]
+
+    # @method except
+    # @api private
+    # @public
     #
-    # @return [NilClass]
-    def check_options(options)
-      invalid_keys = options.keys - DEFAULT_OPTIONS.keys
+    # actions to be ignored
+    #
+    # @return [Array<String,Symbol>]
 
-      return if invalid_keys.empty?
-
-      raise Azeroth::Exception::InvalidOptions, invalid_keys
-    end
+    # @method decorator
+    # @api private
+    # @public
+    #
+    # decorator class to be used
+    #
+    # when set as true/false, it either infer
+    # the class (model_class::Decorator) or
+    # do not use a decorator at all calling
+    # model.as_json
+    #
+    # @return [Decorator,TrueClass,FalseClass]
   end
 end

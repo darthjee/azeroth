@@ -157,7 +157,7 @@ describe Azeroth::Model do
             errors: {
               name: ["can't be blank"]
             }
-          }.stringify_keys
+          }.deep_stringify_keys
         end
 
         it 'object.as_json' do

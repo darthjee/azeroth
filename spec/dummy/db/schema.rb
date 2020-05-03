@@ -13,4 +13,13 @@ ActiveRecord::Schema.define do
     t.string :email
     t.string :reference
   end
+
+  create_table :factories, force: true do |t|
+    t.string :name
+  end
+
+  create_table :products, force: true do |t|
+    t.integer :factory_id
+    t.string :name
+  end
 end
