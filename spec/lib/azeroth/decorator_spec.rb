@@ -49,14 +49,14 @@ describe Azeroth::Decorator do
       it do
         expect { decorator.send(:expose, :name, invalid_option: :valid?) }
           .to not_change(decorator, :attributes_map)
-          .and raise_error(Azeroth::Exception::InvalidOptions)
+          .and raise_error(Sinclair::Exception::InvalidOptions)
       end
 
       it do
         expect { decorator.send(:expose, :name, invalid_option: :valid?) }
           .to not_add_method(:name)
           .to(decorator)
-          .and raise_error(Azeroth::Exception::InvalidOptions)
+          .and raise_error(Sinclair::Exception::InvalidOptions)
       end
     end
   end

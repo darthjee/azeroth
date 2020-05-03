@@ -9,7 +9,7 @@ describe Azeroth::Options do
     context 'when initializing with invalid options' do
       it do
         expect { described_class.new(invalid_option: 1) }
-          .to raise_error(Azeroth::Exception::InvalidOptions)
+          .to raise_error(Sinclair::Exception::InvalidOptions)
       end
     end
   end
