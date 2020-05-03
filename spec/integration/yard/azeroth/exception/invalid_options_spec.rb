@@ -2,7 +2,7 @@
 
 require 'spec_helper'
 
-describe Azeroth::Exception::InvalidOptions do
+describe Sinclair::Exception::InvalidOptions do
   describe '#message' do
     let(:exception) { described_class.new(%i[invalid options]) }
     let(:expected_message) do
