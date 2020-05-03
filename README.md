@@ -11,4 +11,4 @@ Azeroth
 
 Yard Documentation
 -------------------
-[https://www.rubydoc.info/gems/azeroth/0.5.0](https://www.rubydoc.info/gems/azeroth/0.5.0)
+[https://www.rubydoc.info/gems/azeroth/0.6.0](https://www.rubydoc.info/gems/azeroth/0.6.0)
