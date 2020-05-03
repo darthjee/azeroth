@@ -15,3 +15,12 @@ RSpec/NestedGroups:
 
 RSpec/AlignLeftLetBrace:
   Enabled: true
+
+Style/HashEachMethods:
+  Enabled: true
+
+Style/HashTransformKeys:
+  Enabled: true
+
+Style/HashTransformValues:
+  Enabled: true
