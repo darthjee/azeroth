@@ -26,16 +26,18 @@ module Azeroth
       attr_reader :decorator, :key, :options
 
       def json_value
-        value = decorator.public_send(key)
-
         decorator_class_for(value).new(value).as_json
       end
 
-      def decorator_class_for(value)
-        return options.decorator if options.decorator
-        return value.class::Decorator unless value.is_a?(Enumerable)
+      def value
+        @value ||= decorator.public_send(key)
+      end
 
-        decorator_class_for(value.first)
+      def decorator_class_for(object)
+        return options.decorator if options.decorator
+        return object.class::Decorator unless object.is_a?(Enumerable)
+
+        decorator_class_for(object.first)
       rescue NameError
         Azeroth::DummyDecorator
       end
