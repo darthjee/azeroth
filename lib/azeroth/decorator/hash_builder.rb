@@ -58,19 +58,20 @@ module Azeroth
 
         key = options.as || method
 
-        hash[key.to_s] = json_for(method)
+        hash[key.to_s] = json_for(method, options)
       end
 
-      def json_for(method)
+      def json_for(method, options)
         value = decorator.public_send(method)
 
-        decorator_class_for(value).new(value).as_json
+        decorator_class_for(value, options).new(value).as_json
       end
 
-      def decorator_class_for(value)
+      def decorator_class_for(value, options)
+        return options.decorator if options.decorator
         return value.class::Decorator unless value.is_a?(Enumerable)
 
-        decorator_class_for(value.first)
+        decorator_class_for(value.first, options)
       rescue NameError
         Azeroth::DummyDecorator
       end

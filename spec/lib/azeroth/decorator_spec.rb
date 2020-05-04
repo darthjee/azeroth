@@ -224,7 +224,7 @@ describe Azeroth::Decorator do
         end
       end
 
-      context 'when relation object has decorator' do
+      context 'when relation object has decorator and defined decorator' do
         subject(:decorator) do
           Factory::DecoratorWithProduct.new(factory)
         end
@@ -240,7 +240,8 @@ describe Azeroth::Decorator do
           {
             name: factory.name,
             main_product: {
-              name: main_product.name
+              name: main_product.name,
+              factory: factory.as_json
             },
             products: [{
               name: main_product.name

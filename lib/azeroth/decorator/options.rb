@@ -12,7 +12,8 @@ module Azeroth
     class Options < Sinclair::Options
       DEFAULT_OPTIONS = {
         as: nil,
-        if: nil
+        if: nil,
+        decorator: nil
       }.freeze
 
       with_options DEFAULT_OPTIONS

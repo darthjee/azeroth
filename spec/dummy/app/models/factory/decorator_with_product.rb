@@ -3,7 +3,7 @@
 class Factory
   class DecoratorWithProduct < Azeroth::Decorator
     expose :name
-    expose :main_product
+    expose :main_product, decorator: Product::DecoratorWithFactory
     expose :products
   end
 end
