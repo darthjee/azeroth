@@ -40,8 +40,9 @@ module Azeroth
   #                     #   'pokemon' => 'Arcanine'
   #                     # }
   class Decorator
-    autoload :HashBuilder, 'azeroth/decorator/hash_builder'
-    autoload :Options,     'azeroth/decorator/options'
+    autoload :HashBuilder,       'azeroth/decorator/hash_builder'
+    autoload :KeyValueExtractor, 'azeroth/decorator/key_value_extractor'
+    autoload :Options,           'azeroth/decorator/options'
 
     class << self
       # @api private
