@@ -41,6 +41,16 @@ module Azeroth
       # when it is a {Symbol} or {String} this will be
       # the name of the method called in the decorator
       # to evaluate the condition
+
+      # @method decorator
+      # @api private
+      # @public
+      #
+      # Decorator class to decorate the value
+      #
+      # when nill, {DummyDecorator} will be used
+      #
+      # @return [NilClass,Decorator]
     end
   end
 end
