@@ -34,29 +34,31 @@ describe Azeroth::Decorator::KeyValueExtractor do
     end
 
     context "with 'if' option" do
-      context 'with symbol' do
+      context 'with symbol for method returns true' do
+        let(:options_hash)    { { if: :magic? } }
+        let(:decorator_class) { Document::Decorator }
+        let(:object) do
+          create(:document, reference: 'X-MAGIC-1')
+        end
+
+        it 'returns attribute and value as hash' do
+          expect(extractor.as_json)
+            .to eq({ 'name' => object.name })
+        end
+      end
+
+      context 'with symbol for method returns false' do
         let(:options_hash)    { { if: :magic? } }
         let(:decorator_class) { Document::Decorator }
 
-        context 'when decorator method returns true' do
-          let(:object) { create(:document, reference: 'X-MAGIC-1') }
-
-          it 'returns attribute and value as hash' do
-            expect(extractor.as_json)
-              .to eq({ 'name' => object.name })
-          end
+        it do
+          expect(extractor.as_json)
+            .to be_a(Hash)
         end
 
-        context 'when decorator method returns false' do
-          it do
-            expect(extractor.as_json)
-              .to be_a(Hash)
-          end
-
-          it do
-            expect(extractor.as_json)
-              .to be_empty
-          end
+        it do
+          expect(extractor.as_json)
+            .to be_empty
         end
       end
 
