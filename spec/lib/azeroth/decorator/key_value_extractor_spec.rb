@@ -96,5 +96,36 @@ describe Azeroth::Decorator::KeyValueExtractor do
         end
       end
     end
+
+    context 'when value is an object that can be decorated' do
+      context 'when it has decorator' do
+        let(:object)    { create(:factory) }
+        let!(:product)  { create(:product, factory: object) }
+        let(:attribute) { :main_product }
+        let(:expected) do
+          {
+            'main_product' => {
+              'name' => product.name
+            }
+          }
+        end
+
+        it 'exposes value with default decorator' do
+          expect(extractor.as_json)
+            .to eq(expected)
+        end
+      end
+
+      context 'when it has no decorator' do
+        let(:object)    { create(:product) }
+        let(:factory)   { object.factory }
+        let(:attribute) { :factory }
+
+        it 'exposes value as json' do
+          expect(extractor.as_json)
+            .to eq({ 'factory' => factory.as_json })
+        end
+      end
+    end
   end
 end
