@@ -27,7 +27,6 @@ module Azeroth
 
     # @method only
     # @api private
-    # @public
     #
     # filter of only actions to be built
     #
@@ -35,7 +34,6 @@ module Azeroth
 
     # @method except
     # @api private
-    # @public
     #
     # actions to be ignored
     #
@@ -43,7 +41,6 @@ module Azeroth
 
     # @method decorator
     # @api private
-    # @public
     #
     # decorator class to be used
     #

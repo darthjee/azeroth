@@ -20,7 +20,6 @@ module Azeroth
 
       # @method as
       # @api private
-      # @public
       #
       # key to use when exposing the field
       #
@@ -30,21 +29,21 @@ module Azeroth
 
       # @method if
       # @api private
-      # @public
       #
       # conditional to be checked when exposing field
       #
       # when conditional returns false, the
       # field will not be exposed
       #
-      # when if is a {Proc} the proc will be used,
-      # when it is a {Symbol} or {String} this will be
+      # when if is a Proc the proc will be used,
+      # when it is a Symbol or String this will be
       # the name of the method called in the decorator
       # to evaluate the condition
+      #
+      # @return [Proc,Symbol]
 
       # @method decorator
       # @api private
-      # @public
       #
       # Decorator class to decorate the value
       #

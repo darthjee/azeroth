@@ -77,10 +77,11 @@ module Azeroth
       # Expose attributes on json decorated
       #
       # @param attribute [Symbol,String] attribute to be exposed
-      # @param options [Hash] exposing options
-      # @option options as [Symbol,String] custom key
+      # @param options_hash [Hash] exposing options
+      # @option options_hash as [Symbol,String] custom key
       #   to expose
-      # @option options if [Symbol,Proc] method/block to be called
+      # @option options_hash if [Symbol,Proc] method/block
+      #   to be called
       #   checking if an attribute should or should not
       #   be exposed
       #
