@@ -38,7 +38,7 @@ module Azeroth
         }
       end
 
-      #private
+      # private
 
       attr_reader :decorator, :attribute, :options
       # @method decorator

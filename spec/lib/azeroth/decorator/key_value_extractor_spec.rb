@@ -8,14 +8,13 @@ describe Azeroth::Decorator::KeyValueExtractor do
   end
 
   let(:decorator_class) { Class.new(Azeroth::Decorator) }
-  let(:decorator)       { decorator_class.new(object)}
+  let(:decorator)       { decorator_class.new(object) }
   let(:object)          { create(:document) }
   let(:attribute)       { :name }
   let(:options_hash)    { {} }
   let(:options) do
     Azeroth::Decorator::Options.new(options_hash)
   end
-
 
   describe '#as_json' do
     context 'with default options' do
@@ -36,11 +35,11 @@ describe Azeroth::Decorator::KeyValueExtractor do
 
     context "with 'if' option" do
       context 'with symbol' do
-        let(:options_hash) { { if: :magic? } }
+        let(:options_hash)    { { if: :magic? } }
         let(:decorator_class) { Document::Decorator }
 
         context 'when decorator method returns true' do
-          let(:object)  { create(:document, reference: 'X-MAGIC-1') }
+          let(:object) { create(:document, reference: 'X-MAGIC-1') }
 
           it 'returns attribute and value as hash' do
             expect(extractor.as_json)
