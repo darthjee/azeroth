@@ -25,6 +25,7 @@ rules:
     exclude:
       - Azeroth::Decorator#initialize
       - Azeroth::Decorator::HashBuilder#initialize
+      - Azeroth::Decorator::KeyValueExtractor#initialize
       - Azeroth::DummyDecorator#initialize
       - Azeroth::Exception::InvalidOptions#initialize
       - Azeroth::Model#initialize
