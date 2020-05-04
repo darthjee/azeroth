@@ -115,6 +115,27 @@ describe Azeroth::Decorator::KeyValueExtractor do
         end
       end
 
+      context 'when it has decorator and cusom decorator is given' do
+        let(:object)           { create(:factory) }
+        let!(:product)         { create(:product, factory: object) }
+        let(:attribute)        { :main_product }
+        let(:custom_decorator) { IdDecorator }
+        let(:options_hash)     { { decorator: custom_decorator } }
+
+        let(:expected) do
+          {
+            'main_product' => {
+              'id' => product.id
+            }
+          }
+        end
+
+        it 'expose decorated value' do
+          expect(extractor.as_json)
+            .to eq(expected)
+        end
+      end
+
       context 'when it has no decorator' do
         let(:object)    { create(:product) }
         let(:factory)   { object.factory }
@@ -123,6 +144,27 @@ describe Azeroth::Decorator::KeyValueExtractor do
         it 'exposes value as json' do
           expect(extractor.as_json)
             .to eq({ 'factory' => factory.as_json })
+        end
+      end
+
+      context 'when it has no decorator and cusom decorator is given' do
+        let(:object)           { create(:product) }
+        let(:factory)          { object.factory }
+        let(:attribute)        { :factory }
+        let(:custom_decorator) { IdDecorator }
+        let(:options_hash)     { { decorator: custom_decorator } }
+
+        let(:expected) do
+          {
+            'factory' => {
+              'id' => factory.id
+            }
+          }
+        end
+
+        it 'expose decorated value' do
+          expect(extractor.as_json)
+            .to eq(expected)
         end
       end
     end
