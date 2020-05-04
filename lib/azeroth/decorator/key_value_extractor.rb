@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'sinclair'
-
 module Azeroth
   class Decorator
     # @api private
