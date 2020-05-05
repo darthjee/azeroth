@@ -71,7 +71,7 @@ module Azeroth
       #
       # @return [Object]
       def json_value
-        decorator_class_for(value).new(value).as_json
+        decorator_class(value).new(value).as_json
       end
 
       # @private
@@ -87,9 +87,27 @@ module Azeroth
       # Finds the correct decorator class for a value
       #
       # @return [Class<Decorator>]
-      def decorator_class_for(object)
+      def decorator_class(object)
+        decorator_from_options || decorator_class_for(object)
+      end
+
+      # @private
+      #
+      # returns decorator defined in options
+      #
+      # @return [Class<Decorator>, NilClass]
+      def decorator_from_options
         return options.decorator if options.decorator
-        return Azeroth::DummyDecorator unless options.any_decorator?
+
+        Azeroth::DummyDecorator unless options.any_decorator?
+      end
+
+      # @private
+      #
+      # Finds the correct decorator class for a value
+      #
+      # @return [Class<Decorator>]
+      def decorator_class_for(object)
         return object.class::Decorator unless object.is_a?(Enumerable)
 
         decorator_class_for(object.first)
