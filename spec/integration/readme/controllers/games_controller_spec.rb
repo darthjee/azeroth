@@ -4,10 +4,21 @@ require 'spec_helper'
 
 describe GamesController, controller: true do
   describe 'POST create' do
-    let(:publisher) { create(:publisher, name: 'Nintendo') }
-
     it 'create game' do
-      post "/publishers/#{publisher.id}/games.json", params: {
+      post "/publishers.json", params: {
+        publisher: {
+          name: 'Nintendo'
+        }
+      }
+
+      publisher = JSON.parse(response.body)
+      expect(publisher).to eq({
+        'id' => publisher['id'],
+        'name' => 'Nintendo'
+      })
+
+      publisher = Publisher.last
+      post "/publishers/#{publisher['id']}/games.json", params: {
         game: {
           name: 'Pokemon'
         }
@@ -15,13 +26,13 @@ describe GamesController, controller: true do
 
       game = Game.last
 
-      expect(response.body).to eq({
+      expect(JSON.parse(response.body)).to eq({
         id: game.id,
         name: 'Pokemon',
         publisher: {
           name: 'Nintendo'
         }
-      }.to_json)
+      })
     end
   end
 end

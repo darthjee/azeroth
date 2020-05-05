@@ -108,6 +108,40 @@ Usage
   end
 ```
 
+```ruby
+  post "/publishers.json", params: {
+    publisher: {
+      name: 'Nintendo'
+    }
+  }
+
+  publisher = JSON.parse(response.body)
+  # returns
+  # {
+  #   'id' => 11,
+  #   'name' => 'Nintendo'
+  # }
+
+  publisher = Publisher.last
+  post "/publishers/#{publisher['id']}/games.json", params: {
+    game: {
+      name: 'Pokemon'
+    }
+  }
+
+  game = Game.last
+
+  JSON.parse(response.body)
+  # returns
+  # {
+  #   id: game.id,
+  #   name: 'Pokemon',
+  #   publisher: {
+  #     name: 'Nintendo'
+  # }
+  }
+```
+
 ## Decorator usage
 [https://www.rubydoc.info/gems/azeroth/Azeroth/Decorator](Decorators) are
 used to define how an object is exposed as json on controller responses
