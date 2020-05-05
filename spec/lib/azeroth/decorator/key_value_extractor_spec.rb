@@ -24,6 +24,44 @@ describe Azeroth::Decorator::KeyValueExtractor do
       end
     end
 
+    context 'when value is a collection' do
+      let(:object)    { create(:factory) }
+      let(:attribute) { :products }
+
+      let!(:products) do
+        create_list(:product, 3, factory: object)
+      end
+
+      let(:expected) do
+        {
+          'products' => products.as_json
+        }
+      end
+
+      it 'returns value as array' do
+        expect(extractor.as_json)
+          .to eq(expected)
+      end
+
+      context 'with custom decorator option' do
+        let(:options_hash) { { decorator: IdDecorator } }
+        let(:expected) do
+          {
+            'products' => [
+              { 'id' => products[0].id },
+              { 'id' => products[1].id },
+              { 'id' => products[2].id }
+            ]
+          }
+        end
+
+        it 'returns value as array' do
+          expect(extractor.as_json)
+            .to eq(expected)
+        end
+      end
+    end
+
     context "with 'as' option" do
       let(:options_hash) { { as: :the_name } }
 
