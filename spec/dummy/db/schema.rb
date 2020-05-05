@@ -23,6 +23,16 @@ ActiveRecord::Schema.define do
     t.string :name
   end
 
+  create_table :publishers, force: true do |t|
+    t.string :name
+    t.index :name, unique: true
+  end
+
+  create_table :games, force: true do |t|
+    t.string :name
+    t.integer :publisher_id
+  end
+
   create_table :pokemon_masters, force: true do |t|
     t.string :first_name, null: false
     t.string :last_name
