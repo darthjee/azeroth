@@ -47,9 +47,24 @@ module Azeroth
       #
       # Decorator class to decorate the value
       #
-      # when nill, {DummyDecorator} will be used
+      # when false {DummyDecorator} will be used
+      #
+      # when nil, a decorator will be infered from
+      # value::Decorator
       #
       # @return [NilClass,Decorator]
+
+      # @api private
+      #
+      # Returns true when attribute must can be decorated
+      #
+      # when false, decoration happens through
+      # #as_json call on value
+      #
+      # @return [TrueClass,FalseClass]
+      def any_decorator?
+        decorator != false
+      end
     end
   end
 end
