@@ -25,7 +25,6 @@ ActiveRecord::Schema.define do
 
   create_table :publishers, force: true do |t|
     t.string :name
-    t.index :name, unique: true
   end
 
   create_table :games, force: true do |t|
