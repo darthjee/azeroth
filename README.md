@@ -28,7 +28,17 @@ database operations.
 Usage
 -----
 
-## Controller Usage
+## Azeroth::Resourceable
+[Resourceable](https://www.rubydoc.info/gems/azeroth/Azeroth/Resourceable)
+module adds class method [resource_for](https://www.rubydoc.info/gems/azeroth/Azeroth/Resourceable/ClassMethods#resource_for-instance_method)
+which adds a resource and action methods for `create`, `show`, `index`,
+`update`, `delete`, `edit`
+
+It accepts options
+- only List of actions to be built
+- except List of actions to not to be built
+- decorator Decorator class or flag allowing/disallowing decorators
+
 ```ruby
   # publishers_controller.rb
 
@@ -142,7 +152,7 @@ Usage
   }
 ```
 
-## Decorator usage
+## Azeroth::Decorator
 [Decorators](https://www.rubydoc.info/gems/azeroth/Azeroth/Decorator) are
 used to define how an object is exposed as json on controller responses
 defining which and how fields will be exposed
