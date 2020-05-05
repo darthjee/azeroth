@@ -84,6 +84,8 @@ module Azeroth
       #   to be called
       #   checking if an attribute should or should not
       #   be exposed
+      # @option options_hash decorator [FalseClass,TrueClass,Class]
+      #   flag to use or not a decorator or decorator class to be used
       #
       # @return [Array<Symbol>]
       #
