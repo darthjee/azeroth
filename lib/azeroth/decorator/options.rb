@@ -13,7 +13,7 @@ module Azeroth
       DEFAULT_OPTIONS = {
         as: nil,
         if: nil,
-        decorator: nil
+        decorator: true
       }.freeze
 
       with_options DEFAULT_OPTIONS
@@ -62,8 +62,8 @@ module Azeroth
       # #as_json call on value
       #
       # @return [TrueClass,FalseClass]
-      def any_decorator?
-        decorator != false
+      def decorator_defined?
+        decorator.is_a?(Class)
       end
     end
   end
