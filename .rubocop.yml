@@ -29,3 +29,7 @@ Style/HashTransformValues:
 RSpec/ExampleLength:
   Exclude:
     - 'spec/integration/readme/**/*_spec.rb'
+
+RSpec/MultipleExpectations:
+  Exclude:
+    - 'spec/integration/readme/**/*_spec.rb'
