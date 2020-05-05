@@ -143,7 +143,7 @@ Usage
 ```
 
 ## Decorator usage
-[https://www.rubydoc.info/gems/azeroth/Azeroth/Decorator](Decorators) are
+[Decorators](https://www.rubydoc.info/gems/azeroth/Azeroth/Decorator) are
 used to define how an object is exposed as json on controller responses
 defining which and how fields will be exposed
 
@@ -278,3 +278,11 @@ defining which and how fields will be exposed
   #   }]
   # }
 ```
+
+Exposing is done through the class method
+[expose](https://www.rubydoc.info/gems/azeroth/Azeroth/Decorator#expose-class_method)
+which accepts several options:
+
+- as: custom key to expose
+- if: method/block to be called checking if an attribute should or should not be exposed
+- decorator: flag to use or not a decorator or decorator class to be used
