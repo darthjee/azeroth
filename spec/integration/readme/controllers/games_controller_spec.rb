@@ -18,7 +18,10 @@ describe GamesController, controller: true do
       expect(response.body).to eq({
         id: game.id,
         name: 'Pokemon',
-        publisher_id: publisher.id
+        publisher: {
+          id: publisher.id,
+          name: 'Nintendo'
+        }
       }.to_json)
     end
   end

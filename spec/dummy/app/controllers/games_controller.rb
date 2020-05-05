@@ -13,7 +13,7 @@ class GamesController < ApplicationController
   end
 
   def publisher
-    @publisher ||= Publisher.find_by(publisher_id)
+    @publisher ||= Publisher.find(publisher_id)
   end
 
   def publisher_id

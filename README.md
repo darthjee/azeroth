@@ -56,7 +56,7 @@ Usage
     end
 
     def publisher
-      @publisher ||= Publisher.find_by(publisher_id)
+      @publisher ||= Publisher.find(publisher_id)
     end
 
     def publisher_id
@@ -95,6 +95,15 @@ Usage
 
   class Game < ActiveRecord::Base
     belongs_to :publisher
+  end
+```
+
+```ruby
+  # game/decorator.rb
+  class Game::Decorator < Azeroth::Decorator
+    expose :id
+    expose :name
+    expose :publisher
   end
 ```
 
