@@ -29,6 +29,74 @@ Usage
 -----
 
 ## Controller Usage
+```ruby
+  # publishers_controller.rb
+
+  class PublishersController < ApplicationController
+    include Azeroth::Resourceable
+    skip_before_action :verify_authenticity_token
+
+    resource_for :publisher, only: %i[create index]
+  end
+```
+
+```ruby
+  # games_controller.rb
+
+  class GamesController < ApplicationController
+    include Azeroth::Resourceable
+    skip_before_action :verify_authenticity_token
+
+    resource_for :game, except: :delete
+
+    private
+
+    def games
+      publisher.games
+    end
+
+    def publisher
+      @publisher ||= Publisher.find_by(publisher_id)
+    end
+
+    def publisher_id
+      params.require(:publisher_id)
+    end
+  end
+```
+
+```ruby
+  # schema.rb
+
+  ActiveRecord::Schema.define do
+    self.verbose = false
+
+    create_table :publishers, force: true do |t|
+      t.string :name
+    end
+
+    create_table :games, force: true do |t|
+      t.string :name
+      t.integer :publisher_id
+    end
+   end
+```
+
+```ruby
+  # publisher.rb
+
+  class Publisher < ActiveRecord::Base
+    has_many :games
+  end
+```
+
+```ruby
+  # game.rb
+
+  class Game < ActiveRecord::Base
+    belongs_to :publisher
+  end
+```
 
 ## Decorator usage
 [https://www.rubydoc.info/gems/azeroth/Azeroth/Decorator](Decorators) are
