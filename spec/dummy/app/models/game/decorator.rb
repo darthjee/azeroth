@@ -4,6 +4,6 @@ class Game < ActiveRecord::Base
   class Decorator < Azeroth::Decorator
     expose :id
     expose :name
-    expose :publisher
+    expose :publisher, decorator: NameDecorator
   end
 end

@@ -19,7 +19,6 @@ describe GamesController, controller: true do
         id: game.id,
         name: 'Pokemon',
         publisher: {
-          id: publisher.id,
           name: 'Nintendo'
         }
       }.to_json)
