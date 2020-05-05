@@ -10,7 +10,6 @@ module Azeroth
   class DummyDecorator
     delegate :as_json, to: :@object
     # @method as_json
-    # @public
     # @api public
     #
     # Returns object.as_json

@@ -12,14 +12,14 @@ module Azeroth
     class Options < Sinclair::Options
       DEFAULT_OPTIONS = {
         as: nil,
-        if: nil
+        if: nil,
+        decorator: nil
       }.freeze
 
       with_options DEFAULT_OPTIONS
 
       # @method as
       # @api private
-      # @public
       #
       # key to use when exposing the field
       #
@@ -29,17 +29,42 @@ module Azeroth
 
       # @method if
       # @api private
-      # @public
       #
       # conditional to be checked when exposing field
       #
       # when conditional returns false, the
       # field will not be exposed
       #
-      # when if is a {Proc} the proc will be used,
-      # when it is a {Symbol} or {String} this will be
+      # when if is a Proc the proc will be used,
+      # when it is a Symbol or String this will be
       # the name of the method called in the decorator
       # to evaluate the condition
+      #
+      # @return [Proc,Symbol]
+
+      # @method decorator
+      # @api private
+      #
+      # Decorator class to decorate the value
+      #
+      # when false {DummyDecorator} will be used
+      #
+      # when nil, a decorator will be infered from
+      # value::Decorator
+      #
+      # @return [NilClass,Decorator]
+
+      # @api private
+      #
+      # Returns true when attribute must can be decorated
+      #
+      # when false, decoration happens through
+      # #as_json call on value
+      #
+      # @return [TrueClass,FalseClass]
+      def any_decorator?
+        decorator != false
+      end
     end
   end
 end
