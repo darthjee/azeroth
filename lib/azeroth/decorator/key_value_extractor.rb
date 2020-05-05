@@ -89,6 +89,7 @@ module Azeroth
       # @return [Class<Decorator>]
       def decorator_class_for(object)
         return options.decorator if options.decorator
+        return Azeroth::DummyDecorator if options.decorator == false
         return object.class::Decorator unless object.is_a?(Enumerable)
 
         decorator_class_for(object.first)

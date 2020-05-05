@@ -25,6 +25,7 @@ describe Azeroth::Decorator::KeyValueExtractor do
     end
 
     context 'when value is a collection' do
+      let(:options_hash) { { decorator: false } }
       let(:object)    { create(:factory) }
       let(:attribute) { :products }
 
@@ -150,6 +151,24 @@ describe Azeroth::Decorator::KeyValueExtractor do
         end
 
         it 'exposes value with default decorator' do
+          expect(extractor.as_json)
+            .to eq(expected)
+        end
+      end
+
+      context 'when it has decorator and false decorator is given' do
+        let(:object)           { create(:factory) }
+        let!(:product)         { create(:product, factory: object) }
+        let(:attribute)        { :main_product }
+        let(:options_hash)     { { decorator: false } }
+
+        let(:expected) do
+          {
+            'main_product' => product.as_json
+          }
+        end
+
+        it 'expose decorated value' do
           expect(extractor.as_json)
             .to eq(expected)
         end
