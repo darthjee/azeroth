@@ -31,8 +31,73 @@ Usage
 ## Controller Usage
 
 ## Decorator usage
-Decoratos are used to define hos an object is exposed as json
-on controller responses
+[https://www.rubydoc.info/gems/azeroth/Azeroth/Decorator](Decorators) are
+used to define how an object is exposed as json on controller responses
+defining which and how fields will be exposed
+
+```ruby
+  # pokemon/decorator.rb
+
+  class Pokemon::Decorator < Azeroth::Decorator
+    expose :name
+    expose :previous_form_name, as: :evolution_of, if: :evolution?
+
+    def evolution?
+      previous_form
+    end
+
+    def previous_form_name
+      previous_form.name
+    end
+  end
+```
+
+```ruby
+  # pokemon/favorite_decorator.rb
+
+  class Pokemon::FavoriteDecorator < Pokemon::Decorator
+    expose :nickname
+  end
+```
+
+```ruby
+  # pokemon_master/decorator.rb
+
+  class PokemonMaster < ActiveRecord::Base
+    has_one :favorite_pokemon, -> { where(favorite: true) },
+            class_name: 'Pokemon'
+    has_many :pokemons
+  end
+```
+
+```ruby
+  # pokemon.rb
+
+  class Pokemon < ActiveRecord::Base
+    belongs_to :pokemon_master
+    has_one :previous_form,
+            class_name: 'Pokemon',
+            foreign_key: :previous_form_id
+  end
+```
+
+```ruby
+  # pokemon_master.rb
+
+  class PokemonMaster::Decorator < Azeroth::Decorator
+    expose :name
+    expose :age
+    expose :favorite_pokemon, decorator: Pokemon::FavoriteDecorator
+    expose :pokemons
+
+    def name
+      [
+        first_name,
+        last_name
+      ].compact.join(' ')
+    end
+  end
+```
 
 ```ruby
   # schema.rb
@@ -56,58 +121,6 @@ on controller responses
     end
 
     add_foreign_key 'pokemons', 'pokemon_masters'
-  end
-```
-
-```ruby
-  # pokemon.rb
-
-  class Pokemon < ActiveRecord::Base
-    belongs_to :pokemon_master
-    has_one :previous_form,
-            class_name: 'Pokemon',
-            foreign_key: :previous_form_id
-
-    class Decorator < Azeroth::Decorator
-      expose :name
-      expose :previous_form_name, as: :evolution_of, if: :evolution?
-
-      def evolution?
-        previous_form
-      end
-
-      def previous_form_name
-        previous_form.name
-      end
-    end
-
-    class FavoriteDecorator < Pokemon::Decorator
-      expose :nickname
-    end
-  end
-```
-
-```ruby
-  # pokemon_master.rb
-
-  class PokemonMaster < ActiveRecord::Base
-    has_one :favorite_pokemon, -> { where(favorite: true) },
-            class_name: 'Pokemon'
-    has_many :pokemons
-
-    class Decorator < Azeroth::Decorator
-      expose :name
-      expose :age
-      expose :favorite_pokemon, decorator: Pokemon::FavoriteDecorator
-      expose :pokemons
-
-      def name
-        [
-          first_name,
-          last_name
-        ].compact.join(' ')
-      end
-    end
   end
 ```
 
