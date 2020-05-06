@@ -29,6 +29,7 @@ Usage
 -----
 
 ## Azeroth::Resourceable
+
 [Resourceable](https://www.rubydoc.info/gems/azeroth/Azeroth/Resourceable)
 module adds class method [resource_for](https://www.rubydoc.info/gems/azeroth/Azeroth/Resourceable/ClassMethods#resource_for-instance_method)
 which adds a resource and action methods for `create`, `show`, `index`,
@@ -75,84 +76,8 @@ It accepts options
   end
 ```
 
-```ruby
-  # schema.rb
-
-  ActiveRecord::Schema.define do
-    self.verbose = false
-
-    create_table :publishers, force: true do |t|
-      t.string :name
-    end
-
-    create_table :games, force: true do |t|
-      t.string :name
-      t.integer :publisher_id
-    end
-   end
-```
-
-```ruby
-  # publisher.rb
-
-  class Publisher < ActiveRecord::Base
-    has_many :games
-  end
-```
-
-```ruby
-  # game.rb
-
-  class Game < ActiveRecord::Base
-    belongs_to :publisher
-  end
-```
-
-```ruby
-  # game/decorator.rb
-
-  class Game::Decorator < Azeroth::Decorator
-    expose :id
-    expose :name
-    expose :publisher, decorator: NameDecorator
-  end
-```
-
-```ruby
-  post "/publishers.json", params: {
-    publisher: {
-      name: 'Nintendo'
-    }
-  }
-
-  publisher = JSON.parse(response.body)
-  # returns
-  # {
-  #   'id' => 11,
-  #   'name' => 'Nintendo'
-  # }
-
-  publisher = Publisher.last
-  post "/publishers/#{publisher['id']}/games.json", params: {
-    game: {
-      name: 'Pokemon'
-    }
-  }
-
-  game = Game.last
-
-  JSON.parse(response.body)
-  # returns
-  # {
-  #   id: game.id,
-  #   name: 'Pokemon',
-  #   publisher: {
-  #     name: 'Nintendo'
-  # }
-  }
-```
-
 ## Azeroth::Decorator
+
 [Decorators](https://www.rubydoc.info/gems/azeroth/Azeroth/Decorator) are
 used to define how an object is exposed as json on controller responses
 defining which and how fields will be exposed
