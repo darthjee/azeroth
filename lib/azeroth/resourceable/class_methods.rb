@@ -36,17 +36,13 @@ module Azeroth
       #     resource_for :document, only: %w[create index show]
       #   end
       #
-      # @example complete example
-      #   # publishers_controller.rb
-      #
+      # @example complete example gmaes and publishers
       #   class PublishersController < ApplicationController
       #     include Azeroth::Resourceable
       #     skip_before_action :verify_authenticity_token
       #
       #     resource_for :publisher, only: %i[create index]
       #   end
-      #
-      #   # games_controller.rb
       #
       #   class GamesController < ApplicationController
       #     include Azeroth::Resourceable
@@ -69,8 +65,6 @@ module Azeroth
       #     end
       #   end
       #
-      #   # schema.rb
-      #
       #   ActiveRecord::Schema.define do
       #     self.verbose = false
       #
@@ -84,19 +78,13 @@ module Azeroth
       #     end
       #    end
       #
-      #   # publisher.rb
-      #
       #   class Publisher < ActiveRecord::Base
       #     has_many :games
       #   end
       #
-      #   # game.rb
-      #
       #   class Game < ActiveRecord::Base
       #     belongs_to :publisher
       #   end
-      #
-      #   # game/decorator.rb
       #
       #   class Game::Decorator < Azeroth::Decorator
       #     expose :id
@@ -104,6 +92,7 @@ module Azeroth
       #     expose :publisher, decorator: NameDecorator
       #   end
       #
+      # @example requesting games and publishers
       #   post "/publishers.json", params: {
       #     publisher: {
       #       name: 'Nintendo'
