@@ -3,7 +3,7 @@
 require 'spec_helper'
 
 describe GamesController, controller: true do
-  describe 'readme' do
+  describe 'yard' do
     describe 'POST create' do
       it 'create game' do
         post '/publishers.json', params: {
