@@ -11,4 +11,116 @@ Azeroth
 
 Yard Documentation
 -------------------
-[https://www.rubydoc.info/gems/azeroth/0.6.3](https://www.rubydoc.info/gems/azeroth/0.6.3)
+[https://www.rubydoc.info/gems/azeroth/0.6.4](https://www.rubydoc.info/gems/azeroth/0.6.4)
+
+Azeroth has been designed making the coding of controllers easier
+as routes in controllers are usually copy, paste and replace of same
+code.
+
+Azeroth was originally developed for controller actions
+which will respond with json or template rendering based
+on the requested format `.json` or `.html` where `html` rendering
+does not perform database operations
+
+Future versions will enable `html` rendering to also perform
+database operations.
+
+Usage
+-----
+
+## Azeroth::Resourceable
+
+[Resourceable](https://www.rubydoc.info/gems/azeroth/Azeroth/Resourceable)
+module adds class method [resource_for](https://www.rubydoc.info/gems/azeroth/Azeroth/Resourceable/ClassMethods#resource_for-instance_method)
+which adds a resource and action methods for `create`, `show`, `index`,
+`update`, `delete`, `edit`
+
+It accepts options
+-only List of actions to be built
+-except List of actions to not to be built
+-decorator Decorator class or flag allowing/disallowing decorators
+
+```ruby
+  # publishers_controller.rb
+
+  class PublishersController < ApplicationController
+    include Azeroth::Resourceable
+    skip_before_action :verify_authenticity_token
+
+    resource_for :publisher, only: %i[create index]
+  end
+```
+
+```ruby
+  # games_controller.rb
+
+  class GamesController < ApplicationController
+    include Azeroth::Resourceable
+    skip_before_action :verify_authenticity_token
+
+    resource_for :game, except: :delete
+
+    private
+
+    def games
+      publisher.games
+    end
+
+    def publisher
+      @publisher ||= Publisher.find(publisher_id)
+    end
+
+    def publisher_id
+      params.require(:publisher_id)
+    end
+  end
+```
+
+## Azeroth::Decorator
+
+[Decorators](https://www.rubydoc.info/gems/azeroth/Azeroth/Decorator) are
+used to define how an object is exposed as json on controller responses
+defining which and how fields will be exposed
+
+```ruby
+  # pokemon/decorator.rb
+
+  class Pokemon::Decorator < Azeroth::Decorator
+    expose :name
+    expose :previous_form_name, as: :evolution_of, if: :evolution?
+
+    def evolution?
+      previous_form
+    end
+
+    def previous_form_name
+      previous_form.name
+    end
+  end
+```
+
+```ruby
+  # pokemon/favorite_decorator.rb
+
+  class Pokemon::FavoriteDecorator < Pokemon::Decorator
+    expose :nickname
+  end
+```
+
+```ruby
+  # pokemon_master/decorator.rb
+
+  class PokemonMaster < ActiveRecord::Base
+    has_one :favorite_pokemon, -> { where(favorite: true) },
+            class_name: 'Pokemon'
+    has_many :pokemons
+  end
+```
+
+Exposing is done through the class method
+[expose](https://www.rubydoc.info/gems/azeroth/Azeroth/Decorator#expose-class_method)
+which accepts several options:
+
+-as: custom key to expose
+-if: method/block to be called checking if an attribute should or should not be exposed
+-decorator: flag to use or not a decorator or decorator class to be used

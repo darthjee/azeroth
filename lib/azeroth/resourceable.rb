@@ -7,6 +7,10 @@ module Azeroth
   # @author Darthjee
   #
   # Concern for building controller methods for the routes
+  #
+  # @example (see Resourceable::ClassMethods#resource_for)
+  #
+  # @see Resourceable::ClassMethods
   module Resourceable
     extend ActiveSupport::Concern
 

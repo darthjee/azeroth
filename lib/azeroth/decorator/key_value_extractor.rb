@@ -97,9 +97,9 @@ module Azeroth
       #
       # @return [Class<Decorator>, NilClass]
       def decorator_from_options
-        return options.decorator if options.decorator
+        return options.decorator if options.decorator_defined?
 
-        Azeroth::DummyDecorator unless options.any_decorator?
+        Azeroth::DummyDecorator unless options.decorator
       end
 
       # @private

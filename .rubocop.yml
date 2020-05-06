@@ -7,6 +7,7 @@ AllCops:
 Metrics/BlockLength:
   Exclude:
     - 'spec/**/*_spec.rb'
+    - 'spec/dummy/db/schema.rb'
     - 'spec/support/shared_*/**/*.rb'
     - 'azeroth.gemspec'
 
@@ -24,3 +25,13 @@ Style/HashTransformKeys:
 
 Style/HashTransformValues:
   Enabled: true
+
+RSpec/ExampleLength:
+  Exclude:
+    - 'spec/integration/readme/**/*_spec.rb'
+    - 'spec/integration/yard/**/*_spec.rb'
+
+RSpec/MultipleExpectations:
+  Exclude:
+    - 'spec/integration/readme/**/*_spec.rb'
+    - 'spec/integration/yard/**/*_spec.rb'
