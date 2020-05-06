@@ -2,7 +2,6 @@
 
 describe Azeroth::Decorator do
   describe 'yard' do
-
     describe '#as_json' do
       it 'simple example' do
         object = DummyModel.new(
