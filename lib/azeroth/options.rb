@@ -13,7 +13,8 @@ module Azeroth
     DEFAULT_OPTIONS = {
       only: %i[create destroy edit index new show update],
       except: [],
-      decorator: true
+      decorator: true,
+      before_save: nil,
     }.freeze
 
     with_options DEFAULT_OPTIONS
@@ -50,5 +51,12 @@ module Azeroth
     # model.as_json
     #
     # @return [Decorator,TrueClass,FalseClass]
+
+    # @method before_save
+    # @api private
+    #
+    # block or method name to be run
+    # before committing changes in models
+    # to database.
   end
 end
