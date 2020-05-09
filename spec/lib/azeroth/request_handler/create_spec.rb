@@ -48,10 +48,6 @@ describe Azeroth::RequestHandler::Create do
         end
 
         let(:expected_json) do
-          { 'name' => 'My Document' }
-        end
-
-        let(:expected_json) do
           {
             'name' => 'My Document',
             'reference' => 'X-MAGIC-10'
@@ -87,10 +83,6 @@ describe Azeroth::RequestHandler::Create do
               name: 'My Document'
             }
           }
-        end
-
-        let(:expected_json) do
-          { 'name' => 'My Document' }
         end
 
         let(:expected_json) do

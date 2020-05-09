@@ -14,6 +14,6 @@ class RequestHandlerController < ActionController::Base
   end
 
   def add_magic_reference
-    document.reference = "X-MAGIC-15"
+    document.reference = 'X-MAGIC-15'
   end
 end
