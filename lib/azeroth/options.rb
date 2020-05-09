@@ -14,7 +14,7 @@ module Azeroth
       only: %i[create destroy edit index new show update],
       except: [],
       decorator: true,
-      before_save: nil,
+      before_save: nil
     }.freeze
 
     with_options DEFAULT_OPTIONS

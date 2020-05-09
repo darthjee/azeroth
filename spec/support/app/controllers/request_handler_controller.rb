@@ -10,6 +10,6 @@ class RequestHandlerController < ActionController::Base
   end
 
   def document
-    documents.find(params.require(:id))
+    @document ||= documents.find(params.require(:id))
   end
 end

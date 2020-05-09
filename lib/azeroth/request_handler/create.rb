@@ -26,7 +26,15 @@ module Azeroth
       def build_resource
         attributes = controller.send("#{model.name}_params")
         collection = controller.send(model.plural)
-        collection.create(attributes)
+        @resource = collection.build(attributes)
+        controller.instance_variable_set("@#{model.name}", resource)
+
+        if options.before_save
+          block = proc(&options.before_save)
+          controller.instance_eval(&block)
+        end
+
+        resource.tap(&:save)
       end
 
       # @private
