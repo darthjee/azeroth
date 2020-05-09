@@ -4,7 +4,9 @@ require 'spec_helper'
 
 describe Azeroth::RequestHandler do
   describe '#process' do
-    subject(:handler) { handler_class.new(controller, model) }
+    subject(:handler) do
+      handler_class.new(controller, model, options)
+    end
 
     let(:controller) { controller_class.new }
     let(:params)     { ActionController::Parameters.new(parameters) }

@@ -1,12 +1,15 @@
 # frozen_string_literal: true
 
 shared_examples 'a request handler' do |status: :ok|
-  subject(:handler) { described_class.new(controller, model) }
+  subject(:handler) do
+    described_class.new(controller, model, options)
+  end
 
   let(:controller)      { controller_class.new }
   let(:params)          { ActionController::Parameters.new(parameters) }
   let(:model)           { Azeroth::Model.new(:document, options) }
-  let(:options)         { Azeroth::Options.new }
+  let(:options)         { Azeroth::Options.new(options_hash) }
+  let(:options_hash)    { {} }
   let(:extra_params)    { {} }
 
   let(:decorator)       { Document::Decorator.new(expected_resource) }

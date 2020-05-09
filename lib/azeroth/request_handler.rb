@@ -18,9 +18,10 @@ module Azeroth
 
     # @param controller [ApplicationController]
     # @param model [Azeroth::Model]
-    def initialize(controller, model)
+    def initialize(controller, model, options)
       @controller = controller
       @model = model
+      @options = options
     end
 
     # process the request
@@ -44,7 +45,7 @@ module Azeroth
 
     private
 
-    attr_reader :controller, :model
+    attr_reader :controller, :model, :options
     # @method controller
     # @api private
     # @private
@@ -60,6 +61,14 @@ module Azeroth
     # Model interface
     #
     # @return [Azeroth::Model]
+
+    # @method optsion
+    # @api private
+    # @private
+    #
+    # Handling options
+    #
+    # @return [Azeroth::Options]
 
     delegate :params, to: :controller
     # @method params
