@@ -9,7 +9,7 @@ Rails.application.routes.draw do
     resources :games, except: :delete
   end
 
-  resources :pokemon_masters, only: [] do
+  resources :pokemon_masters, only: [:create, :update] do
     resources :pokemons, only: [:create, :update]
   end
 end
