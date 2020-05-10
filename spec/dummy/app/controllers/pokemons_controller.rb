@@ -4,8 +4,8 @@ class PokemonsController < ApplicationController
   include Azeroth::Resourceable
 
   resource_for :pokemon,
-    only: [:create, :update],
-    before_save: :set_favorite
+               only: %i[create update],
+               before_save: :set_favorite
 
   private
 
