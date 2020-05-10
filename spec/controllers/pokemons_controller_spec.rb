@@ -15,9 +15,15 @@ RSpec.describe PokemonsController do
     end
 
     it 'creates pokemon' do
-        expect { post :create, params: parameters }
-          .to change(Pokemon, :count)
-          .by(1)
+      expect { post :create, params: parameters }
+        .to change(Pokemon, :count)
+        .by(1)
+    end
+
+    it 'updates pokemon to be favorite' do
+      expect { post :create, params: parameters }
+        .to change { master.reload.favorite_pokemon }
+        .from(nil)
     end
   end
 end

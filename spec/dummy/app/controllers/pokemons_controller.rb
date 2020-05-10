@@ -10,6 +10,7 @@ class PokemonsController < ApplicationController
   private
 
   def set_favorite
+    pokemon.favorite = true
   end
 
   def pokemons
