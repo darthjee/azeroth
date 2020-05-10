@@ -29,8 +29,7 @@ module Azeroth
         @resource = collection.build(attributes)
         controller.instance_variable_set("@#{model.name}", resource)
 
-        Event::Dispatcher.new(before: options.before_save)
-          .dispatch(controller) do
+        trigger_event(:save) do
           resource.tap(&:save)
         end
       end

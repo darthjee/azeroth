@@ -113,5 +113,10 @@ module Azeroth
     def status
       :ok
     end
+
+    def trigger_event(event, &block)
+      options.event_dispatcher(event)
+        .dispatch(controller, &block)
+    end
   end
 end

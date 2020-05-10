@@ -26,6 +26,11 @@ module Azeroth
       [only].flatten.map(&:to_sym) - [except].flatten.map(&:to_sym)
     end
 
+    def event_dispatcher(event)
+      return Event::Dispatcher.new unless event == :save
+      Event::Dispatcher.new(before: before_save)
+    end
+
     # @method only
     # @api private
     #
