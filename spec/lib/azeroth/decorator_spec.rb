@@ -62,6 +62,12 @@ describe Azeroth::Decorator do
   end
 
   describe '#as_json' do
+    context 'when object is nil' do
+      let(:object) { nil }
+
+      it { expect(decorator.as_json).to be_nil }
+    end
+
     context 'when object is just a model' do
       let(:expected_json) do
         {
@@ -166,7 +172,7 @@ describe Azeroth::Decorator do
       end
     end
 
-    context 'with decotator for model with validation' do
+    context 'with decorator for model with validation' do
       subject(:decorator) do
         Document::DecoratorWithError.new(object)
       end
@@ -255,6 +261,26 @@ describe Azeroth::Decorator do
           expect(decorator.as_json).to eq(expected_json)
         end
       end
+
+      context 'with nil value and defined decorator' do
+        subject(:decorator) do
+          Factory::DecoratorWithProduct.new(factory)
+        end
+
+        let(:factory) { create(:factory) }
+
+        let(:expected_json) do
+          {
+            name: factory.name,
+            main_product: nil,
+            products: []
+          }.deep_stringify_keys
+        end
+
+        it 'exposes relation' do
+          expect(decorator.as_json).to eq(expected_json)
+        end
+      end
     end
   end
 
@@ -262,7 +288,7 @@ describe Azeroth::Decorator do
     subject(:decorator) { decorator_class.new(object) }
 
     let(:decorator_class) { Class.new(described_class) }
-    let(:model) { build(:dummy_model) }
+    let(:model)           { build(:dummy_model) }
 
     it 'delegates methods to object' do
       expect(decorator.first_name).not_to be_nil

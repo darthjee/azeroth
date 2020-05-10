@@ -227,5 +227,37 @@ describe Azeroth::Decorator::KeyValueExtractor do
         end
       end
     end
+
+    context 'when value is nil' do
+      context 'without decorator options' do
+        let(:object) { build(:document, name: nil) }
+
+        it 'returns nil for value' do
+          expect(extractor.as_json)
+            .to eq({ 'name' => nil })
+        end
+      end
+
+      context 'with decorator false' do
+        let(:object)       { build(:document, name: nil) }
+        let(:options_hash) { { decorator: false } }
+
+        it 'returns nil for value' do
+          expect(extractor.as_json)
+            .to eq({ 'name' => nil })
+        end
+      end
+
+      context 'with decorator option' do
+        let(:object)       { create(:pokemon_master) }
+        let(:options_hash) { { decorator: Pokemon::Decorator } }
+        let(:attribute)    { :favorite_pokemon }
+
+        it 'returns nil for value' do
+          expect(extractor.as_json)
+            .to eq({ 'favorite_pokemon' => nil })
+        end
+      end
+    end
   end
 end

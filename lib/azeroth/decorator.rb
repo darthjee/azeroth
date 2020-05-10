@@ -257,6 +257,8 @@ module Azeroth
     #
     # @return [Hash]
     def as_json(*args)
+      return nil if object.nil?
+
       return array_as_json(*args) if enum?
 
       HashBuilder.new(self).as_json
