@@ -28,7 +28,13 @@ module Azeroth
 
         controller.send(model.name).tap do |entry|
           if options.before_save
-            block = proc(&options.before_save)
+            before_save = options.before_save
+            if options.before_save.is_a? Proc
+              block = proc(&before_save)
+            else
+              block = proc { send(before_save) }
+            end
+
             controller.instance_eval(&block)
           end
 
