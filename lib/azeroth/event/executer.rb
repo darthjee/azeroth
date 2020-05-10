@@ -8,15 +8,9 @@ module Azeroth
       end
 
       def call
-        actions(before).each do |action|
-          context.instance_eval(&action)
-        end
-
+        execute_actions(before)
         result = block.call
-
-        actions(after).each do |action|
-          context.instance_eval(&action)
-        end
+        execute_actions(after)
 
         result
       end
@@ -31,6 +25,12 @@ module Azeroth
       end
 
       attr_reader :before, :after, :context, :block
+
+      def execute_actions(list)
+        actions(list).each do |action|
+          context.instance_eval(&action)
+        end
+      end
 
       def actions(list)
         list.map do |entry|
