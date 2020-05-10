@@ -288,7 +288,7 @@ describe Azeroth::Decorator do
     subject(:decorator) { decorator_class.new(object) }
 
     let(:decorator_class) { Class.new(described_class) }
-    let(:model) { build(:dummy_model) }
+    let(:model)           { build(:dummy_model) }
 
     it 'delegates methods to object' do
       expect(decorator.first_name).not_to be_nil
