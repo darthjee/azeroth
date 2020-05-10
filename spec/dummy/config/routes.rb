@@ -10,6 +10,6 @@ Rails.application.routes.draw do
   end
 
   resources :pokemon_masters, only: [] do
-    resources :pokemons, only: [:create]
+    resources :pokemons, only: [:create, :update]
   end
 end
