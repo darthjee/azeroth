@@ -29,18 +29,12 @@ module Azeroth
         @resource = collection.build(attributes)
         controller.instance_variable_set("@#{model.name}", resource)
 
-        if options.before_save
-          before_save = options.before_save
-          if options.before_save.is_a? Proc
-            block = proc(&before_save)
-          else
-            block = proc { send(before_save) }
-          end
-
-          controller.instance_eval(&block)
+        Event::Executer.call(
+          before: options.before_save,
+          context: controller
+        ) do
+          resource.tap(&:save)
         end
-
-        resource.tap(&:save)
       end
 
       # @private

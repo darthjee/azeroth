@@ -27,18 +27,12 @@ module Azeroth
         attributes = controller.send("#{model.name}_params")
 
         controller.send(model.name).tap do |entry|
-          if options.before_save
-            before_save = options.before_save
-            if options.before_save.is_a? Proc
-              block = proc(&before_save)
-            else
-              block = proc { send(before_save) }
-            end
-
-            controller.instance_eval(&block)
+          Event::Executer.call(
+            before: options.before_save,
+            context: controller
+          ) do
+            entry.update(attributes)
           end
-
-          entry.update(attributes)
         end
       end
 
