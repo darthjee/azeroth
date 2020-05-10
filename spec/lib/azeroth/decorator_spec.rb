@@ -62,6 +62,12 @@ describe Azeroth::Decorator do
   end
 
   describe '#as_json' do
+    context 'when object is nil' do
+      let(:object) { nil }
+
+      it { expect(decorator.as_json).to be_nil }
+    end
+
     context 'when object is just a model' do
       let(:expected_json) do
         {
