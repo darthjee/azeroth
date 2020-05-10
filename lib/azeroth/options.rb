@@ -27,8 +27,9 @@ module Azeroth
     end
 
     def event_dispatcher(event)
-      return Event::Dispatcher.new unless event == :save
-      Event::Dispatcher.new(before: before_save)
+      Event::Dispatcher.new(
+        before: try("before_#{event}")
+      )
     end
 
     # @method only
