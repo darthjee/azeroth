@@ -24,8 +24,6 @@ module Azeroth
       #
       # @return [Object]
       def update_resource
-        attributes = controller.send("#{model.name}_params")
-
         controller.send(model.name).tap do |entry|
           trigger_event(:save) do
             entry.update(attributes)
@@ -43,6 +41,10 @@ module Azeroth
       # @return [Symbol]
       def status
         resource.valid? ? :ok : :unprocessable_entity
+      end
+
+      def attributes
+        @attributes ||= controller.send("#{model.name}_params")
       end
     end
   end

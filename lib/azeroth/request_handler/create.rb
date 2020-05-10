@@ -24,8 +24,6 @@ module Azeroth
       #
       # @return [Object]
       def build_resource
-        attributes = controller.send("#{model.name}_params")
-        collection = controller.send(model.plural)
         @resource = collection.build(attributes)
         controller.instance_variable_set("@#{model.name}", resource)
 
@@ -44,6 +42,14 @@ module Azeroth
       # @return [Symbol]
       def status
         resource.valid? ? :created : :unprocessable_entity
+      end
+
+      def attributes
+        @attributes ||= controller.send("#{model.name}_params")
+      end
+
+      def collection
+        @collection = controller.send(model.plural)
       end
     end
   end
