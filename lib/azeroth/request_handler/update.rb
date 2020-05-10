@@ -27,10 +27,8 @@ module Azeroth
         attributes = controller.send("#{model.name}_params")
 
         controller.send(model.name).tap do |entry|
-          Event::Executer.call(
-            before: options.before_save,
-            context: controller
-          ) do
+          Event::Dispatcher.new(before: options.before_save)
+            .dispatch(controller) do
             entry.update(attributes)
           end
         end
