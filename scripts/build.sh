@@ -15,6 +15,25 @@ function isTagged() {
   fi
 }
 
+function isLatestCommit() {
+  VERSION=$(version)
+  DIFF=$(git diff HEAD $VERSION)
+
+  if [[ $DIFF ]]; then
+    return 1
+  else
+    return 0
+  fi
+}
+
+function isLatestTagAndCommit() {
+  if ( isTagged && isLatestCommit)
+    return 0;
+  else
+    return 1
+  fi
+}
+
 ACTION=$1
 
 case $ACTION in
@@ -25,14 +44,14 @@ case $ACTION in
     chmod 600 ~/.gem/credentials
     ;;
   "build")
-    if $(isTagged); then
+    if $(isLatestTagAndCommit); then
       rake build
     else
       echo version did not change
     fi
     ;;
   "push")
-    if $(isTagged); then
+    if $(isLatestTagAndCommit); then
       VERSION=$(version)
       gem push "pkg/$PROJECT-$VERSION.gem"
     else
