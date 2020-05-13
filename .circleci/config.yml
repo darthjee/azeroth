@@ -55,6 +55,9 @@ jobs:
     steps:
       - checkout
       - run:
+          name: Bundle Install
+          command: bundle install
+      - run:
           name: Signin
           command: scripts/build.sh signin
       - run:
