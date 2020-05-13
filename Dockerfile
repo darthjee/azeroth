@@ -1,5 +1,5 @@
-FROM darthjee/rails_gems:0.5.2 as base
-FROM darthjee/scripts:0.1.7 as scripts
+FROM darthjee/rails_gems:0.5.3 as base
+FROM darthjee/scripts:0.1.8 as scripts
 
 ######################################
 
