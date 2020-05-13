@@ -42,10 +42,6 @@ module Azeroth
       def status
         resource.valid? ? :ok : :unprocessable_entity
       end
-
-      def attributes
-        @attributes ||= controller.send("#{model.name}_params")
-      end
     end
   end
 end
