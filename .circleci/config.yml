@@ -6,7 +6,7 @@ workflows:
       - test:
           filters:
             tags:
-              only: /.+/
+              only: /.*/
       - build-and-release:
           requires: [test]
           filters:
