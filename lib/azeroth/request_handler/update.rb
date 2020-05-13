@@ -24,10 +24,10 @@ module Azeroth
       #
       # @return [Object]
       def update_resource
-        attributes = controller.send("#{model.name}_params")
-
         controller.send(model.name).tap do |entry|
-          entry.update(attributes)
+          trigger_event(:save) do
+            entry.update(attributes)
+          end
         end
       end
 

@@ -62,13 +62,14 @@ module Azeroth
 
     def route_code(route)
       model_interface = model
+      options_object = options
       handler_class = Azeroth::RequestHandler.const_get(
         route.to_s.capitalize
       )
 
       proc do
         handler_class.new(
-          self, model_interface
+          self, model_interface, options_object
         ).process
       end
     end

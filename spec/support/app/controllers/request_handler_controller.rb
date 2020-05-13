@@ -10,6 +10,10 @@ class RequestHandlerController < ActionController::Base
   end
 
   def document
-    documents.find(params.require(:id))
+    @document ||= documents.find(params.require(:id))
+  end
+
+  def add_magic_reference
+    document.reference = 'X-MAGIC-15'
   end
 end

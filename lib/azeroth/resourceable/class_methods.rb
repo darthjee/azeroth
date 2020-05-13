@@ -9,18 +9,11 @@ module Azeroth
     module ClassMethods
       # Adds resource methods for resource
       #
-      # @param name [String, Symbol] Name of the resource
-      # @param options [Hash] resource building options
-      # @option options only [Array<Symbol,String>] List of
-      #   actions to be built
-      # @option options except [Array<Symbol,String>] List of
-      #   actions to not to be built
-      # @option options decorator [Azeroth::Decorator,TrueClass,FalseClass]
-      #   Decorator class or flag allowing/disallowing decorators
+      # @param (see Resourceable.resource_for)
+      # @option (see Resourceable.resource_for)
+      # @return (see Resourceable.resource_for)
       #
-      # @return [Array<MethodDefinition>] list of methods created
-      #
-      # @see Options
+      # @see (see Resourceable.resource_for)
       #
       # @example Controller without delete
       #   class DocumentsController < ApplicationController
@@ -124,6 +117,33 @@ module Azeroth
       #   #     name: 'Nintendo'
       #   # }
       #   }
+      #
+      # @example Controller with before_save
+      #   class PokemonsController < ApplicationController
+      #     include Azeroth::Resourceable
+      #
+      #     resource_for :pokemon,
+      #                  only: %i[create update],
+      #                  before_save: :set_favorite
+      #
+      #     private
+      #
+      #     def set_favorite
+      #       pokemon.favorite = true
+      #     end
+      #
+      #     def pokemons
+      #       master.pokemons
+      #     end
+      #
+      #     def master
+      #       @master ||= PokemonMaster.find(master_id)
+      #     end
+      #
+      #     def master_id
+      #       params.require(:pokemon_master_id)
+      #     end
+      #   end
       def resource_for(name, **options)
         Builder.new(
           self, name, Azeroth::Options.new(options)

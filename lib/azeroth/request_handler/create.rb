@@ -24,9 +24,12 @@ module Azeroth
       #
       # @return [Object]
       def build_resource
-        attributes = controller.send("#{model.name}_params")
-        collection = controller.send(model.plural)
-        collection.create(attributes)
+        @resource = collection.build(attributes)
+        controller.instance_variable_set("@#{model.name}", resource)
+
+        trigger_event(:save) do
+          resource.tap(&:save)
+        end
       end
 
       # @private

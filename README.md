@@ -11,7 +11,7 @@ Azeroth
 
 Yard Documentation
 -------------------
-[https://www.rubydoc.info/gems/azeroth/0.6.5](https://www.rubydoc.info/gems/azeroth/0.6.5)
+[https://www.rubydoc.info/gems/azeroth/0.7.0](https://www.rubydoc.info/gems/azeroth/0.7.0)
 
 Azeroth has been designed making the coding of controllers easier
 as routes in controllers are usually copy, paste and replace of same
@@ -25,6 +25,25 @@ does not perform database operations
 Future versions will enable `html` rendering to also perform
 database operations.
 
+Installation
+---------------
+
+- Install it
+
+```ruby
+  gem install azeroth
+```
+
+- Or add Sinclair to your `Gemfile` and `bundle install`:
+
+```ruby
+  gem 'azeroth'
+```
+
+```bash
+  bundle install azeroth
+```
+
 Usage
 -----
 
@@ -36,9 +55,10 @@ which adds a resource and action methods for `create`, `show`, `index`,
 `update`, `delete`, `edit`
 
 It accepts options
-- only List of actions to be built
-- except List of actions to not to be built
-- decorator Decorator class or flag allowing/disallowing decorators
+- only: List of actions to be built
+- except: List of actions to not to be built
+- decorator: Decorator class or flag allowing/disallowing decorators
+- before_save: Method/Proc to be ran before saving the resource on create or update
 
 ```ruby
   # publishers_controller.rb
@@ -72,6 +92,36 @@ It accepts options
 
     def publisher_id
       params.require(:publisher_id)
+    end
+  end
+```
+
+```ruby
+  # pokemons_controller.rb
+
+  class PokemonsController < ApplicationController
+    include Azeroth::Resourceable
+
+    resource_for :pokemon,
+                 only: %i[create update],
+                 before_save: :set_favorite
+
+    private
+
+    def set_favorite
+      pokemon.favorite = true
+    end
+
+    def pokemons
+      master.pokemons
+    end
+
+    def master
+      @master ||= PokemonMaster.find(master_id)
+    end
+
+    def master_id
+      params.require(:pokemon_master_id)
     end
   end
 ```

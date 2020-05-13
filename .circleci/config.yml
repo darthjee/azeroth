@@ -1,6 +1,22 @@
 version: 2
+workflows:
+  version: 2
+  test-and-build:
+    jobs:
+      - test:
+          filters:
+            tags:
+              only: /.*/
+      - build-and-release:
+          requires: [test]
+          filters:
+            tags:
+              only: /\d+\.\d+\.\d+/
+            branches:
+              only:
+                - master
 jobs:
-  build:
+  test:
     docker:
       - image: darthjee/circleci_rails_gems:0.5.1
         environment:
@@ -34,3 +50,22 @@ jobs:
       - run:
           name: Check unit tests
           command: check_specs
+  build-and-release:
+    docker:
+      - image: darthjee/circleci_rails_gems:0.5.1
+        environment:
+          PROJECT: azeroth
+    steps:
+      - checkout
+      - run:
+          name: Bundle Install
+          command: bundle install
+      - run:
+          name: Signin
+          command: scripts/build.sh signin
+      - run:
+          name: Build Gem
+          command: scripts/build.sh build
+      - run:
+          name: Push Gem
+          command: scripts/build.sh push

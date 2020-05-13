@@ -18,9 +18,10 @@ module Azeroth
 
     # @param controller [ApplicationController]
     # @param model [Azeroth::Model]
-    def initialize(controller, model)
+    def initialize(controller, model, options)
       @controller = controller
       @model = model
+      @options = options
     end
 
     # process the request
@@ -44,7 +45,7 @@ module Azeroth
 
     private
 
-    attr_reader :controller, :model
+    attr_reader :controller, :model, :options
     # @method controller
     # @api private
     # @private
@@ -60,6 +61,14 @@ module Azeroth
     # Model interface
     #
     # @return [Azeroth::Model]
+
+    # @method options
+    # @api private
+    # @private
+    #
+    # Handling options
+    #
+    # @return [Azeroth::Options]
 
     delegate :params, to: :controller
     # @method params
@@ -103,6 +112,34 @@ module Azeroth
     # @return [Symbol]
     def status
       :ok
+    end
+
+    # @private
+    #
+    # Run a block triggering the event
+    #
+    # @return [Object] Result of given block
+    def trigger_event(event, &block)
+      options.event_dispatcher(event)
+             .dispatch(controller, &block)
+    end
+
+    # @private
+    #
+    # Attributes to be used on resource creating
+    #
+    # @return [Hash]
+    def attributes
+      @attributes ||= controller.send("#{model.name}_params")
+    end
+
+    # @private
+    #
+    # Collection scope of the resource
+    #
+    # @return [ActiveRecord::Relation]
+    def collection
+      @collection = controller.send(model.plural)
     end
   end
 end

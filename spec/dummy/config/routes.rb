@@ -8,4 +8,8 @@ Rails.application.routes.draw do
   resources :publishers, only: %i[create index] do
     resources :games, except: :delete
   end
+
+  resources :pokemon_masters, only: %i[create update] do
+    resources :pokemons, only: %i[create update]
+  end
 end
