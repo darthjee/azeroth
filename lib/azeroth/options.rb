@@ -11,6 +11,8 @@ module Azeroth
   class Options < Sinclair::Options
     # Default options
     #
+    # @api public
+    #
     # @see Resourceable::ClassMethods#resource_for
     DEFAULT_OPTIONS = {
       only: %i[create destroy edit index new show update],

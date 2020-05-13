@@ -9,20 +9,11 @@ module Azeroth
     module ClassMethods
       # Adds resource methods for resource
       #
-      # @param name [String, Symbol] Name of the resource
-      # @param options [Hash] resource building options
-      # @option options only [Array<Symbol,String>] List of
-      #   actions to be built
-      # @option options except [Array<Symbol,String>] List of
-      #   actions to not to be built
-      # @option options decorator [Azeroth::Decorator,TrueClass,FalseClass]
-      #   Decorator class or flag allowing/disallowing decorators
-      # @option options before_save [Symbol,Proc] method/block
-      #   to be ran on the controller before saving the resource
+      # @param (see Resourceable.resource_for)
+      # @option (see Resourceable.resource_for)
+      # @return (see Resourceable.resource_for)
       #
-      # @return [Array<MethodDefinition>] list of methods created
-      #
-      # @see Options
+      # @see (see Resourceable.resource_for)
       #
       # @example Controller without delete
       #   class DocumentsController < ApplicationController
