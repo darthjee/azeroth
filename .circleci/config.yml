@@ -1,12 +1,16 @@
 version: 2
 workflows:
   version: 2
+  test:
+    jobs:
+      - test
+
   test-and-build:
     jobs:
       - test:
           filters:
             tags:
-              only: /.*/
+              only: /\d+\.\d+\.\d+/
       - build-and-release:
           requires: [test]
           filters:
