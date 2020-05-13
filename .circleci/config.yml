@@ -6,12 +6,15 @@ workflows:
       - test:
           filters:
             tags:
-              only: /\d+\.\d+\.\d+/
+              only: /.*/
       - build-and-release:
           requires: [test]
           filters:
             tags:
               only: /\d+\.\d+\.\d+/
+            branches:
+              only:
+                - master
 jobs:
   test:
     docker:
