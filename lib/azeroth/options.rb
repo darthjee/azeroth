@@ -10,6 +10,8 @@ module Azeroth
   #   Sinclair::Options
   class Options < Sinclair::Options
     # Default options
+    #
+    # @see Resourceable::ClassMethods#resource_for
     DEFAULT_OPTIONS = {
       only: %i[create destroy edit index new show update],
       except: [],
@@ -26,6 +28,13 @@ module Azeroth
       [only].flatten.map(&:to_sym) - [except].flatten.map(&:to_sym)
     end
 
+    # Returns event dispatcher
+    #
+    # Event dispatcher is responsible for
+    # sending events such as +before_save+
+    # to it's correct calling point
+    #
+    # @return [Jace::Dispatcher]
     def event_dispatcher(event)
       Jace::Dispatcher.new(
         before: try("before_#{event}")
@@ -61,8 +70,12 @@ module Azeroth
     # @method before_save
     # @api private
     #
-    # block or method name to be run
+    # Block or method name to be run before save
+    #
+    # The given method or block will be ran
     # before committing changes in models
-    # to database.
+    # to database
+    #
+    # @return [Symbol,Proc]
   end
 end

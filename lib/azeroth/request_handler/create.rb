@@ -44,10 +44,20 @@ module Azeroth
         resource.valid? ? :created : :unprocessable_entity
       end
 
+      # @private
+      #
+      # Attributes to be used on resource creating
+      #
+      # @return [Hash]
       def attributes
         @attributes ||= controller.send("#{model.name}_params")
       end
 
+      # @private
+      #
+      # Collection scope to receive the create call
+      #
+      # @return [ActiveRecord::Relation]
       def collection
         @collection = controller.send(model.plural)
       end

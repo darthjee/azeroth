@@ -17,6 +17,8 @@ module Azeroth
       #   actions to not to be built
       # @option options decorator [Azeroth::Decorator,TrueClass,FalseClass]
       #   Decorator class or flag allowing/disallowing decorators
+      # @option options before_save [Symbol,Proc] method/block
+      #   to be ran on the controller before saving the resource
       #
       # @return [Array<MethodDefinition>] list of methods created
       #
