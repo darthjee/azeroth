@@ -1,9 +1,6 @@
 version: 2
 workflows:
   version: 2
-  test:
-    jobs:
-      - test
   test-and-build:
     jobs:
       - test:
@@ -14,7 +11,7 @@ workflows:
           requires: [test]
           filters:
             tags:
-              only: /.*/
+              only: /\d+\.\d+\.\d+/
 jobs:
   test:
     docker:
@@ -52,7 +49,7 @@ jobs:
           command: check_specs
   build-and-release:
     docker:
-      - image: darthjee/circleci_ruby_gems:0.5.2
+      - image: darthjee/circleci_rails_gems:0.5.1
         environment:
           PROJECT: azeroth
     steps:
