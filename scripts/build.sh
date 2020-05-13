@@ -27,8 +27,8 @@ function isLatestCommit() {
 }
 
 function isLatestTagAndCommit() {
-  if ( isTagged && isLatestCommit)
-    return 0;
+  if ( isTagged && isLatestCommit ); then
+    return 0
   else
     return 1
   fi
