@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'sinclair'
+require 'jace'
 
 # @api public
 #
@@ -12,7 +13,6 @@ require 'sinclair'
 module Azeroth
   autoload :Decorator,       'azeroth/decorator'
   autoload :DummyDecorator,  'azeroth/dummy_decorator'
-  autoload :Event,           'azeroth/event'
   autoload :Model,           'azeroth/model'
   autoload :RequestHandler,  'azeroth/request_handler'
   autoload :Resourceable,    'azeroth/resourceable'

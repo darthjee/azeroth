@@ -27,7 +27,7 @@ module Azeroth
     end
 
     def event_dispatcher(event)
-      Event::Dispatcher.new(
+      Jace::Dispatcher.new(
         before: try("before_#{event}")
       )
     end
