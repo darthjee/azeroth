@@ -17,26 +17,29 @@ module Azeroth
       #
       # @return [Object]
       def resource
-        @resource ||= build_resource
+        @resource ||= build_and_save_resource
       end
 
-      # build resource for create
+      # build resource for create and save it
       #
       # @return [Object]
-      def build_resource
-        if options.build_with
-          if options.build_with.is_a?(Proc)
-            @resource = controller.instance_eval(&options.build_with)
-          else
-            @resource = controller.send(options.build_with)
-          end
-        else
-          @resource = collection.build(attributes)
-        end
+      def build_and_save_resource
+        @resource = build_resource
         controller.instance_variable_set("@#{model.name}", resource)
 
         trigger_event(:save) do
           resource.tap(&:save)
+        end
+      end
+
+      def build_resource
+        return collection.build(attributes) unless options.build_with
+
+        case options.build_with
+        when Proc
+          then controller.instance_eval(&options.build_with)
+        else
+          controller.send(options.build_with)
         end
       end
 
