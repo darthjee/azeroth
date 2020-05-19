@@ -8,6 +8,8 @@ module Azeroth
     class Create < RequestHandler
       private
 
+      delegate :build_with, to: :options
+
       # @private
       #
       # Creates and return an instance of the model
@@ -33,13 +35,13 @@ module Azeroth
       end
 
       def build_resource
-        return collection.build(attributes) unless options.build_with
+        return collection.build(attributes) unless build_with
 
-        case options.build_with
+        case build_with
         when Proc
-          controller.instance_eval(&options.build_with)
+          controller.instance_eval(&build_with)
         else
-          controller.send(options.build_with)
+          controller.send(build_with)
         end
       end
 
