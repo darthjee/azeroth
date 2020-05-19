@@ -24,8 +24,12 @@ module Azeroth
       #
       # @return [Object]
       def build_resource
-        if options.build_with?
-          @resource = controller.send(options.build_with)
+        if options.build_with
+          if options.build_with.is_a?(Proc)
+            @resource = controller.instance_eval(&options.build_with)
+          else
+            @resource = controller.send(options.build_with)
+          end
         else
           @resource = collection.build(attributes)
         end

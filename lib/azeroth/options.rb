@@ -87,9 +87,5 @@ module Azeroth
     # Block or method name to be ran when building the resource
     #
     # @return [Symbol,Proc]
-
-    def build_with?
-      build_with.present?
-    end
   end
 end
