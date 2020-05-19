@@ -150,8 +150,8 @@ describe Azeroth::RequestHandler::Create do
     it_behaves_like 'a request handler', status: :created do
       let(:block) do
         proc do
-          documents.where(reference: 'X-MAGIC-20') 
-            .build(document_params)
+          documents.where(reference: 'X-MAGIC-20')
+                   .build(document_params)
         end
       end
 
@@ -193,7 +193,7 @@ describe Azeroth::RequestHandler::Create do
 
   context 'when payload is invalid' do
     it_behaves_like 'a request handler',
-      status: :unprocessable_entity do
+                    status: :unprocessable_entity do
       let(:extra_params) do
         {
           document: {

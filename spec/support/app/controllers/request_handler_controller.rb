@@ -21,6 +21,6 @@ class RequestHandlerController < ActionController::Base
 
   def build_magic_document
     documents.where(reference: 'X-MAGIC-15')
-      .build(document_params)
+             .build(document_params)
   end
 end

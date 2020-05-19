@@ -37,7 +37,7 @@ module Azeroth
 
         case options.build_with
         when Proc
-          then controller.instance_eval(&options.build_with)
+          controller.instance_eval(&options.build_with)
         else
           controller.send(options.build_with)
         end
