@@ -18,7 +18,7 @@ Gem::Specification.new do |gem|
   gem.test_files    = gem.files.grep(%r{^(test|spec|features)/})
   gem.require_paths = ['lib']
 
-  gem.add_runtime_dependency 'activesupport',       '~> 5.2.0'
+  gem.add_runtime_dependency 'activesupport',       '~> 5.2.4.2'
   gem.add_runtime_dependency 'darthjee-active_ext', '>= 1.3.2'
   gem.add_runtime_dependency 'jace',                '>= 0.0.3'
   gem.add_runtime_dependency 'sinclair',            '>= 1.6.5'
