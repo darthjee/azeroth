@@ -22,6 +22,8 @@ module Azeroth
         @resource ||= build_and_save_resource
       end
 
+      # @private
+      #
       # build resource for create and save it
       #
       # @return [Object]
@@ -34,6 +36,14 @@ module Azeroth
         end
       end
 
+      # @private
+      #
+      # build resource without saving it
+      #
+      # when +build_with+ option is given, the proc/method
+      # is called instead of collection.build
+      #
+      # @return [Object] resource built
       def build_resource
         return collection.build(attributes) unless build_with
 
