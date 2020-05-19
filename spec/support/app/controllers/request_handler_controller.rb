@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class RequestHandlerController < ActionController::Base
+  private
+
   def document_params
     params.require(:document).permit(:name)
   end
