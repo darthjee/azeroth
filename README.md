@@ -59,6 +59,7 @@ It accepts options
 - except: List of actions to not to be built
 - decorator: Decorator class or flag allowing/disallowing decorators
 - before_save: Method/Proc to be ran before saving the resource on create or update
+- build_with: Method/Block to be ran when building the reource on create
 
 ```ruby
   # publishers_controller.rb
