@@ -18,7 +18,8 @@ module Azeroth
       only: %i[create destroy edit index new show update],
       except: [],
       decorator: true,
-      before_save: nil
+      before_save: nil,
+      build_with: nil
     }.freeze
 
     with_options DEFAULT_OPTIONS
@@ -77,6 +78,13 @@ module Azeroth
     # The given method or block will be ran
     # before committing changes in models
     # to database
+    #
+    # @return [Symbol,Proc]
+
+    # @method build_with
+    # @api private
+    #
+    # Block or method name to be ran when building the resource
     #
     # @return [Symbol,Proc]
   end

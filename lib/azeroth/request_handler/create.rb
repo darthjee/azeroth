@@ -8,6 +8,8 @@ module Azeroth
     class Create < RequestHandler
       private
 
+      delegate :build_with, to: :options
+
       # @private
       #
       # Creates and return an instance of the model
@@ -17,18 +19,39 @@ module Azeroth
       #
       # @return [Object]
       def resource
-        @resource ||= build_resource
+        @resource ||= build_and_save_resource
       end
 
-      # build resource for create
+      # @private
+      #
+      # build resource for create and save it
       #
       # @return [Object]
-      def build_resource
-        @resource = collection.build(attributes)
+      def build_and_save_resource
+        @resource = build_resource
         controller.instance_variable_set("@#{model.name}", resource)
 
         trigger_event(:save) do
           resource.tap(&:save)
+        end
+      end
+
+      # @private
+      #
+      # build resource without saving it
+      #
+      # when +build_with+ option is given, the proc/method
+      # is called instead of collection.build
+      #
+      # @return [Object] resource built
+      def build_resource
+        return collection.build(attributes) unless build_with
+
+        case build_with
+        when Proc
+          controller.instance_eval(&build_with)
+        else
+          controller.send(build_with)
         end
       end
 

@@ -62,6 +62,8 @@ module Azeroth
     #
     # @return [Azeroth::Options]
 
+    delegate :decorator, to: :options
+
     # @private
     #
     # Returns decorator class for the object
@@ -85,7 +87,7 @@ module Azeroth
     # @return [Azeroth::Decorator,DummyDecorator]
     def calculate_decorator_class
       return DummyDecorator unless options.decorator
-      return options.decorator if options.decorator.is_a?(Class)
+      return decorator if decorator.is_a?(Class)
 
       klass::Decorator
     rescue NameError

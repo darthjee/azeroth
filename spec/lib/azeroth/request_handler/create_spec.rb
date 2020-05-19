@@ -108,6 +108,89 @@ describe Azeroth::RequestHandler::Create do
     end
   end
 
+  context 'with build_with as symbol' do
+    it_behaves_like 'a request handler', status: :created do
+      let(:options_hash) do
+        {
+          build_with: :build_magic_document
+        }
+      end
+
+      let(:extra_params) do
+        {
+          document: {
+            name: 'My Document'
+          }
+        }
+      end
+
+      let(:expected_json) do
+        {
+          'name' => 'My Document',
+          'reference' => 'X-MAGIC-15'
+        }
+      end
+
+      it 'creates entry' do
+        expect { handler.process }
+          .to change(Document, :count)
+          .by(1)
+      end
+
+      it 'builds entity with custom method' do
+        handler.process
+
+        expect(Document.last.reference)
+          .to eq('X-MAGIC-15')
+      end
+    end
+  end
+
+  context 'with build_with as block' do
+    it_behaves_like 'a request handler', status: :created do
+      let(:block) do
+        proc do
+          documents.where(reference: 'X-MAGIC-20')
+                   .build(document_params)
+        end
+      end
+
+      let(:options_hash) do
+        {
+          build_with: block
+        }
+      end
+
+      let(:extra_params) do
+        {
+          document: {
+            name: 'My Document'
+          }
+        }
+      end
+
+      let(:expected_json) do
+        {
+          'name' => 'My Document',
+          'reference' => 'X-MAGIC-20'
+        }
+      end
+
+      it 'creates entry' do
+        expect { handler.process }
+          .to change(Document, :count)
+          .by(1)
+      end
+
+      it 'builds entity with custom method' do
+        handler.process
+
+        expect(Document.last.reference)
+          .to eq('X-MAGIC-20')
+      end
+    end
+  end
+
   context 'when payload is invalid' do
     it_behaves_like 'a request handler',
                     status: :unprocessable_entity do
