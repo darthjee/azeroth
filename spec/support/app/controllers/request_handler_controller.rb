@@ -17,7 +17,7 @@ class RequestHandlerController < ActionController::Base
     document.reference = 'X-MAGIC-15'
   end
 
-  def build_magic_documents
+  def build_magic_document
     documents.where(reference: 'X-MAGIC-15')
       .build(document_params)
   end

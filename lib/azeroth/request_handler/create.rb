@@ -24,7 +24,11 @@ module Azeroth
       #
       # @return [Object]
       def build_resource
-        @resource = collection.build(attributes)
+        if options.build_with?
+          @resource = controller.send(options.build_with)
+        else
+          @resource = collection.build(attributes)
+        end
         controller.instance_variable_set("@#{model.name}", resource)
 
         trigger_event(:save) do
