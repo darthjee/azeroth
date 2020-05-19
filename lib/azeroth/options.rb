@@ -19,6 +19,7 @@ module Azeroth
       except: [],
       decorator: true,
       before_save: nil
+      build_with: nil
     }.freeze
 
     with_options DEFAULT_OPTIONS

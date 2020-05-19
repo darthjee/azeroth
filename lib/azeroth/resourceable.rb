@@ -35,6 +35,9 @@ module Azeroth
       #   Decorator class or flag allowing/disallowing decorators
       # @option options before_save [Symbol,Proc] method/block
       #   to be ran on the controller before saving the resource
+      # @option options build_with [Symbol,Proc] method/block
+      #   to be ran when building resource
+      #   (default proc { <resource_collection>.build(resource_params) }
       #
       # @return [Array<MethodDefinition>] list of methods created
       #
