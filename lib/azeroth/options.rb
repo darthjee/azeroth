@@ -18,7 +18,7 @@ module Azeroth
       only: %i[create destroy edit index new show update],
       except: [],
       decorator: true,
-      before_save: nil
+      before_save: nil,
       build_with: nil
     }.freeze
 
