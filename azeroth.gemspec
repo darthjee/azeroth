@@ -18,19 +18,19 @@ Gem::Specification.new do |gem|
   gem.test_files    = gem.files.grep(%r{^(test|spec|features)/})
   gem.require_paths = ['lib']
 
-  gem.add_runtime_dependency 'activesupport',       '~> 5.2.4.2'
+  gem.add_runtime_dependency 'activesupport',       '~> 5.2.4.3'
   gem.add_runtime_dependency 'darthjee-active_ext', '>= 1.3.2'
   gem.add_runtime_dependency 'jace',                '>= 0.0.3'
   gem.add_runtime_dependency 'sinclair',            '>= 1.6.5'
 
-  gem.add_development_dependency 'actionpack',               '5.2.4.2'
-  gem.add_development_dependency 'activerecord',             '5.2.4.2'
+  gem.add_development_dependency 'actionpack',               '5.2.4.3'
+  gem.add_development_dependency 'activerecord',             '5.2.4.3'
   gem.add_development_dependency 'bundler',                  '1.16.1'
   gem.add_development_dependency 'factory_bot',              '5.2.0'
   gem.add_development_dependency 'nokogiri',                 '1.10.9'
   gem.add_development_dependency 'pry',                      '0.12.2'
   gem.add_development_dependency 'pry-nav',                  '0.3.0'
-  gem.add_development_dependency 'rails',                    '5.2.4.2'
+  gem.add_development_dependency 'rails',                    '5.2.4.3'
   gem.add_development_dependency 'rails-controller-testing', '1.0.4'
   gem.add_development_dependency 'rake',                     '13.0.1'
   gem.add_development_dependency 'reek',                     '5.6.0'
