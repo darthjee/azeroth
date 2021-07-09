@@ -19,6 +19,11 @@ class RequestHandlerController < ActionController::Base
     document.reference = 'X-MAGIC-15'
   end
 
+  def add_magic_reference_and_trigger
+    document.update(reference: 'X-MAGIC-15')
+    Worker.perform(document.id)
+  end
+
   def build_magic_document
     documents.where(reference: 'X-MAGIC-15')
              .build(document_params)
