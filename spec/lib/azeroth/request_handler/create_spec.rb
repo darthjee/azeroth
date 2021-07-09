@@ -164,7 +164,7 @@ describe Azeroth::RequestHandler::Create do
       end
     end
 
-    context 'with before_save symbol option' do
+    context 'with after_save symbol option' do
       it_behaves_like 'a request handler', status: :created do
         let(:options_hash) do
           {
