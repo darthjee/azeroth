@@ -106,6 +106,112 @@ describe Azeroth::RequestHandler::Create do
         end
       end
     end
+
+    context 'with after_save block option' do
+      it_behaves_like 'a request handler', status: :created do
+        let(:block) do
+          value = 10
+          proc do
+            document.update(reference: "X-MAGIC-#{value}")
+            Worker.perform(document.id)
+          end
+        end
+
+        let(:options_hash) do
+          {
+            after_save: block
+          }
+        end
+
+        let(:extra_params) do
+          {
+            document: {
+              name: 'My Document'
+            }
+          }
+        end
+
+        let(:expected_json) do
+          {
+            'name' => 'My Document',
+            'reference' => 'X-MAGIC-10'
+          }
+        end
+
+        before do
+          allow(Worker).to receive(:perform)
+        end
+
+        it 'creates entry' do
+          expect { handler.process }
+            .to change(Document, :count)
+            .by(1)
+        end
+
+        it 'trigger workers after saving' do
+          handler.process
+
+          expect(Worker).to have_received(:perform)
+            .with(Document.last.id)
+        end
+
+        it 'changes entry after saving' do
+          handler.process
+
+          expect(Document.last.reference)
+            .to eq('X-MAGIC-10')
+        end
+      end
+    end
+
+    context 'with after_save symbol option' do
+      it_behaves_like 'a request handler', status: :created do
+        let(:options_hash) do
+          {
+            after_save: :add_magic_reference_and_trigger
+          }
+        end
+
+        let(:extra_params) do
+          {
+            document: {
+              name: 'My Document'
+            }
+          }
+        end
+
+        let(:expected_json) do
+          {
+            'name' => 'My Document',
+            'reference' => 'X-MAGIC-15'
+          }
+        end
+
+        before do
+          allow(Worker).to receive(:perform)
+        end
+
+        it 'creates entry' do
+          expect { handler.process }
+            .to change(Document, :count)
+            .by(1)
+        end
+
+        it 'trigger workers after saving' do
+          handler.process
+
+          expect(Worker).to have_received(:perform)
+            .with(Document.last.id)
+        end
+
+        it 'changes entry after saving' do
+          handler.process
+
+          expect(Document.last.reference)
+            .to eq('X-MAGIC-15')
+        end
+      end
+    end
   end
 
   context 'with build_with as symbol' do

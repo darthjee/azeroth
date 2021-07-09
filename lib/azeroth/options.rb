@@ -19,6 +19,7 @@ module Azeroth
       except: [],
       decorator: true,
       before_save: nil,
+      after_save: nil,
       build_with: nil
     }.freeze
 
@@ -40,7 +41,8 @@ module Azeroth
     # @return [Jace::Dispatcher]
     def event_dispatcher(event)
       Jace::Dispatcher.new(
-        before: try("before_#{event}")
+        before: try("before_#{event}"),
+        after: try("after_#{event}")
       )
     end
 
@@ -77,6 +79,17 @@ module Azeroth
     #
     # The given method or block will be ran
     # before committing changes in models
+    # to database
+    #
+    # @return [Symbol,Proc]
+
+    # @method after_save
+    # @api private
+    #
+    # Block or method name to be run after save
+    #
+    # The given method or block will be ran
+    # after committing changes in models
     # to database
     #
     # @return [Symbol,Proc]

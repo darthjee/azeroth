@@ -11,7 +11,7 @@ Azeroth
 
 Yard Documentation
 -------------------
-[https://www.rubydoc.info/gems/azeroth/0.7.3](https://www.rubydoc.info/gems/azeroth/0.7.3)
+[https://www.rubydoc.info/gems/azeroth/0.7.4](https://www.rubydoc.info/gems/azeroth/0.7.4)
 
 Azeroth has been designed making the coding of controllers easier
 as routes in controllers are usually copy, paste and replace of same
@@ -59,6 +59,7 @@ It accepts options
 - except: List of actions to not to be built
 - decorator: Decorator class or flag allowing/disallowing decorators
 - before_save: Method/Proc to be ran before saving the resource on create or update
+- after_save: Method/Proc to be ran after saving the resource on create or update
 - build_with: Method/Block to be ran when building the reource on create
 
 ```ruby
