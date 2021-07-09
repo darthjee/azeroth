@@ -41,7 +41,8 @@ module Azeroth
     # @return [Jace::Dispatcher]
     def event_dispatcher(event)
       Jace::Dispatcher.new(
-        before: try("before_#{event}")
+        before: try("before_#{event}"),
+        after:  try("after_#{event}")
       )
     end
 
