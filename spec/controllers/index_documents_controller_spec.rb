@@ -37,6 +37,17 @@ describe IndexDocumentsController do
           expect(parsed_response).to eq(expected_json)
         end
       end
+
+      context 'when there are more documents than expected pagination' do
+        let(:documents_count) { Random.rand(21..30) }
+
+        it { expect(response).to be_successful }
+
+        it 'returns empty text' do
+          expect(parsed_response)
+            .to have(documents_count).elements
+        end
+      end
     end
   end
 
