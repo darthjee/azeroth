@@ -22,7 +22,7 @@ module Azeroth
       after_save: nil,
       build_with: nil,
       paginated: false,
-      per_page:   20
+      per_page: 20
     }.freeze
 
     with_options DEFAULT_OPTIONS
@@ -117,6 +117,6 @@ module Azeroth
     #
     # @return [Integer]
 
-    alias_method :paginated?, :paginated
+    alias paginated? paginated
   end
 end

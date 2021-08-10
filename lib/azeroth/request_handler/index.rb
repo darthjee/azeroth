@@ -17,6 +17,7 @@ module Azeroth
       # @return [Enumerable<Object>]
       def resource
         return scoped_entries unless paginated?
+
         paginated_entries
       end
 
