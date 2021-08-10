@@ -34,12 +34,20 @@ describe Azeroth::RequestHandler::Index do
         end
       end
 
-
       context 'when per_page is not default' do
         it_behaves_like 'a request handler' do
           let(:documents_count)   { Random.rand(21..30) }
           let(:expected_resource) { Document.all.limit(10) }
           let(:options_hash)      { { paginated: true, per_page: 10 } }
+        end
+      end
+
+      context 'when per page is given in params' do
+        it_behaves_like 'a request handler' do
+          let(:documents_count)   { Random.rand(41..50) }
+          let(:expected_resource) { Document.all.offset(15).limit(15) }
+          let(:options_hash)      { { paginated: true, per_page: 10 } }
+          let(:extra_params)      { { page: 2, per_page: 15 } }
         end
       end
     end
