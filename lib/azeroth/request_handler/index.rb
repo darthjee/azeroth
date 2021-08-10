@@ -21,7 +21,16 @@ module Azeroth
       end
 
       def paginated_entries
-        scoped_entries.limit(per_page)
+        scoped_entries.offset(offset).limit(per_page)
+      end
+
+      def offset
+        page = (params[:page] || 1) - 1
+        page * limit
+      end
+
+      def limit
+        per_page
       end
 
       def scoped_entries

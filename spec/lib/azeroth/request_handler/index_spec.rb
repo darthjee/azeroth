@@ -16,6 +16,25 @@ describe Azeroth::RequestHandler::Index do
         let(:options_hash)      { { paginated: true } }
       end
 
+      context 'when page is given' do
+        it_behaves_like 'a request handler' do
+          let(:documents_count)   { Random.rand(41..50) }
+          let(:expected_resource) { Document.all.offset(20).limit(20) }
+          let(:options_hash)      { { paginated: true } }
+          let(:extra_params)      { { page: 2 } }
+        end
+      end
+
+      context 'when third page is given' do
+        it_behaves_like 'a request handler' do
+          let(:documents_count)   { Random.rand(41..50) }
+          let(:expected_resource) { Document.all.offset(40) }
+          let(:options_hash)      { { paginated: true } }
+          let(:extra_params)      { { page: 3 } }
+        end
+      end
+
+
       context 'when per_page is not default' do
         it_behaves_like 'a request handler' do
           let(:documents_count)   { Random.rand(21..30) }
