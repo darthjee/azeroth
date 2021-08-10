@@ -20,7 +20,9 @@ module Azeroth
       decorator: true,
       before_save: nil,
       after_save: nil,
-      build_with: nil
+      build_with: nil,
+      pagination: false,
+      per_page:   20
     }.freeze
 
     with_options DEFAULT_OPTIONS
@@ -100,5 +102,19 @@ module Azeroth
     # Block or method name to be ran when building the resource
     #
     # @return [Symbol,Proc]
+
+    # @method pagination
+    # @api private
+    #
+    # Boolean indicating if pagination should or not be used
+    #
+    # @return [TrueClass,FalseClass]
+
+    # @method per_page
+    # @api private
+    #
+    # Number of elements returned when pagination is active
+    #
+    # @return [Integer]
   end
 end
