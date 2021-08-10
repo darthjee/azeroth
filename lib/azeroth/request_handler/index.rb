@@ -26,7 +26,7 @@ module Azeroth
       end
 
       def offset
-        page = (params[:page] || 1) - 1
+        page = (params[:page] || 1).to_i - 1
         page * limit
       end
 

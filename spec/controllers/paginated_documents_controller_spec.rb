@@ -18,8 +18,10 @@ describe PaginatedDocumentsController do
     end
 
     context 'when calling on format json' do
+      let(:parameters) { {} }
+
       before do
-        get :index, params: { format: :json }
+        get :index, params: parameters.merge(format: :json)
       end
 
       it { expect(response).to be_successful }
@@ -50,7 +52,42 @@ describe PaginatedDocumentsController do
 
         it 'returns full page of documents' do
           expect(parsed_response)
-            .not_to have(20).elements
+            .to have(20).elements
+        end
+
+        context 'when page is given' do
+          let(:parameters) { { page: 2 } }
+
+          it { expect(response).to be_successful }
+
+          it 'returns paginated documents' do
+            expect(parsed_response)
+              .not_to have(documents_count).elements
+          end
+
+          it 'returns full page of documents' do
+            expect(parsed_response)
+              .to have(documents_count - 20)
+              .elements
+          end
+        end
+
+        context 'when per_page is given' do
+          let(:per_page)   { Random.rand(5..15) }
+          let(:parameters) { { per_page: per_page } }
+
+          it { expect(response).to be_successful }
+
+          it 'returns paginated documents' do
+            expect(parsed_response)
+              .not_to have(documents_count).elements
+          end
+
+          it 'returns full page of documents' do
+            expect(parsed_response)
+              .to have(per_page)
+              .elements
+          end
         end
       end
     end

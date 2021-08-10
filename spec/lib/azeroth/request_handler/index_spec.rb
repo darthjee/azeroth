@@ -21,7 +21,7 @@ describe Azeroth::RequestHandler::Index do
           let(:documents_count)   { Random.rand(41..50) }
           let(:expected_resource) { Document.all.offset(20).limit(20) }
           let(:options_hash)      { { paginated: true } }
-          let(:extra_params)      { { page: 2 } }
+          let(:extra_params)      { { page: '2' } }
         end
       end
 
@@ -30,7 +30,7 @@ describe Azeroth::RequestHandler::Index do
           let(:documents_count)   { Random.rand(41..50) }
           let(:expected_resource) { Document.all.offset(40) }
           let(:options_hash)      { { paginated: true } }
-          let(:extra_params)      { { page: 3 } }
+          let(:extra_params)      { { page: '3' } }
         end
       end
 
@@ -47,7 +47,7 @@ describe Azeroth::RequestHandler::Index do
           let(:documents_count)   { Random.rand(41..50) }
           let(:expected_resource) { Document.all.offset(15).limit(15) }
           let(:options_hash)      { { paginated: true, per_page: 10 } }
-          let(:extra_params)      { { page: 2, per_page: 15 } }
+          let(:extra_params)      { { page: '2', per_page: '15' } }
         end
       end
     end
