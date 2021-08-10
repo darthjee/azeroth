@@ -116,5 +116,7 @@ module Azeroth
     # Number of elements returned when pagination is active
     #
     # @return [Integer]
+
+    alias_method :paginated?, :paginated
   end
 end

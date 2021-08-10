@@ -8,7 +8,7 @@ module Azeroth
     class Index < RequestHandler
       private
 
-      delegate :paginated, :per_page, to: :options
+      delegate :paginated?, :per_page, to: :options
 
       # @private
       #
@@ -16,7 +16,7 @@ module Azeroth
       #
       # @return [Enumerable<Object>]
       def resource
-        return scoped_entries unless paginated
+        return scoped_entries unless paginated?
         paginated_entries
       end
 
