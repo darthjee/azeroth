@@ -43,7 +43,7 @@ describe IndexDocumentsController do
 
         it { expect(response).to be_successful }
 
-        it 'returns empty text' do
+        it 'returns all documents' do
           expect(parsed_response)
             .to have(documents_count).elements
         end

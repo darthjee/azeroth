@@ -21,7 +21,7 @@ module Azeroth
       before_save: nil,
       after_save: nil,
       build_with: nil,
-      pagination: false,
+      paginated: false,
       per_page:   20
     }.freeze
 
@@ -103,7 +103,7 @@ module Azeroth
     #
     # @return [Symbol,Proc]
 
-    # @method pagination
+    # @method paginated
     # @api private
     #
     # Boolean indicating if pagination should or not be used
