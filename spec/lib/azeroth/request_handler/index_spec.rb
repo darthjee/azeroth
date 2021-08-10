@@ -8,5 +8,13 @@ describe Azeroth::RequestHandler::Index do
       let(:documents_count)   { 3 }
       let(:expected_resource) { Document.all }
     end
+
+    context 'when pagination is active' do
+      it_behaves_like 'a request handler' do
+        let(:documents_count)   { Random.rand(21..30) }
+        let(:expected_resource) { Document.all.limit(20) }
+        let(:options_hash)      { { paginated: true } }
+      end
+    end
   end
 end
