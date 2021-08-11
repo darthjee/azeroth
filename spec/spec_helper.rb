@@ -18,6 +18,8 @@ require File.expand_path('spec/dummy/db/schema.rb')
 require 'rspec/rails'
 require 'active_support/railtie'
 require 'sinclair/matchers'
+require 'shoulda-matchers'
+require 'rspec/collection_matchers'
 
 support_files = File.expand_path('spec/support/**/*.rb')
 Dir[support_files].sort.each { |file| require file }

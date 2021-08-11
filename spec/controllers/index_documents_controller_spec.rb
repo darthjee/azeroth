@@ -10,7 +10,7 @@ describe IndexDocumentsController do
   describe 'GET index' do
     let(:documents_count) { 0 }
     let!(:documents) do
-      documents_count.times.map { create(:document) }
+      create_list(:document, documents_count)
     end
 
     let(:expected_json) do
@@ -35,6 +35,17 @@ describe IndexDocumentsController do
 
         it 'renders documents json' do
           expect(parsed_response).to eq(expected_json)
+        end
+      end
+
+      context 'when there are more documents than expected pagination' do
+        let(:documents_count) { Random.rand(21..30) }
+
+        it { expect(response).to be_successful }
+
+        it 'returns all documents' do
+          expect(parsed_response)
+            .to have(documents_count).elements
         end
       end
     end

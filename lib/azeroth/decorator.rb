@@ -42,6 +42,7 @@ module Azeroth
   class Decorator
     autoload :HashBuilder,       'azeroth/decorator/hash_builder'
     autoload :KeyValueExtractor, 'azeroth/decorator/key_value_extractor'
+    autoload :MethodBuilder,     'azeroth/decorator/method_builder'
     autoload :Options,           'azeroth/decorator/options'
 
     class << self
@@ -228,9 +229,7 @@ module Azeroth
       def expose(attribute, **options_hash)
         options = Decorator::Options.new(options_hash)
 
-        builder = Sinclair.new(self)
-        builder.add_method(attribute, "@object.#{attribute}")
-        builder.build
+        MethodBuilder.build_reader(self, attribute)
 
         attributes_map[attribute] = options
       end

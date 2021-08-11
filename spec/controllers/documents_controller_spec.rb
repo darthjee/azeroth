@@ -11,7 +11,7 @@ describe DocumentsController do
     let(:documents_count) { 0 }
 
     before do
-      documents_count.times.map { create(:document) }
+      create_list(:document, documents_count)
     end
 
     context 'when calling on format json' do

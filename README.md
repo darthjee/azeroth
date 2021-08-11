@@ -11,7 +11,7 @@ Azeroth
 
 Yard Documentation
 -------------------
-[https://www.rubydoc.info/gems/azeroth/0.7.4](https://www.rubydoc.info/gems/azeroth/0.7.4)
+[https://www.rubydoc.info/gems/azeroth/0.8.0](https://www.rubydoc.info/gems/azeroth/0.8.0)
 
 Azeroth has been designed making the coding of controllers easier
 as routes in controllers are usually copy, paste and replace of same
@@ -61,6 +61,8 @@ It accepts options
 - before_save: Method/Proc to be ran before saving the resource on create or update
 - after_save: Method/Proc to be ran after saving the resource on create or update
 - build_with: Method/Block to be ran when building the reource on create
+- paginated: Flag when pagination should be applied
+- per_page: Number of items returned when pagination is active
 
 ```ruby
   # publishers_controller.rb

@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   resources :documents
   resources :public_documents, controller: :index_documents
   resources :create_documents, controller: :documents_with_error
+  resources :paginated_documents
 
   resources :publishers, only: %i[create index] do
     resources :games, except: :delete
