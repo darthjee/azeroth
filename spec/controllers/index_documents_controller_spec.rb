@@ -10,7 +10,7 @@ describe IndexDocumentsController do
   describe 'GET index' do
     let(:documents_count) { 0 }
     let!(:documents) do
-      documents_count.times.map { create(:document) }
+      create_list(:document, documents_count)
     end
 
     let(:expected_json) do

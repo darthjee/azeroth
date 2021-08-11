@@ -25,7 +25,7 @@ shared_examples 'a request handler' do |status: :ok|
   end
 
   before do
-    documents_count.times { create(:document) }
+    create_list(:document, documents_count)
 
     allow(controller).to receive(:params)
       .and_return(params)
