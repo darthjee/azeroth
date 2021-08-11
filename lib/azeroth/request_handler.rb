@@ -38,7 +38,11 @@ module Azeroth
       json            = model.decorate(resource)
       response_status = status
 
+      headers_hash = headers
       controller.instance_eval do
+        headers_hash.each do |key, value|
+          headers[key.to_s] = value
+        end
         render(json: json, status: response_status)
       end
     end
@@ -140,6 +144,10 @@ module Azeroth
     # @return [ActiveRecord::Relation]
     def collection
       @collection = controller.send(model.plural)
+    end
+
+    def headers
+      {}
     end
   end
 end

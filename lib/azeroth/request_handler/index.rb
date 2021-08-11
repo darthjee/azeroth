@@ -39,8 +39,15 @@ module Azeroth
       #
       # @return [Integer]
       def offset
-        page = (params[:page] || 1).to_i - 1
-        page * limit
+        (current_page - 1) * limit
+      end
+
+      def current_page
+        (params[:page] || 1).to_i
+      end
+
+      def pages
+        (scoped_entries.count.to_f / per_page).ceil
       end
 
       # @private
@@ -61,6 +68,15 @@ module Azeroth
       # @return [Enumerable<Object>]
       def scoped_entries
         controller.send(model.plural)
+      end
+
+      def headers
+        return {} unless paginated?
+        {
+          pages: pages,
+          page: current_page,
+          per_page: limit
+        }
       end
     end
   end
