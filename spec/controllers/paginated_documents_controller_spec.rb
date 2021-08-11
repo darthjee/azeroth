@@ -128,8 +128,9 @@ describe PaginatedDocumentsController do
             .elements
         end
 
-        xit 'adds total pages header' do
-          expect(response.headers['pages']).to eq(1)
+        it 'adds total pages header' do
+          expect(response.headers['pages'])
+            .to eq((documents_count.to_f / per_page).ceil)
         end
 
         it 'adds current page header' do

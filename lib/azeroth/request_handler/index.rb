@@ -47,7 +47,7 @@ module Azeroth
       end
 
       def pages
-        (scoped_entries.count.to_f / per_page).ceil
+        (scoped_entries.count.to_f / limit).ceil
       end
 
       # @private

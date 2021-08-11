@@ -111,7 +111,7 @@ describe Azeroth::RequestHandler::Index do
 
           it 'adds total pages header' do
             handler.process
-            expect(controller_headers['pages']).to eq(5)
+            expect(controller_headers['pages']).to eq(3)
           end
 
           it 'adds current page header' do
