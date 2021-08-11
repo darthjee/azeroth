@@ -105,13 +105,13 @@ describe Azeroth::RequestHandler::Index do
       context 'when per page is given in params' do
         it_behaves_like 'a request handler' do
           let(:documents_count)   { Random.rand(41..50) }
-          let(:expected_resource) { Document.all.offset(15).limit(15) }
-          let(:options_hash)      { { paginated: true, per_page: 10 } }
-          let(:extra_params)      { { page: '2', per_page: '15' } }
+          let(:expected_resource) { Document.all.offset(10).limit(10) }
+          let(:options_hash)      { { paginated: true, per_page: 15 } }
+          let(:extra_params)      { { page: '2', per_page: '10' } }
 
           it 'adds total pages header' do
             handler.process
-            expect(controller_headers['pages']).to eq(3)
+            expect(controller_headers['pages']).to eq(5)
           end
 
           it 'adds current page header' do
@@ -121,7 +121,7 @@ describe Azeroth::RequestHandler::Index do
 
           it 'adds per page header' do
             handler.process
-            expect(controller_headers['per_page']).to eq(15)
+            expect(controller_headers['per_page']).to eq(10)
           end
         end
       end
