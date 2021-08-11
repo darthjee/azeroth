@@ -38,6 +38,18 @@ describe PaginatedDocumentsController do
         it 'renders documents json' do
           expect(parsed_response).to eq(expected_json)
         end
+
+        it 'adds total pages header' do
+          expect(response.headers['pages']).to eq(1)
+        end
+
+        it 'adds current page header' do
+          expect(response.headers['page']).to eq(1)
+        end
+
+        it 'adds per page header' do
+          expect(response.headers['per_page']).to eq(20)
+        end
       end
 
       context 'when there are more documents than expected pagination' do
@@ -53,6 +65,18 @@ describe PaginatedDocumentsController do
         it 'returns full page of documents' do
           expect(parsed_response)
             .to have(20).elements
+        end
+
+        it 'adds total pages header' do
+          expect(response.headers['pages']).to eq(2)
+        end
+
+        it 'adds current page header' do
+          expect(response.headers['page']).to eq(1)
+        end
+
+        it 'adds per page header' do
+          expect(response.headers['per_page']).to eq(20)
         end
       end
 
@@ -72,6 +96,18 @@ describe PaginatedDocumentsController do
             .to have(documents_count - 20)
             .elements
         end
+
+        it 'adds total pages header' do
+          expect(response.headers['pages']).to eq(2)
+        end
+
+        it 'adds current page header' do
+          expect(response.headers['page']).to eq(2)
+        end
+
+        it 'adds per page header' do
+          expect(response.headers['per_page']).to eq(20)
+        end
       end
 
       context 'when per_page is given' do
@@ -90,6 +126,18 @@ describe PaginatedDocumentsController do
           expect(parsed_response)
             .to have(per_page)
             .elements
+        end
+
+        xit 'adds total pages header' do
+          expect(response.headers['pages']).to eq(1)
+        end
+
+        it 'adds current page header' do
+          expect(response.headers['page']).to eq(1)
+        end
+
+        it 'adds per page header' do
+          expect(response.headers['per_page']).to eq(per_page)
         end
       end
     end
