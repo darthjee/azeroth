@@ -21,4 +21,3 @@ describe Azeroth::Decorator::MethodBuilder do
     end
   end
 end
-
