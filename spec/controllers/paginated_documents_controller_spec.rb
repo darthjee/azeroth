@@ -54,40 +54,42 @@ describe PaginatedDocumentsController do
           expect(parsed_response)
             .to have(20).elements
         end
+      end
 
-        context 'when page is given' do
-          let(:parameters) { { page: 2 } }
+      context 'when page is given' do
+        let(:documents_count) { Random.rand(21..30) }
+        let(:parameters)      { { page: 2 } }
 
-          it { expect(response).to be_successful }
+        it { expect(response).to be_successful }
 
-          it 'returns paginated documents' do
-            expect(parsed_response)
-              .not_to have(documents_count).elements
-          end
-
-          it 'returns full page of documents' do
-            expect(parsed_response)
-              .to have(documents_count - 20)
-              .elements
-          end
+        it 'returns paginated documents' do
+          expect(parsed_response)
+            .not_to have(documents_count).elements
         end
 
-        context 'when per_page is given' do
-          let(:per_page)   { Random.rand(5..15) }
-          let(:parameters) { { per_page: per_page } }
+        it 'returns full page of documents' do
+          expect(parsed_response)
+            .to have(documents_count - 20)
+            .elements
+        end
+      end
 
-          it { expect(response).to be_successful }
+      context 'when per_page is given' do
+        let(:documents_count) { Random.rand(21..30) }
+        let(:per_page)        { Random.rand(5..15) }
+        let(:parameters)      { { per_page: per_page } }
 
-          it 'returns paginated documents' do
-            expect(parsed_response)
-              .not_to have(documents_count).elements
-          end
+        it { expect(response).to be_successful }
 
-          it 'returns full page of documents' do
-            expect(parsed_response)
-              .to have(per_page)
-              .elements
-          end
+        it 'returns paginated documents' do
+          expect(parsed_response)
+            .not_to have(documents_count).elements
+        end
+
+        it 'returns full page of documents' do
+          expect(parsed_response)
+            .to have(per_page)
+            .elements
         end
       end
     end
