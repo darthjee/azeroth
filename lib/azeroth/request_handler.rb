@@ -56,7 +56,6 @@ module Azeroth
       end
     end
 
-
     # @private
     #
     # render response json
@@ -172,7 +171,7 @@ module Azeroth
     # @abstract
     #
     # Headers to be added
-    # 
+    #
     # @return [Hash]
     def headers
       {}

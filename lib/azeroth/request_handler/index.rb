@@ -28,6 +28,7 @@ module Azeroth
       # @return [Hash] heders
       def headers
         return {} unless paginated?
+
         {
           pages: pages,
           page: current_page,
