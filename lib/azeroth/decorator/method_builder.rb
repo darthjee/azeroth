@@ -11,7 +11,7 @@ module Azeroth
       #
       # reaader delegate method calls to @object
       #
-      # @return (see Sinclair#build)
+      # @return [Array<Sinclair::MethodDefinition>]
       def self.build_reader(klass, attribute)
         new(klass).build_reader(attribute)
       end

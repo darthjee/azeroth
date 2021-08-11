@@ -41,6 +41,11 @@ module Azeroth
 
     private
 
+    # @private
+    #
+    # Set response headers
+    #
+    # @return [Hash]
     def add_headers
       headers_hash = headers
 
@@ -51,6 +56,12 @@ module Azeroth
       end
     end
 
+
+    # @private
+    #
+    # render response json
+    #
+    # @return [String]
     def render_json
       json            = model.decorate(resource)
       response_status = status
@@ -157,6 +168,12 @@ module Azeroth
       @collection = controller.send(model.plural)
     end
 
+    # @private
+    # @abstract
+    #
+    # Headers to be added
+    # 
+    # @return [Hash]
     def headers
       {}
     end
