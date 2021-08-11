@@ -35,19 +35,30 @@ module Azeroth
     def process
       return unless json?
 
-      json            = model.decorate(resource)
-      response_status = status
+      add_headers
+      render_json
+    end
 
+    private
+
+    def add_headers
       headers_hash = headers
+
       controller.instance_eval do
         headers_hash.each do |key, value|
           headers[key.to_s] = value
         end
-        render(json: json, status: response_status)
       end
     end
 
-    private
+    def render_json
+      json            = model.decorate(resource)
+      response_status = status
+
+      controller.instance_eval do
+        render(json: json, status: response_status)
+      end
+    end
 
     attr_reader :controller, :model, :options
     # @method controller
