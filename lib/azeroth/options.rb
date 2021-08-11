@@ -48,6 +48,13 @@ module Azeroth
       )
     end
 
+    alias paginated? paginated
+    # @method paginated?
+    # @api private
+    #
+    # @see paginated
+    # @return [TrueClass,FalseClass]
+
     # @method only
     # @api private
     #
@@ -113,10 +120,8 @@ module Azeroth
     # @method per_page
     # @api private
     #
-    # Number of elements returned when pagination is active
+    # Number of elements when pagination is active
     #
     # @return [Integer]
-
-    alias paginated? paginated
   end
 end
