@@ -29,7 +29,7 @@ module Azeroth
       # @return [Object]
       def build_and_save_resource
         @resource = build_resource
-        controller.instance_variable_set("@#{model.name}", resource)
+        controller.set(model.name, resource)
 
         trigger_event(:save) do
           resource.tap(&:save)
