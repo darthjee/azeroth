@@ -23,6 +23,7 @@ rules:
   Summary::Presence:
     enabled: true
     exclude:
+      - Azeroth::ControllerInterface#initialize
       - Azeroth::Decorator#initialize
       - Azeroth::Decorator::HashBuilder#initialize
       - Azeroth::Decorator::KeyValueExtractor#initialize

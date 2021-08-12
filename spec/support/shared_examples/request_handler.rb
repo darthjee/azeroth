@@ -24,6 +24,8 @@ shared_examples 'a request handler' do |status: :ok|
     { format: format }.merge(extra_params)
   end
 
+  let(:controller_headers) { {} }
+
   before do
     create_list(:document, documents_count)
 
@@ -33,6 +35,9 @@ shared_examples 'a request handler' do |status: :ok|
     allow(controller).to receive(:render)
       .with(json: expected_json, status: status)
       .and_return(expected_json)
+
+    allow(controller).to receive(:headers)
+      .and_return(controller_headers)
   end
 
   it 'returns all documents json' do

@@ -23,6 +23,21 @@ module Azeroth
 
       # @private
       #
+      # returns pagination headers
+      #
+      # @return [Hash] heders
+      def headers
+        return {} unless paginated?
+
+        {
+          pages: pages,
+          page: current_page,
+          per_page: limit
+        }
+      end
+
+      # @private
+      #
       # paginated collection of the model
       #
       # @return [Enumerable<Object>]
@@ -39,8 +54,7 @@ module Azeroth
       #
       # @return [Integer]
       def offset
-        page = (params[:page] || 1).to_i - 1
-        page * limit
+        (current_page - 1) * limit
       end
 
       # @private
@@ -61,6 +75,24 @@ module Azeroth
       # @return [Enumerable<Object>]
       def scoped_entries
         controller.send(model.plural)
+      end
+
+      # @private
+      #
+      # calculates current page
+      #
+      # @return [Integer]
+      def current_page
+        (params[:page] || 1).to_i
+      end
+
+      # @private
+      #
+      # calculates how many pages are there
+      #
+      # @return [Integer]
+      def pages
+        (scoped_entries.count.to_f / limit).ceil
       end
     end
   end

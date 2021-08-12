@@ -19,7 +19,7 @@ module Azeroth
     # @param controller [ApplicationController]
     # @param model [Azeroth::Model]
     def initialize(controller, model, options)
-      @controller = controller
+      @controller = ControllerInterface.new(controller)
       @model = model
       @options = options
     end
@@ -35,12 +35,11 @@ module Azeroth
     def process
       return unless json?
 
-      json            = model.decorate(resource)
-      response_status = status
-
-      controller.instance_eval do
-        render(json: json, status: response_status)
-      end
+      controller.add_headers(headers)
+      controller.render_json(
+        model.decorate(resource),
+        status
+      )
     end
 
     private
@@ -140,6 +139,16 @@ module Azeroth
     # @return [ActiveRecord::Relation]
     def collection
       @collection = controller.send(model.plural)
+    end
+
+    # @private
+    # @abstract
+    #
+    # Headers to be added
+    #
+    # @return [Hash]
+    def headers
+      {}
     end
   end
 end

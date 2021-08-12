@@ -11,7 +11,7 @@ Azeroth
 
 Yard Documentation
 -------------------
-[https://www.rubydoc.info/gems/azeroth/0.8.0](https://www.rubydoc.info/gems/azeroth/0.8.0)
+[https://www.rubydoc.info/gems/azeroth/0.8.1](https://www.rubydoc.info/gems/azeroth/0.8.1)
 
 Azeroth has been designed making the coding of controllers easier
 as routes in controllers are usually copy, paste and replace of same
