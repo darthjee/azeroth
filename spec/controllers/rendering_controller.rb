@@ -7,33 +7,19 @@ describe RenderingController do
     JSON.parse(response.body)
   end
 
-  xdescribe 'GET index' do
-    let(:documents_count) { 0 }
+  fdescribe 'GET index' do
+    render_views
+
+    let(:documents_count) { Random.rand(2..5) }
+
+    let(:expected_content) do
+      documents.map do |document|
+        "<li><strong>Name:</strong>#{document.name}</li>"
+      end.join("\n    ")
+    end
 
     before do
       create_list(:document, documents_count)
-    end
-
-    context 'when calling on format json' do
-      before do
-        get :index, params: { format: :json }
-      end
-
-      it { expect(response).to be_successful }
-
-      it 'returns empty text' do
-        expect(response.body).to eq('')
-      end
-
-      context 'when there is a document' do
-        let(:documents_count) { 1 }
-
-        it { expect(response).to be_successful }
-
-        it 'returns empty text' do
-          expect(response.body).to eq('')
-        end
-      end
     end
 
     context 'when calling on format html' do
@@ -43,11 +29,13 @@ describe RenderingController do
 
       it { expect(response).to be_successful }
 
-      it { expect(response).to render_template('documents/index') }
+      it { expect(response).to render_template('rendering/index') }
+
+      it { expect(response.body).to include(expected_content) }
     end
   end
 
-  fdescribe 'GET show' do
+  describe 'GET show' do
     render_views
 
     let(:document)    { create(:document) }
@@ -57,7 +45,7 @@ describe RenderingController do
     end
 
     context 'when calling on format html' do
-      before do
+      be  fore do
         get :show, params: { id: document.id, format: :html }
       end
 
