@@ -67,5 +67,15 @@ describe Azeroth::RequestHandler do
         expect(controller).not_to have_received(:render)
       end
     end
+
+    context 'with format js' do
+      let(:format) { 'js' }
+
+      it do
+        handler.process
+
+        expect(controller).not_to have_received(:render)
+      end
+    end
   end
 end
