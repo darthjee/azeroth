@@ -18,9 +18,7 @@ describe RenderingController do
       end.join("\n    ")
     end
 
-    before do
-      create_list(:document, documents_count)
-    end
+    let!(:documents) { create_list(:document, documents_count) }
 
     context 'when calling on format html' do
       before do
@@ -45,7 +43,7 @@ describe RenderingController do
     end
 
     context 'when calling on format html' do
-      be  fore do
+      before do
         get :show, params: { id: document.id, format: :html }
       end
 
