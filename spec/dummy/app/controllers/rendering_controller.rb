@@ -5,4 +5,3 @@ class RenderingController < ApplicationController
 
   resource_for :document
 end
-
