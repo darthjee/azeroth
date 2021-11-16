@@ -7,7 +7,7 @@ describe RenderingController do
     JSON.parse(response.body)
   end
 
-  fdescribe 'GET index' do
+  describe 'GET index' do
     render_views
 
     let(:documents_count) { Random.rand(2..5) }
