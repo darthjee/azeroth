@@ -25,6 +25,7 @@ module Azeroth
         add_params
         add_resource
         add_routes
+        add_helpers
       end
 
       private
@@ -125,6 +126,14 @@ module Azeroth
       # @return [Array<Sinclair::MethodDefinition>]
       def add_routes
         RoutesBuilder.new(model, builder, options).append
+      end
+
+      # Add helpers to render objects on template
+      #
+      # @return [String]
+      def add_helpers
+        clazz.public_send(:helper_method, model.name)
+        clazz.public_send(:helper_method, model.plural)
       end
 
       # Returns all updatable attributes
