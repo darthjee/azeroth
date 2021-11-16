@@ -128,6 +128,9 @@ module Azeroth
         RoutesBuilder.new(model, builder, options).append
       end
 
+      # Add helpers to render objects on template
+      #
+      # @return [String]
       def add_helpers
         clazz.public_send(:helper_method, model.name)
         clazz.public_send(:helper_method, model.plural)
