@@ -25,7 +25,7 @@ Gem::Specification.new do |gem|
 
   gem.add_development_dependency 'actionpack',                '~> 5.2.x'
   gem.add_development_dependency 'activerecord',              '~> 5.2.x'
-  gem.add_development_dependency 'bundler',                   '1.16.1'
+  gem.add_development_dependency 'bundler',                   '~> 2.3.14'
   gem.add_development_dependency 'factory_bot',               '5.2.0'
   gem.add_development_dependency 'nokogiri',                  '1.12.5'
   gem.add_development_dependency 'pry',                       '0.12.2'
