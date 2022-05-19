@@ -24,7 +24,7 @@ module Azeroth
 
       # Update a resource saving it to the database
       #
-      # @return [Object]
+      # @return [Object] updated resource
       def perform_update
         @resource = controller.send(model.name)
         resource.tap do
@@ -34,6 +34,12 @@ module Azeroth
         end
       end
 
+      # @private
+      #
+      # Update the resource, either by running update_with
+      # or directly updating the attributes in the object
+      #
+      # @return [Object] updated resource
       def update_and_save_resource
         return resource.update(attributes) unless update_with
 
