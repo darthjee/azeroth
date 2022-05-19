@@ -2,7 +2,7 @@
 
 require 'spec_helper'
 
-fdescribe Azeroth::RequestHandler::Update do
+describe Azeroth::RequestHandler::Update do
   describe '#process' do
     let!(:document) { create(:document) }
 
@@ -34,7 +34,6 @@ fdescribe Azeroth::RequestHandler::Update do
       context 'with block' do
         it_behaves_like 'a request handler' do
           let(:block) do
-            value = 10
             proc do
               document.assign_attributes(document_params)
               document.name = "#{document.name}!"
@@ -236,26 +235,26 @@ fdescribe Azeroth::RequestHandler::Update do
 
     context 'when payload is invalid' do
       it_behaves_like 'a request handler',
-        status: :unprocessable_entity do
-          let(:expected_resource) { document }
-          let(:extra_params) do
-            {
-              id: document.id,
-              document: {
-                name: nil
-              }
+                      status: :unprocessable_entity do
+        let(:expected_resource) { document }
+        let(:extra_params) do
+          {
+            id: document.id,
+            document: {
+              name: nil
             }
-          end
-
-          let(:expected_json) do
-            { 'name' => nil }
-          end
-
-          it 'does not update entry' do
-            expect { handler.process }
-              .not_to(change { document.reload.name })
-          end
+          }
         end
+
+        let(:expected_json) do
+          { 'name' => nil }
+        end
+
+        it 'does not update entry' do
+          expect { handler.process }
+            .not_to(change { document.reload.name })
+        end
+      end
     end
   end
 end
