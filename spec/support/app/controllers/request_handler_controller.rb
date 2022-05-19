@@ -28,4 +28,10 @@ class RequestHandlerController < ActionController::Base
     documents.where(reference: 'X-MAGIC-15')
              .build(document_params)
   end
+
+  def add_bang_name
+    document.assign_attributes(document_params)
+    document.name = "#{document.name}!"
+    document.save
+  end
 end

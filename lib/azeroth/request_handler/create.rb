@@ -47,12 +47,7 @@ module Azeroth
       def build_resource
         return collection.build(attributes) unless build_with
 
-        case build_with
-        when Proc
-          controller.instance_eval(&build_with)
-        else
-          controller.send(build_with)
-        end
+        controller.run(build_with)
       end
 
       # @private

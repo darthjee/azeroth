@@ -21,6 +21,7 @@ module Azeroth
       before_save: nil,
       after_save: nil,
       build_with: nil,
+      update_with: nil,
       paginated: false,
       per_page: 20
     }.freeze
@@ -107,6 +108,13 @@ module Azeroth
     # @api private
     #
     # Block or method name to be ran when building the resource
+    #
+    # @return [Symbol,Proc]
+
+    # @method update_with
+    # @api private
+    #
+    # Block or method name to be ran when updating the resource
     #
     # @return [Symbol,Proc]
 

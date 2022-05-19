@@ -42,6 +42,21 @@ module Azeroth
       controller.instance_variable_set("@#{variable}", value)
     end
 
+    # Forces a controller to run a block
+    #
+    # When the block is a +Proc+ that is evaluated,
+    # when it is a +Symbol+ or +String+, a method is called
+    #
+    # @return [Object] whatever the block returns
+    def run(block)
+      case block
+      when Proc
+        controller.instance_eval(&block)
+      else
+        controller.send(block)
+      end
+    end
+
     private
 
     attr_reader :controller

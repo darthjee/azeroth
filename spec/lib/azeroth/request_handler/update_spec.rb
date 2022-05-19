@@ -30,6 +30,118 @@ describe Azeroth::RequestHandler::Update do
       end
     end
 
+    context 'when update_with option is given ' do
+      context 'with block' do
+        it_behaves_like 'a request handler' do
+          let(:block) do
+            proc do
+              document.assign_attributes(document_params)
+              document.name = "#{document.name}!"
+              document.save
+            end
+          end
+
+          let(:options_hash) do
+            {
+              update_with: block
+            }
+          end
+
+          let(:expected_resource) { document }
+
+          let(:extra_params) do
+            {
+              id: document.id,
+              document: {
+                name: 'New Name'
+              }
+            }
+          end
+
+          let(:expected_json) do
+            {
+              'name' => 'New Name!'
+            }
+          end
+
+          it 'updates the values given by request' do
+            expect { handler.process }
+              .to change { document.reload.name }
+              .from(document.name)
+              .to('New Name!')
+          end
+        end
+      end
+
+      context 'with symbol' do
+        it_behaves_like 'a request handler' do
+          let(:options_hash) do
+            {
+              update_with: :add_bang_name
+            }
+          end
+
+          let(:expected_resource) { document }
+
+          let(:extra_params) do
+            {
+              id: document.id,
+              document: {
+                name: 'New Name'
+              }
+            }
+          end
+
+          let(:expected_json) do
+            {
+              'name' => 'New Name!'
+            }
+          end
+
+          it 'updates the values given by request' do
+            expect { handler.process }
+              .to change { document.reload.name }
+              .from(document.name)
+              .to('New Name!')
+          end
+        end
+      end
+
+      context 'with string' do
+        it_behaves_like 'a request handler' do
+          let(:options_hash) do
+            {
+              update_with: 'add_bang_name'
+            }
+          end
+
+          let(:expected_resource) { document }
+
+          let(:extra_params) do
+            {
+              id: document.id,
+              document: {
+                name: 'New Name'
+              }
+            }
+          end
+
+          let(:expected_json) do
+            {
+              'name' => 'New Name!'
+            }
+          end
+
+          it 'updates the values given by request' do
+            expect { handler.process }
+              .to change { document.reload.name }
+              .from(document.name)
+              .to('New Name!')
+          end
+        end
+      end
+    end
+
     context 'with before_save block option' do
       it_behaves_like 'a request handler' do
         let(:block) do
