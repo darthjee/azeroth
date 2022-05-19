@@ -43,12 +43,7 @@ module Azeroth
       def update_and_save_resource
         return resource.update(attributes) unless update_with
 
-        case update_with
-        when Proc
-          controller.instance_eval(&update_with)
-        else
-          controller.send(update_with)
-        end
+        controller.run(update_with)
       end
 
       # @private

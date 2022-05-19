@@ -42,6 +42,15 @@ module Azeroth
       controller.instance_variable_set("@#{variable}", value)
     end
 
+    def run(block)
+      case block
+      when Proc
+        controller.instance_eval(&block)
+      else
+        controller.send(block)
+      end
+    end
+
     private
 
     attr_reader :controller
