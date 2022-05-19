@@ -41,7 +41,7 @@ module Azeroth
         when Proc
           controller.instance_eval(&update_with)
         else
-          controller.send(build_with)
+          controller.send(update_with)
         end
       end
 
