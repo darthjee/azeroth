@@ -61,6 +61,7 @@ It accepts options
 - before_save: Method/Proc to be ran before saving the resource on create or update
 - after_save: Method/Proc to be ran after saving the resource on create or update
 - build_with: Method/Block to be ran when building the reource on create
+- update_with: Method/Block to be ran when updating the reource on update
 - paginated: Flag when pagination should be applied
 - per_page: Number of items returned when pagination is active
 
