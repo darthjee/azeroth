@@ -8,6 +8,8 @@ module Azeroth
     class Update < RequestHandler
       private
 
+      delegate :update_with, to: :options
+
       # @private
       #
       # Updates and return an instance of the model
@@ -17,17 +19,29 @@ module Azeroth
       #
       # @return [Object]
       def resource
-        @resource ||= update_resource
+        @resource ||= perform_update
       end
 
-      # build resource for update
+      # Update a resource saving it to the database
       #
       # @return [Object]
-      def update_resource
-        controller.send(model.name).tap do |entry|
+      def perform_update
+        @resource = controller.send(model.name)
+        resource.tap do
           trigger_event(:save) do
-            entry.update(attributes)
+            update_and_save_resource
           end
+        end
+      end
+
+      def update_and_save_resource
+        return resource.update(attributes) unless update_with
+
+        case update_with
+        when Proc
+          controller.instance_eval(&update_with)
+        else
+          controller.send(build_with)
         end
       end
 
