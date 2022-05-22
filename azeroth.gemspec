@@ -46,7 +46,7 @@ Gem::Specification.new do |gem|
   gem.add_development_dependency 'rubycritic',                '4.6.1'
   gem.add_development_dependency 'shoulda-matchers',          '4.3.0'
   gem.add_development_dependency 'simplecov',                 '0.21.2'
-  gem.add_development_dependency 'sqlite3',                   '3.4.1.2'
+  gem.add_development_dependency 'sqlite3',                   '1.4.2'
   gem.add_development_dependency 'yard',                      '0.9.27'
   gem.add_development_dependency 'yardstick',                 '0.9.9'
 end
