@@ -23,6 +23,7 @@ Gem::Specification.new do |gem|
   gem.add_runtime_dependency 'jace',                '>= 0.0.3'
   gem.add_runtime_dependency 'sinclair',            '>= 1.6.7'
 
+  gem.add_development_dependency 'minitest',                  '~> 5.15.0'
   gem.add_development_dependency 'actionpack',                '~> 5.2.x'
   gem.add_development_dependency 'activerecord',              '~> 5.2.x'
   gem.add_development_dependency 'bundler',                   '~> 2.3.14'
