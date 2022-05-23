@@ -23,11 +23,11 @@ Gem::Specification.new do |gem|
   gem.add_runtime_dependency 'jace',                '>= 0.0.3'
   gem.add_runtime_dependency 'sinclair',            '>= 1.6.7'
 
-  gem.add_development_dependency 'minitest',                  '~> 5.15.0'
   gem.add_development_dependency 'actionpack',                '~> 5.2.x'
   gem.add_development_dependency 'activerecord',              '~> 5.2.x'
   gem.add_development_dependency 'bundler',                   '~> 2.3.14'
   gem.add_development_dependency 'factory_bot',               '6.2.1'
+  gem.add_development_dependency 'minitest',                  '~> 5.15.0'
   gem.add_development_dependency 'nokogiri',                  '1.13.6'
   gem.add_development_dependency 'pry',                       '0.14.1'
   gem.add_development_dependency 'pry-nav',                   '1.0.0'
