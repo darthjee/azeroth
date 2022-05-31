@@ -23,8 +23,6 @@ Gem::Specification.new do |gem|
   gem.add_runtime_dependency 'jace',                '>= 0.0.3'
   gem.add_runtime_dependency 'sinclair',            '>= 1.6.7'
 
-
-  gem.add_development_dependency 'tzinfo-data',               '~> 1.2022.1'
   gem.add_development_dependency 'actionpack',                '~> 5.2.x'
   gem.add_development_dependency 'activerecord',              '~> 5.2.x'
   gem.add_development_dependency 'bundler',                   '~> 2.3.14'
@@ -50,6 +48,7 @@ Gem::Specification.new do |gem|
   gem.add_development_dependency 'shoulda-matchers',          '4.3.0'
   gem.add_development_dependency 'simplecov',                 '0.21.2'
   gem.add_development_dependency 'sqlite3',                   '1.4.2'
+  gem.add_development_dependency 'tzinfo-data',               '~> 1.2022.1'
   gem.add_development_dependency 'yard',                      '0.9.27'
   gem.add_development_dependency 'yardstick',                 '0.9.9'
 end
