@@ -23,6 +23,7 @@ services:
     command: /bin/bash -c 'rspec && yard && rake yardstick_measure && rake verify_measurements'
 
   circleci:
+    image: azeroth_circleci
     build:
       context: ./
       dockerfile: Dockerfile.circleci

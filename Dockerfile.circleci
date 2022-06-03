@@ -1,0 +1,5 @@
+FROM darthjee/circleci_rails_gems:1.0.0 as base
+
+COPY --chown=circleci ./ /home/circleci/project/
+
+RUN bundle install
