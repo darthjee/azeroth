@@ -11,3 +11,4 @@ rubycritic/
 spec/dummy/log/*
 spec/dummy/tmp/*
 spec/dummy/db/*.sqlite3
+spec/dummy/db/*.sqlite3-journal
