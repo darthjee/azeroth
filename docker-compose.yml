@@ -21,3 +21,10 @@ services:
     <<: *base
     depends_on: [base_build]
     command: /bin/bash -c 'rspec && yard && rake yardstick_measure && rake verify_measurements'
+
+  circleci:
+    build:
+      context: ./
+      dockerfile: Dockerfile.circleci
+    volumes:
+      - .:/home/circleci/project
