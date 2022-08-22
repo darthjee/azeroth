@@ -10,11 +10,31 @@ fdescribe Azeroth::Resourceable do
   end
 
   describe '.resource_for' do
+    let(:params)     { { id: document.id, format: :json } }
+    let(:document)   { create(:document) }
+    let(:controller) { controller_class.new(params) }
+
     context 'when no special option is given' do
       %i[index show new edit update destroy].each do |method_name|
         it do
           expect { controller_class.resource_for(:document) }
             .to add_method(method_name).to(controller_class)
+        end
+      end
+
+      context 'when the method is called' do
+        let(:rendered) { {} }
+
+        before do
+          controller_class.resource_for(:document)
+          allow(controller).to receive(:render) do |args|
+            rendered.merge!(args[:json])
+          end
+        end
+
+        it do
+          controller.show
+          expect(rendered).to eq(Document::Decorator.new(document).as_json)
         end
       end
 
