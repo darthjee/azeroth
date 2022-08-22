@@ -3,6 +3,8 @@
 module Azeroth
   # @api private
   # @author Darthjee
+  #
+  # Class responsible for adding params handling methods to a controller
   class ParamsBuilder
     # @param model [Model] resource interface
     # @param builder [Sinclair] methods builder
