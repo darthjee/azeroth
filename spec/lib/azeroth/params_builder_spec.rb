@@ -2,7 +2,7 @@
 
 require 'spec_helper'
 
-fdescribe Azeroth::ParamsBuilder do
+describe Azeroth::ParamsBuilder do
   subject(:params_builder) { described_class.new(model, builder) }
 
   let(:model)   { Azeroth::Model.new(:document, options) }

@@ -15,14 +15,14 @@ module Azeroth
     #
     # @return [Array<Sinclair::MethodDefinition>]
     def append
-      add_method("#{name}_id", 'params.require(:id)')
-      add_method(
-        "#{name}_params",
-        <<-CODE
-          params.require(:#{name})
-            .permit(:#{permitted_attributes.join(', :')})
-        CODE
-      )
+      method_name = name
+      allowed_attributes = permitted_attributes.map(&:to_sym)
+
+      add_method("#{name}_id") { params.require(:id) }
+      add_method("#{name}_params") do
+        params.require(method_name)
+          .permit(*allowed_attributes)
+      end
     end
 
     attr_reader :model, :builder
