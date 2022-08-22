@@ -14,6 +14,7 @@ fdescribe Azeroth::Resourceable do
     let(:model_name) { :document }
     let(:model)      { create(model_name) }
     let(:controller) { controller_class.new(params) }
+    let(:decorator)  { Document::Decorator }
 
     context 'when no special option is given' do
       %i[index show new edit update destroy].each do |method_name|
@@ -35,7 +36,7 @@ fdescribe Azeroth::Resourceable do
 
         it 'decorates the model' do
           controller.show
-          expect(rendered).to eq(Document::Decorator.new(model).as_json)
+          expect(rendered).to eq(decorator.new(model).as_json)
         end
 
         context 'when the model does not have a decorator' do
@@ -81,6 +82,25 @@ fdescribe Azeroth::Resourceable do
             expect { controller_class.resource_for(model_name, **options) }
               .to add_method(method_name).to(controller_class)
           end
+        end
+      end
+
+      context 'when passing decorator option' do
+        let(:model_name) { :movie }
+        let(:decorator)  { Movie::SimpleDecorator }
+        let(:rendered)   { {} }
+
+        before do
+          controller_class.resource_for(model_name, decorator: decorator)
+
+          allow(controller).to receive(:render) do |args|
+            rendered.merge!(args[:json])
+          end
+        end
+
+        it 'decorates the model' do
+          controller.show
+          expect(rendered).to eq(decorator.new(model).as_json)
         end
       end
     end
