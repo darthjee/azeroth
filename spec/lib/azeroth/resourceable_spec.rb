@@ -10,31 +10,41 @@ fdescribe Azeroth::Resourceable do
   end
 
   describe '.resource_for' do
-    let(:params)     { { id: document.id, format: :json } }
-    let(:document)   { create(:document) }
+    let(:params)     { { id: model.id, format: :json } }
+    let(:model_name) { :document }
+    let(:model)      { create(model_name) }
     let(:controller) { controller_class.new(params) }
 
     context 'when no special option is given' do
       %i[index show new edit update destroy].each do |method_name|
         it do
-          expect { controller_class.resource_for(:document) }
+          expect { controller_class.resource_for(model_name) }
             .to add_method(method_name).to(controller_class)
         end
       end
 
       context 'when the method is called' do
-        let(:rendered) { {} }
+        let(:rendered)   { {} }
 
         before do
-          controller_class.resource_for(:document)
+          controller_class.resource_for(model_name)
           allow(controller).to receive(:render) do |args|
             rendered.merge!(args[:json])
           end
         end
 
-        it do
+        it 'decorates the model' do
           controller.show
-          expect(rendered).to eq(Document::Decorator.new(document).as_json)
+          expect(rendered).to eq(Document::Decorator.new(model).as_json)
+        end
+
+        context 'when the model does not have a decorator' do
+          let(:model_name) { :movie }
+
+          it 'renders model as json' do
+            controller.show
+            expect(rendered).to eq(model.as_json)
+          end
         end
       end
 
@@ -43,14 +53,14 @@ fdescribe Azeroth::Resourceable do
 
         %i[index show].each do |method_name|
           it do
-            expect { controller_class.resource_for(:document, **options) }
+            expect { controller_class.resource_for(model_name, **options) }
               .to add_method(method_name).to(controller_class)
           end
         end
 
         %i[new edit update destroy].each do |method_name|
           it do
-            expect { controller_class.resource_for(:document, **options) }
+            expect { controller_class.resource_for(model_name, **options) }
               .not_to add_method(method_name).to(controller_class)
           end
         end
