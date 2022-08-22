@@ -47,5 +47,10 @@ ActiveRecord::Schema.define do
     t.index %i[pokemon_master_id favorite], unique: true
   end
 
+  create_table :movies, force: true do |t|
+    t.string :name, null: false
+    t.string :director, null: false
+  end
+
   add_foreign_key 'pokemons', 'pokemon_masters'
 end
