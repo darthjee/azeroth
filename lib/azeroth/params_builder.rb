@@ -50,7 +50,7 @@ module Azeroth
     # Appends a method
     #
     # @return [Array<Sinclair::MethodDefinition>]
-    
+
     delegate :name, :klass, to: :model
     # @method name
     # @api private
