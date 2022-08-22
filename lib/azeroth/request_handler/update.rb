@@ -36,7 +36,9 @@ module Azeroth
 
       # @private
       #
-      # Update the resource, either by running update_with
+      # Update the resource
+      #
+      # This update happens by either by running update_with
       # or directly updating the attributes in the object
       #
       # @return [Object] updated resource

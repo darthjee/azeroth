@@ -71,7 +71,7 @@ module Azeroth
       #
       # @return [Array<Sinclair::MethodDefinition>]
 
-      delegate :name, :klass, to: :model
+      delegate :name, to: :model
       # @method name
       # @api private
       # @private
@@ -79,14 +79,6 @@ module Azeroth
       # Resource name
       #
       # @return [Symbol,String]
-
-      # @method klass
-      # @api private
-      # @private
-      #
-      # Controller to be changed
-      #
-      # @return [Array<Sinclair::MethodDefinition>]
 
       # @api private
       # @private
@@ -104,14 +96,7 @@ module Azeroth
       #
       # @return [Array<Sinclair::MethodDefinition>]
       def add_params
-        add_method("#{name}_id", 'params.require(:id)')
-        add_method(
-          "#{name}_params",
-          <<-CODE
-            params.require(:#{name})
-              .permit(:#{permitted_attributes.join(', :')})
-          CODE
-        )
+        ParamsBuilder.new(model, builder).append
       end
 
       # Add methods for resource fetching
@@ -134,13 +119,6 @@ module Azeroth
       def add_helpers
         clazz.public_send(:helper_method, model.name)
         clazz.public_send(:helper_method, model.plural)
-      end
-
-      # Returns all updatable attributes
-      #
-      # @return [Array<String>]
-      def permitted_attributes
-        @permitted_attributes ||= klass.attribute_names - ['id']
       end
     end
   end

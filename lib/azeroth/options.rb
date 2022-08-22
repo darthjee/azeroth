@@ -35,18 +35,13 @@ module Azeroth
       [only].flatten.map(&:to_sym) - [except].flatten.map(&:to_sym)
     end
 
-    # Returns event dispatcher
+    # Returns the event registry
     #
-    # Event dispatcher is responsible for
-    # sending events such as +before_save+
-    # to it's correct calling point
+    # Event registry is used to handle events within the request
     #
-    # @return [Jace::Dispatcher]
-    def event_dispatcher(event)
-      Jace::Dispatcher.new(
-        before: try("before_#{event}"),
-        after: try("after_#{event}")
-      )
+    # @return [Jace::Registry]
+    def event_registry
+      @event_registry ||= build_event_registry
     end
 
     alias paginated? paginated
@@ -131,5 +126,22 @@ module Azeroth
     # Number of elements when pagination is active
     #
     # @return [Integer]
+
+    private
+
+    # private
+    #
+    # Builds the event registr
+    #
+    # The event registry is build using the before
+    # and after actions defined in optionsy
+    #
+    # @return [Jace::Registry]
+    def build_event_registry
+      Jace::Registry.new.tap do |registry|
+        registry.register(:save, :after, &after_save)
+        registry.register(:save, :before, &before_save)
+      end
+    end
   end
 end

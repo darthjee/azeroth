@@ -15,6 +15,7 @@ module Azeroth
   autoload :Decorator,           'azeroth/decorator'
   autoload :DummyDecorator,      'azeroth/dummy_decorator'
   autoload :Model,               'azeroth/model'
+  autoload :ParamsBuilder,       'azeroth/params_builder'
   autoload :RequestHandler,      'azeroth/request_handler'
   autoload :Resourceable,        'azeroth/resourceable'
   autoload :ResourceBuilder,     'azeroth/resource_builder'
