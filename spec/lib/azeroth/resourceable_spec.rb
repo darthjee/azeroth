@@ -2,7 +2,7 @@
 
 require 'spec_helper'
 
-fdescribe Azeroth::Resourceable do
+describe Azeroth::Resourceable do
   let(:controller_class) do
     Class.new(Controller) do
       include Azeroth::Resourceable
@@ -23,84 +23,84 @@ fdescribe Azeroth::Resourceable do
             .to add_method(method_name).to(controller_class)
         end
       end
+    end
 
-      context 'when the method is called' do
-        let(:rendered)   { {} }
+    context 'when passing the only option' do
+      let(:options) { { only: %i[index show] } }
 
-        before do
-          controller_class.resource_for(model_name)
-          allow(controller).to receive(:render) do |args|
-            rendered.merge!(args[:json])
-          end
-        end
-
-        it 'decorates the model' do
-          controller.show
-          expect(rendered).to eq(decorator.new(model).as_json)
-        end
-
-        context 'when the model does not have a decorator' do
-          let(:model_name) { :movie }
-
-          it 'renders model as json' do
-            controller.show
-            expect(rendered).to eq(model.as_json)
-          end
+      %i[index show].each do |method_name|
+        it do
+          expect { controller_class.resource_for(model_name, **options) }
+            .to add_method(method_name).to(controller_class)
         end
       end
 
-      context 'when passing the only option' do
-        let(:options) { { only: [:index, :show] } }
-
-        %i[index show].each do |method_name|
-          it do
-            expect { controller_class.resource_for(model_name, **options) }
-              .to add_method(method_name).to(controller_class)
-          end
+      %i[new edit update destroy].each do |method_name|
+        it do
+          expect { controller_class.resource_for(model_name, **options) }
+            .not_to add_method(method_name).to(controller_class)
         end
+      end
+    end
 
-        %i[new edit update destroy].each do |method_name|
-          it do
-            expect { controller_class.resource_for(model_name, **options) }
-              .not_to add_method(method_name).to(controller_class)
-          end
+    context 'when passing the except option' do
+      let(:options) { { except: %i[index show] } }
+
+      %i[index show].each do |method_name|
+        it do
+          expect { controller_class.resource_for(model_name, **options) }
+            .not_to add_method(method_name).to(controller_class)
         end
       end
 
-      context 'when passing the except option' do
-        let(:options) { { except: [:index, :show] } }
-
-        %i[index show].each do |method_name|
-          it do
-            expect { controller_class.resource_for(model_name, **options) }
-              .not_to add_method(method_name).to(controller_class)
-          end
+      %i[new edit update destroy].each do |method_name|
+        it do
+          expect { controller_class.resource_for(model_name, **options) }
+            .to add_method(method_name).to(controller_class)
         end
+      end
+    end
 
-        %i[new edit update destroy].each do |method_name|
-          it do
-            expect { controller_class.resource_for(model_name, **options) }
-              .to add_method(method_name).to(controller_class)
-          end
+    context 'when passing decorator option' do
+      let(:model_name) { :movie }
+      let(:decorator)  { Movie::SimpleDecorator }
+      let(:rendered)   { {} }
+
+      before do
+        controller_class.resource_for(model_name, decorator: decorator)
+
+        allow(controller).to receive(:render) do |args|
+          rendered.merge!(args[:json])
         end
       end
 
-      context 'when passing decorator option' do
+      it 'decorates the model' do
+        controller.show
+        expect(rendered).to eq(decorator.new(model).as_json)
+      end
+    end
+
+    context 'when the method is called' do
+      let(:rendered) { {} }
+
+      before do
+        controller_class.resource_for(model_name)
+        allow(controller).to receive(:render) do |args|
+          rendered.merge!(args[:json])
+        end
+      end
+
+      it 'decorates the model' do
+        controller.show
+        expect(rendered).to eq(decorator.new(model).as_json)
+      end
+
+      context 'when the model does not have a decorator' do
         let(:model_name) { :movie }
-        let(:decorator)  { Movie::SimpleDecorator }
-        let(:rendered)   { {} }
 
-        before do
-          controller_class.resource_for(model_name, decorator: decorator)
-
-          allow(controller).to receive(:render) do |args|
-            rendered.merge!(args[:json])
-          end
-        end
-
-        it 'decorates the model' do
+        it 'renders model as json' do
           controller.show
-          expect(rendered).to eq(decorator.new(model).as_json)
+          expect(rendered).to eq(model.as_json)
         end
       end
     end
