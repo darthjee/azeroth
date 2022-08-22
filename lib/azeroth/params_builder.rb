@@ -21,7 +21,7 @@ module Azeroth
       add_method("#{name}_id") { params.require(:id) }
       add_method("#{name}_params") do
         params.require(method_name)
-          .permit(*allowed_attributes)
+              .permit(*allowed_attributes)
       end
     end
 

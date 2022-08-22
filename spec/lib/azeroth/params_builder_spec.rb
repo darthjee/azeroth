@@ -32,8 +32,8 @@ describe Azeroth::ParamsBuilder do
       let(:id)         { Random.rand(10..100) }
       let(:expected_attributes) do
         {
-          "name" => document.name,
-          "reference" => document.reference
+          'name' => document.name,
+          'reference' => document.reference
         }
       end
 
