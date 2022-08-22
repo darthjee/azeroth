@@ -119,8 +119,7 @@ module Azeroth
     #
     # @return [Object] Result of given block
     def trigger_event(event, &block)
-      options.event_dispatcher(event)
-             .dispatch(controller, &block)
+      options.event_registry.trigger(event, controller, &block)
     end
 
     # @private
