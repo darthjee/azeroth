@@ -65,6 +65,24 @@ fdescribe Azeroth::Resourceable do
           end
         end
       end
+
+      context 'when passing the except option' do
+        let(:options) { { except: [:index, :show] } }
+
+        %i[index show].each do |method_name|
+          it do
+            expect { controller_class.resource_for(model_name, **options) }
+              .not_to add_method(method_name).to(controller_class)
+          end
+        end
+
+        %i[new edit update destroy].each do |method_name|
+          it do
+            expect { controller_class.resource_for(model_name, **options) }
+              .to add_method(method_name).to(controller_class)
+          end
+        end
+      end
     end
   end
 end
