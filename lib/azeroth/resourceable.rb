@@ -43,7 +43,8 @@ module Azeroth
       #   (default proc { <resource>.update(resource_params) }
       # @option options paginated [TrueClass,FalseClass] flag defining if index
       #   endpoint should be paginated
-      # @option options per_page [Integer] number of entries returned per page on index
+      # @option options per_page [Integer] number of entries returned per
+      #   page on index
       #
       # @return [Array<MethodDefinition>] list of methods created
       #
@@ -183,7 +184,7 @@ module Azeroth
       #
       #   class PaginatedDocumentsController < ApplicationController
       #     include Azeroth::Resourceable
-      #   
+      #
       #     resource_for :document, only: 'index', paginated: true
       #   end
       #
