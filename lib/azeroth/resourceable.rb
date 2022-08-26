@@ -38,12 +38,12 @@ module Azeroth
       # @option options build_with [Symbol,Proc] method/block
       #   to be ran when building resource
       #   (default proc { <resource_collection>.build(resource_params) }
-      # @option options build_with [Symbol,Proc] method/block
+      # @option options update_with [Symbol,Proc] method/block
       #   to be ran when updating resource
       #   (default proc { <resource>.update(resource_params) }
-      # @option paginated [TrueClass,FalseClass] flag defining if index
+      # @option options paginated [TrueClass,FalseClass] flag defining if index
       #   endpoint should be paginated
-      # @option per_page [Integer] number of entries returned per page on index
+      # @option options per_page [Integer] number of entries returned per page on index
       #
       # @return [Array<MethodDefinition>] list of methods created
       #
