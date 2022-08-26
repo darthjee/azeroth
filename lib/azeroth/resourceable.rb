@@ -25,17 +25,25 @@ module Azeroth
       #
       # @param name [String, Symbol] Name of the resource
       # @param options [Hash] resource building options
-      # @option options only [Array<Symbol,String>] List of
+      # @option options only [Array<Symbol,String>,Symbol,String] List of
       #   actions to be built
-      # @option options except [Array<Symbol,String>] List of
+      # @option options except [Array<Symbol,String>,Symbol,String] List of
       #   actions to not to be built
       # @option options decorator [Azeroth::Decorator,TrueClass,FalseClass]
       #   Decorator class or flag allowing/disallowing decorators
       # @option options before_save [Symbol,Proc] method/block
       #   to be ran on the controller before saving the resource
+      # @option options after_save [Symbol,Proc] method/block
+      #   to be ran on the controller after saving the resource
       # @option options build_with [Symbol,Proc] method/block
       #   to be ran when building resource
       #   (default proc { <resource_collection>.build(resource_params) }
+      # @option options build_with [Symbol,Proc] method/block
+      #   to be ran when updating resource
+      #   (default proc { <resource>.update(resource_params) }
+      # @option paginated [TrueClass,FalseClass] flag defining if index
+      #   endpoint should be paginated
+      # @option per_page [Integer] number of entries returned per page on index
       #
       # @return [Array<MethodDefinition>] list of methods created
       #
