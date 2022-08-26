@@ -7,7 +7,7 @@ describe PaginatedDocumentsController, controller: true do
     describe 'GET index' do
       before { create_list(:document, 30) }
 
-      it 'create game' do
+      it 'list documents with pagination page' do
         get '/paginated_documents.json'
 
         documents = JSON.parse(response.body)
@@ -18,7 +18,7 @@ describe PaginatedDocumentsController, controller: true do
         expect(response.headers['per_page']).to eq(20)
         expect(response.headers['page']).to eq(1)
 
-        get '/paginated_documents.json?page=1'
+        get '/paginated_documents.json?page=2'
 
         documents = JSON.parse(response.body)
         expect(documents)
