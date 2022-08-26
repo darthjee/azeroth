@@ -149,8 +149,8 @@ module Azeroth
       #   #   name: 'Pokemon',
       #   #   publisher: {
       #   #     name: 'Nintendo'
+      #   #   }
       #   # }
-      #   }
       #
       # @example Controller with before_save
       #   class PokemonsController < ApplicationController
