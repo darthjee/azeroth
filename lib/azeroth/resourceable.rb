@@ -178,6 +178,36 @@ module Azeroth
       #       params.require(:pokemon_master_id)
       #     end
       #   end
+      #
+      # @example Controller with paginated index response
+      #
+      #   class PaginatedDocumentsController < ApplicationController
+      #     include Azeroth::Resourceable
+      #   
+      #     resource_for :document, only: 'index', paginated: true
+      #   end
+      #
+      #   30.times { create(:document) }
+      #
+      #   get '/paginated_documents.json'
+      #
+      #   # returns Array with 20 first documents
+      #   # returns in the headers pagination headers
+      #   {
+      #     'pages' => 2,
+      #     'per_page' => 20,
+      #     'page' => 1
+      #   }
+      #
+      #   get '/paginated_documents.json?page=2'
+      #
+      #   # returns Array with 10 next documents
+      #   # returns in the headers pagination headers
+      #   {
+      #     'pages' => 2,
+      #     'per_page' => 20,
+      #     'page' => 2
+      #   }
     end
 
     private
