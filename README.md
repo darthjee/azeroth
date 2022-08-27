@@ -144,21 +144,21 @@ It accepts options
 
   # returns Array with 20 first documents
   # returns in the headers pagination headers
-  {
-    'pages' => 2,
-    'per_page' => 20,
-    'page' => 1
-  }
+  # {
+  #   'pages' => 2,
+  #   'per_page' => 20,
+  #   'page' => 1
+  # }
 
   get '/paginated_documents.json?page=2'
 
   # returns Array with 10 next documents
   # returns in the headers pagination headers
-  {
-    'pages' => 2,
-    'per_page' => 20,
-    'page' => 2
-  }
+  # {
+  #   'pages' => 2,
+  #   'per_page' => 20,
+  #   'page' => 2
+  # }
 ```
 
 ## Azeroth::Decorator
