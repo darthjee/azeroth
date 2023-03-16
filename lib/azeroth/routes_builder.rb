@@ -5,15 +5,14 @@ module Azeroth
   # @author Darthjee
   #
   # Builder resposible for adding routes methods to the controller
-  class RoutesBuilder
-    # @param model [Model] resource interface
-    # @param builder [Sinclair] methods builder
-    # @param options [Option]
-    def initialize(model:, builder:, options:)
-      @model = model
-      @builder = builder
-      @options = options
-    end
+  class RoutesBuilder < Sinclair::Model
+    initialize_with(:model, :builder, :options, writter: false)
+
+    # @method initialize(model:, builder:, options:)
+    #   @param model [Model] resource interface
+    #   @param builder [Sinclair] methods builder
+    #   @param options [Option]
+    #   @return [RoutesBuilder]
 
     # Append the routes methods to be built
     #
@@ -26,7 +25,6 @@ module Azeroth
 
     private
 
-    attr_reader :model, :builder, :options
     # @method model
     # @api private
     # @private
