@@ -21,7 +21,7 @@ Gem::Specification.new do |gem|
   gem.add_runtime_dependency 'activesupport',       '~> 5.2.x'
   gem.add_runtime_dependency 'darthjee-active_ext', '>= 1.3.2'
   gem.add_runtime_dependency 'jace',                '>= 0.1.1'
-  gem.add_runtime_dependency 'sinclair',            '>= 1.13.0'
+  gem.add_runtime_dependency 'sinclair',            '>= 1.14.0'
 
   gem.add_development_dependency 'actionpack',                '5.2.8.1'
   gem.add_development_dependency 'activerecord',              '5.2.8.1'
