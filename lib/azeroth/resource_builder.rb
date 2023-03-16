@@ -12,7 +12,7 @@ module Azeroth
   class ResourceBuilder
     # @param model [Model] Resource model interface
     # @param builder [Sinclair] method builder
-    def initialize(model, builder)
+    def initialize(model:, builder:)
       @model = model
       @builder = builder
     end

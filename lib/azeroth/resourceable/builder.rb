@@ -105,7 +105,7 @@ module Azeroth
       #
       # @return [Array<Sinclair::MethodDefinition>]
       def add_resource
-        ResourceBuilder.new(model, builder).append
+        ResourceBuilder.new(model: model, builder: builder).append
       end
 
       # Add metohods for each route
