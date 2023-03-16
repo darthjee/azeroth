@@ -9,13 +9,15 @@ module Azeroth
   # The builder adds 2 methods, one for listing all
   # entries of a resource, and one for fetching an specific
   # entry
-  class ResourceBuilder
-    # @param model [Model] Resource model interface
-    # @param builder [Sinclair] method builder
-    def initialize(model:, builder:)
-      @model = model
-      @builder = builder
-    end
+  class ResourceBuilder < Sinclair::Model
+    # @!method initialize(model:, builder:)
+    #   @api private
+    #
+    #   @param model [Model] Resource model interface
+    #   @param builder [Sinclair] method builder
+    #
+    #   @return [ResourceBuilder]
+    initialize_with(:model, :builder, writter: false)
 
     # Append methods to be built to the builder
     #
@@ -30,7 +32,6 @@ module Azeroth
 
     private
 
-    attr_reader :model, :builder
     # @method model
     # @api private
     # @private
