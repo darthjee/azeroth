@@ -5,6 +5,7 @@ services:
     working_dir: /home/app/app
     volumes:
       - .:/home/app/app
+      - /Users/fernandofavini/projects/mine/sinclair:/usr/local/bundle/gems/sinclair-1.13.0
 
   base_build:
     <<: *base
