@@ -30,8 +30,6 @@ module Azeroth
       add_method(name, "@#{name} ||= #{plural}.find(#{name}_id)")
     end
 
-    private
-
     # @method model
     # @api private
     # @private
