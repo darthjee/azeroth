@@ -112,7 +112,9 @@ module Azeroth
       #
       # @return [Array<Sinclair::MethodDefinition>]
       def add_routes
-        RoutesBuilder.new(model, builder, options).append
+        RoutesBuilder.new(
+          model: model, builder: builder, options: options
+        ).append
       end
 
       # Add helpers to render objects on template

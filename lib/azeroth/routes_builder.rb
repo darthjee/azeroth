@@ -9,7 +9,7 @@ module Azeroth
     # @param model [Model] resource interface
     # @param builder [Sinclair] methods builder
     # @param options [Option]
-    def initialize(model, builder, options)
+    def initialize(model:, builder:, options:)
       @model = model
       @builder = builder
       @options = options

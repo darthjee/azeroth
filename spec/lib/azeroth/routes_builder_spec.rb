@@ -4,7 +4,9 @@ require 'spec_helper'
 
 describe Azeroth::RoutesBuilder do
   subject(:routes_builder) do
-    described_class.new(model, builder, options)
+    described_class.new(
+      model: model, builder: builder, options: options
+    )
   end
 
   let(:controller) { controller_class.new }
