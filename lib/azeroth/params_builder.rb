@@ -8,7 +8,7 @@ module Azeroth
   class ParamsBuilder
     # @param model [Model] resource interface
     # @param builder [Sinclair] methods builder
-    def initialize(model, builder)
+    def initialize(model:, builder:)
       @model = model
       @builder = builder
     end

@@ -3,7 +3,9 @@
 require 'spec_helper'
 
 describe Azeroth::ParamsBuilder do
-  subject(:params_builder) { described_class.new(model, builder) }
+  subject(:params_builder) do
+    described_class.new(model: model, builder: builder)
+  end
 
   let(:model)   { Azeroth::Model.new(:document, options) }
   let(:options) { Azeroth::Options.new }

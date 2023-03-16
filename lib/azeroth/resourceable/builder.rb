@@ -96,7 +96,9 @@ module Azeroth
       #
       # @return [Array<Sinclair::MethodDefinition>]
       def add_params
-        ParamsBuilder.new(model, builder).append
+        ParamsBuilder.new(
+          model: model, builder: builder
+        ).append
       end
 
       # Add methods for resource fetching
