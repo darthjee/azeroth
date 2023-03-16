@@ -6,11 +6,13 @@ module Azeroth
   #
   # Class responsible for adding params handling methods to a controller
   class ParamsBuilder < Sinclair::Model
-    # @!method initialize(model: builder:)
+    # @!method initialize(model:, builder:)
     #   @api private
     #
     #   @param model [Model] Resource interface
     #   @param builder [Sinclair] Methods builder
+    #
+    #   @return [ParamsBuilder]
     initialize_with(:model, :builder, writter: false)
 
     # Append the params methods to be built
@@ -26,6 +28,8 @@ module Azeroth
               .permit(*allowed_attributes)
       end
     end
+
+    private
 
     # @method model
     # @api private
