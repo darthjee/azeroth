@@ -4,7 +4,9 @@ require 'spec_helper'
 
 describe Azeroth::Decorator::KeyValueExtractor do
   subject(:extractor) do
-    described_class.new(decorator, attribute, options)
+    described_class.new(
+      decorator: decorator, attribute: attribute, options: options
+    )
   end
 
   let(:decorator_class) { Class.new(Azeroth::Decorator) }

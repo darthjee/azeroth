@@ -25,7 +25,9 @@ module Azeroth
       # @return [Hash]
       def as_json
         attributes_map.inject({}) do |hash, (method, options)|
-          new_hash = KeyValueExtractor.new(decorator, method, options).as_json
+          new_hash = KeyValueExtractor.new(
+            decorator: decorator, attribute: method, options: options
+          ).as_json
           hash.merge!(new_hash)
         end
       end
