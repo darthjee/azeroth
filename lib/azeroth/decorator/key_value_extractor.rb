@@ -11,18 +11,14 @@ module Azeroth
     #
     # A decorator is infered for the value / attribute
     # or used from the options given
-    class KeyValueExtractor
+    class KeyValueExtractor < Sinclair::Model
+      initialize_with(:decorator, :attribute, :options)
       # @param decorator [Decorator] decorator object
       # @param attribute [Symbol] attribute to be used on output hash
       # @param options [Decorator::Options] decoration options
       # @option options if [Proc,Symbol] conditional to be
       #   checked when exposing field
       #   (see {Decorator::Options#if})
-      def initialize(decorator, attribute, options)
-        @decorator = decorator
-        @attribute = attribute
-        @options = options
-      end
 
       # Return hash for attribute
       #
@@ -38,9 +34,8 @@ module Azeroth
         }
       end
 
-      # private
+      private
 
-      attr_reader :decorator, :attribute, :options
       # @method decorator
       # @api private
       # @private

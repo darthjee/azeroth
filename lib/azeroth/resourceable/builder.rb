@@ -13,12 +13,12 @@ module Azeroth
     # @see ResourceRouteBuilder
     # @see RoutesBuilder
     class Builder
-      # @param clazz [ActionController::Base] Controller to
+      # @param klass [ActionController::Base] Controller to
       #   to be changed
       # @param model_name [Symbol,String]
       # @param options [Options]
-      def initialize(clazz, model_name, options)
-        @clazz = clazz
+      def initialize(klass, model_name, options)
+        @klass = klass
         @options = options
         @model = Azeroth::Model.new(model_name, options)
 
@@ -30,8 +30,8 @@ module Azeroth
 
       private
 
-      attr_reader :clazz, :model, :options
-      # @method clazz
+      attr_reader :klass, :model, :options
+      # @method klass
       # @api private
       # @private
       #
@@ -89,36 +89,40 @@ module Azeroth
       #
       # @see https://www.rubydoc.info/gems/sinclair Sinclair
       def builder
-        @builder ||= Sinclair.new(clazz)
+        @builder ||= Sinclair.new(klass)
       end
 
       # Add methods for id and parameters
       #
       # @return [Array<Sinclair::MethodDefinition>]
       def add_params
-        ParamsBuilder.new(model, builder).append
+        ParamsBuilder.new(
+          model: model, builder: builder
+        ).append
       end
 
       # Add methods for resource fetching
       #
       # @return [Array<Sinclair::MethodDefinition>]
       def add_resource
-        ResourceBuilder.new(model, builder).append
+        ResourceBuilder.new(model: model, builder: builder).append
       end
 
       # Add metohods for each route
       #
       # @return [Array<Sinclair::MethodDefinition>]
       def add_routes
-        RoutesBuilder.new(model, builder, options).append
+        RoutesBuilder.new(
+          model: model, builder: builder, options: options
+        ).append
       end
 
       # Add helpers to render objects on template
       #
       # @return [String]
       def add_helpers
-        clazz.public_send(:helper_method, model.name)
-        clazz.public_send(:helper_method, model.plural)
+        klass.public_send(:helper_method, model.name)
+        klass.public_send(:helper_method, model.plural)
       end
     end
   end

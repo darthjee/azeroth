@@ -5,13 +5,15 @@ module Azeroth
   # @author Darthjee
   #
   # Class responsible for adding params handling methods to a controller
-  class ParamsBuilder
-    # @param model [Model] resource interface
-    # @param builder [Sinclair] methods builder
-    def initialize(model, builder)
-      @model = model
-      @builder = builder
-    end
+  class ParamsBuilder < Sinclair::Model
+    # @!method initialize(model:, builder:)
+    #   @api private
+    #
+    #   @param model [Model] Resource interface
+    #   @param builder [Sinclair] Methods builder
+    #
+    #   @return [ParamsBuilder]
+    initialize_with(:model, :builder, writter: false)
 
     # Append the params methods to be built
     #
@@ -27,7 +29,8 @@ module Azeroth
       end
     end
 
-    attr_reader :model, :builder
+    private
+
     # @method model
     # @api private
     # @private
