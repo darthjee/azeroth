@@ -51,4 +51,5 @@ Gem::Specification.new do |gem|
   gem.add_development_dependency 'tzinfo-data',               '~> 1.2022.1'
   gem.add_development_dependency 'yard',                      '0.9.27'
   gem.add_development_dependency 'yardstick',                 '0.9.9'
+  gem.add_development_dependency 'sprockets-rails',           '3.4.2'
 end
