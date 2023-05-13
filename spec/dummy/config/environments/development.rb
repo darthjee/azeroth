@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 Rails.application.configure do
+  config.hosts << 'www.example.com'
   # Settings specified here will take precedence over
   # those in config/application.rb.
 

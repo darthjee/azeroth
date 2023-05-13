@@ -128,7 +128,9 @@ describe DocumentsWithErrorController do
 
     it 'returns updated document json' do
       patch :update, params: parameters
-      expect(response.body).to eq(expected_body)
+
+      expect(JSON.parse(response.body))
+        .to eq(JSON.parse(expected_body))
     end
 
     it do
