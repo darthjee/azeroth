@@ -5,8 +5,9 @@ require 'spec_helper'
 describe Azeroth::Decorator do
   subject(:decorator) { DummyModel::Decorator.new(object) }
 
-  let(:model)  { build(:dummy_model) }
-  let(:object) { model }
+  let(:model)    { build(:dummy_model) }
+  let(:object)   { model }
+  let(:instance) { decorator.new(object) }
 
   describe '.expose' do
     subject(:decorator) { Class.new(described_class) }
@@ -57,6 +58,20 @@ describe Azeroth::Decorator do
           .to not_add_method(:name)
           .to(decorator)
           .and raise_error(Sinclair::Exception::InvalidOptions)
+      end
+    end
+
+    context "when decorator already has the method" do
+      before do
+        decorator.define_method(:name) do
+          "some name"
+        end
+      end
+
+      it do
+        expect { decorator.send(:expose, :name) }
+          .not_to change_method(:name)
+          .on(instance)
       end
     end
   end
