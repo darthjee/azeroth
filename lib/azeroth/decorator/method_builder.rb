@@ -7,13 +7,20 @@ module Azeroth
     # Responsible for building readers for attributes
     # @api private
     class MethodBuilder < Sinclair
-      # Builds reader
-      #
-      # reaader delegate method calls to @object
-      #
-      # @return [Array<Sinclair::MethodDefinition>]
-      def self.build_reader(klass, attribute)
-        new(klass).build_reader(attribute)
+      class << self
+        # Builds reader
+        #
+        # reaader delegate method calls to @object
+        #
+        # @return [Array<Sinclair::MethodDefinition>]
+        def build_reader(klass, attribute, options)
+          self.new(klass, options).build_reader(attribute)
+        end
+      end
+
+      def initialize(klass, options)
+        super(klass)
+        @options = options
       end
 
       # (see MethodBuilder.build_reader)

@@ -229,7 +229,7 @@ module Azeroth
       def expose(attribute, **options_hash)
         options = Decorator::Options.new(options_hash)
 
-        MethodBuilder.build_reader(self, attribute)
+        MethodBuilder.build_reader(self, attribute, options)
 
         attributes_map[attribute] = options
       end
