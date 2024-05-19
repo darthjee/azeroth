@@ -68,10 +68,20 @@ describe Azeroth::Decorator do
         end
       end
 
-      it do
-        expect { decorator.send(:expose, :name) }
-          .not_to change_method(:name)
-          .on(instance)
+      context "when not passing override"do
+        it do
+          expect { decorator.send(:expose, :name) }
+            .to change_method(:name)
+            .on(instance)
+        end
+      end
+
+      context "when passing override"do
+        it do
+          expect { decorator.send(:expose, :name, override: false) }
+            .not_to change_method(:name)
+            .on(instance)
+        end
       end
     end
   end

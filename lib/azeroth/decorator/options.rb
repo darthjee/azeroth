@@ -13,7 +13,8 @@ module Azeroth
       DEFAULT_OPTIONS = {
         as: nil,
         if: nil,
-        decorator: true
+        decorator: true,
+        override: true
       }.freeze
 
       with_options DEFAULT_OPTIONS

@@ -25,8 +25,16 @@ module Azeroth
 
       # (see MethodBuilder.build_reader)
       def build_reader(attribute)
+        return if skip_creation?(attribute)
+
         add_method(attribute, "@object.#{attribute}")
         build
+      end
+
+      def skip_creation?(attribute)
+        return false unless klass.method_defined?(attribute)
+
+        !options.override
       end
     end
   end
