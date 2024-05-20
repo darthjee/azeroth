@@ -7,7 +7,7 @@ describe Azeroth::Decorator::MethodBuilder do
   let(:decorator)       { decorator_class.new(object) }
   let(:model)           { build(:dummy_model) }
   let(:object)          { model }
-  let(:options)         { Azeroth::Decorator::Options.new({}) } 
+  let(:options)         { Azeroth::Decorator::Options.new({}) }
 
   describe '.build_reader' do
     it do

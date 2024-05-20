@@ -14,7 +14,7 @@ module Azeroth
         #
         # @return [Array<Sinclair::MethodDefinition>]
         def build_reader(klass, attribute, options)
-          self.new(klass, options).build_reader(attribute)
+          new(klass, options).build_reader(attribute)
         end
       end
 

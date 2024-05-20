@@ -62,14 +62,14 @@ describe Azeroth::Decorator do
       end
     end
 
-    context "when decorator already has the method" do
+    context 'when decorator already has the method' do
       before do
         decorator.define_method(:name) do
-          "some name"
+          'some name'
         end
       end
 
-      context "when not passing override"do
+      context 'when not passing override' do
         it do
           expect { decorator.send(:expose, :name) }
             .to change(decorator, :attributes_map)
@@ -84,8 +84,8 @@ describe Azeroth::Decorator do
         end
       end
 
-      context "when passing override as true" do
-        let(:options_hash) { { override: true } } 
+      context 'when passing override as true' do
+        let(:options_hash) { { override: true } }
 
         it do
           expect { decorator.send(:expose, :name, **options_hash) }
@@ -101,8 +101,8 @@ describe Azeroth::Decorator do
         end
       end
 
-      context "when passing override as false"do
-        let(:options_hash) { { override: false } } 
+      context 'when passing override as false' do
+        let(:options_hash) { { override: false } }
 
         it do
           expect { decorator.send(:expose, :name, **options_hash) }
@@ -119,9 +119,9 @@ describe Azeroth::Decorator do
       end
     end
 
-    context "When passing reader option" do
-      context "when option is true" do
-        let(:options_hash) { { reader: true } } 
+    context 'when passing reader option' do
+      context 'when option is true' do
+        let(:options_hash) { { reader: true } }
 
         it do
           expect { decorator.send(:expose, :name, **options_hash) }
@@ -136,8 +136,8 @@ describe Azeroth::Decorator do
         end
       end
 
-      context "when option is false" do
-        let(:options_hash) { { reader: false } } 
+      context 'when option is false' do
+        let(:options_hash) { { reader: false } }
 
         it do
           expect { decorator.send(:expose, :name, **options_hash) }

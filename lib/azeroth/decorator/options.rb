@@ -15,7 +15,7 @@ module Azeroth
         if: nil,
         decorator: true,
         override: true,
-        reader: true,
+        reader: true
       }.freeze
 
       with_options DEFAULT_OPTIONS
