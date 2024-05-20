@@ -18,10 +18,10 @@ describe Azeroth::RequestHandler::Pagination do
     end
 
     context "when parameters has page value" do
-     let(:parameters)        { { page: page } }
-     let(:page)              { Random.rand(1..10) }
-     let(:expected_offset)   { (page - 1) * expected_per_page }
-     let(:expected_per_page) { 20 }
+      let(:parameters)        { { page: page } }
+      let(:page)              { Random.rand(1..10) }
+      let(:expected_offset)   { (page - 1) * expected_per_page }
+      let(:expected_per_page) { 20 }
 
       it "returns value from request" do
         expect(pagination.offset).to eq(expected_offset)
@@ -29,9 +29,21 @@ describe Azeroth::RequestHandler::Pagination do
     end
 
     context "when parameters has per_page value" do
-     let(:parameters)        { { per_page: per_page } }
-     let(:per_page)          { Random.rand(1..10) }
-     let(:expected_offset)   { 0 }
+      let(:parameters)        { { per_page: per_page } }
+      let(:per_page)          { Random.rand(1..10) }
+      let(:expected_offset)   { 0 }
+
+      it "returns value from request" do
+        expect(pagination.offset).to eq(expected_offset)
+      end
+    end
+
+    context "when parameters has page and per page values" do
+      let(:parameters)        { { page: page } }
+      let(:page)              { Random.rand(1..10) }
+      let(:per_page)          { Random.rand(1..10) }
+      let(:expected_offset)   { (page - 1) * expected_per_page }
+      let(:expected_per_page) { page }
 
       it "returns value from request" do
         expect(pagination.offset).to eq(expected_offset)
