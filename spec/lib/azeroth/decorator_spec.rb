@@ -12,8 +12,9 @@ describe Azeroth::Decorator do
   describe '.expose' do
     subject(:decorator) { Class.new(described_class) }
 
+    let(:options_hash) { {} }
     let(:expected_options) do
-      Azeroth::Decorator::Options.new
+      Azeroth::Decorator::Options.new(options_hash)
     end
 
     it do
@@ -95,37 +96,33 @@ describe Azeroth::Decorator do
 
     context "When passing reader option" do
       context "when option is true" do
-        let(:expected_options) do
-          Azeroth::Decorator::Options.new(reader: true)
-        end
+        let(:options_hash) { { reader: true } } 
 
         it do
-          expect { decorator.send(:expose, :name, reader: true) }
+          expect { decorator.send(:expose, :name, **options_hash) }
             .to change(decorator, :attributes_map)
             .from({})
             .to({ name: expected_options })
         end
 
         it do
-          expect { decorator.send(:expose, :name, reader: true) }
+          expect { decorator.send(:expose, :name, **options_hash) }
             .to add_method(:name).to(decorator)
         end
       end
 
       context "when option is false" do
-        let(:expected_options) do
-          Azeroth::Decorator::Options.new(reader: false)
-        end
+        let(:options_hash) { { reader: false } } 
 
         it do
-          expect { decorator.send(:expose, :name, reader: false) }
+          expect { decorator.send(:expose, :name, **options_hash) }
             .to change(decorator, :attributes_map)
             .from({})
             .to({ name: expected_options })
         end
 
         it do
-          expect { decorator.send(:expose, :name, reader: false) }
+          expect { decorator.send(:expose, :name, **options_hash) }
             .not_to add_method(:name).to(decorator)
         end
       end
