@@ -92,6 +92,44 @@ describe Azeroth::Decorator do
         end
       end
     end
+
+    context "When passing reader option" do
+      context "when option is true" do
+        let(:expected_options) do
+          Azeroth::Decorator::Options.new(reader: true)
+        end
+
+        it do
+          expect { decorator.send(:expose, :name, reader: true) }
+            .to change(decorator, :attributes_map)
+            .from({})
+            .to({ name: expected_options })
+        end
+
+        it do
+          expect { decorator.send(:expose, :name, reader: true) }
+            .to add_method(:name).to(decorator)
+        end
+      end
+
+      context "when option is false" do
+        let(:expected_options) do
+          Azeroth::Decorator::Options.new(reader: false)
+        end
+
+        it do
+          expect { decorator.send(:expose, :name, reader: false) }
+            .to change(decorator, :attributes_map)
+            .from({})
+            .to({ name: expected_options })
+        end
+
+        it do
+          expect { decorator.send(:expose, :name, reader: false) }
+            .not_to add_method(:name).to(decorator)
+        end
+      end
+    end
   end
 
   describe '#as_json' do
