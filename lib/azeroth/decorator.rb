@@ -65,15 +65,17 @@ module Azeroth
     #   be exposed
     # @option options_hash decorator [FalseClass,TrueClass,Class]
     #   flag to use or not a decorator or decorator class to be used
-    # @option options_hash reader [Boolean] Flag indicating if a reader to access
-    #   the attribute should be created. usefull if you want method_missing to take over
+    # @option options_hash reader [Boolean] Flag indicating if a reader
+    #   to access the attribute should be created. usefull if you want
+    #   method_missing to take over
     # @option options_hash override [Boolean] Flag indicating if an
     #   existing method should be overriden.
     #   This is useful when a method acessor was included from another module
     #
     # @return [Array<Symbol>]
     #
-    # @see Decorator::ClassMethods#expose Decorator::ClassMethods#expose for examples
+    # @see Decorator::ClassMethods#expose Decorator::ClassMethods#expose
+    #   for examples
 
     # @api private
     #
