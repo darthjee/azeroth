@@ -51,4 +51,10 @@ ActiveRecord::Schema.define do
     t.string :name, null: false
     t.string :director, null: false
   end
+
+  create_table :websites, force: true do |t|
+    t.string :domain, null: false
+    t.integer :port, limit: 2, unsigned: true
+    t.string :protocol, limit: 5
+  end
 end

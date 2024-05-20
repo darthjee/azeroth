@@ -11,7 +11,7 @@ Azeroth
 
 Yard Documentation
 -------------------
-[https://www.rubydoc.info/gems/azeroth/1.0.0](https://www.rubydoc.info/gems/azeroth/1.0.0)
+[https://www.rubydoc.info/gems/azeroth/1.1.0](https://www.rubydoc.info/gems/azeroth/1.1.0)
 
 Azeroth has been designed making the coding of controllers easier
 as routes in controllers are usually copy, paste and replace of same
@@ -24,6 +24,10 @@ does not perform database operations
 
 Future versions will enable `html` rendering to also perform
 database operations.
+
+Current Release: [1.1.0](https://github.com/darthjee/azeroth/tree/1.1.0)
+
+[Next release](https://github.com/darthjee/azeroth/compare/1.1.0...master)
 
 Installation
 ---------------
@@ -166,6 +170,14 @@ It accepts options
 [Decorators](https://www.rubydoc.info/gems/azeroth/Azeroth/Decorator) are
 used to define how an object is exposed as json on controller responses
 defining which and how fields will be exposed
+
+Exposing options:
+
+- as: custom key to expose the value as
+- if: method/block to be called checking if an attribute should or should not be exposed
+- decorator: flag to use or not a decorator or decorator class to be used
+- reader: Flag indicating if a reader to access the attribute should be created. usefull if you want method_missing to take over
+- override: Flag indicating if an existing method should be overriden. This is useful when a method acessor was included from another module
 
 ```ruby
   # pokemon/decorator.rb

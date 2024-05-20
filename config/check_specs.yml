@@ -1,4 +1,5 @@
 ignore:
+  - lib/azeroth/decorator/class_methods.rb
   - lib/azeroth/decorator/options.rb
   - lib/azeroth/resourceable/class_methods.rb
   - lib/azeroth/resourceable.rb

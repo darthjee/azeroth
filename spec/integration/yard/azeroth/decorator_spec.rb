@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'spec_helper'
+
 describe Azeroth::Decorator do
   describe 'yard' do
     describe '#as_json' do
@@ -58,6 +60,19 @@ describe Azeroth::Decorator do
               'name' => 'pikachu'
             }]
           }
+        )
+      end
+
+      it 'example without override' do
+        website = Website.create(
+          protocol: :http,
+          domain: 'google.com'
+        )
+
+        decorator = Website::Decorator.new(website)
+
+        expect(decorator.as_json).to eq(
+          'location' => 'http://google.com:*'
         )
       end
     end
