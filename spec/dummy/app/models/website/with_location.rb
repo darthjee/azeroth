@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Website < ActiveRecord::Base
   module WithLocation
     def location

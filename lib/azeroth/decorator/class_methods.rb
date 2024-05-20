@@ -39,7 +39,7 @@ module Azeroth
       #
       # @return (see Decorator.expose)
       #
-      # @example
+      # @example Simple usage
       #   class DummyModel
       #     include ActiveModel::Model
       #
@@ -175,6 +175,62 @@ module Azeroth
       #   #     'name' => 'pikachu'
       #   #   }]
       #   # }
+      #
+      # @example With method building options
+      #   ActiveRecord::Schema.define do
+      #     self.verbose = false
+      #
+      #     create_table :websites, force: true do |t|
+      #       t.string :domain, null: false
+      #       t.integer :port, limit: 2, unsigned: true
+      #       t.string :protocol, limit: 5
+      #     end
+      #   end
+      #
+      #   class Website < ActiveRecord::Base
+      #   end
+      #
+      #   class Website < ActiveRecord::Base
+      #     module WithLocation
+      #       def location
+      #         "#{protocol}://#{domain}:#{port}"
+      #       end
+      #
+      #       def protocol
+      #         website.protocol || '*'
+      #       end
+      #
+      #       def domain
+      #         website.domain || '*'
+      #       end
+      #
+      #       def port
+      #         website.port || '*'
+      #       end
+      #     end
+      #   end
+      #
+      #   class Website < ActiveRecord::Base
+      #     class Decorator < Azeroth::Decorator
+      #       include WithLocation
+      #
+      #       expose :location, override: false
+      #
+      #       alias website object
+      #     end
+      #   end
+      #
+      #   website = Website.create(
+      #     protocol: :http,
+      #     domain: 'google.com'
+      #   )
+      #
+      #   decorator = Website::Decorator.new(website)
+      #
+      #   decorator.as_json
+      #
+      #   # returns
+      #   # { 'location' => 'http://google.com:*' }
       def expose(attribute, **options_hash)
         options = Decorator::Options.new(options_hash)
 
