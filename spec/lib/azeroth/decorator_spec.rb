@@ -5,14 +5,16 @@ require 'spec_helper'
 describe Azeroth::Decorator do
   subject(:decorator) { DummyModel::Decorator.new(object) }
 
-  let(:model)  { build(:dummy_model) }
-  let(:object) { model }
+  let(:model)    { build(:dummy_model) }
+  let(:object)   { model }
+  let(:instance) { decorator.new(object) }
 
   describe '.expose' do
     subject(:decorator) { Class.new(described_class) }
 
+    let(:options_hash) { {} }
     let(:expected_options) do
-      Azeroth::Decorator::Options.new
+      Azeroth::Decorator::Options.new(options_hash)
     end
 
     it do
@@ -57,6 +59,97 @@ describe Azeroth::Decorator do
           .to not_add_method(:name)
           .to(decorator)
           .and raise_error(Sinclair::Exception::InvalidOptions)
+      end
+    end
+
+    context 'when decorator already has the method' do
+      before do
+        decorator.define_method(:name) do
+          'some name'
+        end
+      end
+
+      context 'when not passing override' do
+        it do
+          expect { decorator.send(:expose, :name) }
+            .to change(decorator, :attributes_map)
+            .from({})
+            .to({ name: expected_options })
+        end
+
+        it do
+          expect { decorator.send(:expose, :name) }
+            .to change_method(:name)
+            .on(instance)
+        end
+      end
+
+      context 'when passing override as true' do
+        let(:options_hash) { { override: true } }
+
+        it do
+          expect { decorator.send(:expose, :name, **options_hash) }
+            .to change(decorator, :attributes_map)
+            .from({})
+            .to({ name: expected_options })
+        end
+
+        it do
+          expect { decorator.send(:expose, :name, **options_hash) }
+            .to change_method(:name)
+            .on(instance)
+        end
+      end
+
+      context 'when passing override as false' do
+        let(:options_hash) { { override: false } }
+
+        it do
+          expect { decorator.send(:expose, :name, **options_hash) }
+            .to change(decorator, :attributes_map)
+            .from({})
+            .to({ name: expected_options })
+        end
+
+        it do
+          expect { decorator.send(:expose, :name, **options_hash) }
+            .not_to change_method(:name)
+            .on(instance)
+        end
+      end
+    end
+
+    context 'when passing reader option' do
+      context 'when option is true' do
+        let(:options_hash) { { reader: true } }
+
+        it do
+          expect { decorator.send(:expose, :name, **options_hash) }
+            .to change(decorator, :attributes_map)
+            .from({})
+            .to({ name: expected_options })
+        end
+
+        it do
+          expect { decorator.send(:expose, :name, **options_hash) }
+            .to add_method(:name).to(decorator)
+        end
+      end
+
+      context 'when option is false' do
+        let(:options_hash) { { reader: false } }
+
+        it do
+          expect { decorator.send(:expose, :name, **options_hash) }
+            .to change(decorator, :attributes_map)
+            .from({})
+            .to({ name: expected_options })
+        end
+
+        it do
+          expect { decorator.send(:expose, :name, **options_hash) }
+            .not_to add_method(:name).to(decorator)
+        end
       end
     end
   end
