@@ -7,7 +7,6 @@ module Azeroth
     # Wrapper for request finding pagination attributes
     class Pagination
       def initialize(params, options)
-        binding.pry
         @params = params
         @options = options
       end
