@@ -58,7 +58,7 @@ module Azeroth
     # @param attribute [Symbol,String] attribute to be exposed
     # @param options_hash [Hash] exposing options
     # @option options_hash as [Symbol,String] custom key
-    #   to expose
+    #   to expose the value as
     # @option options_hash if [Symbol,Proc] method/block
     #   to be called
     #   checking if an attribute should or should not
