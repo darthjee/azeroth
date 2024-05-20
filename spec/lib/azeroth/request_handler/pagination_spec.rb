@@ -76,4 +76,41 @@ describe Azeroth::RequestHandler::Pagination do
       end
     end
   end
+
+  describe 'limit' do
+    context 'when nothing was defined' do
+      it 'returns default value' do
+        expect(pagination.limit).to eq(20)
+      end
+    end
+
+    context 'when parameters has per_page' do
+      let(:parameters) { { per_page: per_page } }
+      let(:per_page)   { Random.rand(1..10) }
+
+      it 'returns value from request' do
+        expect(pagination.limit).to eq(per_page)
+      end
+    end
+
+    context 'when options has per_page' do
+      let(:options_hash) { { per_page: per_page } }
+      let(:per_page)     { Random.rand(1..10) }
+
+      it 'returns value from options' do
+        expect(pagination.limit).to eq(per_page)
+      end
+    end
+
+    context 'when params and options have per_page' do
+      let(:parameters)       { { per_page: per_page } }
+      let(:per_page)         { Random.rand(1..10) }
+      let(:options_hash)     { { per_page: options_per_page } }
+      let(:options_per_page) { Random.rand(1..10) }
+
+      it 'returns value from request' do
+        expect(pagination.limit).to eq(per_page)
+      end
+    end
+  end
 end
