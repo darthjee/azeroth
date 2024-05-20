@@ -8,7 +8,13 @@ module Azeroth
     class Index < RequestHandler
       private
 
-      delegate :paginated?, :per_page, to: :options
+      delegate :per_page, :offset, :limit,
+               :current_page, to: :pagination
+      delegate :paginated?, to: :options
+
+      def pagination
+        @pagination ||= Pagination.new(params, options)
+      end
 
       # @private
       #
@@ -47,43 +53,11 @@ module Azeroth
 
       # @private
       #
-      # offest used in pagination
-      #
-      # offset is retrieved from +params[:per_page]+
-      # or +options.per_page+
-      #
-      # @return [Integer]
-      def offset
-        (current_page - 1) * limit
-      end
-
-      # @private
-      #
-      # limit used in pagination
-      #
-      # limit is retrieved from +params[:page]+
-      #
-      # @return [Integer]
-      def limit
-        (params[:per_page] || per_page).to_i
-      end
-
-      # @private
-      #
       # default scope of elements
       #
       # @return [Enumerable<Object>]
       def scoped_entries
         controller.send(model.plural)
-      end
-
-      # @private
-      #
-      # calculates current page
-      #
-      # @return [Integer]
-      def current_page
-        (params[:page] || 1).to_i
       end
 
       # @private
