@@ -29,23 +29,15 @@ module Azeroth
       end
 
       # @visibility public
-      # @api public
+      # @api (see Decorator.expose)
       # @private
       #
       # Expose attributes on json decorated
       #
-      # @param attribute [Symbol,String] attribute to be exposed
-      # @param options_hash [Hash] exposing options
-      # @option options_hash as [Symbol,String] custom key
-      #   to expose
-      # @option options_hash if [Symbol,Proc] method/block
-      #   to be called
-      #   checking if an attribute should or should not
-      #   be exposed
-      # @option options_hash decorator [FalseClass,TrueClass,Class]
-      #   flag to use or not a decorator or decorator class to be used
+      # @param (see Decorator.expose)
+      # @option (see Decorator.expose)
       #
-      # @return [Array<Symbol>]
+      # @return (see Decorator.expose)
       #
       # @example
       #   class DummyModel
