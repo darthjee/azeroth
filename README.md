@@ -25,6 +25,10 @@ does not perform database operations
 Future versions will enable `html` rendering to also perform
 database operations.
 
+Current Release: [1.1.0](https://github.com/darthjee/azeroth/tree/1.1.0)
+
+[Next release](https://github.com/darthjee/azeroth/compare/1.1.0...master)
+
 Installation
 ---------------
 
