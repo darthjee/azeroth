@@ -3,6 +3,10 @@
 require 'spec_helper'
 
 describe Azeroth::Decorator::MethodBuilder do
+  subject(:build_reader) do
+    described_class.build_reader(decorator_class, :age, options)
+  end
+
   let(:decorator_class) { Class.new(Azeroth::Decorator) }
   let(:decorator)       { decorator_class.new(object) }
   let(:model)           { build(:dummy_model) }
@@ -12,12 +16,12 @@ describe Azeroth::Decorator::MethodBuilder do
 
   describe '.build_reader' do
     it do
-      expect { described_class.build_reader(decorator_class, :age, options) }
+      expect { build_reader }
         .to add_method(:age).to(decorator)
     end
 
     it do
-      described_class.build_reader(decorator_class, :age, options)
+      build_reader
 
       expect(decorator.age).to eq(model.age)
     end
@@ -27,7 +31,7 @@ describe Azeroth::Decorator::MethodBuilder do
         let(:options_hash) { { reader: true } }
 
         it do
-          expect { described_class.build_reader(decorator_class, :age, options) }
+          expect { build_reader }
             .to add_method(:age).to(decorator)
         end
       end
@@ -36,7 +40,7 @@ describe Azeroth::Decorator::MethodBuilder do
         let(:options_hash) { { reader: false } }
 
         it do
-          expect { described_class.build_reader(decorator_class, :age, options) }
+          expect { build_reader }
             .not_to add_method(:age).to(decorator)
         end
       end
@@ -46,7 +50,7 @@ describe Azeroth::Decorator::MethodBuilder do
       let(:options_hash) { { override: false } }
 
       it do
-        expect { described_class.build_reader(decorator_class, :age, options) }
+        expect { build_reader }
           .to add_method(:age).to(decorator)
       end
     end
@@ -60,16 +64,16 @@ describe Azeroth::Decorator::MethodBuilder do
         let(:options_hash) { { override: true } }
 
         it do
-          expect { described_class.build_reader(decorator_class, :age, options) }
+          expect { build_reader }
             .to change_method(:age).on(decorator)
         end
       end
 
-      context 'when passing override option as true' do
+      context 'when passing override option as false' do
         let(:options_hash) { { override: false } }
 
         it do
-          expect { described_class.build_reader(decorator_class, :age, options) }
+          expect { build_reader }
             .not_to change_method(:age).on(decorator)
         end
       end
