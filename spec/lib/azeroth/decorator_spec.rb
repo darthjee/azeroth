@@ -72,12 +72,11 @@ describe Azeroth::Decorator do
       context "when not passing override"do
         it do
           expect { decorator.send(:expose, :name) }
-            .to change_method(:name)
-            .on(instance)
+            .to change(decorator, :attributes_map)
+            .from({})
+            .to({ name: expected_options })
         end
-      end
 
-      context "when passing override as true" do
         it do
           expect { decorator.send(:expose, :name) }
             .to change_method(:name)
@@ -85,9 +84,35 @@ describe Azeroth::Decorator do
         end
       end
 
-      context "when passing override as false"do
+      context "when passing override as true" do
+        let(:options_hash) { { override: true } } 
+
         it do
-          expect { decorator.send(:expose, :name, override: false) }
+          expect { decorator.send(:expose, :name, **options_hash) }
+            .to change(decorator, :attributes_map)
+            .from({})
+            .to({ name: expected_options })
+        end
+
+        it do
+          expect { decorator.send(:expose, :name, **options_hash) }
+            .to change_method(:name)
+            .on(instance)
+        end
+      end
+
+      context "when passing override as false"do
+        let(:options_hash) { { override: false } } 
+
+        it do
+          expect { decorator.send(:expose, :name, **options_hash) }
+            .to change(decorator, :attributes_map)
+            .from({})
+            .to({ name: expected_options })
+        end
+
+        it do
+          expect { decorator.send(:expose, :name, **options_hash) }
             .not_to change_method(:name)
             .on(instance)
         end
