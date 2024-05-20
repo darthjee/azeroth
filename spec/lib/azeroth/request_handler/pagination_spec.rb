@@ -10,7 +10,7 @@ describe Azeroth::RequestHandler::Pagination do
   let(:params)       { ActionController::Parameters.new(parameters) }
   let(:parameters)   { {} }
 
-  describe 'offset' do
+  describe '#offset' do
     context 'when nothing was defined' do
       it do
         expect(pagination.offset).to be_zero
@@ -77,7 +77,7 @@ describe Azeroth::RequestHandler::Pagination do
     end
   end
 
-  describe 'limit' do
+  describe '#limit' do
     context 'when nothing was defined' do
       it 'returns default value' do
         expect(pagination.limit).to eq(20)
@@ -110,6 +110,23 @@ describe Azeroth::RequestHandler::Pagination do
 
       it 'returns value from request' do
         expect(pagination.limit).to eq(per_page)
+      end
+    end
+  end
+
+  describe '#current_page' do
+    context 'when nothing was defined' do
+      it 'returns first page' do
+        expect(pagination.current_page).to eq(1)
+      end
+    end
+
+    context 'when parameters has page' do
+      let(:parameters) { { page: page } }
+      let(:page)       { Random.rand(1..10) }
+
+      it 'returns value from request' do
+        expect(pagination.current_page).to eq(page)
       end
     end
   end
