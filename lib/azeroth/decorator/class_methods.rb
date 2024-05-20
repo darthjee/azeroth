@@ -2,6 +2,12 @@
 
 module Azeroth
   class Decorator
+    # @api private
+    # @author Darthjee
+    #
+    # Class methods added by {Decorator}
+    #
+    # @see ClassMethods#expose
     module ClassMethods
       # @api private
       #
