@@ -32,6 +32,7 @@ module Azeroth
       end
 
       def skip_creation?(attribute)
+        return true unless options.reader
         return false unless klass.method_defined?(attribute)
 
         !options.override
