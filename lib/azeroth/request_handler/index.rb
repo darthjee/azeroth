@@ -8,7 +8,8 @@ module Azeroth
     class Index < RequestHandler
       private
 
-      delegate :paginated?, :per_page, :offset, :limit, :current_page, to: :pagination
+      delegate :paginated?, :per_page, :offset, :limit,
+               :current_page, to: :pagination
 
       def pagination
         @pagination ||= Pagination.new(params, options)

@@ -1,5 +1,10 @@
+# frozen_string_literal: true
+
 module Azeroth
   class RequestHandler
+    # @api private
+    #
+    # Wrapper for request finding pagination attributes
     class Pagination
       def initialize(params, options)
         @params = params
