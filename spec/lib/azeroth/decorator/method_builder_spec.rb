@@ -22,8 +22,8 @@ describe Azeroth::Decorator::MethodBuilder do
       expect(decorator.age).to eq(model.age)
     end
 
-    context "when passing reader option" do
-      context "when passing true" do
+    context 'when passing reader option' do
+      context 'when passing true' do
         let(:options_hash) { { reader: true } }
 
         it do
@@ -32,7 +32,7 @@ describe Azeroth::Decorator::MethodBuilder do
         end
       end
 
-      context "when passing false" do
+      context 'when passing false' do
         let(:options_hash) { { reader: false } }
 
         it do
@@ -42,7 +42,7 @@ describe Azeroth::Decorator::MethodBuilder do
       end
     end
 
-    context "when passing override option as true" do
+    context 'when passing override option as true' do
       let(:options_hash) { { override: false } }
 
       it do
@@ -51,12 +51,12 @@ describe Azeroth::Decorator::MethodBuilder do
       end
     end
 
-    context "when method already existed" do
+    context 'when method already existed' do
       before do
         decorator_class.define_method(:age) { 1 }
       end
 
-      context "when passing override option as true" do
+      context 'when passing override option as true' do
         let(:options_hash) { { override: true } }
 
         it do
@@ -65,7 +65,7 @@ describe Azeroth::Decorator::MethodBuilder do
         end
       end
 
-      context "when passing override option as true" do
+      context 'when passing override option as true' do
         let(:options_hash) { { override: false } }
 
         it do
