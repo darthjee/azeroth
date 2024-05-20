@@ -7,11 +7,12 @@ module Azeroth
     # Wrapper for request finding pagination attributes
     class Pagination
       def initialize(params, options)
+        binding.pry
         @params = params
         @options = options
       end
 
-      delegate :paginated?, :per_page, to: :options
+      delegate :per_page, to: :options
 
       # @private
       #
