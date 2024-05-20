@@ -62,7 +62,7 @@ describe Azeroth::RequestHandler::Pagination do
       end
     end
 
-    context 'when parameters has page and per_page and options per page values' do
+    context 'when params has page and per_page and options per page values' do
       let(:parameters)        { { page: page, per_page: per_page } }
       let(:options_hash)      { { per_page: options_per_page } }
       let(:page)              { Random.rand(1..10) }
