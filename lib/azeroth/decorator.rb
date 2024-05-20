@@ -67,6 +67,8 @@ module Azeroth
     #   flag to use or not a decorator or decorator class to be used
     #
     # @return [Array<Symbol>]
+    #
+    # @see Decorator::ClassMethods#expose Decorator::ClassMethods#expose for examples
 
     # @api private
     #
