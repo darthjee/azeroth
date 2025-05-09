@@ -46,3 +46,6 @@ Gemspec/RequireMFA:
 Lint/EmptyBlock:
   Exclude:
     - 'spec/**/*_spec.rb'
+
+Lint/EmptyClass:
+  Enabled: false
