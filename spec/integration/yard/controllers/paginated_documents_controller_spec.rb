@@ -2,7 +2,7 @@
 
 require 'spec_helper'
 
-describe PaginatedDocumentsController, controller: true do
+describe PaginatedDocumentsController, :controller do
   describe 'yard' do
     describe 'GET index' do
       before { create_list(:document, 30) }

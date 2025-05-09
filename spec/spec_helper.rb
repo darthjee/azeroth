@@ -22,7 +22,7 @@ require 'shoulda-matchers'
 require 'rspec/collection_matchers'
 
 support_files = File.expand_path('spec/support/**/*.rb')
-Dir[support_files].sort.each { |file| require file }
+Dir[support_files].each { |file| require file }
 
 RSpec::Matchers.define_negated_matcher :not_change, :change
 RSpec::Matchers.define_negated_matcher :not_add_method, :add_method

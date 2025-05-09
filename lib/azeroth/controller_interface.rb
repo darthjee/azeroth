@@ -60,6 +60,7 @@ module Azeroth
     private
 
     attr_reader :controller
+
     # @method controller
     # @private
     # @api private
@@ -78,9 +79,9 @@ module Azeroth
     #   method called
     #
     # @return [Object]
-    def method_missing(method_name, *args)
+    def method_missing(method_name, *)
       if controller.respond_to?(method_name, true)
-        controller.send(method_name, *args)
+        controller.send(method_name, *)
       else
         super
       end

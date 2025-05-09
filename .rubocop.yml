@@ -2,7 +2,8 @@ require: rubocop-rspec
 inherit_from: .rubocop_todo.yml
 
 AllCops:
-  TargetRubyVersion: 2.5
+  TargetRubyVersion: 3.3
+  NewCops: enable
 
 Metrics/BlockLength:
   Exclude:
@@ -35,3 +36,16 @@ RSpec/MultipleExpectations:
   Exclude:
     - 'spec/integration/readme/**/*_spec.rb'
     - 'spec/integration/yard/**/*_spec.rb'
+
+RSpec/MultipleMemoizedHelpers:
+  Enabled: false
+
+Gemspec/RequireMFA:
+  Enabled: false
+
+Lint/EmptyBlock:
+  Exclude:
+    - 'spec/**/*_spec.rb'
+
+Lint/EmptyClass:
+  Enabled: false

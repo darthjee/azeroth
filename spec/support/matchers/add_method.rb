@@ -6,11 +6,12 @@ module RSpec
       attr_reader :method
 
       def initialize(method = nil)
+        super
         @method = method
       end
 
-      def to(instance = nil, &block)
-        AddMethodTo.new(instance, method, &block)
+      def to(instance = nil, &)
+        AddMethodTo.new(instance, method, &)
       end
     end
 
@@ -18,6 +19,7 @@ module RSpec
       attr_reader :method, :instance, :block
 
       def initialize(instance, method, &block)
+        super
         @instance = instance
         @method = method
         @block = block
@@ -68,8 +70,8 @@ module RSpec
 
       def raise_block_syntax_error
         raise SyntaxError, 'Block not received by the' \
-        '`add_method_to` matcher. ' \
-        'Perhaps you want to use `{ ... }` instead of do/end?'
+                           '`add_method_to` matcher. ' \
+                           'Perhaps you want to use `{ ... }` instead of do/end?'
       end
     end
   end

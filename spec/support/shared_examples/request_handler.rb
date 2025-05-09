@@ -29,15 +29,11 @@ shared_examples 'a request handler' do |status: :ok|
   before do
     create_list(:document, documents_count)
 
-    allow(controller).to receive(:params)
-      .and_return(params)
-
     allow(controller).to receive(:render)
       .with(json: expected_json, status: status)
       .and_return(expected_json)
 
-    allow(controller).to receive(:headers)
-      .and_return(controller_headers)
+    allow(controller).to receive_messages(params: params, headers: controller_headers)
   end
 
   it 'returns all documents json' do

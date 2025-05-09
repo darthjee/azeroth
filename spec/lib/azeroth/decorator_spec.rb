@@ -416,12 +416,10 @@ describe Azeroth::Decorator do
     end
 
     context 'when method is private and passing include_private' do
-      # rubocop:disable RSpec/PredicateMatcher
       it do
         expect(decorator.respond_to?(:private_name, true))
           .to be_truthy
       end
-      # rubocop:enable RSpec/PredicateMatcher
     end
 
     context 'when object does not respond to it' do

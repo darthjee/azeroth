@@ -54,7 +54,7 @@ ActiveRecord::Schema.define do
 
   create_table :websites, force: true do |t|
     t.string :domain, null: false
-    t.integer :port, limit: 2, unsigned: true
+    t.integer :port, limit: 2
     t.string :protocol, limit: 5
   end
 end

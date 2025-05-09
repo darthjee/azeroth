@@ -46,6 +46,7 @@ module Azeroth
     private
 
     attr_reader :controller, :model, :options
+
     # @method controller
     # @api private
     # @private
@@ -119,8 +120,8 @@ module Azeroth
     # Run a block triggering the event
     #
     # @return [Object] Result of given block
-    def trigger_event(event, &block)
-      options.event_registry.trigger(event, controller, &block)
+    def trigger_event(event, &)
+      options.event_registry.trigger(event, controller, &)
     end
 
     # @private

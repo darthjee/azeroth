@@ -35,6 +35,7 @@ module Azeroth
       private
 
       attr_reader :decorator
+
       # @method decorator
       # @api private
       # @private
