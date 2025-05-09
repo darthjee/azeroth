@@ -40,7 +40,7 @@ Gem::Specification.new do |gem|
   gem.add_development_dependency 'rspec-core',                '3.13.3'
   gem.add_development_dependency 'rspec-expectations',        '3.13.3'
   gem.add_development_dependency 'rspec-mocks',               '3.13.2'
-  gem.add_development_dependency 'rspec-rails',               '6.0.2'
+  gem.add_development_dependency 'rspec-rails',               '8.0.0'
   gem.add_development_dependency 'rspec-support',             '3.13.2'
   gem.add_development_dependency 'rubocop',                   '1.75.5'
   gem.add_development_dependency 'rubocop-rspec',             '3.6.0'
