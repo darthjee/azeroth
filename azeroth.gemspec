@@ -10,7 +10,7 @@ Gem::Specification.new do |gem|
   gem.authors       = ['Darthjee']
   gem.email         = ['darthjee@gmail.com']
   gem.summary       = 'Azeroth'
-  gem.description   = gem.description
+  gem.description   = 'Rails controller builder'
   gem.homepage      = 'https://github.com/darthjee/azeroth'
   gem.required_ruby_version = '>= 3.3.1'
 
