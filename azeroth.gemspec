@@ -18,10 +18,10 @@ Gem::Specification.new do |gem|
   gem.test_files    = gem.files.grep(%r{^(test|spec|features)/})
   gem.require_paths = ['lib']
 
-  gem.add_runtime_dependency 'activesupport',       '~> 7.0.x'
+  gem.add_runtime_dependency 'activesupport',       '~> 7.x'
   gem.add_runtime_dependency 'darthjee-active_ext', '>= 1.3.2'
   gem.add_runtime_dependency 'jace',                '>= 0.1.1'
-  gem.add_runtime_dependency 'sinclair',            '>= 2.0.0'
+  gem.add_runtime_dependency 'sinclair',            '>= 3.0.0'
 
   gem.add_development_dependency 'actionpack',                '7.0.4.3'
   gem.add_development_dependency 'activerecord',              '7.0.4.3'
