@@ -46,6 +46,7 @@ module Azeroth
     private
 
     attr_reader :controller, :model, :options
+
     # @method controller
     # @api private
     # @private

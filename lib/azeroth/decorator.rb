@@ -108,6 +108,7 @@ module Azeroth
     private
 
     attr_reader :object
+
     # @method object
     # @api private
     #

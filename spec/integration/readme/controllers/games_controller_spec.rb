@@ -2,7 +2,7 @@
 
 require 'spec_helper'
 
-describe GamesController, controller: true do
+describe GamesController, :controller do
   describe 'readme' do
     describe 'POST create' do
       it 'create game' do

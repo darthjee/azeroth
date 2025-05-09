@@ -31,6 +31,7 @@ module Azeroth
       private
 
       attr_reader :klass, :model, :options
+
       # @method klass
       # @api private
       # @private

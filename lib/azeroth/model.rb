@@ -54,6 +54,7 @@ module Azeroth
     private
 
     attr_reader :options
+
     # @method options
     # @api private
     # @private

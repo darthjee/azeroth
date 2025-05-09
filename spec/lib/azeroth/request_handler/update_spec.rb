@@ -30,7 +30,7 @@ describe Azeroth::RequestHandler::Update do
       end
     end
 
-    context 'when update_with option is given ' do
+    context 'when update_with option is given' do
       context 'with block' do
         it_behaves_like 'a request handler' do
           let(:block) do
