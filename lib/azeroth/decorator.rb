@@ -97,10 +97,10 @@ module Azeroth
     # @param args [Hash] options (to be implemented)
     #
     # @return [Hash]
-    def as_json(*args)
+    def as_json(*)
       return nil if object.nil?
 
-      return array_as_json(*args) if enum?
+      return array_as_json(*) if enum?
 
       HashBuilder.new(self).as_json
     end
@@ -150,9 +150,9 @@ module Azeroth
     #   method called
     #
     # @return [Object]
-    def method_missing(method_name, *args)
+    def method_missing(method_name, *)
       if object.respond_to?(method_name)
-        object.public_send(method_name, *args)
+        object.public_send(method_name, *)
       else
         super
       end

@@ -15,13 +15,12 @@ Gem::Specification.new do |gem|
 
   gem.files         = `git ls-files`.split($INPUT_RECORD_SEPARATOR)
   gem.executables   = gem.files.grep(%r{^bin/}) { |f| File.basename(f) }
-  gem.test_files    = gem.files.grep(%r{^(test|spec|features)/})
   gem.require_paths = ['lib']
 
-  gem.add_runtime_dependency 'activesupport',       '~> 7.2.x'
-  gem.add_runtime_dependency 'darthjee-active_ext', '>= 1.3.2'
-  gem.add_runtime_dependency 'jace',                '>= 0.1.1'
-  gem.add_runtime_dependency 'sinclair',            '>= 3.0.0'
+  gem.add_dependency 'activesupport',       '~> 7.2.x'
+  gem.add_dependency 'darthjee-active_ext', '>= 1.3.2'
+  gem.add_dependency 'jace',                '>= 0.1.1'
+  gem.add_dependency 'sinclair',            '>= 3.0.0'
 
   gem.add_development_dependency 'actionpack',                '7.2.2.1'
   gem.add_development_dependency 'activerecord',              '7.2.2.1'
@@ -52,4 +51,5 @@ Gem::Specification.new do |gem|
   gem.add_development_dependency 'tzinfo-data',               '~> 1.2025.2'
   gem.add_development_dependency 'yard',                      '0.9.37'
   gem.add_development_dependency 'yardstick',                 '0.9.9'
+  gem.metadata['rubygems_mfa_required'] = 'true'
 end

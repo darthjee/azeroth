@@ -122,8 +122,8 @@ module Azeroth
       #
       # @return [String]
       def add_helpers
-        klass.public_send(:helper_method, model.name)
-        klass.public_send(:helper_method, model.plural)
+        klass.helper_method(model.name)
+        klass.helper_method(model.plural)
       end
     end
   end

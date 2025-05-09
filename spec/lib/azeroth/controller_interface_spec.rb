@@ -11,7 +11,7 @@ describe Azeroth::ControllerInterface do
   describe '#add_headers' do
     let(:controller_headers) do
       {
-        'old_key': 100
+        old_key: 100
       }
     end
 
