@@ -39,3 +39,6 @@ RSpec/MultipleExpectations:
 
 RSpec/MultipleMemoizedHelpers:
   Enabled: false
+
+Gemspec/RequireMFA:
+  Enabled: false
