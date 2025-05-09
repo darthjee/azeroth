@@ -6,6 +6,7 @@ module RSpec
       attr_reader :method
 
       def initialize(method = nil)
+        super
         @method = method
       end
 
@@ -18,6 +19,7 @@ module RSpec
       attr_reader :method, :instance, :block
 
       def initialize(instance, method, &block)
+        super
         @instance = instance
         @method = method
         @block = block
