@@ -36,3 +36,6 @@ RSpec/MultipleExpectations:
   Exclude:
     - 'spec/integration/readme/**/*_spec.rb'
     - 'spec/integration/yard/**/*_spec.rb'
+
+RSpec/MultipleMemoizedHelpers:
+  Enabled: false
