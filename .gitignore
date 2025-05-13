@@ -12,3 +12,5 @@ spec/dummy/log/*
 spec/dummy/tmp/*
 spec/dummy/db/*.sqlite3
 spec/dummy/db/*.sqlite3-journal
+spec/dummy/db/*.sqlite3-shm
+spec/dummy/db/*.sqlite3-wal
