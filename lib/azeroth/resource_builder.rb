@@ -76,5 +76,11 @@ module Azeroth
     # @return [String]
 
     delegate :id_key, to: :options
+    # @method plural
+    # @api private
+    #
+    # key used to find a model. id by default
+    #
+    # @return [Symbol]
   end
 end
