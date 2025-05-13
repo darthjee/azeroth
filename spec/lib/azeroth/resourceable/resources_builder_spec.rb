@@ -3,7 +3,7 @@
 require 'spec_helper'
 
 describe Azeroth::Resourceable::ResourcesBuilder do
-  subject { described_class.new(klass, :document, options) }
+  subject(:builder) { described_class.new(klass, :document, options) }
 
   let(:options)      { Azeroth::Options.new(options_hash) }
   let(:options_hash) { {} }
@@ -14,6 +14,14 @@ describe Azeroth::Resourceable::ResourcesBuilder do
   end
 
   describe '#build' do
-    it 'adds spec'
+    let(:expected_resource_methods) { %i[document documents] }
+
+    it 'adds resource methods' do
+      expect { builder.build }
+        .to change {
+          methods = klass.instance_methods
+          expected_resource_methods.all? { |m| methods.include?(m) }
+        }
+    end
   end
 end
