@@ -6,7 +6,7 @@ module Azeroth
   #
   # Class responsible for adding params handling methods to a controller
   class ParamsBuilder < Sinclair::Model
-    # @!method initialize(model:, builder:)
+    # @!method initialize(model:, builder:, options:)
     #   @api private
     #
     #   @param model [Model] Resource interface

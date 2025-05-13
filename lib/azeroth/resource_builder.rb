@@ -10,7 +10,7 @@ module Azeroth
   # entries of a resource, and one for fetching an specific
   # entry
   class ResourceBuilder < Sinclair::Model
-    # @!method initialize(model:, builder:)
+    # @!method initialize(model:, builder:, options:)
     #   @api private
     #
     #   @param model [Model] Resource model interface
