@@ -20,7 +20,8 @@ module Azeroth
         @options = options
         @model = Azeroth::Model.new(model_name, options)
 
-        ResourceBuilder.new(model: model, builder: builder).append
+        add_resource
+        add_helpers
       end
 
       private
@@ -86,6 +87,13 @@ module Azeroth
       # @see https://www.rubydoc.info/gems/sinclair Sinclair
       def builder
         @builder ||= Sinclair.new(klass)
+      end
+      
+      # Add methods for resource fetching
+      #
+      # @return [Array<Sinclair::MethodDefinition>]
+      def add_resource
+        ResourceBuilder.new(model: model, builder: builder).append
       end
 
       # Add helpers to render objects on template
