@@ -20,6 +20,7 @@ module Azeroth
         @options = options
         @model = Azeroth::Model.new(model_name, options)
 
+        add_params
         add_resource
         add_helpers
       end
@@ -87,6 +88,15 @@ module Azeroth
       # @see https://www.rubydoc.info/gems/sinclair Sinclair
       def builder
         @builder ||= Sinclair.new(klass)
+      end
+
+      # Add methods for id and parameters
+      #
+      # @return [Array<Sinclair::MethodDefinition>]
+      def add_params
+        ParamsBuilder.new(
+          model: model, builder: builder
+        ).append
       end
 
       # Add methods for resource fetching
