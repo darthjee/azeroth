@@ -14,7 +14,15 @@ describe Azeroth::Resourceable::EndpointsBuilder do
   end
 
   describe '#build' do
-    let(:expected_resource_methods) { %i[document documents] }
+    let(:expected_resource_methods) { %i[document_id document_params] }
+
+    it 'adds params methods' do
+      expect { builder.build }
+        .to change {
+          methods = klass.instance_methods
+          expected_resource_methods.all? { |m| methods.include?(m) }
+        }
+    end
 
     it 'adds resource methods' do
       expect { builder.build }
