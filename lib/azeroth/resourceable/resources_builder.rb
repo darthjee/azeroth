@@ -5,9 +5,9 @@ require 'sinclair'
 module Azeroth
   module Resourceable
     # @api private
-    # Builder responsible to add all methods to the controller
+    # Builder responsible to add resource / model methods to the controller
     #
-    # Builder uses other builders to put together it's methods
+    # Builder uses {ResourceBuilder} to put together it's methods
     #
     # @see ResourceBuilder
     class ResourcesBuilder
