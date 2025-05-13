@@ -24,6 +24,8 @@ module Azeroth
       # @method self.resource_for(name, **options)
       # @api public
       #
+      # Adds resource and routes methods for resource
+      #
       # @param name [String, Symbol] Name of the resource
       # @param options [Hash] resource building options
       # @option options only [Array<Symbol,String>,Symbol,String] List of
@@ -210,6 +212,13 @@ module Azeroth
       #     'per_page' => 20,
       #     'page' => 2
       #   }
+
+      # @method self.model_for(name)
+      # @api public
+      #
+      # Adds resource and routes methods for resource
+      #
+      # @param name [String, Symbol] Name of the resource
     end
 
     private
