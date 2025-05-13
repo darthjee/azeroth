@@ -17,6 +17,7 @@ module Azeroth
     DEFAULT_OPTIONS = {
       only: %i[create destroy edit index new show update],
       except: [],
+      id_key: :id,
       decorator: true,
       before_save: nil,
       after_save: nil,
@@ -64,6 +65,13 @@ module Azeroth
     # actions to be ignored
     #
     # @return [Array<String,Symbol>]
+
+    # @method id_key
+    # @api private
+    #
+    # key used to find a model. id by default
+    #
+    # @return [Symbol]
 
     # @method decorator
     # @api private
