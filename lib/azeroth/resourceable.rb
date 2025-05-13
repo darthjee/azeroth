@@ -213,12 +213,13 @@ module Azeroth
       #     'page' => 2
       #   }
 
-      # @method self.model_for(name)
+      # @method self.model_for(name, **options)
       # @api public
       #
       # Adds resource and routes methods for resource
       #
       # @param name [String, Symbol] Name of the resource
+      # @param options [Hash] resource building options
     end
 
     private
