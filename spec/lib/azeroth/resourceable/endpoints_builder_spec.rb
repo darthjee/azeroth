@@ -104,7 +104,29 @@ describe Azeroth::Resourceable::EndpointsBuilder do
         expect { builder.build }
           .to(change do
             methods = klass.instance_methods
-            added_routes.any? { |m| methods.include?(m) }
+            added_routes.all? { |m| methods.include?(m) }
+          end)
+      end
+    end
+
+    context 'when except option as array is given for a route' do
+      let(:options_hash)   { { except: routes } }
+      let(:routes)         { [available_routes.sample, available_routes.sample].uniq }
+      let(:added_routes)   { available_routes - routes }
+
+      it 'Does not add routes methods' do
+        expect { builder.build }
+          .not_to(change do
+            methods = klass.instance_methods
+            routes.any? { |m| methods.include?(m) }
+          end)
+      end
+
+      it 'adds other routes methods' do
+        expect { builder.build }
+          .to(change do
+            methods = klass.instance_methods
+            added_routes.all? { |m| methods.include?(m) }
           end)
       end
     end
