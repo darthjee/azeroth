@@ -4,13 +4,14 @@ require 'spec_helper'
 
 describe Azeroth::ResourceBuilder do
   subject(:resource_builder) do
-    described_class.new(model: model, builder: builder)
+    described_class.new(model: model, builder: builder, options: options)
   end
 
-  let(:model)   { Azeroth::Model.new(:document, options) }
-  let(:options) { Azeroth::Options.new }
-  let(:builder) { Sinclair.new(klass) }
-  let(:klass)   { Class.new(ResourceBuilderController) }
+  let(:model)        { Azeroth::Model.new(:document, options) }
+  let(:options)      { Azeroth::Options.new(options_hash) }
+  let(:options_hash) { {} }
+  let(:builder)      { Sinclair.new(klass) }
+  let(:klass)        { Class.new(ResourceBuilderController) }
 
   before do
     resource_builder.append

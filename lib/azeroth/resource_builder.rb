@@ -15,9 +15,10 @@ module Azeroth
     #
     #   @param model [Model] Resource model interface
     #   @param builder [Sinclair] method builder
+    #   @param options [Azeroth::Options] options
     #
     #   @return [ResourceBuilder]
-    initialize_with(:model, :builder, writter: false)
+    initialize_with(:model, :builder, :options, writter: false)
 
     # Append methods to be built to the builder
     #

@@ -95,7 +95,7 @@ module Azeroth
       # @return [Array<Sinclair::MethodDefinition>]
       def add_params
         ParamsBuilder.new(
-          model: model, builder: builder
+          model: model, builder: builder, options: options
         ).append
       end
 
@@ -103,7 +103,7 @@ module Azeroth
       #
       # @return [Array<Sinclair::MethodDefinition>]
       def add_resource
-        ResourceBuilder.new(model: model, builder: builder).append
+        ResourceBuilder.new(model: model, builder: builder, options: options).append
       end
 
       # Add helpers to render objects on template
