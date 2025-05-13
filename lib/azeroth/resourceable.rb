@@ -16,7 +16,7 @@ module Azeroth
       rescue_from ActiveRecord::RecordNotFound, with: :not_found
     end
 
-    autoload :Builder, 'azeroth/resourceable/builder'
+    autoload :EndpointsBuilder, 'azeroth/resourceable/endpoints_builder'
     autoload :ClassMethods, 'azeroth/resourceable/class_methods'
 
     class << self

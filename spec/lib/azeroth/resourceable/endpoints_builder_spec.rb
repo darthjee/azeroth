@@ -2,7 +2,7 @@
 
 require 'spec_helper'
 
-describe Azeroth::Resourceable::Builder do
+describe Azeroth::Resourceable::EndpointsBuilder do
   subject { described_class.new(klass, :document, options) }
 
   let(:options)      { Azeroth::Options.new(options_hash) }

@@ -12,7 +12,7 @@ module Azeroth
     # @see ResourceBuilder
     # @see ResourceRouteBuilder
     # @see RoutesBuilder
-    class Builder
+    class EndpointsBuilder
       # @param klass [ActionController::Base] Controller to
       #   to be changed
       # @param model_name [Symbol,String]

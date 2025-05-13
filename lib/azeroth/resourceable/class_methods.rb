@@ -16,7 +16,7 @@ module Azeroth
       # @see (see Resourceable.resource_for)
       # @example (see Resourceable.resource_for)
       def resource_for(name, **options)
-        Builder.new(
+        EndpointsBuilder.new(
           self, name, Azeroth::Options.new(options)
         ).build
       end
