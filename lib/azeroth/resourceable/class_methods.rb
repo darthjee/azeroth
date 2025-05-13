@@ -30,7 +30,7 @@ module Azeroth
       # @example (see Resourceable.model_for)
       def model_for(name)
         ResourcesBuilder.new(
-          self, name, Azeroth::Options.new({})
+          self, name
         ).build
       end
     end

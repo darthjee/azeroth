@@ -3,10 +3,7 @@
 require 'spec_helper'
 
 describe Azeroth::Resourceable::ResourcesBuilder do
-  subject(:builder) { described_class.new(klass, :document, options) }
-
-  let(:options)      { Azeroth::Options.new(options_hash) }
-  let(:options_hash) { {} }
+  subject(:builder) { described_class.new(klass, :document) }
 
   let(:klass) do
     Class.new(Controller) do

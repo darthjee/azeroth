@@ -14,11 +14,9 @@ module Azeroth
       # @param klass [ActionController::Base] Controller to
       #   to be changed
       # @param model_name [Symbol,String]
-      # @param options [Options]
-      def initialize(klass, model_name, options)
+      def initialize(klass, model_name)
         @klass = klass
-        @options = options
-        @model = Azeroth::Model.new(model_name, options)
+        @model = Azeroth::Model.new(model_name, Azeroth::Options.new({}))
 
         add_resource
         add_helpers
@@ -26,7 +24,7 @@ module Azeroth
 
       private
 
-      attr_reader :klass, :model, :options
+      attr_reader :klass, :model
 
       # @method klass
       # @api private
@@ -43,14 +41,6 @@ module Azeroth
       # Model interface to resource model
       #
       # @return [Model]
-
-      # @method options
-      # @api private
-      # @private
-      #
-      # Options
-      #
-      # @return [Options]
 
       delegate :build, :add_method, to: :builder
       # @method build
