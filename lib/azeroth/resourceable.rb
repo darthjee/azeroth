@@ -16,12 +16,15 @@ module Azeroth
       rescue_from ActiveRecord::RecordNotFound, with: :not_found
     end
 
-    autoload :Builder, 'azeroth/resourceable/builder'
-    autoload :ClassMethods, 'azeroth/resourceable/class_methods'
+    autoload :ClassMethods,     'azeroth/resourceable/class_methods'
+    autoload :EndpointsBuilder, 'azeroth/resourceable/endpoints_builder'
+    autoload :ResourcesBuilder, 'azeroth/resourceable/resources_builder'
 
     class << self
       # @method self.resource_for(name, **options)
       # @api public
+      #
+      # Adds resource and routes methods for resource
       #
       # @param name [String, Symbol] Name of the resource
       # @param options [Hash] resource building options
@@ -209,6 +212,13 @@ module Azeroth
       #     'per_page' => 20,
       #     'page' => 2
       #   }
+
+      # @method self.model_for(name)
+      # @api public
+      #
+      # Adds resource and routes methods for resource
+      #
+      # @param name [String, Symbol] Name of the resource
     end
 
     private

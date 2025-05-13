@@ -12,7 +12,7 @@ module Azeroth
     # @see ResourceBuilder
     # @see ResourceRouteBuilder
     # @see RoutesBuilder
-    class Builder
+    class EndpointsBuilder
       # @param klass [ActionController::Base] Controller to
       #   to be changed
       # @param model_name [Symbol,String]
@@ -23,9 +23,8 @@ module Azeroth
         @model = Azeroth::Model.new(model_name, options)
 
         add_params
-        add_resource
         add_routes
-        add_helpers
+        ResourcesBuilder.new(klass, model_name).build
       end
 
       private
@@ -102,13 +101,6 @@ module Azeroth
         ).append
       end
 
-      # Add methods for resource fetching
-      #
-      # @return [Array<Sinclair::MethodDefinition>]
-      def add_resource
-        ResourceBuilder.new(model: model, builder: builder).append
-      end
-
       # Add metohods for each route
       #
       # @return [Array<Sinclair::MethodDefinition>]
@@ -116,14 +108,6 @@ module Azeroth
         RoutesBuilder.new(
           model: model, builder: builder, options: options
         ).append
-      end
-
-      # Add helpers to render objects on template
-      #
-      # @return [String]
-      def add_helpers
-        klass.helper_method(model.name)
-        klass.helper_method(model.plural)
       end
     end
   end

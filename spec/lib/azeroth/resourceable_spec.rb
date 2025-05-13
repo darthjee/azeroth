@@ -10,54 +10,41 @@ describe Azeroth::Resourceable do
   end
 
   describe '.resource_for' do
-    let(:params)     { { id: model.id, format: :json } }
-    let(:model_name) { :document }
-    let(:model)      { create(model_name) }
-    let(:controller) { controller_class.new(params) }
-    let(:decorator)  { Document::Decorator }
+    let(:available_routes) { %i[index show new destroy create update] }
+    let(:params)           { { id: model.id, format: :json } }
+    let(:model_name)       { :document }
+    let(:model)            { create(model_name) }
+    let(:controller)       { controller_class.new(params) }
+    let(:decorator)        { Document::Decorator }
 
     context 'when no special option is given' do
-      %i[index show new edit update destroy].each do |method_name|
-        it do
-          expect { controller_class.resource_for(model_name) }
-            .to add_method(method_name).to(controller_class)
-        end
+      it 'add routes methods' do
+        expect { controller_class.resource_for(model_name) }
+          .to change { (controller.methods & available_routes).sort }
+          .from([]).to(available_routes.sort)
       end
     end
 
     context 'when passing the only option' do
-      let(:options) { { only: %i[index show] } }
+      let(:options) { { only: expected_routes_methods } }
+      let(:expected_routes_methods) { %i[index show] }
 
-      %i[index show].each do |method_name|
-        it do
-          expect { controller_class.resource_for(model_name, **options) }
-            .to add_method(method_name).to(controller_class)
-        end
-      end
-
-      %i[new edit update destroy].each do |method_name|
-        it do
-          expect { controller_class.resource_for(model_name, **options) }
-            .not_to add_method(method_name).to(controller_class)
-        end
+      it 'add routes methods' do
+        expect { controller_class.resource_for(model_name, **options) }
+          .to change { (controller.methods & available_routes).sort }
+          .from([]).to(expected_routes_methods.sort)
       end
     end
 
     context 'when passing the except option' do
-      let(:options) { { except: %i[index show] } }
+      let(:options) { { except: skipped_routes } }
+      let(:skipped_routes)          { %i[index show] }
+      let(:expected_routes_methods) { available_routes - skipped_routes }
 
-      %i[index show].each do |method_name|
-        it do
-          expect { controller_class.resource_for(model_name, **options) }
-            .not_to add_method(method_name).to(controller_class)
-        end
-      end
-
-      %i[new edit update destroy].each do |method_name|
-        it do
-          expect { controller_class.resource_for(model_name, **options) }
-            .to add_method(method_name).to(controller_class)
-        end
+      it 'add routes methods' do
+        expect { controller_class.resource_for(model_name, **options) }
+          .to change { (controller.methods & available_routes).sort }
+          .from([]).to(expected_routes_methods.sort)
       end
     end
 
@@ -103,6 +90,19 @@ describe Azeroth::Resourceable do
           expect(rendered).to eq(model.as_json)
         end
       end
+    end
+  end
+
+  describe '.model_for' do
+    let(:model_name) { :document }
+    let(:model)                     { create(model_name) }
+    let(:controller)                { controller_class.new({}) }
+    let(:expected_resource_methods) { %i[document documents] }
+
+    it 'adds resource methods' do
+      expect { controller_class.model_for(model_name) }
+        .to change { (controller.methods & expected_resource_methods).sort }
+        .from([]).to(expected_resource_methods.sort)
     end
   end
 end
