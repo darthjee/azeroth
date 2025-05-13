@@ -7,7 +7,7 @@ module Azeroth
     #
     # Class methods added by {Resourceable}
     module ClassMethods
-      # Adds resource methods for resource
+      # Adds resource and routes methods for resource
       #
       # @param (see Resourceable.resource_for)
       # @option (see Resourceable.resource_for)
@@ -21,6 +21,13 @@ module Azeroth
         ).build
       end
 
+      # Adds resource methods for resource
+      #
+      # @param (see Resourceable.model_for)
+      # @return (see Resourceable.model_for)
+      #
+      # @see (see Resourceable.model_for)
+      # @example (see Resourceable.model_for)
       def model_for(name)
         ResourcesBuilder.new(
           self, name, Azeroth::Options.new({})
