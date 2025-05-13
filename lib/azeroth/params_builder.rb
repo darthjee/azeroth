@@ -11,9 +11,10 @@ module Azeroth
     #
     #   @param model [Model] Resource interface
     #   @param builder [Sinclair] Methods builder
+    #   @param options [Azeroth::Options] options
     #
     #   @return [ParamsBuilder]
-    initialize_with(:model, :builder, writter: false)
+    initialize_with(:model, :builder, :options, writter: false)
 
     # Append the params methods to be built
     #
@@ -22,7 +23,8 @@ module Azeroth
       method_name = name
       allowed_attributes = permitted_attributes.map(&:to_sym)
 
-      add_method("#{name}_id") { params.require(:id) }
+      param_key = options.param_key
+      add_method("#{name}_id") { params.require(param_key) }
       add_method("#{name}_params") do
         params.require(method_name)
               .permit(*allowed_attributes)
@@ -46,6 +48,14 @@ module Azeroth
     # Methods builder
     #
     # @return [Sinclair]
+
+    # @method options
+    # @api private
+    # @private
+    #
+    # Methods builder
+    #
+    # @return [Azeroth::Options]
 
     delegate :add_method, to: :builder
     # @method add_method
