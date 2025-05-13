@@ -28,7 +28,10 @@ module Azeroth
     # @return [Array<Sinclair::MethodDefinition>]
     def append
       add_method(plural, "@#{plural} ||= #{model.klass}.all")
-      add_method(name, "@#{name} ||= #{plural}.find(#{name}_id)")
+      add_method(
+        name,
+        "@#{name} ||= #{plural}.find_by!(#{id_key}: #{name}_id)"
+      )
     end
 
     # @method model
@@ -71,5 +74,7 @@ module Azeroth
     # Return the pluralized version of resource name
     #
     # @return [String]
+
+    delegate :id_key, to: :options
   end
 end
