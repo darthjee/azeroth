@@ -20,6 +20,11 @@ module Azeroth
           self, name, Azeroth::Options.new(options)
         ).build
       end
+
+      def model_for(name)
+        ResourcesBuilder.new(
+          self, name, Azeroth::Options.new({})
+        ).build
     end
   end
 end
