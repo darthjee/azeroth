@@ -14,7 +14,7 @@ describe Azeroth::Resourceable::EndpointsBuilder do
   end
 
   describe '#build' do
-    let(:available_routes) { %i[index show new destroy create] }
+    let(:available_routes) { %i[index show new destroy create update] }
     let(:expected_params_methods)   { %i[document_id document_params] }
     let(:expected_routes_methods)   { available_routes }
     let(:expected_resource_methods) { %i[document documents] }
@@ -84,6 +84,27 @@ describe Azeroth::Resourceable::EndpointsBuilder do
           .not_to(change do
             methods = klass.instance_methods
             ignored_routes.any? { |m| methods.include?(m) }
+          end)
+      end
+    end
+
+    context 'when except option is given for a route' do
+      let(:options_hash)   { { except: route } }
+      let(:route)          { available_routes.sample }
+      let(:added_routes)   { available_routes - [route] }
+
+      it 'Does not add route methods' do
+        expect { builder.build }
+          .not_to(change do
+            klass.instance_methods.include?(route)
+          end)
+      end
+
+      it 'adds other routes methods' do
+        expect { builder.build }
+          .to(change do
+            methods = klass.instance_methods
+            added_routes.any? { |m| methods.include?(m) }
           end)
       end
     end
