@@ -24,7 +24,7 @@ module Azeroth
 
         add_params
         add_routes
-        ResourcesBuilder.new(klass, model_name).build
+        ResourcesBuilder.new(klass, model_name, options).build
       end
 
       private
