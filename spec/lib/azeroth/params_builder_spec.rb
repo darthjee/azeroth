@@ -22,7 +22,7 @@ describe Azeroth::ParamsBuilder do
   end
 
   describe '#append' do
-    context "when no options are given" do
+    context 'when no options are given' do
       it 'adds id method' do
         expect { builder.build }
           .to add_method(:document_id).to(klass)
@@ -59,8 +59,8 @@ describe Azeroth::ParamsBuilder do
     end
   end
 
-  context "when no options are given" do
-    let(:options_hash) { { param_key: :document_id }}
+  context 'when no options are given' do
+    let(:options_hash) { { param_key: :document_id } }
     let(:controller)   { klass.new(id, attributes, param_id: :document_id) }
 
     before { builder.build }

@@ -13,7 +13,7 @@ Metrics/BlockLength:
     - 'azeroth.gemspec'
 
 RSpec/NestedGroups:
-  Max: 4
+  Max: 5
 
 RSpec/AlignLeftLetBrace:
   Enabled: true
