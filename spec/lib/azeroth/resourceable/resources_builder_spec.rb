@@ -18,10 +18,8 @@ describe Azeroth::Resourceable::ResourcesBuilder do
 
     it 'adds resource methods' do
       expect { builder.build }
-        .to(change do
-          methods = klass.instance_methods
-          expected_resource_methods.all? { |m| methods.include?(m) }
-        end)
+        .to change { (klass.instance_methods & expected_resource_methods).sort }
+        .from([]).to(expected_resource_methods.sort)
     end
   end
 end
