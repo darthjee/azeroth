@@ -14,32 +14,56 @@ describe Azeroth::Resourceable::EndpointsBuilder do
   end
 
   describe '#build' do
+    let(:available_routes) { %i[index show new destroy create] }
     let(:expected_params_methods) { %i[document_id document_params] }
-    let(:expected_routes_methods) { %i[index show new destroy create] }
+    let(:expected_routes_methods) { available_routes }
     let(:expected_resource_methods) { %i[document documents] }
 
-    it 'adds params methods' do
-      expect { builder.build }
-        .to change {
-          methods = klass.instance_methods
-          expected_params_methods.all? { |m| methods.include?(m) }
-        }
+    context "when no option is given" do
+      it 'adds params methods' do
+        expect { builder.build }
+          .to change {
+            methods = klass.instance_methods
+            expected_params_methods.all? { |m| methods.include?(m) }
+          }
+      end
+
+      it 'adds routes methods' do
+        expect { builder.build }
+          .to change {
+            methods = klass.instance_methods
+            expected_routes_methods.all? { |m| methods.include?(m) }
+          }
+      end
+
+      it 'adds resource methods' do
+        expect { builder.build }
+          .to change {
+            methods = klass.instance_methods
+            expected_resource_methods.all? { |m| methods.include?(m) }
+          }
+      end
     end
 
-    it 'adds routes methods' do
-      expect { builder.build }
-        .to change {
-          methods = klass.instance_methods
-          expected_routes_methods.all? { |m| methods.include?(m) }
-        }
-    end
+    context "when only option is given for a route" do
+      let(:options_hash) { { only: route} }
+      let(:route) { available_routes.sample }
+      let(:ignored_routes) { available_routes - [route] }
 
-    it 'adds resource methods' do
-      expect { builder.build }
-        .to change {
-          methods = klass.instance_methods
-          expected_resource_methods.all? { |m| methods.include?(m) }
-        }
+      it 'adds route methods' do
+        expect { builder.build }
+          .to change {
+            klass.instance_methods.include?(route)
+          }
+      end
+
+      it 'does not add other routes methods' do
+        expect { builder.build }
+          .not_to change {
+            methods = klass.instance_methods
+            ignored_routes.any? { |m| methods.include?(m) }
+          }
+      end
     end
   end
 end
