@@ -105,4 +105,18 @@ describe Azeroth::Resourceable do
       end
     end
   end
+
+
+  describe '.model_for' do
+    let(:model_name) { :document }
+    let(:model)      { create(model_name) }
+    let(:controller) { controller_class.new({}) }
+    let(:expected_resource_methods) { %i[document documents] }
+
+    it 'adds resource methods' do
+      expect { controller_class.model_for(model_name) }
+        .to change { (controller.methods & expected_resource_methods).sort }
+        .from([]).to(expected_resource_methods.sort)
+    end
+  end
 end

@@ -25,6 +25,7 @@ module Azeroth
         ResourcesBuilder.new(
           self, name, Azeroth::Options.new({})
         ).build
+      end
     end
   end
 end
