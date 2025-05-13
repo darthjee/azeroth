@@ -65,5 +65,27 @@ describe Azeroth::Resourceable::EndpointsBuilder do
           }
       end
     end
+
+    context "when only option as array is given for a route" do
+      let(:options_hash) { { only: routes} }
+      let(:routes) { [available_routes.sample,available_routes.sample].uniq }
+      let(:ignored_routes) { available_routes - routes }
+
+      it 'adds routes methods' do
+        expect { builder.build }
+          .to change {
+            methods = klass.instance_methods
+            routes.all? { |m| methods.include?(m) }
+          }
+      end
+
+      it 'does not add other routes methods' do
+        expect { builder.build }
+          .not_to change {
+            methods = klass.instance_methods
+            ignored_routes.any? { |m| methods.include?(m) }
+          }
+      end
+    end
   end
 end
