@@ -88,7 +88,7 @@ module Azeroth
       def builder
         @builder ||= Sinclair.new(klass)
       end
-      
+
       # Add methods for resource fetching
       #
       # @return [Array<Sinclair::MethodDefinition>]
