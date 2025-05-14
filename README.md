@@ -68,6 +68,8 @@ It accepts options
 - update_with: Method/Block to be ran when updating the reource on update
 - paginated: Flag when pagination should be applied
 - per_page: Number of items returned when pagination is active
+- id_key: key used to find a model. id by default
+- param_key: parameter key used to find the model
 
 ```ruby
   # publishers_controller.rb
