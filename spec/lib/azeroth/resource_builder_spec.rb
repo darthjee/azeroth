@@ -19,7 +19,7 @@ describe Azeroth::ResourceBuilder do
   end
 
   describe '#append' do
-    context "when no option is given" do
+    context 'when no option is given' do
       it 'adds the listing method' do
         expect { builder.build }
           .to change { klass.new.respond_to?(:documents) }
@@ -52,9 +52,9 @@ describe Azeroth::ResourceBuilder do
       end
     end
 
-    context "when id_key option is given" do
+    context 'when id_key option is given' do
       let(:options_hash) { { id_key: :reference } }
-      
+
       let(:controller) { klass.new(document_id: document.reference) }
       let(:document)   { create(:document, reference: SecureRandom.hex(20)) }
 
