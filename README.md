@@ -11,7 +11,7 @@ Azeroth
 
 Yard Documentation
 -------------------
-[https://www.rubydoc.info/gems/azeroth/2.0.0](https://www.rubydoc.info/gems/azeroth/2.0.0)
+[https://www.rubydoc.info/gems/azeroth/2.1.0](https://www.rubydoc.info/gems/azeroth/2.1.0)
 
 Azeroth has been designed making the coding of controllers easier
 as routes in controllers are usually copy, paste and replace of same
@@ -25,9 +25,9 @@ does not perform database operations
 Future versions will enable `html` rendering to also perform
 database operations.
 
-Current Release: [2.0.0](https://github.com/darthjee/azeroth/tree/2.0.0)
+Current Release: [2.1.0](https://github.com/darthjee/azeroth/tree/2.1.0)
 
-[Next release](https://github.com/darthjee/azeroth/compare/2.0.0...master)
+[Next release](https://github.com/darthjee/azeroth/compare/2.1.0...master)
 
 Installation
 ---------------
@@ -68,6 +68,8 @@ It accepts options
 - update_with: Method/Block to be ran when updating the reource on update
 - paginated: Flag when pagination should be applied
 - per_page: Number of items returned when pagination is active
+- id_key: key used to find a model. id by default
+- param_key: parameter key used to find the model
 
 ```ruby
   # publishers_controller.rb

@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
 class ParamsBuilderController
-  def initialize(id, attributes)
+  def initialize(id, attributes, param_id: :id)
     @params = ActionController::Parameters.new(
-      id: id,
+      param_id => id,
       document: attributes
     )
   end

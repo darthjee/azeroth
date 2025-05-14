@@ -48,6 +48,8 @@ module Azeroth
       #   endpoint should be paginated
       # @option options per_page [Integer] number of entries returned per
       #   page on index
+      # @option options id_key [Symbol] key used to find a model. id by default
+      # @option options param_key [Symbol] parameter key used to find the model
       #
       # @return [Array<MethodDefinition>] list of methods created
       #
@@ -213,12 +215,15 @@ module Azeroth
       #     'page' => 2
       #   }
 
-      # @method self.model_for(name)
+      # @method self.model_for(name, **options)
       # @api public
       #
       # Adds resource and routes methods for resource
       #
       # @param name [String, Symbol] Name of the resource
+      # @param options [Hash] resource building options
+      # @option options id_key [Symbol] key used to find a model. id by default
+      # @option options param_key [Symbol] parameter key used to find the model
     end
 
     private

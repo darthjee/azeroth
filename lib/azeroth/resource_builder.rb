@@ -10,14 +10,15 @@ module Azeroth
   # entries of a resource, and one for fetching an specific
   # entry
   class ResourceBuilder < Sinclair::Model
-    # @!method initialize(model:, builder:)
+    # @!method initialize(model:, builder:, options:)
     #   @api private
     #
     #   @param model [Model] Resource model interface
     #   @param builder [Sinclair] method builder
+    #   @param options [Azeroth::Options] options
     #
     #   @return [ResourceBuilder]
-    initialize_with(:model, :builder, writter: false)
+    initialize_with(:model, :builder, :options, writter: false)
 
     # Append methods to be built to the builder
     #
@@ -27,7 +28,10 @@ module Azeroth
     # @return [Array<Sinclair::MethodDefinition>]
     def append
       add_method(plural, "@#{plural} ||= #{model.klass}.all")
-      add_method(name, "@#{name} ||= #{plural}.find(#{name}_id)")
+      add_method(
+        name,
+        "@#{name} ||= #{plural}.find_by!(#{id_key}: #{name}_id)"
+      )
     end
 
     # @method model
@@ -70,5 +74,13 @@ module Azeroth
     # Return the pluralized version of resource name
     #
     # @return [String]
+
+    delegate :id_key, to: :options
+    # @method plural
+    # @api private
+    #
+    # key used to find a model. id by default
+    #
+    # @return [Symbol]
   end
 end

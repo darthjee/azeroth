@@ -14,17 +14,20 @@ module Azeroth
       # @param klass [ActionController::Base] Controller to
       #   to be changed
       # @param model_name [Symbol,String]
-      def initialize(klass, model_name)
+      # @param options [Options]
+      def initialize(klass, model_name, options)
         @klass = klass
-        @model = Azeroth::Model.new(model_name, Azeroth::Options.new({}))
+        @options = options
+        @model = Azeroth::Model.new(model_name, options)
 
+        add_params
         add_resource
         add_helpers
       end
 
       private
 
-      attr_reader :klass, :model
+      attr_reader :klass, :model, :options
 
       # @method klass
       # @api private
@@ -41,6 +44,14 @@ module Azeroth
       # Model interface to resource model
       #
       # @return [Model]
+
+      # @method options
+      # @api private
+      # @private
+      #
+      # Options
+      #
+      # @return [Options]
 
       delegate :build, :add_method, to: :builder
       # @method build
@@ -79,11 +90,20 @@ module Azeroth
         @builder ||= Sinclair.new(klass)
       end
 
+      # Add methods for id and parameters
+      #
+      # @return [Array<Sinclair::MethodDefinition>]
+      def add_params
+        ParamsBuilder.new(
+          model: model, builder: builder, options: options
+        ).append
+      end
+
       # Add methods for resource fetching
       #
       # @return [Array<Sinclair::MethodDefinition>]
       def add_resource
-        ResourceBuilder.new(model: model, builder: builder).append
+        ResourceBuilder.new(model: model, builder: builder, options: options).append
       end
 
       # Add helpers to render objects on template
