@@ -222,6 +222,8 @@ module Azeroth
       #
       # @param name [String, Symbol] Name of the resource
       # @param options [Hash] resource building options
+      # @option options id_key [Symbol] key used to find a model. id by default
+      # @option options param_key [Symbol] parameter key used to find the model
     end
 
     private
