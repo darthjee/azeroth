@@ -48,6 +48,8 @@ module Azeroth
       #   endpoint should be paginated
       # @option options per_page [Integer] number of entries returned per
       #   page on index
+      # @option options id_key [Symbol] key used to find a model. id by default
+      # @option options param_key [Symbol] parameter key used to find the model
       #
       # @return [Array<MethodDefinition>] list of methods created
       #
