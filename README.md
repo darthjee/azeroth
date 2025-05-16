@@ -11,7 +11,7 @@ Azeroth
 
 Yard Documentation
 -------------------
-[https://www.rubydoc.info/gems/azeroth/2.1.0](https://www.rubydoc.info/gems/azeroth/2.1.0)
+[https://www.rubydoc.info/gems/azeroth/2.1.1](https://www.rubydoc.info/gems/azeroth/2.1.1)
 
 Azeroth has been designed making the coding of controllers easier
 as routes in controllers are usually copy, paste and replace of same
@@ -25,9 +25,9 @@ does not perform database operations
 Future versions will enable `html` rendering to also perform
 database operations.
 
-Current Release: [2.1.0](https://github.com/darthjee/azeroth/tree/2.1.0)
+Current Release: [2.1.1](https://github.com/darthjee/azeroth/tree/2.1.1)
 
-[Next release](https://github.com/darthjee/azeroth/compare/2.1.0...master)
+[Next release](https://github.com/darthjee/azeroth/compare/2.1.1...master)
 
 Installation
 ---------------
@@ -54,10 +54,14 @@ Usage
 ## Azeroth::Resourceable
 
 [Resourceable](https://www.rubydoc.info/gems/azeroth/Azeroth/Resourceable)
-module adds class method [resource_for](https://www.rubydoc.info/gems/azeroth/Azeroth/Resourceable/ClassMethods#resource_for-instance_method)
+module adds class methods
+[resource_for](https://www.rubydoc.info/gems/azeroth/Azeroth/Resourceable/ClassMethods#resource_for-instance_method)
 which adds a resource and action methods for `create`, `show`, `index`,
 `update`, `delete`, `edit`
+and
+[model_for](https://www.rubydoc.info/gems/azeroth/Azeroth/Resourceable/ClassMethods#model_for-instance_method)
 
+### #resource_for
 It accepts options
 - only: List of actions to be built
 - except: List of actions to not to be built
@@ -166,6 +170,11 @@ It accepts options
   #   'page' => 2
   # }
 ```
+
+### #model_for
+It accepts options
+- id_key: key used to find a model. id by default
+- param_key: parameter key used to find the model
 
 ## Azeroth::Decorator
 
