@@ -28,9 +28,9 @@ module Azeroth
       #
       # @see (see Resourceable.model_for)
       # @example (see Resourceable.model_for)
-      def model_for(name)
+      def model_for(name, **options)
         ResourcesBuilder.new(
-          self, name, Azeroth::Options.new({})
+          self, name, Azeroth::Options.new(options)
         ).build
       end
     end
