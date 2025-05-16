@@ -54,10 +54,14 @@ Usage
 ## Azeroth::Resourceable
 
 [Resourceable](https://www.rubydoc.info/gems/azeroth/Azeroth/Resourceable)
-module adds class method [resource_for](https://www.rubydoc.info/gems/azeroth/Azeroth/Resourceable/ClassMethods#resource_for-instance_method)
+module adds class methods
+[resource_for](https://www.rubydoc.info/gems/azeroth/Azeroth/Resourceable/ClassMethods#resource_for-instance_method)
 which adds a resource and action methods for `create`, `show`, `index`,
 `update`, `delete`, `edit`
+and
+[model_for](https://www.rubydoc.info/gems/azeroth/Azeroth/Resourceable/ClassMethods#model_for-instance_method)
 
+### #resource_for
 It accepts options
 - only: List of actions to be built
 - except: List of actions to not to be built
