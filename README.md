@@ -171,6 +171,11 @@ It accepts options
   # }
 ```
 
+### #model_for
+It accepts options
+- id_key: key used to find a model. id by default
+- param_key: parameter key used to find the model
+
 ## Azeroth::Decorator
 
 [Decorators](https://www.rubydoc.info/gems/azeroth/Azeroth/Decorator) are
