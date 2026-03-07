@@ -1,9 +1,8 @@
 Azeroth
 ========
 [![Build Status](https://circleci.com/gh/darthjee/azeroth.svg?style=shield)](https://circleci.com/gh/darthjee/azeroth)
-[![Code Climate](https://codeclimate.com/github/darthjee/azeroth/badges/gpa.svg)](https://codeclimate.com/github/darthjee/azeroth)
-[![Test Coverage](https://codeclimate.com/github/darthjee/azeroth/badges/coverage.svg)](https://codeclimate.com/github/darthjee/azeroth/coverage)
-[![Issue Count](https://codeclimate.com/github/darthjee/azeroth/badges/issue_count.svg)](https://codeclimate.com/github/darthjee/azeroth)
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/5b7f376e378b448cb2f2c8f815fc29a1)](https://app.codacy.com/gh/darthjee/azeroth/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade)
+[![Codacy Badge](https://app.codacy.com/project/badge/Coverage/5b7f376e378b448cb2f2c8f815fc29a1)](https://app.codacy.com/gh/darthjee/azeroth/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_coverage)
 [![Gem Version](https://badge.fury.io/rb/azeroth.svg)](https://badge.fury.io/rb/azeroth)
 [![Inline docs](http://inch-ci.org/github/darthjee/azeroth.svg)](http://inch-ci.org/github/darthjee/azeroth)
 
