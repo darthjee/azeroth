@@ -57,4 +57,9 @@ ActiveRecord::Schema.define do
     t.integer :port, limit: 2
     t.string :protocol, limit: 5
   end
+
+  create_table :items, force: true do |t|
+    t.string :name
+    t.boolean :visible, null: false, default: true
+  end
 end
