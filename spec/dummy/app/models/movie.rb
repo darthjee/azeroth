@@ -1,5 +1,5 @@
 # frozen_string_literal: true
 
-class Movie < ActiveRecord::Base
+class Movie < ApplicationRecord
   validates :name, :director, presence: true
 end

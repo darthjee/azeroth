@@ -8,5 +8,8 @@ require './config/rubycritc'
 
 RSpec::Core::RakeTask.new
 
+desc 'Run tests'
 task default: :spec
+
+desc 'Run tests'
 task test: :spec

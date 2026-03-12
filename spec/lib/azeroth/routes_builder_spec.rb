@@ -23,7 +23,7 @@ describe Azeroth::RoutesBuilder do
   end
 
   let(:controller_class) do
-    Class.new(ActionController::Base) do
+    Class.new(ApplicationController) do
       include Azeroth::Resourceable
 
       def documents

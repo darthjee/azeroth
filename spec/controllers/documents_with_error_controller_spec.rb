@@ -4,7 +4,7 @@ require 'spec_helper'
 
 describe DocumentsWithErrorController do
   let(:parsed_response) do
-    JSON.parse(response.body)
+    response.parsed_body
   end
 
   describe 'GET index' do
@@ -129,7 +129,7 @@ describe DocumentsWithErrorController do
     it 'returns updated document json' do
       patch :update, params: parameters
 
-      expect(JSON.parse(response.body))
+      expect(response.parsed_body)
         .to eq(JSON.parse(expected_body))
     end
 
@@ -147,7 +147,7 @@ describe DocumentsWithErrorController do
       end
 
       it { expect(response).not_to be_successful }
-      it { expect(response.status).to eq(404) }
+      it { expect(response).to have_http_status(:not_found) }
 
       it 'returns empty body' do
         expect(response.body).to eq('')

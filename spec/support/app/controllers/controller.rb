@@ -2,7 +2,7 @@
 
 require 'action_controller'
 
-class Controller < ActionController::Base
+class Controller < ApplicationController
   def initialize(params = {})
     super()
     @params = ActionController::Parameters.new(params)

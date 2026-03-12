@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Website < ActiveRecord::Base
+class Website < ApplicationRecord
   class Decorator < Azeroth::Decorator
     include WithLocation
 

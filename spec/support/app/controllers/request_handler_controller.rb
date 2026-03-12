@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class RequestHandlerController < ActionController::Base
+class RequestHandlerController < ApplicationController
   private
 
   def document_params

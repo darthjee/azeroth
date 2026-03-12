@@ -54,3 +54,11 @@ Lint/EmptyBlock:
 
 Lint/EmptyClass:
   Enabled: false
+
+Style/OneClassPerFile:
+  Exclude:
+    - 'spec/support/matchers/add_method.rb'
+
+FactoryBot/ExcessiveCreateList:
+  Exclude:
+    - 'spec/integration/yard/controllers/paginated_documents_controller_spec.rb'
