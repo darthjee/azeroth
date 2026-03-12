@@ -4,5 +4,8 @@ class Pokemon < ActiveRecord::Base
   belongs_to :pokemon_master
   has_one :previous_form,
           class_name: 'Pokemon',
-          foreign_key: :previous_form_id
+          foreign_key: :previous_form_id,
+          inverse_of: :next_form
+  has_one :next_form,
+          class_name: 'Pokemon'
 end
