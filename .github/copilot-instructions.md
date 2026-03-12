@@ -47,7 +47,9 @@ Azeroth is a Ruby gem that simplifies the creation of Rails controller endpoints
 - Pagination is opt-in via `paginated: true` on `resource_for`; respect the `per_page` option and the pagination response headers (`pages`, `per_page`, `page`).
 - New options added to `resource_for` or `model_for` must be documented and covered by integration specs (see `spec/integration/`).
 
-## Using Jace for Event-Driven Hooks
+## Using dependencies
+
+### Using Jace for Event-Driven Hooks
 
 Azeroth uses the [jace](https://github.com/darthjee/jace) gem to provide event-driven lifecycle hooks around controller actions. Refer to [`.github/jace-usage.md`](.github/jace-usage.md) for the full Jace API reference and usage patterns.
 
@@ -57,3 +59,12 @@ Key points when working with Jace inside Azeroth:
 - Register handlers with `registry.register(event, instant = :after, &block)`, where `instant` is `:before` or `:after`.
 - Trigger events with `registry.trigger(event, context, &block)`; `:before` and `:after` handlers are `instance_eval`'d in `context`, while the main block is called in the surrounding scope.
 - Triggering an event with no registered handlers is safe—the main block still runs.
+
+
+### Using darthjee-core_ext for extending core classes
+
+Azeroth uses the [darthjee-core_ext](https://github.com/darthjee/core_ext) gem to extend core Ruby classes with additional methods. Refer to [`.github/core_ext-usage.md`](.github/core_ext-usage.md) for the full list of available extensions and usage examples.
+
+### Using darthjee-active_ext for extending active record and active support classes
+
+Azeroth uses the [darthjee-active_ext](https://github.com/darthjee/active_ext) gem to extend Active Record and Active Support classes with additional methods. Refer to [`.github/active_ext-usage.md`](.github/active_ext-usage.md) for the full list of available extensions and usage examples.
