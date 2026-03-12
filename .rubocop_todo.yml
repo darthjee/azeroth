@@ -69,10 +69,3 @@ Rails/Blank:
   Exclude:
     - 'lib/azeroth/decorator/key_value_extractor.rb'
 
-# Offense count: 1
-# This cop supports safe autocorrection (--autocorrect).
-# Configuration parameters: EnforceForPrefixed.
-Rails/Delegate:
-  Exclude:
-    - 'spec/dummy/app/models/pokemon/decorator.rb'
-

@@ -9,8 +9,6 @@ class Pokemon
       previous_form
     end
 
-    def previous_form_name
-      previous_form.name
-    end
+    delegate :name, to: :previous_form, prefix: true
   end
 end
