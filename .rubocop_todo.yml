@@ -124,12 +124,6 @@ Rails/Validation:
     - 'spec/dummy/app/models/dummy_model.rb'
 
 # Offense count: 1
-# This cop supports safe autocorrection (--autocorrect).
-Rake/Desc:
-  Exclude:
-    - 'Rakefile'
-
-# Offense count: 1
 # Configuration parameters: AllowedClasses.
 Style/OneClassPerFile:
   Exclude:
