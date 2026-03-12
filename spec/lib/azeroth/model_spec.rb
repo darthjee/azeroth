@@ -112,6 +112,7 @@ describe Azeroth::Model do
       let(:input) do
         Class.new do
           include ActiveModel::Model
+
           attr_accessor :id, :name
         end
       end

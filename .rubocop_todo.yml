@@ -11,11 +11,3 @@
 FactoryBot/ExcessiveCreateList:
   Exclude:
     - 'spec/integration/yard/controllers/paginated_documents_controller_spec.rb'
-
-# Offense count: 3
-# This cop supports safe autocorrection (--autocorrect).
-Layout/EmptyLinesAfterModuleInclusion:
-  Exclude:
-    - 'spec/dummy/app/controllers/games_controller.rb'
-    - 'spec/dummy/app/controllers/publishers_controller.rb'
-    - 'spec/lib/azeroth/model_spec.rb'
