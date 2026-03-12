@@ -35,11 +35,3 @@ RSpecRails/HaveHttpStatus:
   Exclude:
     - 'spec/controllers/documents_controller_spec.rb'
     - 'spec/controllers/documents_with_error_controller_spec.rb'
-
-# Offense count: 3
-# This cop supports unsafe autocorrection (--autocorrect-all).
-Rails/ApplicationController:
-  Exclude:
-    - 'spec/lib/azeroth/routes_builder_spec.rb'
-    - 'spec/support/app/controllers/controller.rb'
-    - 'spec/support/app/controllers/request_handler_controller.rb'
