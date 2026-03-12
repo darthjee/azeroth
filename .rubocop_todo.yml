@@ -84,11 +84,3 @@ Rails/FilePath:
   Exclude:
     - 'spec/dummy/config/environments/development.rb'
 
-# Offense count: 6
-Rails/HasManyOrHasOneDependent:
-  Exclude:
-    - 'spec/dummy/app/models/factory.rb'
-    - 'spec/dummy/app/models/pokemon.rb'
-    - 'spec/dummy/app/models/pokemon_master.rb'
-    - 'spec/dummy/app/models/publisher.rb'
-
