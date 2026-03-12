@@ -117,8 +117,3 @@ Rails/ResponseParsedBody:
     - 'spec/controllers/paginated_documents_controller_spec.rb'
     - 'spec/controllers/rendering_controller_spec.rb'
 
-# Offense count: 1
-# This cop supports safe autocorrection (--autocorrect).
-Rails/Validation:
-  Exclude:
-    - 'spec/dummy/app/models/dummy_model.rb'
