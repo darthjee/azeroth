@@ -54,3 +54,7 @@ Lint/EmptyBlock:
 
 Lint/EmptyClass:
   Enabled: false
+
+Style/OneClassPerFile:
+  Exclude:
+    - 'spec/support/matchers/add_method.rb'

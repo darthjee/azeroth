@@ -122,9 +122,3 @@ Rails/ResponseParsedBody:
 Rails/Validation:
   Exclude:
     - 'spec/dummy/app/models/dummy_model.rb'
-
-# Offense count: 1
-# Configuration parameters: AllowedClasses.
-Style/OneClassPerFile:
-  Exclude:
-    - 'spec/support/matchers/add_method.rb'
