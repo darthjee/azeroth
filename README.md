@@ -10,7 +10,7 @@ Azeroth
 
 Yard Documentation
 -------------------
-[https://www.rubydoc.info/gems/azeroth/2.1.1](https://www.rubydoc.info/gems/azeroth/2.1.1)
+[https://www.rubydoc.info/gems/azeroth/2.2.0](https://www.rubydoc.info/gems/azeroth/2.2.0)
 
 Azeroth has been designed making the coding of controllers easier
 as routes in controllers are usually copy, paste and replace of same
@@ -24,9 +24,9 @@ does not perform database operations
 Future versions will enable `html` rendering to also perform
 database operations.
 
-**Current Release**: [2.1.1](https://github.com/darthjee/azeroth/tree/2.1.1)
+**Current Release**: [2.2.0](https://github.com/darthjee/azeroth/tree/2.2.0)
 
-**Next release**: [2.2.0](https://github.com/darthjee/azeroth/compare/2.1.1...main)
+**Next release**: [2.3.0](https://github.com/darthjee/azeroth/compare/2.2.0...main)
 
 Installation
 ---------------
