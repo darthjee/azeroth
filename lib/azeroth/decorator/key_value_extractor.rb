@@ -117,7 +117,7 @@ module Azeroth
       # @return [Object] result of method call from decorator
       def add_attribute?
         conditional = options.if
-        return true unless conditional.present?
+        return true if conditional.blank?
 
         block = proc(&conditional)
 

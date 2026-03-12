@@ -62,10 +62,3 @@ Rails/ApplicationRecord:
     - 'spec/dummy/app/models/website/decorator.rb'
     - 'spec/dummy/app/models/website/with_location.rb'
 
-# Offense count: 1
-# This cop supports unsafe autocorrection (--autocorrect-all).
-# Configuration parameters: NilOrEmpty, NotPresent, UnlessPresent.
-Rails/Blank:
-  Exclude:
-    - 'lib/azeroth/decorator/key_value_extractor.rb'
-
