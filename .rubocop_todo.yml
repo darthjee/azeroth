@@ -99,11 +99,3 @@ Rails/InverseOf:
     - 'spec/dummy/app/models/pokemon.rb'
     - 'spec/dummy/app/models/pokemon_master.rb'
 
-# Offense count: 5
-# This cop supports unsafe autocorrection (--autocorrect-all).
-# Configuration parameters: AllowedReceivers.
-# AllowedReceivers: ActionMailer::Preview, ActiveSupport::TimeZone
-Rails/RedundantActiveRecordAllMethod:
-  Exclude:
-    - 'spec/lib/azeroth/request_handler/index_spec.rb'
-
