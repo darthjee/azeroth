@@ -4,7 +4,7 @@ require 'spec_helper'
 
 describe IndexDocumentsController do
   let(:parsed_response) do
-    JSON.parse(response.body)
+    response.parsed_body
   end
 
   describe 'GET index' do

@@ -107,13 +107,3 @@ Rails/RedundantActiveRecordAllMethod:
   Exclude:
     - 'spec/lib/azeroth/request_handler/index_spec.rb'
 
-# Offense count: 6
-# This cop supports unsafe autocorrection (--autocorrect-all).
-Rails/ResponseParsedBody:
-  Exclude:
-    - 'spec/controllers/documents_controller_spec.rb'
-    - 'spec/controllers/documents_with_error_controller_spec.rb'
-    - 'spec/controllers/index_documents_controller_spec.rb'
-    - 'spec/controllers/paginated_documents_controller_spec.rb'
-    - 'spec/controllers/rendering_controller_spec.rb'
-
