@@ -76,11 +76,3 @@ Rails/Delegate:
   Exclude:
     - 'spec/dummy/app/models/pokemon/decorator.rb'
 
-# Offense count: 1
-# This cop supports safe autocorrection (--autocorrect).
-# Configuration parameters: EnforcedStyle.
-# SupportedStyles: slashes, arguments
-Rails/FilePath:
-  Exclude:
-    - 'spec/dummy/config/environments/development.rb'
-
