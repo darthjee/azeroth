@@ -8,6 +8,3 @@
 
 # Offense count: 1
 # Configuration parameters: MaxAmount.
-FactoryBot/ExcessiveCreateList:
-  Exclude:
-    - 'spec/integration/yard/controllers/paginated_documents_controller_spec.rb'
