@@ -26,7 +26,7 @@ database operations.
 
 **Current Release**: [2.1.1](https://github.com/darthjee/azeroth/tree/2.1.1)
 
-**Next release**: [2.2.0](https://github.com/darthjee/azeroth/compare/2.1.1...master)
+**Next release**: [2.2.0](https://github.com/darthjee/azeroth/compare/2.1.1...main)
 
 Installation
 ---------------
