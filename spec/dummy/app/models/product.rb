@@ -1,5 +1,5 @@
 # frozen_string_literal: true
 
-class Product < ActiveRecord::Base
+class Product < ApplicationRecord
   belongs_to :factory
 end

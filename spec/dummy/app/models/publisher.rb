@@ -1,5 +1,5 @@
 # frozen_string_literal: true
 
-class Publisher < ActiveRecord::Base
+class Publisher < ApplicationRecord
   has_many :games, dependent: :destroy
 end

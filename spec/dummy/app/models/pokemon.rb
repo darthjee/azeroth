@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Pokemon < ActiveRecord::Base
+class Pokemon < ApplicationRecord
   belongs_to :pokemon_master
   has_one :previous_form,
           class_name: 'Pokemon',
