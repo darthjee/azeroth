@@ -147,7 +147,7 @@ describe DocumentsWithErrorController do
       end
 
       it { expect(response).not_to be_successful }
-      it { expect(response.status).to eq(404) }
+      it { expect(response).to have_http_status(:not_found) }
 
       it 'returns empty body' do
         expect(response.body).to eq('')

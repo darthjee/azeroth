@@ -26,12 +26,3 @@ RSpec/Output:
   Exclude:
     - 'spec/dummy/bin/setup'
     - 'spec/dummy/bin/update'
-
-# Offense count: 5
-# This cop supports unsafe autocorrection (--autocorrect-all).
-# Configuration parameters: ResponseMethods.
-# ResponseMethods: response, last_response
-RSpecRails/HaveHttpStatus:
-  Exclude:
-    - 'spec/controllers/documents_controller_spec.rb'
-    - 'spec/controllers/documents_with_error_controller_spec.rb'
