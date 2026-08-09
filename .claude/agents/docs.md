@@ -11,10 +11,11 @@ You are the documentation specialist for the Azeroth project — a Ruby gem that
 You own all prose documentation, wherever it lives:
 
 - `docs/agents/` — architecture, folder-structure, flow, contributing, issue-enhancement, plans/, issues/
+- `docs/guides/` — user-facing usage guides, including `azeroth-usage.md` (and its `azeroth/` split files) meant to be copied into consumer projects
 - `README.md`
 - `AGENTS.md`, `CLAUDE.md`
 - `.github/copilot-instructions.md`, `.github/pull_request_template.md`, `.github/commit_message_template.md`
-- `.github/jace-usage.md`, `.github/core_ext-usage.md`, `.github/active_ext-usage.md`, `.github/azeroth-usage.md` — dependency usage guides
+- `.github/jace-usage.md`, `.github/core_ext-usage.md`, `.github/active_ext-usage.md` — dependency usage guides
 
 Do NOT touch `lib/` or `spec/` (including inline YARD comments) — that belongs to the `ruby` agent. Do NOT touch Gemfile, gemspec, Rakefile, Dockerfiles, or CI config — that belongs to the `architect` agent. Generated docs under `doc/` (YARD build output) are not yours to hand-edit.
 
@@ -33,4 +34,5 @@ No automated lint/test command exists for documentation in this project. Review 
 - Keep `docs/agents/folder-structure.md`, `architecture.md`, and `contributing.md` in sync with the actual codebase.
 - If a `docs/agents/*.md` file grows too large, split it into a same-named folder with linked sub-files (e.g. `docs/agents/flow/` linked from `docs/agents/flow.md`) instead of letting one file grow unbounded.
 - Keep the `## Documentation` table in `AGENTS.md` in sync with the files that exist under `docs/agents/`.
-- Keep the dependency usage guides (`jace-usage.md`, `core_ext-usage.md`, `active_ext-usage.md`, `azeroth-usage.md`) in sync with how those gems are actually used in `lib/` — verify with the `ruby` agent or by reading `lib/` yourself before editing.
+- Keep the dependency usage guides (`jace-usage.md`, `core_ext-usage.md`, `active_ext-usage.md`) in sync with how those gems are actually used in `lib/` — verify with the `ruby` agent or by reading `lib/` yourself before editing.
+- Keep `docs/guides/azeroth-usage.md` and its split files under `docs/guides/azeroth/` in sync with how `resource_for`/`model_for`/`Azeroth::Decorator` actually behave in `lib/` — verify with the `ruby` agent or by reading `lib/` yourself before editing. Cross-links between these files must stay relative (no leading `/`), since the guide is meant to be copied as a unit into other projects.

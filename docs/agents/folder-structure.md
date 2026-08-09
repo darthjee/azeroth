@@ -7,9 +7,10 @@
 | `lib/`           | Gem source code — the `Azeroth` module and all its classes. |
 | `spec/`          | RSpec test suite, including a Rails dummy app used for integration tests. |
 | `docs/agents/`   | Agent-facing documentation (architecture, flow, issues, plans). |
+| `docs/guides/`   | User-facing usage guides, including [`azeroth-usage.md`](../guides/azeroth-usage.md) — the gem usage guide meant to be copied into consumer projects. |
 | `config/`        | Tooling configuration: `check_specs.yml` (spec coverage exceptions), `yardstick.yml`/`yardstick.rb` (YARD doc coverage), `rubycritc.rb` (RubyCritic config). |
 | `bin/`           | Executable scripts, e.g. `bin/test`. |
-| `.github/`       | GitHub PR/commit templates and dependency usage guides (`jace-usage.md`, `core_ext-usage.md`, `active_ext-usage.md`, `azeroth-usage.md`), plus `copilot-instructions.md` pointing to `AGENTS.md`. |
+| `.github/`       | GitHub PR/commit templates and dependency usage guides (`jace-usage.md`, `core_ext-usage.md`, `active_ext-usage.md`), plus `copilot-instructions.md` pointing to `AGENTS.md`. |
 | `.circleci/`     | CircleCI pipeline configuration. |
 | `doc/`           | Generated YARD API documentation (build output, not hand-maintained). |
 | `measurement/`   | Generated YARD/yardstick coverage report (`report.txt`). |
