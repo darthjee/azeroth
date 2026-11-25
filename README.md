@@ -10,7 +10,7 @@ Azeroth
 
 Yard Documentation
 -------------------
-[https://www.rubydoc.info/gems/azeroth/2.2.0](https://www.rubydoc.info/gems/azeroth/2.2.0)
+[https://www.rubydoc.info/gems/azeroth/2.3.0](https://www.rubydoc.info/gems/azeroth/2.3.0)
 
 Azeroth has been designed making the coding of controllers easier
 as routes in controllers are usually copy, paste and replace of same
@@ -24,9 +24,9 @@ does not perform database operations
 Future versions will enable `html` rendering to also perform
 database operations.
 
-**Current Release**: [2.2.0](https://github.com/darthjee/azeroth/tree/2.2.0)
+**Current Release**: [2.3.0](https://github.com/darthjee/azeroth/tree/2.3.0)
 
-**Next release**: [2.3.0](https://github.com/darthjee/azeroth/compare/2.2.0...main)
+**Next release**: [2.4.0](https://github.com/darthjee/azeroth/compare/2.3.0...main)
 
 Installation
 ---------------
@@ -52,13 +52,13 @@ Usage
 
 ## Azeroth::Resourceable
 
-[Resourceable](https://www.rubydoc.info/gems/azeroth/Azeroth/Resourceable)
+[Resourceable](https://www.rubydoc.info/gems/azeroth/2.3.0Azeroth/Resourceable)
 module adds class methods
-[resource_for](https://www.rubydoc.info/gems/azeroth/Azeroth/Resourceable/ClassMethods#resource_for-instance_method)
+[resource_for](https://www.rubydoc.info/gems/azeroth/2.3.0Azeroth/Resourceable/ClassMethods#resource_for-instance_method)
 which adds a resource and action methods for `create`, `show`, `index`,
 `update`, `delete`, `edit`
 and
-[model_for](https://www.rubydoc.info/gems/azeroth/Azeroth/Resourceable/ClassMethods#model_for-instance_method)
+[model_for](https://www.rubydoc.info/gems/azeroth/2.3.0Azeroth/Resourceable/ClassMethods#model_for-instance_method)
 
 ### #resource_for
 It accepts options
@@ -177,7 +177,7 @@ It accepts options
 
 ## Azeroth::Decorator
 
-[Decorators](https://www.rubydoc.info/gems/azeroth/Azeroth/Decorator) are
+[Decorators](https://www.rubydoc.info/gems/azeroth/2.3.0Azeroth/Decorator) are
 used to define how an object is exposed as json on controller responses
 defining which and how fields will be exposed
 
@@ -225,7 +225,7 @@ Exposing options:
 ```
 
 Exposing is done through the class method
-[expose](https://www.rubydoc.info/gems/azeroth/Azeroth/Decorator#expose-class_method)
+[expose](https://www.rubydoc.info/gems/azeroth/2.3.0Azeroth/Decorator#expose-class_method)
 which accepts several options:
 
 - as: custom key to expose
