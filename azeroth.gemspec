@@ -21,5 +21,5 @@ Gem::Specification.new do |gem|
   gem.add_dependency 'activesupport',       '~> 7.2.x'
   gem.add_dependency 'darthjee-active_ext', '>= 1.4.0'
   gem.add_dependency 'jace',                '>= 1.0.0'
-  gem.add_dependency 'sinclair',            '>= 3.1.0'
+  gem.add_dependency 'sinclair',            '>= 3.2.0'
 end
