@@ -4,8 +4,8 @@ source 'https://rubygems.org'
 
 gemspec
 
-gem 'actionview',                '7.2.4'
 gem 'actionpack',                '7.2.4'
+gem 'actionview',                '7.2.4'
 gem 'activerecord',              '7.2.4'
 gem 'bundler',                   '>= 4.0.24'
 gem 'factory_bot',               '6.6.0'
